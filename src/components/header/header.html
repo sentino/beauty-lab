@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+  
+      <ion-title text-center>
+        <img src="assets/beauty-lab_logo.png" alt="logo">
+      </ion-title>
+  
+      <ion-buttons end>
+        <button ion-button icon-only (click)="showHideSearchList()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+        <button ion-button icon-only class="cart-button" (click)="openCart()">
+          <ion-icon name="cart">
+            <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+
+        <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+              <ion-item>
+                  <ion-icon name="search"></ion-icon>
+                  <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+              </ion-item>
+              <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+        </form>
+</ion-header>
+

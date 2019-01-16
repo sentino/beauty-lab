@@ -1,0 +1,119 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons left>
+        <button ion-button icon-only (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Меню</ion-title>
+
+      <ion-buttons right>
+          <button *ngIf="shared.customerData.accessToken != null" ion-button icon-only (click)="logOut()">
+            <ion-icon name="exit"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="side-menu">
+
+    <ion-list class="list-avatar">
+      <ion-item *ngIf="shared.customerData.accessToken == null" (click)="openLoginPage()">
+        <h2>Логин и регистрация</h2>
+        <p>Пожалуйста войдите в свой аккаунт или создайте новый</p>
+      </ion-item>
+
+      <ion-item class="main_user_info user-information" *ngIf="shared.customerData.accessToken != null" menuClose (click)="openPage('myAccount')">
+        <h2>{{shared.customerData.name + " " + shared.customerData.lastName}}</h2>
+        <p>{{shared.customerData.email}}</p>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list class="list-menu">
+        <button menuClose ion-item (click)="openPage('home')">Главная
+            <ion-icon item-left name="home"></ion-icon>
+          </button>
+
+      <button *ngIf="shared.customerData.accessToken != null" ion-item >Профиль
+        <ion-icon item-left name="person"></ion-icon>
+        <ion-icon item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
+      </button>
+      <div class="inner-menu" *ngIf="ProfileList" [@animate]>
+        <button menuClose ion-item (click)="openPage('myAccount')">
+          <ion-icon small item-left name="list-box"></ion-icon>Редактирование профиля</button>
+        <button menuClose ion-item (click)="openPage('myOrders')">
+          <ion-icon small item-left name="briefcase"></ion-icon>Мои заказы</button>
+        <button menuClose ion-item (click)="openPage('categories3')">
+          <ion-icon small item-left name="remove"></ion-icon>Мои бонусы</button>
+        <button menuClose ion-item (click)="openPage('myWishList')">
+          <ion-icon small item-left name="heart"></ion-icon>Отложенное</button>
+        <button menuClose ion-item (click)="logOut()">
+          <ion-icon small item-left name="exit"></ion-icon>Выход</button>
+      </div>
+
+      <button class="beuatyBtn">
+        <ion-icon class="menu-icon" item-left name="bowtie"></ion-icon>
+        <button menuClose (click)="openBeautyCatalog('BeautyCatalogPage')">Товары для красоты</button>
+        <ion-icon class="btn-plus" item-right [name]="categoriesListIcon" (click)="showHideCategoriesList()"></ion-icon>
+      </button>
+      <div class="inner-menu" *ngIf="categoriesList" [@animate]>
+        <button menuClose ion-item (click)="openCatalog(c.ID)" *ngFor="let c of healthSubs">
+          {{c.TEXT}}</button>
+      </div> 
+
+      <button class="beuatyBtn" >
+        <ion-icon class="menu-icon"  item-left name="medkit"></ion-icon>
+        <button menuClose (click)="openHealthCatalog('HealthCatalogPage')">Товары для здоровья</button>
+        <ion-icon class="btn-plus" item-right [name]="categoriesTwoListIcon" (click)="showHideCategoriesTwoList()"></ion-icon>
+      </button>
+      <div class="inner-menu" *ngIf="categoriesListTwo" [@animate]>
+        <button menuClose ion-item (click)="openCatalog(c.ID)" *ngFor="let c of beautySubs">
+          {{c.TEXT}}</button>
+      </div> 
+
+      <button  menuClose ion-item (click)="openCart()">Корзина
+        <ion-icon item-left name="cart"></ion-icon>
+      </button>
+
+      <button  menuClose ion-item  (click)="openPage('settings')">Бренды
+        <ion-icon item-left name="pricetag"></ion-icon>
+      </button>
+
+      <button  menuClose ion-item  (click)="openPage('settings')">Акции
+        <ion-icon item-left name="timer"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('settings')">Статьи
+        <ion-icon item-left name="book"></ion-icon>
+      </button>
+
+      <button  menuClose ion-item  (click)="openPage('settings')">Доставка и оплата
+        <ion-icon item-left name="card"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('settings')">О компании
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('settings')">Контакты
+        <ion-icon item-left name="call"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('settings')">Вопросы специалистам
+        <ion-icon item-left name="help"></ion-icon>
+      </button> 
+
+      <button menuClose ion-item (click)="openPage('settings')">Настройки
+        <ion-icon item-left name="settings"></ion-icon>
+      </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

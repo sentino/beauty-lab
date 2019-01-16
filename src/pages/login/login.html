@@ -1,0 +1,88 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+    </ion-buttons>
+    <ion-title>Вход в аккаунт</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ng-template #template>
+  
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Востановление пароля</h4>
+      <!--<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">-->
+        <ion-icon (click)="modalRef.hide()"  name="ios-close-circle"></ion-icon>
+      <!--</button>-->
+    </div>
+    <div class="modal-body">
+      <form #ForgForm="ngForm"  class="forg-form form " (ngSubmit)="forgotSent()">
+          <ion-input name="email-forgot"  type="email" placeholder="Введите ваш E-mail*" [(ngModel)]="ForgData.email" required></ion-input>
+          <button class="recover-btn" ion-button round class="no-outline">Восстановить</button>
+      </form>
+    </div>
+  
+  </ng-template>
+
+<ion-content class="page-login" padding>
+    <ion-row class="grid-t logo-part">
+      <ion-col>
+        <img class="image" src="assets/beauty-lab_logo.png"/>
+      </ion-col>
+    </ion-row>
+  <form #loginForm="ngForm" class="form" (ngSubmit)="login()">
+    <ion-row class="grid-b ">
+      <ion-col col-12>
+        <ion-list >
+
+          <div id="floatContainer1" class="float-container">
+                <label for="floatField1">E-mail</label>
+                <input type="email" id="floatField1" data-placeholder="" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" name="email" email [(ngModel)]="formData.email" required/>
+          </div>
+
+          <div id="floatContainer2" class="float-container">
+              <label for="floatField2">Пароль</label>
+              <input type="password" id="floatField2" data-placeholder="" minlength="6"  name="password" [(ngModel)]="formData.password"
+              required/>
+          <caption></caption></div>
+
+
+          <div class="flex-block">
+            <span class="without-btn"  ion-button block clear color="dark" text-capitalize  (click)="dismiss()">Продолжить без авторизации</span>
+            <span class="forgot-btn"  ion-button block clear color="dark" text-capitalize  (click)="openForgetPasswordPage()">Я забыл пароль</span>
+          </div>
+
+        </ion-list>
+      </ion-col>
+      <ion-col col-12>
+        <label *ngIf="errorMessage!=''">
+          <span>{{errorMessage}}</span>
+        </label>
+      </ion-col>
+
+            
+      <ion-col col-12>
+        <button ion-button block class="login-btn" color="secondary" type="submit" [disabled]="!loginForm.form.valid">Вход</button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-row class="grid-b">
+    <ion-col col-12>
+      <button ion-button block color="facebook" (click)="facebookLogin()">Войти с помощью <img class="icon-soc" src="./assets/facebook.svg"/></button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-12>
+        <button class="vk-login" ion-button block outline (click)="Vklog()">Войти с помощью <img class="icon-soc" src="./assets/icon.svg"/></button>
+      </ion-col>
+    </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <button ion-button block class="registry-btn" color="secondary" (click)="openSignUpPage()">Регистрация</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

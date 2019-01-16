@@ -1,0 +1,85 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+
+      <ion-title>
+          Товары для здоровья
+        </ion-title>
+  
+      <ion-buttons end>
+          <button ion-button icon-only (click)="showHideSearchList()">
+              <ion-icon name="search"></ion-icon>
+          </button>
+        <button ion-button icon-only class="cart-button" (click)="openCart()">
+          <ion-icon name="cart">
+            <ion-badge color="secondary">{{shared}}</ion-badge>
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+        <ion-item>
+            <ion-icon name="search"></ion-icon>
+            <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+        </ion-item>
+        <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+  </form>
+
+    <p class="filter category" (click)="openCategoryBy()">
+        <span class="filter">Выбрать категорию:</span> <ion-icon class="arrow" name="ios-arrow-down"></ion-icon>
+    </p>
+  </ion-header>
+
+
+  <ion-content class="page-home">
+      <!-- top banners -->
+      <ion-slides  pager="true"  paginationType="bullets" autoplay="true" loop="false">
+        <ion-slide *ngFor="let b of banners">
+          <img src="{{b.IMAGE}}">
+        </ion-slide>
+      </ion-slides>
+      
+      <div class="main-content">
+        <p class="slider-header">Лидеры продаж</p>
+        <ion-slides class="hits-slider" slidesPerView=2.1 spaceBetween=10>
+            <ion-slide *ngFor="let p of hits_products"  >
+              <product [data]="p" [type]="'normal'"></product>
+            </ion-slide>
+        </ion-slides>
+
+        <p class="slider-header">Новинки</p>
+        <ion-slides class="hits-slider" slidesPerView=2.1 spaceBetween=10>
+            <ion-slide *ngFor="let p of new_products"  >
+              <product [data]="p" [type]="'normal'"></product>
+            </ion-slide>
+        </ion-slides>
+    
+        <p class="slider-header">Последнии статьи</p>
+        <ion-slides slidesPerView=2.1 spaceBetween=10 class="articles_list">
+            <ion-slide *ngFor="let p of last_articles">
+                <div class="card-thumb">
+                    <img class="image" src="{{p.IMAGE}}"/>
+                  </div>
+                  <ion-card-content>
+                    <ion-card-title>
+                        <div class="line-clamp">{{p.NAME}}</div>
+                    </ion-card-title>
+                  </ion-card-content>
+            </ion-slide>
+        </ion-slides>
+      </div>
+    
+      <!-- <sliding-tabs></sliding-tabs> -->
+      <ion-fab bottom right *ngIf="scrollTopButton">
+        <button ion-fab (click)="scrollToTop()">
+          <ion-icon name="arrow-round-up"></ion-icon>
+        </button>
+      </ion-fab>
+    
+    </ion-content>
+    <ion-footer>
+      <footer></footer>
+    </ion-footer>

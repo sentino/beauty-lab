@@ -1,0 +1,239 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+  
+      <ion-title text-center>
+        {{product_name}}
+      </ion-title>
+  
+      <ion-buttons end>
+        <button ion-button icon-only (click)="showHideSearchList()">
+            <ion-icon name="search"></ion-icon>
+          </button>
+        <button ion-button icon-only class="cart-button" (click)="openCart()">
+          <ion-icon name="cart">
+            <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar class="this-toolbar">
+        <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+              <ion-item>
+                  <ion-icon name="search"></ion-icon>
+                  <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+              </ion-item>
+              <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+        </form>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content class="page-product-detail">
+  
+  <div class="product_image">
+      <img class="image" src="{{product_image}}">
+
+      <div class="labels-block">
+          <img class="badge-label hit-label" *ngIf="props_list_hit == 'Y'"  src="./assets/labels/badge_hit.png"/>
+          <img class="badge-label min-label" *ngIf="props_list_min == 'Y'" src="./assets/labels/badge_min.png"/>
+          <img class="badge-label new-label" *ngIf="props_list_new  == 'Y'" src="./assets/labels/badge_new.png"/>
+          <span class="discount-label">
+              <img class="badge-label disc-label" *ngIf="props_list_discount != null" src="./assets/labels/badge_discount.png"/>
+              <span class="discount_number" *ngIf="props_list_discount != null">Скидка<br>{{props_list_discount}}%</span>
+          </span>
+      </div>
+  </div>
+
+
+  <p class="addition-info">Внешний вид товара может отличаться от изображённого на фотографии</p>
+
+   <ion-grid class="product-detail-header">
+      <h3 class="product_name">{{product_name}}</h3>
+
+      <div class="articul-maker flex-block">
+        <p class="articul">Арт.: {{product_articul}}</p>
+        <p class="maker">{{product_country}}</p>
+      </div>
+
+      <span class="">
+          <span class="brand"><u>{{product_brand}}</u></span>
+          <span class="gamme" *ngIf="no_gamme !=true">Гамма:  <u>{{product_gamme}}</u></span>
+      </span>
+      
+      <span class="price-row">
+        <span class="price-text">Цена</span>
+          <span class="all-prices">
+            <span class="card-price-normal-through discount_price" *ngIf="product_price > product_discount">{{product_price|curency}}</span>
+            <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price" >{{product_price|curency}}</span>
+            <span class="card-price-normal" *ngIf="product_price != product_discount">{{product_discount|curency}}</span> 
+          </span>
+          <!-- <span class="product-outstock" *ngIf="product.products_quantity==0">{{'Out of Stock'|translate}}</span>
+          <span class="product-instock" *ngIf="product.products_quantity!=0">{{'In Stock'|translate}}</span> -->
+          <span class="product-outstock">{{product_avail}}</span>
+        </span>
+
+
+      <div class="flex-block rating-like-part">
+            <div class="rating-part" >
+                <span *ngIf="no_rating !=true" class="rating_number" >{{product_rating}}</span>
+                <rating *ngIf="no_rating !=true" name="rating" readOnly="true" [(ngModel)]="product_rating" ></rating>
+                <span *ngIf="no_rating !=true" class="reviews_count"><b> {{reviews_count}} отзыва</b></span>
+            </div>
+      
+            <div class="etc-buttons">
+                <ion-icon name="share" (click)="share()"></ion-icon>
+                <ion-icon name="heart-outline" (click)="clickWishList()"></ion-icon>
+            </div>
+      </div>
+
+      <div class="flex-block buy_btns-part">
+          <button class="left-button" ion-button block color="secondary"  >КУПИТЬ</button>
+          <button class="right-button" ion-button block color="secondary"  >Купить в 1 клик</button>
+      </div>
+
+
+
+      <div class="more-details-block">
+          <ion-segment [(ngModel)]="pet">
+              <ion-segment-button value="kittens">
+                <span class="seg-name">описание</span> 
+                <ion-icon name="star"></ion-icon>    
+              </ion-segment-button>
+              <ion-segment-button value="ducklings">
+                <span class="seg-name">доставка</span> 
+                <ion-icon name="time"></ion-icon>   
+              </ion-segment-button>
+              <ion-segment-button value="puppies">
+                <span class="seg-name">отзывы</span> 
+                <ion-icon name="people"></ion-icon>  
+              </ion-segment-button>
+            </ion-segment>
+            
+            <div [ngSwitch]="pet">            
+              <ion-list *ngSwitchCase="'kittens'"> 
+                  <div class="properties-single" *ngFor="let c of props_all_textlist">
+                      <p class="prop-name" [innerHTML]="c.name"></p>
+                      <p class="prop-value" [innerHTML]="c.value"></p>
+                  </div>
+              </ion-list>
+            
+              <ion-list *ngSwitchCase="'ducklings'">
+                  <div class="properties-single">
+                      <p class="prop-name" >Доставка</p>
+                      <p class="prop-value" [innerHTML]="product_delivery"></p>
+                  </div>
+              </ion-list>
+
+              <ion-list *ngSwitchCase="'puppies'">
+                  <div class="reviews_list">
+                    <div class="single-review" *ngFor="let c of product_reviews">
+                        <p class="reviews_name">{{c.NAME}} </p>
+                        <p class="reviews_data">{{c.DATE}}</p>
+
+                        <rating name="rating" readOnly="true" [(ngModel)]="c.RATING" ></rating>
+
+                        <p class="reviews_text">{{c.COMMENT}}</p>
+                    </div>
+                  </div>
+
+
+
+
+                <div class="properties-single" *ngIf="can_add == 'Y'">
+                    <p class="prop-name">Оставить отзыв</p>
+                    <form action="" #loginForm="ngForm" class="form review_form" (ngSubmit)="newReview()">
+                        <ion-item>
+                            <ion-input [(ngModel)]="RevData.NAME" name="name" type="text" placeholder="Имя*"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Тип кожи</ion-label>
+                            <ion-select [(ngModel)]="RevData.tip_skin" name="type_skin">
+                                <ion-option *ngFor="let c of reviews_info[2].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Укажите ваш возраст</ion-label>
+                            <ion-select [(ngModel)]="RevData.AGE" name="age">
+                              <ion-option *ngFor="let c of reviews_info[1].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Укажите тип волос</ion-label>
+                            <ion-select [(ngModel)]="RevData.tip_volos" name="type_volos">
+                                <ion-option *ngFor="let c of reviews_info[3].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-textarea placeholder="Отзыв*" name="review" [(ngModel)]="RevData.COMMENT" type="text" value=""></ion-textarea>
+                          </ion-item>
+
+                          <div class="rating-block">
+                            <span>Цена/качество:</span>  <rating name="rating" [(ngModel)]="RevData.RATING1" ></rating>
+                          </div>
+
+                          <div class="rating-block">
+                            <span>Эффективность:</span> <rating name="rating" [(ngModel)]="RevData.RATING2" ></rating>
+                          </div>
+                          
+                          <div class="rating-block">
+                            <span>Дизайн упаковки:</span> <rating name="rating" [(ngModel)]="RevData.RATING3" ></rating>
+                          </div>
+
+                          <ion-row>
+                            <ion-col>
+                              <button  ion-button block class="regsubmit" color="secondary" type="submit" [disabled]="!loginForm.form.valid">Оставить отзыв</button>
+                            </ion-col>
+                          </ion-row>  
+                    </form>
+                </div>
+              </ion-list>
+            </div>
+      </div>
+
+      <hr>
+
+    <div class="properties-single" *ngIf="alsobuy_length != 0">
+        <p class="prop-name">С этим товаром  покупают</p>
+        <p class="prop-value">
+            <ion-slides slidesPerView=2.1 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
+                <ion-slide *ngFor="let p of products_alsobuy">
+                  <product [data]="p" [type]="'normal'"></product>
+                </ion-slide>
+            </ion-slides>
+        </p>
+    </div>
+
+    <div class="properties-single" *ngIf="leaders_length != 0">
+        <p class="prop-name">Лидеры продаж</p>
+        <p class="prop-value">
+            <ion-slides slidesPerView=2.1 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
+                <ion-slide *ngFor="let p of products_leaders">
+                  <product [data]="p" [type]="'normal'"></product>
+                </ion-slide>
+            </ion-slides>
+        </p>
+    </div>
+
+    <div class="properties-single" *ngIf="anlogs_length != 0">
+        <p class="prop-name">Аналоги</p>
+        <p class="prop-value">
+            <ion-slides slidesPerView=2.2 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
+                <ion-slide *ngFor="let p of products_analogs">
+                  <product [data]="p" [type]="'normal'"></product>
+                </ion-slide>
+            </ion-slides>
+        </p>
+    </div>
+    
+  </ion-grid>
+</ion-content>
+<ion-footer>
+<footer></footer>
+</ion-footer>

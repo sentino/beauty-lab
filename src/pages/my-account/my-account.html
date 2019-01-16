@@ -1,0 +1,166 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Редактирование профиля
+    </ion-title>
+
+    <ion-buttons end>
+        <button ion-button icon-only (click)="showHideSearchList()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      <button ion-button icon-only class="cart-button" (click)="openCart()">
+        <ion-icon name="cart">
+          <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+        <ion-item>
+            <ion-icon name="search"></ion-icon>
+            <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+        </ion-item>
+        <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+  </form>
+</ion-header>
+<ion-content class="page-my-account" padding>
+<ion-segment class="segment-body" [(ngModel)]="pet">
+  <ion-segment-button value="kittens">
+        Клиент
+  </ion-segment-button>
+  <ion-segment-button value="ducklings">
+      Доставка
+  </ion-segment-button>
+  <ion-segment-button value="puppies">
+    Пароль
+  </ion-segment-button>
+</ion-segment>
+
+<div [ngSwitch]="pet">
+  <ion-list *ngSwitchCase="'puppies'">
+    
+    <form #userForm="ngForm" (ngSubmit)="updateProfile()">
+      <ion-row>
+        <ion-col>
+          <ion-list> 
+              <div class="container my-5">
+                  <div class="row">
+                      <div class="form-group">
+                          <input minlength="6" id="customers_password" name="customers_password"[(ngModel)]="myAccountData.password" type="password" class="form-control">
+                          <label class="form-control-placeholder" for="customers_password">Пароль*</label>
+                      </div>
+                      <div class="form-group">
+                          <input minlength="6" id="customers_confirm" name="customers_confirm" [(ngModel)]="myAccountData.passwordConfirmed"  type="password" class="form-control">
+                          <label class="form-control-placeholder" for="customers_confirm">Подтверждение пароля*</label>
+                      </div>
+                    </div>
+              </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <button ion-button block color="secondary" type="submit">Сохранить</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+  
+  <ion-list *ngSwitchCase="'kittens'">
+    <form #userForm="ngForm" (ngSubmit)="updateProfile()">
+      <ion-row>
+        <ion-col>
+            <ion-list>
+                <div class="container my-5">
+                    <div class="row">
+                        <div class="form-group">
+                            <input id="customers_email" [ngClass]="{'ng-valid':email_validation==true,'ng-invalid':email_validation==false}" pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" name="customers_email" [(ngModel)]="myAccountData.email" type="email" class="form-control" required>
+                            <label class="form-control-placeholder" for="customers_email" >E-mail*</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input id="customers_firstname" name="customers_firstname" [(ngModel)]="myAccountData.name" type="text" class="form-control">
+                            <label class="form-control-placeholder" for="customers_firstname" >Имя*</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input id="customers_lastname" name="customers_lastname" [(ngModel)]="myAccountData.secondName" type="text" class="form-control">
+                            <label class="form-control-placeholder" for="customers_lastname" >Отчество*</label>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <input id="customers_secondname" name="customers_secondname" [(ngModel)]="myAccountData.lastName" type="text" class="form-control">
+                            <label class="form-control-placeholder" for="customers_secondname" >Фамилия*</label>                          
+                        </div>
+
+                        <div class="form-group">
+                            <input [textMask]="{mask: data_mask}" id="customers_birhday" name="customers_birhday" [(ngModel)]="myAccountData.birthday" type="text" class="form-control" required>
+                            <label class="form-control-placeholder" for="customers_birhday" >Дата рождения*</label> 
+                        </div>
+                      </div>
+                </div>
+            </ion-list>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <button ion-button block color="secondary" type="submit">Сохранить</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'ducklings'">
+    <form #userForm="ngForm" (ngSubmit)="updateProfile()">
+      <ion-row>
+        <ion-col>
+          <ion-list>
+              <div class="container my-5">
+                  <div class="row">
+                      <div class="form-group">
+                          <input [textMask]="{mask: mask}" id="tel"  name="tel" [(ngModel)]="myAccountData.phone" type="text" class="form-control">
+                          <label class="form-control-placeholder" for="tel" >+7(000)-0000-000*</label>
+                      </div>
+
+                      <div class="form-group">
+                          <input id="index" name="index" [(ngModel)]="myAccountData.addressZip" type="text" class="form-control">
+                          <label class="form-control-placeholder" for="index" >Индекс*</label>
+                      </div>
+
+                      <div class="form-group">
+                          <input id="sity" name="sity" [(ngModel)]="myAccountData.addressCity" type="text" class="form-control">
+                          <label class="form-control-placeholder" for="sity" >Город или населенный пункт*</label>
+                      </div>
+
+                      
+                      <div class="form-group">
+                          <input id="address" name="address" [(ngModel)]="myAccountData.addressStreet" type="text" class="form-control">
+                          <label class="form-control-placeholder" for="address" >Адрес*</label>                          
+                      </div>
+                    </div>
+              </div>                           
+          </ion-list>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row >
+        <ion-col >
+          <button class="submiter" ion-button block color="secondary" type="submit">Сохранить</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+</div>
+</ion-content>
+
+<ion-footer>
+    <footer></footer>
+</ion-footer>

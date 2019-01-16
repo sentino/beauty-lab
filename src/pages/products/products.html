@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      {{current_section}}
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showHideSearchList()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-button icon-only class="cart-button" (click)="openCart()">
+        <ion-icon name="cart">
+          <ion-badge color="secondary"></ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar class="toolbar-secondary">
+    <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+          <ion-item>
+              <ion-icon name="search"></ion-icon>
+              <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+          </ion-item>
+          <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+    </form>
+
+    <div class="sort-filter">
+      <p (click)="background_show = 'cat'" [ngClass]="{ 'bg-active': background_show == 'cat'}" class="filter category" (click)="openCategoryBy()">
+          <span class="filter">Категории: </span> 
+          <ion-icon class="arrow" name="ios-arrow-down"></ion-icon>
+      </p>
+
+      <p [ngClass]="{ 'bg-active': background_show == 'sort'}" class="sorts" (click)="showHideSortsList()">
+        <span class="sort-title">Сортировка:</span>
+        <ion-icon [name]="sortListIcon"></ion-icon>
+      </p>
+
+      <p [ngClass]="{ 'bg-active': background_show == 'filter'}" (click)="showHideFilterList()">
+        <span class="filter">Фильтр:</span>
+        <ion-icon [name]="filterListIcon"></ion-icon>
+      </p>
+
+
+
+      <button ion-button icon-only class="change-btn" (click)="changeLayout()">
+          <ion-icon name="list" [name]="productView=='grid'? 'list' : 'apps'"></ion-icon>
+      </button>
+    </div>
+
+    <form *ngIf="background_show == 'filter'&&Filter"   [ngClass]="{ 'height_auto': empty_filter == true}" #loginForm="ngForm" class="form filter-list" [@animate] (ngSubmit)="filtered()">
+        
+        <div class="empty_list" *ngIf="empty_filter == true" >
+            <p>Список доступных фильтров пуст, попробуйте пожалуйста еще раз!</p>
+        </div>
+
+        <div class="filter" *ngFor="let filter of all_filters">
+            <h3 class="filter_title">{{filter.name}}:</h3>
+            <ion-item class="filter_select">
+                <ion-label>{{filter.name}}:</ion-label>
+                <ion-select name="redic"  [(ngModel)]="filterList[filter.code]"  >  
+                    <ion-option value="{{brand.id}}" *ngFor="let brand of filter.values">{{brand.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </div>
+
+        <ion-footer>
+            <ion-toolbar color="light">
+              <ion-buttons left>
+                <div class="reset-filters" ion-button outline color="secondary" menuClose="right" (click)="resetFilters()">
+                  Сбросить
+                </div>
+              </ion-buttons>
+              <ion-title></ion-title>
+              <ion-buttons right>
+                <button class="apply-filters" ion-button solid color="secondary" menuClose="right" (click)="filtered()">
+                  Применить
+                </button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-footer>
+    </form>
+
+    <form *ngIf="background_show == 'sort'&&Sort" #loginForm="ngForm" class="form sort-list" [@animate] (ngSubmit)="filtered()">
+
+      <div class="sort list" >
+        <p *ngFor="let sort of sortArray" (click)="activeButton = sort" [ngClass]="{ 'active-sort': activeButton == sort }" (click)="getSortProducts(sort)" >{{sort}}</p>
+        <p (click)="showHideSortsList()">закрыть</p>
+      </div>
+    </form>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="page-products" (ionScroll)="onScroll($event)">
+
+    <div class="empty_list" *ngIf="empty_status == true" >
+        <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+    </div>
+
+    
+
+
+  <ion-grid *ngIf="productView=='grid'">
+    <ion-col *ngFor="let p of all_products " col-6>
+      <product [data]="p" [type]="'normal'"></product>
+    </ion-col>
+
+    <div class="empty_list" *ngIf="empty_products == true" >
+        <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+    </div>
+  </ion-grid>
+
+
+
+  <ion-list class="list-view list-type" *ngIf="productView=='list'">
+      <div class="empty_list" *ngIf="empty_products == true" >
+          <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+      </div>
+    
+    <span *ngFor="let p of all_products">
+      <product [data]="p" [type]="'list'"></product>
+    </span>
+  </ion-list>
+
+
+  
+
+
+  <!-- <ion-infinite-scroll #infinite (ionInfinite)="getProducts($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="scrollToTop()">
+      <ion-icon name="ios-arrow-up"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+
+
+<ion-footer>
+
+  <div class="flexer">
+      <div [@slideInOut]="helpMenuOpen" class="pagi" >
+          <button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>
+
+      </div>
+      <div *ngIf="all_pages_count>1" class="plaska" (click)="navHandler()">
+      <button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages_count}}</button> 
+      <ion-icon  name="ios-arrow-forward"></ion-icon> 
+      </div>
+  </div>
+  <footer></footer>
+</ion-footer>
+
+<ion-menu [content]="content" side="{{side}}" id="menu2">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons left>
+        <button ion-button icon-only *ngIf="shared.dir=='ltr'" menuToggle="right">
+          <ion-icon name="close"></ion-icon>
+        </button>
+        <button ion-button icon-only *ngIf="shared.dir=='rtl'" menuToggle="left">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>{{"Filters"|translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-menu>

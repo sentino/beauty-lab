@@ -1,0 +1,122 @@
+<ion-card *ngIf="type=='normal' || type=='recent' || type=='wishList'" class="animated fadeIn">
+  <div class="card-thumb">
+    <img class="image" src="{{p.IMAGE}}" (click)="showProductDetail(p.ID)"/>
+
+    <div class="labels-block" *ngIf="props_show == true">
+        <img class="badge-label hit-label" *ngIf="p.PROPS.HIT == 'Y'"  src="./assets/labels/badge_hit.png"/>
+        <img class="badge-label min-label" *ngIf="p.PROPS.MIN_PRICE == 'Y'" src="./assets/labels/badge_min.png"/>
+        <img class="badge-label new-label" *ngIf="p.PROPS.NEW  == 'Y'" src="./assets/labels/badge_new.png"/>
+        <span class="discount-label">
+            <img class="badge-label disc-label" *ngIf="p.PROPS.DISCOUNT_PERCENT != null" src="./assets/labels/badge_discount.png"/>
+            <span class="discount_number" *ngIf="p.PROPS.DISCOUNT_PERCENT != null">{{p.PROPS.DISCOUNT_PERCENT}}%</span>
+        </span>
+    </div>
+    
+
+  </div>
+  <ion-card-content>
+    <ion-card-title class="product_name" (click)="showProductDetail(p.ID)">
+        <div class="line-clamp" >{{p.NAME}}</div>
+    </ion-card-title>
+    <ion-row class="card-attr">
+      <ion-col col-6>
+        <h4 class="card-price-normal-through" *ngIf="p.PRICE > p.PRICE_DISCOUNT">{{p.PRICE|curency}}</h4>
+        <h4 class="card-price-normal single-price" *ngIf="p.PRICE == p.PRICE_DISCOUNT" >{{p.PRICE|curency}}</h4>
+        <h4 class="card-price-normal" *ngIf="p.PRICE != p.PRICE_DISCOUNT">{{p.PRICE_DISCOUNT|curency}}</h4>
+      </ion-col>
+      <ion-col col-6>
+      <ion-card-title>
+        <div class="country_name">{{p.COUNTRY}}</div>
+      </ion-card-title>
+
+      <ion-col>
+        <ion-icon [name]="p.isLiked=='0'? 'heart-outline' : 'heart'"></ion-icon>
+      </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+
+  <ion-buttons class="bar-buttons-remove" *ngIf="type=='wishList'">
+      <button ion-button block color="danger" (click)="removeWishList();">
+        Убрать
+      </button>
+  </ion-buttons>
+
+  <ion-buttons *ngIf="type=='normal'">
+    <button ion-button block color="#EF5CEF">Купить</button>
+    <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
+  </ion-buttons>
+
+  <ion-buttons class="bar-buttons-remove"  *ngIf="type=='recent'">
+    <button ion-button block color="danger" (click)="removeRecent()">{{'REMOVE'|translate}}</button>
+  </ion-buttons>
+
+  <ion-row class="card-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
+      <ion-icon name="checkmark-circle"></ion-icon>
+  </ion-row>
+</ion-card>
+
+
+
+<ion-item *ngIf="type=='list'" class="list-type animated fadeIn">
+  <ion-row class="list-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
+    <ion-icon name="checkmark-circle"></ion-icon>
+  </ion-row>
+  <div class="list-tag-off" *ngIf="p.discount_price!=null">{{pDiscount()}}<br>{{'OFF'|translate}}</div>
+  <ion-thumbnail item-start>
+    <div class="list-tag-new" *ngIf="checkProductNew()" translate></div>
+    <img src="{{p.IMAGE}}" (click)="showProductDetail()">
+
+    <div class="labels-block" *ngIf="props_show == true">
+        <img class="badge-label hit-label" *ngIf="p.PROPS.HIT == 'Y'"  src="./assets/labels/badge_hit.png"/>
+        <img class="badge-label min-label" *ngIf="p.PROPS.MIN_PRICE == 'Y'" src="./assets/labels/badge_min.png"/>
+        <img class="badge-label new-label" *ngIf="p.PROPS.NEW  == 'Y'" src="./assets/labels/badge_new.png"/>
+        <span class="discount-label">
+            <img class="badge-label disc-label" *ngIf="p.PROPS.DISCOUNT_PERCENT != null" src="./assets/labels/badge_discount.png"/>
+            <span class="discount_number" *ngIf="p.PROPS.DISCOUNT_PERCENT != null">{{p.PROPS.DISCOUNT_PERCENT}}%</span>
+        </span>
+    </div>
+  </ion-thumbnail>
+
+
+
+<ion-card-content>
+  <ion-card-title class="product_name">
+      <div (click)="showProductDetail(p.ID)" class="line-clamp">{{p.NAME}}</div>
+  </ion-card-title>
+  <ion-row class="card-attr">
+    <ion-col col-6>
+      <h4 class="card-price-normal-through" *ngIf="p.PRICE > p.PRICE_DISCOUNT">{{p.PRICE|curency}}</h4>
+      <h4 class="card-price-normal single-price" *ngIf="p.PRICE == p.PRICE_DISCOUNT" >{{p.PRICE|curency}}</h4>
+      <h4 class="card-price-normal" *ngIf="p.PRICE != p.PRICE_DISCOUNT">{{p.PRICE_DISCOUNT|curency}}</h4>
+    </ion-col>
+    <ion-col col-6>
+    <ion-card-title>
+      <div class="country_name">{{p.COUNTRY}}</div>
+    </ion-card-title>
+
+    <ion-col>
+      <ion-icon [name]="p.isLiked=='0'? 'heart-outline' : 'heart'" (click)="clickWishList()"></ion-icon>
+    </ion-col>
+    </ion-col>
+  </ion-row>
+  <ion-buttons >
+      <button ion-button block color="#EF5CEF">Купить</button>
+      <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
+  </ion-buttons>
+</ion-card-content>
+
+<ion-buttons class="bar-buttons-remove" *ngIf="type=='wishList'">
+    <button ion-button block color="danger" (click)="removeWishList();">
+      Убрать
+    </button>
+</ion-buttons>
+
+<ion-buttons *ngIf="type=='normal'">
+  <button ion-button block color="#EF5CEF">Купить</button>
+  <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
+</ion-buttons>
+
+
+  
+</ion-item>

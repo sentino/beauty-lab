@@ -1,0 +1,100 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Настройки
+    </ion-title>
+
+    <ion-buttons end>
+        <button ion-button icon-only (click)="showHideSearchList()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      <button ion-button icon-only class="cart-button" (click)="openCart()">
+        <ion-icon name="cart">
+          <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+      <ion-item>
+          <ion-icon name="search"></ion-icon>
+          <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+      </ion-item>
+      <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+</form>
+
+</ion-header>
+
+<ion-content class="page-settings">
+
+  <ion-list class="list-avatar" padding>
+    <ion-item class="user-information" *ngIf="shared.customerData.accessToken !=undefined" text-center>
+      <h2>{{shared.customerData.name + " " + shared.customerData.lastName}}</h2>
+      <p>{{shared.customerData.email}}</p>
+    </ion-item>
+
+    <ion-item class="user-information" text-center *ngIf="shared.customerData.accessToken ==undefined"  (click)="openLoginPage()">
+      <h2>Логин & Регистрация</h2>
+      <p>Пожалуйста войдите в свой профиль или создайте новый</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-list padding class="notification-settings">
+    <ion-item>
+      <ion-label>Push-уведомления</ion-label>
+      <ion-toggle [(ngModel)]="setting.localNotification" (ionChange)="turnOnOffNotification()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Рассылка на e-mail</ion-label>
+      <ion-toggle [(ngModel)]="setting.notification" (ionChange)="onOffPushNotification()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list padding>
+
+    <button ion-item (click)="openSite()">
+      Веб сайт
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="showModal('privacyPolicy')">
+      Пользовательское соглашение
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+
+    </button>
+    <button ion-item (click)="showModal('refundPolicy')">
+      Политика возрата
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+
+    </button>
+    <button ion-item (click)="showModal('termServices')">
+      Правила и услуги
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="rateUs()">
+      Оцените нас
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="share()">
+      Поделиться
+      <ion-icon showWhen="android" name="share" item-end></ion-icon>
+    </button>
+
+    <ion-list *ngIf="shared.customerData.accessToken != null" class="logout-btn"  padding>
+      <button ion-button block color="secondary" (click)="logOut()">
+        Выйти
+      </button>
+  </ion-list>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+    <footer></footer>
+</ion-footer>

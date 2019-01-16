@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Регистрация</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="page-sign-up" padding>
+  <form #loginForm="ngForm" class="form" (ngSubmit)="signUp()">
+              <ion-row>
+                  <ion-col>
+                    <ion-list>
+                          <ion-segment-button class="reg-header" value="first">
+                            Персональная информация
+                          </ion-segment-button>
+                          <div id="floatContainer3" class="float-container">
+                              <label for="floatField3">Фамилия*</label>
+                              <input id="floatField3" data-placeholder="" type="text" name="customers_secondname" [(ngModel)]="formData.lastName"
+                              required/>
+                          </div>
+
+                          <div id="floatContainer4" class="float-container">
+                              <label for="floatField4">Имя*</label>
+                              <input id="floatField4" data-placeholder="" type="text" name="customers_firstname" [(ngModel)]="formData.name"
+                              required/>
+                          </div>
+                          
+                          <div id="floatContainer5" class="float-container">
+                              <label for="floatField5">Отчество*</label>
+                              <input id="floatField5" data-placeholder="" type="text" name="customers_lastname" [(ngModel)]="formData.secondName"
+                              required/>
+                          </div>
+                
+                          <div id="floatContainer14" class="float-container">
+                              <label for="floatField14">Дата рождения*</label>
+                              <input id="floatField14" [textMask]="{mask: data_mask}" data-placeholder="" type="text" name="customers_birhday" [(ngModel)]="formData.birthday"
+                              required/>
+                          </div> 
+
+                          <div id="floatContainer6" class="float-container">
+                              <label for="floatField6">E-mail*</label>
+                              <input id="floatField6" [ngClass]="{'ng-valid':email_validation==true,'ng-invalid':email_validation==false}" pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" data-placeholder="" type="email" name="customers_email" [(ngModel)]="formData.email"
+                              required/>
+                          </div> 
+
+                          <div id="floatContainer7" class="float-container">
+                              <label for="floatField7">Пароль*</label>
+                              <input minlength="6"  name="customers_password" type="password" id="floatField7" [ngClass]="{'ng-valid':pass_validation==true,'fail':pass_validation==false}"  data-placeholder="" [(ngModel)]="formData.password"
+                              required/>
+                          </div>   
+                          <p class="input_counter">6/{{formData.password.length}}</p>
+
+                          <div id="floatContainer8" class="float-container">
+                              <label for="floatField8">Подтверждение пароля*</label>
+                              <input minlength="6"  name="customers_confirm" [(ngModel)]="formData.passwordConfirmed" type="password" id="floatField8" [ngClass]="{'ng-valid':pass_validation==true,'fail':pass_validation==false}" data-placeholder=""
+                              required/>
+                          </div>  
+                          <p class="input_counter">6/{{formData.passwordConfirmed.length}}</p>
+
+                          <p class="little-text">* поля обязательные для заполнения</p>
+
+                          <div ion-item  class="delivery_info">
+                          <ion-segment-button class="reg-header" value="first">
+                              Информация для доставки
+                          </ion-segment-button>
+                            <ion-icon item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
+                          </div>
+                          <div class="inner-menu" [ngClass]="{'shower':ProfileList==true,'hider':ProfileList==false}" [@animate]>
+                              <div id="floatContainer9" class="float-container"  >
+                                  <label for="floatField9">+7(000)-0000-000*</label>
+                                  <input [textMask]="{mask: mask}"   [(ngModel)]="formData.phone" name="tel"  type="text" id="floatField9" [ngClass]="{'ng-valid':pass_validation==true,'fail':pass_validation==false}"  data-placeholder=""
+                                  />
+                              </div>                             
+                              
+                              <div id="floatContainer11" class="float-container">
+                                  <label for="floatField11">Индекс*</label>
+                                  <input name="index" type="number" id="floatField11"  data-placeholder="" [(ngModel)]="formData.addressZip"
+                                  />
+                              </div>  
+
+                              <div id="floatContainer12" class="float-container">
+                                  <label for="floatField12">Город или населенный пункт*</label>
+                                  <input name="sity" type="text" id="floatField12"  data-placeholder="" [(ngModel)]="formData.addressCity"
+                                  />
+                              </div>  
+
+                              <div id="floatContainer13" class="float-container">
+                                  <label for="floatField13">Адрес*</label>
+                                  <input name="address" type="text" id="floatField13"  data-placeholder="" [(ngModel)]="formData.addressStreet"
+                                  />
+                              </div> 
+
+                            <ion-item class="subscribe-input" checked="true">
+                                <ion-label>Получать эксклюзивные специальные предложения, информацию о скидках и новости</ion-label>
+                                <ion-checkbox  name="subscribe" [(ngModel)]="formData.subscribe"></ion-checkbox>
+                            </ion-item>
+                          </div>
+                          <ion-row>
+                            <ion-col>
+                              <button ion-button block class="regsubmit" color="secondary" type="submit" [disabled]="!loginForm.form.valid&&pass_validation!=false">Зарегистрироваться</button>
+                            </ion-col>
+                          </ion-row>        
+                    </ion-list>
+                  </ion-col>
+              </ion-row>
+
+    <!-- <ion-row>
+      <ion-col>
+        <p>Создание учетной записи означает, что вы в согласны с нашими:
+          <a (click)="openTermServicesPage()">Условия использования</a>,
+          <a (click)="openPrivacyPolicyPage()">Политика конфиденциальности</a> и
+          <a (click)="openRefundPolicyPage()">Политика возврата</a>
+        </p>
+      </ion-col>
+    </ion-row> -->
+  </form>
+</ion-content>

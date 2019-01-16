@@ -1,0 +1,128 @@
+page-home{
+    .content-md{
+        background-color: white!important;
+    }
+    .page-home{
+
+        .articles_list .line-clamp{
+            font-size: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .articles_list{
+            margin-bottom: 20px;
+        }
+
+        .hits-slider{
+            ion-slide{
+                margin-bottom: 20px!important;
+            }
+        }
+
+        
+        
+        .card-content-md{
+            padding: 0;
+        }
+
+        .main-content{
+            padding: 0 20px;
+
+            .slider-header{
+                font-weight: 600;
+                font-size: 14px;
+                margin-bottom: 18px;
+            }
+        }
+
+        .slides .swiper-pagination-bullet-active{
+            background: white;
+            width: 15px;
+            height: 15px;
+        }
+
+        .swiper-pagination-bullet{
+            background: white!important;
+            opacity: 1;
+        }
+
+        .swiper-pagination{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .articles_list{
+            .swiper-slide img{
+                height: 100px;
+                box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+
+        .card-title-md{
+            padding: 4px 0; 
+        }
+
+
+        .module{
+            .slides{
+                .swiper-slide:first-child{
+                    margin-left: 10px;
+                }
+                .swiper-slide{
+                    .slide-zoom{
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        text-align: initial;
+                        product{
+                            display: block;
+                        }
+                    }
+                }
+                .swiper-slide-last{
+                    padding-top: 15%;
+                    .slide-zoom{
+                        
+                        .card{
+                            
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: calc(100% - 0px);
+                            margin-right: 0 !important;
+                            margin-left: 0 !important;
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            box-shadow: none;
+                            .icon{
+                                color: color($colors, accent-color);
+                                font-size:50px;
+                            }
+                        }
+                    }
+                }
+            }
+            h5{
+                margin-left: 10px;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .animate-product {
+        animation: bounceInRight 0.75s;
+    }
+}
+
+.card-title-md{
+    font-size: 16px;
+}
+
+.licenz-text{
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 10px;
+}

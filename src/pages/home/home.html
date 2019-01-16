@@ -1,0 +1,43 @@
+<header></header>
+
+<ion-content class="page-home" (ionScroll)="onScroll($event)">
+  <!-- top banners -->
+  <ion-slides class="banners-slider" pager="true"  paginationType="bullets" autoplay="true" loop="false" dir="{{shared.dir}}">
+    <ion-slide *ngFor="let b of banners">
+      <img src="{{b.IMAGE}}">
+    </ion-slide>
+  </ion-slides>
+  <div class="main-content">
+    <p class="slider-header">Хиты продаж</p>
+    <ion-slides class="hits-slider" slidesPerView=2.1 spaceBetween=10>
+        <ion-slide *ngFor="let p of hits_products"  >
+          <product [data]="p" [type]="'normal'"></product>
+        </ion-slide>
+    </ion-slides>
+
+    <p class="slider-header">Последнии статьи</p>
+    <ion-slides slidesPerView=2.1 spaceBetween=10 class="articles_list">
+        <ion-slide *ngFor="let p of last_articles">
+            <div class="card-thumb">
+                <img class="image" src="{{p.IMAGE}}"/>
+              </div>
+              <ion-card-content>
+                <ion-card-title>
+                    <div class="line-clamp">{{p.NAME}}</div>
+                </ion-card-title>
+              </ion-card-content>
+        </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- <sliding-tabs></sliding-tabs> -->
+  <ion-fab bottom right *ngIf="scrollTopButton">
+    <button ion-fab (click)="scrollToTop()">
+      <ion-icon name="arrow-round-up"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
+<ion-footer>
+  <footer></footer>
+</ion-footer>

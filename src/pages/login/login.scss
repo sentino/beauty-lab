@@ -1,0 +1,226 @@
+
+page-login {
+    .item-md {
+        padding-left: 0!important;
+    }
+
+        #floatContainer1{
+            margin-bottom: 20px;
+        }
+
+      
+      /** float container */
+      .float-container {
+        border-bottom: solid 1px #ccc;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        padding: 0 0;
+        position: relative;
+        
+        color: rgba(0, 0, 00, 0.52);
+        font-weight: 400;
+
+        
+        input {
+          border: none;
+          font-size: 16px;
+          outline: 0;
+          padding: 16px 0 8px;    
+          width: 100%;
+          color: black;
+        }
+      
+        label {
+          font-size: 16px;
+          position: absolute;
+          transform-origin: top left;
+          transform: translate(0, 16px) scale(1); 
+          transition: all .1s ease-in-out;  //speed
+
+        }
+        
+        /** active label */
+        &.active {
+          label {
+            //move the x coordinate and reduce size
+            transform: translate(0, -5px) scale(.75);
+          }
+        }
+      }
+
+    .toolbar-title-md{
+        padding-left: 68px!important;
+    }
+
+    .back-button{
+        display: none!important;
+    }
+
+    .icon-soc{
+        width: 19px;
+        height: 19px;
+        margin-left: 8px;
+    }
+
+    .vk-login{
+        background-color: #4A76A8;
+        border-color: #4A76A8;
+        color: white;
+    }
+
+    .button{
+        padding: 0!important;
+        height: 35px!important;
+
+        span{
+            font-weight: 400!important;
+        }
+    }
+
+    .without-btn{
+        font-size: 12px!important;
+        text-decoration: underline;
+        color: grey;
+        width: 120%;
+        color: rgba(0, 0, 0, 0.52);
+        font-weight: 400!important;
+    }
+
+    .login-btn{
+        background: #EF5CEF;
+        margin-bottom: 15px!important;
+    }
+
+    .registry-btn{
+        background: #48A7F0;
+    }
+
+    .registry-btn.activated{
+        background: #3F93D3;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
+    }
+
+    
+
+    .item-block{
+        display: block;
+        background-color: white;
+        margin-bottom: 20px!important;
+    }
+
+    .flex-block{
+        .button:nth-child(even){
+            span{
+                justify-content: flex-end;
+                
+            }
+        }
+
+        .button:nth-child(odd){
+            span{
+                justify-content: flex-start; 
+            }
+        }
+    }
+
+    .flex-block{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .scroll-content{
+        background: white;
+    }
+
+    .logo-part{
+        img{
+            width: 225px;
+            height: 52px;
+            margin: 0 auto;
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+    }
+
+    input{
+        width: 100%;
+        padding-bottom: 10px;
+        border: none;
+        font-weight: 400;
+    }
+
+    .ng-valid{
+        border-bottom: 2px solid #EF5CEF!important;
+    }
+
+
+    .ng-invalid{
+        border-bottom: 2px solid red!important;
+    }
+
+    .scroll-content form{
+        border-bottom: none!important;
+    }
+
+    .ng-pristine{
+        border-bottom: none!important;
+    }
+
+    
+    .fail{
+        border-bottom: 2px solid red;
+    }
+
+    .label-md {
+        margin: 10px 0px 0px 0!important;
+    }
+
+    .forgot-btn .button-inner{
+        justify-content: flex-end;
+        font-size: 12px;
+        color: grey;
+        text-transform: none;
+        text-decoration: underline;
+        color: rgba(0, 0, 0, 0.52);
+        font-weight: 400!important;
+    }
+
+    .last-input{
+        margin-bottom: 10px!important;
+    }
+
+    .page-login {
+        .grid-t{
+            .logo{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 10px;
+                overflow: hidden;
+                border-width: 2px;
+                border-style: solid;
+                border-color:color($colors, light); 
+                .image{
+                    
+                    display: block;
+                    opacity: 0.10;
+                }
+            }
+        }
+
+        .grid-b{
+            .col{
+                .button{
+                    margin-left: 0;
+                    margin-right: 0;
+                    .icon{
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

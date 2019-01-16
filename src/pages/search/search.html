@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Результаты поиска
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="showHideSearchList()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      <button ion-button icon-only class="cart-button" (click)="openCart()">
+        <ion-icon name="cart">
+          <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="toolbar-secondary">
+    <div class="flex-box">
+        <p (click)="background_show = 'sort'" [ngClass]="{ 'bg-active': background_show == 'sort'}" class="sorts" (click)="showHideSortsList()">
+            <span class="sort-title">Сортировка:</span>
+            <ion-icon [name]="sortListIcon"></ion-icon>
+        </p>
+  
+        <button ion-button icon-only class="change-btn" (click)="changeLayout()">
+            <ion-icon name="list" [name]="productView=='grid'? 'list' : 'apps'"></ion-icon>
+        </button>
+    </div>
+
+
+      <form #loginForm="ngForm" class="form sort-list" *ngIf="Sort" [@animate] (ngSubmit)="filtered()">
+          <div class="sort list" >
+            <p *ngFor="let sort of sortArray" (click)="activeButton = sort" [ngClass]="{ 'active-sort': activeButton == sort }" (click)="getSortProducts(sort)" >{{sort}}</p>
+            <p (click)="showHideSortsList()">закрыть</p>
+          </div>
+        </form>
+  </ion-toolbar>
+
+  <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+      <ion-item>
+          <ion-icon name="search"></ion-icon>
+          <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+      </ion-item>
+      <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+</form>
+</ion-header>
+
+<ion-content class="page-products" (ionScroll)="onScroll($event)">
+
+    <div class="empty_list" *ngIf="empty_status == true" >
+      <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+    </div>
+
+    <ion-grid *ngIf="productView=='grid'">
+      <ion-col *ngFor="let p of Products" col-6>
+        <product [data]="p" [type]="'normal'"></product>
+      </ion-col>
+    </ion-grid>
+  
+  
+  
+    <ion-list class="list-view" *ngIf="productView=='list'">
+      <span *ngFor="let p of Products">
+        <product [data]="p" [type]="'list'"></product>
+      </span>
+    </ion-list>
+  
+  
+    
+  
+  
+    <!-- <ion-infinite-scroll #infinite (ionInfinite)="getProducts($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+  
+    <ion-fab bottom right>
+      <button ion-fab (click)="scrollToTop()">
+          <ion-icon name="ios-arrow-up"></ion-icon>
+      </button>
+    </ion-fab>
+</ion-content>
+
+<ion-footer>
+    <div class="flexer">
+        <div [@slideInOut]="helpMenuOpen" class="pagi" >
+            <button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>
+        </div>
+        <div *ngIf="all_pages>1" class="plaska" (click)="navHandler()">
+        <button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages}}</button> 
+        <ion-icon  name="ios-arrow-forward"></ion-icon> 
+        </div>
+    </div>
+    <footer></footer>
+  </ion-footer>

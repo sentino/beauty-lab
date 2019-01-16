@@ -1,0 +1,333 @@
+page-sign-up {
+
+    .hider{
+        height: 0;
+        overflow: hidden;
+    }
+
+    .item-inner{
+        .ion-md-add{
+            margin-top: 18px!important;
+        }
+    }
+
+    
+
+    .shower{
+        height: auto;
+        overflow: hidden;    
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-control-placeholder {
+        position: absolute;
+        top: 0;
+        padding: 7px 0 0 13px;
+        transition: all 200ms;
+        opacity: 0.5;
+      }
+      
+      .form-control:focus + .form-control-placeholder,
+      .form-control:valid + .form-control-placeholder {
+        font-size: 75%;
+        transform: translate3d(0, -100%, 0);
+        opacity: 1;
+      }
+      
+
+
+
+    .item-md {
+        padding-left: 0!important;
+    }
+
+
+    
+    /** float container */
+    .float-container {
+    border-bottom: solid 1px #ccc;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    
+    input {
+      border: none;
+      font-size: 16px;
+      outline: 0;
+      padding: 16px 0 10px;    
+      width: 100%;
+    }
+  
+    label {
+      color: rgba(0, 0, 0, 0.52);
+      font-size: 16px;
+      position: absolute;
+      transform-origin: top left;
+      transform: translate(0, 16px) scale(1); 
+      transition: all .1s ease-in-out;  //speed
+    }
+    
+    /** active label */
+    &.active {
+      label {
+        //move the x coordinate and reduce size
+        transform: translate(0, -2px) scale(.75);
+      }
+    }
+    }
+
+    ion-input {
+        background-color: map-get($colors, light);
+        padding-left: 10px;
+        color: #6c6c6c;
+    }
+
+    ion-label {
+        color: #6c6c6c;
+        margin-top: 20px;
+    }
+
+    .ng-valid{
+        border-bottom: 2px solid #EF5CEF;
+    }
+
+
+    .ng-invalid{
+        border-bottom: 2px solid red;
+    }
+
+    
+    .fail{
+        border-bottom: 2px solid red;
+    }
+
+    .input_counter{
+        text-align: right;
+        border: none;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.38);
+    }
+
+
+
+     .label-md {
+        margin: 10px 0px 0px 0!important;
+    }
+
+    .ng-pristine{
+        border-bottom: none!important;
+    }
+
+    input{
+        width: 100%;
+        padding-bottom: 10px;
+        border: none;
+        font-weight: 400;
+    }
+
+    [floating] {
+        margin-left: 10px;
+    }
+
+    button {
+        float: right;
+        margin-right: 20px;
+    }
+
+    ion-slide{
+        margin-bottom: 50px;
+    }
+
+    .bar-buttons{
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+
+    .toolbar-content-md{
+        position: relative;
+        top: 2px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ng-valid{
+        border-bottom: 2px solid #EF5CEF!important;
+    }
+
+
+    .ng-invalid{
+        border-bottom: 2px solid red!important;
+    }
+
+    .scroll-content form{
+        border-bottom: none!important;
+    }
+
+    .ng-pristine{
+        border-bottom: none!important;
+    }
+
+    .list .input-wrapper ion-label {
+        margin-top: 18px !important;
+        font-weight: 400;
+        color: #707070;
+    }
+
+    .list-md .item-block .item-inner{
+        border-bottom: 0;
+    }
+
+    .subscribe-input{
+        ion-label{
+            font-size: 12px!important;
+        }
+
+        .checkbox{
+            border-bottom: none!important;
+        }
+        
+        .checkbox-md .checkbox-checked{
+            background: #48A7F0;
+            border-color: #48A7F0;
+        }
+
+        .checkbox-md .checkbox-icon {
+            margin-top: 16px;
+        }
+    }
+
+    .regsubmit{
+        background: #48A7F0;
+        height: 35px;
+    }
+
+    .regsubmit.activated{
+        background: #3F93D3;
+    }
+
+    .sent-btn.activated{
+        background: #3F93D3!important;
+    }
+
+    
+
+    .checkbox-md {
+        margin: 9px 15px 9px 4px!important;
+    }
+
+    .little-text{
+        font-size: 12px;
+        color: rgba($color: #000000, $alpha: 0.52);
+        margin-bottom: 10px!important;
+    }
+
+    .item-md{
+        background-color: transparent;
+        margin-bottom: 15px!important;
+    }
+
+    .reg-header{
+        padding-top: 9px;
+        padding-bottom: 23px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+        opacity: 0.87;
+    }
+
+    .scroll-content{
+        padding: 17px!important;
+    }
+
+    form{
+        border:none!important;
+
+        .col{
+            padding: 0!important;
+        }
+    }
+
+    .content-md{
+        background: white;
+    }
+
+
+    .delivery_info{
+        margin-bottom: 0!important;
+        .label-md{
+            margin-bottom: 10px!important;
+        }
+    }
+
+    .item-datetime .label-md{
+        font-weight: 400;
+        color: #858585;
+        padding-left: 0px;
+    }
+
+    .delivery_info{
+        .item-inner{
+            border-bottom: none!important;
+        }
+    }
+    
+
+    .page-sign-up{
+
+        .data_birthday{
+            padding-left: 15px;
+        }
+
+        .photo{
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+            .image{
+                width: 110px;
+                height: 110px;
+                border-radius: 50%;
+                overflow: hidden;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .upload{
+                position: absolute;
+                right:-20px;
+                bottom: 0;
+    
+                .icon{
+                    font-size: 20px;
+                    background-color:darken($icon-color-text, 10%);
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 40px;
+                    color: $white;
+                }
+            }
+        }
+        p{
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+}
