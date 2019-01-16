@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ActionSheetController} from 'ionic-angular';
 import { trigger, style, animate, transition, state } from '@angular/animations';
-import { ConfigProvider } from '../../providers/config/config';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { ConfigProvider } from '../../services/config/config';
+import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
 import { ViewChild } from '@angular/core';
 import { SearchPage } from '../../pages/search/search';

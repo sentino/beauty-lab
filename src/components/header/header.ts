@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 import { CartPage } from '../../pages/cart/cart';
 import { SearchPage } from '../../pages/search/search';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition, state } from '@angular/animations';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 
 @Component({

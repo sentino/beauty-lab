@@ -5,8 +5,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { TranslateService } from '@ngx-translate/core';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { CartPage } from '../cart/cart';

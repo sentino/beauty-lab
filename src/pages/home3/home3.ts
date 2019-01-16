@@ -5,9 +5,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
 import { NavController, Content } from 'ionic-angular';

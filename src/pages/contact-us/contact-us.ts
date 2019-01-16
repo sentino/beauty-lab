@@ -5,10 +5,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
-import { LoadingProvider } from '../../providers/loading/loading';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { AlertProvider } from '../../providers/alert/alert';
+import { ConfigProvider } from '../../services/config/config';
+import { LoadingProvider } from '../../services/loading/loading';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { AlertProvider } from '../../services/alert/alert';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
 

@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 
 
 @Component({

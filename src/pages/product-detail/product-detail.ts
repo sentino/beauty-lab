@@ -4,12 +4,12 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { ConfigProvider } from '../../providers/config/config';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style,state } from '@angular/animations';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LoginPage } from '../login/login';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { Events } from 'ionic-angular';

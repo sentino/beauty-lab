@@ -4,8 +4,8 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { ConfigProvider } from '../../providers/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
 import { ProductsPage } from '../products/products';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';

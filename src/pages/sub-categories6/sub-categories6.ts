@@ -4,9 +4,9 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ProductsPage } from '../products/products';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';

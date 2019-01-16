@@ -8,12 +8,12 @@ import { HomePage } from '../home/home';
 import { MyOrdersPage } from '../my-orders/my-orders';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { Home2Page } from '../home2/home2';
 import { Home3Page } from '../home3/home3';
 import { Home5Page } from '../home5/home5';
 import { Home4Page } from '../home4/home4';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 
 
 

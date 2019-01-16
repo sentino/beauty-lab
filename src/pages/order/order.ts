@@ -5,14 +5,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, Content } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingProvider } from '../../providers/loading/loading';
-import { AlertProvider } from '../../providers/alert/alert';
+import { LoadingProvider } from '../../services/loading/loading';
+import { AlertProvider } from '../../services/alert/alert';
 import { ThankYouPage } from '../thank-you/thank-you';
 import { Stripe } from '@ionic-native/stripe';
-import { CouponProvider } from '../../providers/coupon/coupon';
+import { CouponProvider } from '../../services/coupon/coupon';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
 
 

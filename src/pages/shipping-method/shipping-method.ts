@@ -4,10 +4,10 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { ConfigProvider } from '../../providers/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { OrderPage } from '../order/order';
 
 

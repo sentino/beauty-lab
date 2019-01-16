@@ -19,7 +19,7 @@ const AUTH_CONFIG = {
 /*
   Generated class for the AuthServiceProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
+  See https://angular.io/guide/dependency-injection for more info on services
   and Angular DI.
 */
 @Injectable()

@@ -3,12 +3,12 @@
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { ConfigProvider } from '../../providers/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProductsPage } from '../../pages/products/products';
 import { Http } from '@angular/http';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { ProductDetailPage } from '../../pages/product-detail/product-detail';
 
 @Component({

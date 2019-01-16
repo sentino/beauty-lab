@@ -4,13 +4,13 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition, state } from '@angular/animations';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { Platform, NavController } from 'ionic-angular';
-import { AlertProvider } from '../../providers/alert/alert';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { AlertProvider } from '../../services/alert/alert';
+import { LoadingProvider } from '../../services/loading/loading';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';

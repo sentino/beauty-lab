@@ -5,8 +5,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { ConfigProvider } from '../../providers/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
 import { Home2Page } from '../home2/home2';
 import { Home3Page } from '../home3/home3';
 import { Home4Page } from '../home4/home4';

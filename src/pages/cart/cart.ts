@@ -4,13 +4,13 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, Events, ModalController } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { ConfigProvider } from '../../providers/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Toast } from '@ionic-native/toast';
 import { ProductDetailPage } from '../product-detail/product-detail';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { ShippingAddressPage } from '../shipping-address/shipping-address';

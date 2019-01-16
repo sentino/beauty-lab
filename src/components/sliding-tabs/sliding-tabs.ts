@@ -3,11 +3,11 @@
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
 import { Component, ViewChild, Input } from '@angular/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import 'rxjs/add/operator/map';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { InfiniteScroll } from 'ionic-angular';
 
 @Component({

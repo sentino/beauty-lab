@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 
 
 @Pipe({

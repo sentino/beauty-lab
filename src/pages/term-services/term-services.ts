@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 
 
 @Component({

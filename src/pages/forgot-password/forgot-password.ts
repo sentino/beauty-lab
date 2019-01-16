@@ -5,9 +5,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { trigger, style, animate, transition, state } from '@angular/animations';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { SearchPage } from '../../pages/search/search';
 
 /**

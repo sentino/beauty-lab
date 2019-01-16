@@ -4,13 +4,13 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { TranslateService } from '@ngx-translate/core';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
 import { TermServicesPage } from '../term-services/term-services';
 import { RefundPolicyPage } from '../refund-policy/refund-policy';
-import { ConfigProvider } from '../../providers/config/config';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { ConfigProvider } from '../../services/config/config';
+import { LoadingProvider } from '../../services/loading/loading';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';

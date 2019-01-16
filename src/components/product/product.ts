@@ -3,8 +3,8 @@
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
 import { Component, Input } from '@angular/core';
-import { ConfigProvider } from '../../providers/config/config';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { ProductDetailPage } from '../../pages/product-detail/product-detail';
 import { LoginPage } from '../../pages/login/login';

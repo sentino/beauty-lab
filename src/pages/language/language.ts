@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingProvider } from '../../providers/loading/loading';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { LoadingProvider } from '../../services/loading/loading';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 
 @Component({
   selector: 'page-language',

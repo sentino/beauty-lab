@@ -5,9 +5,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
-import { LoadingProvider } from '../../providers/loading/loading';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { ConfigProvider } from '../../services/config/config';
+import { LoadingProvider } from '../../services/loading/loading';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { Toast } from '@ionic-native/toast';
 import { TranslateService } from '@ngx-translate/core';
 import { NewsDetailPage } from '../news-detail/news-detail';

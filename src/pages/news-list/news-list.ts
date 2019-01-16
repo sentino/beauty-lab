@@ -5,8 +5,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { NewsDetailPage } from '../news-detail/news-detail';
-import { ConfigProvider } from '../../providers/config/config';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { ConfigProvider } from '../../services/config/config';
+import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
 import { Toast } from '@ionic-native/toast';
 

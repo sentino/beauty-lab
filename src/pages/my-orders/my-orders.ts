@@ -5,11 +5,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { LoadingProvider } from '../../providers/loading/loading';
-import { AlertProvider } from '../../providers/alert/alert';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { LoadingProvider } from '../../services/loading/loading';
+import { AlertProvider } from '../../services/alert/alert';
 import { OrderDetailPage } from '../order-detail/order-detail';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';

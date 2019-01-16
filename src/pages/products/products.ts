@@ -4,10 +4,10 @@
 // Author URI: http://vectorcoder.com/
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
-import { ConfigProvider } from '../../providers/config/config';
+import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
-import { LoadingProvider } from '../../providers/loading/loading';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { LoadingProvider } from '../../services/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';

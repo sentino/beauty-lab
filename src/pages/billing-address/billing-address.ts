@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { SharedDataProvider } from '../../providers/shared-data/shared-data';
+import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { SelectCountryPage } from '../select-country/select-country';
 import { SelectZonesPage } from '../select-zones/select-zones';
 import { ShippingMethodPage } from '../shipping-method/shipping-method';
