@@ -6,7 +6,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ConfigProvider } from '../../services/config/config';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
@@ -71,7 +71,8 @@ export class HomePage {
     public loading: LoadingProvider,
     public appCtrl: App,
     public navCtrl: NavController,
-    translate: TranslateService) {
+    // translate: TranslateService
+  ) {
       this.loading.hide();
       
       console.log(this.shared.subCategoriesBeauty);

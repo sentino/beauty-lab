@@ -6,7 +6,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Events, Platform } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { LanguagePage } from '../language/language';
+// import { LanguagePage } from '../language/language';
 import { ConfigProvider } from '../../services/config/config';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
@@ -180,10 +180,10 @@ export class SettingsPage {
       let modal = this.modalCtrl.create(TermServicesPage);
       modal.present();
     }
-    else if (value == 'language') {
-      let modal = this.modalCtrl.create(LanguagePage);
-      modal.present();
-    }
+    // else if (value == 'language') {
+    //   let modal = this.modalCtrl.create(LanguagePage);
+    //   modal.present();
+    // }
     else {
       let modal = this.modalCtrl.create(RefundPolicyPage);
       modal.present();

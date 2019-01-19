@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,10 +16,9 @@ export class PrivacyPolicyPage {
 
   constructor(
     public viewCtrl: ViewController,
-  
     public sharedData: SharedDataProvider,
-    translate: TranslateService,) {
-  }
+    // translate: TranslateService,
+    ) { }
 
   dismiss() {
     this.viewCtrl.dismiss();

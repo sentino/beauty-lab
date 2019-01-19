@@ -23,7 +23,7 @@ import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-loginmodal',
   templateUrl: 'loginmodal.html',

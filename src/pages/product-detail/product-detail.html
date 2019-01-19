@@ -70,8 +70,8 @@
             <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price" >{{product_price|curency}}</span>
             <span class="card-price-normal" *ngIf="product_price != product_discount">{{product_discount|curency}}</span> 
           </span>
-          <!-- <span class="product-outstock" *ngIf="product.products_quantity==0">{{'Out of Stock'|translate}}</span>
-          <span class="product-instock" *ngIf="product.products_quantity!=0">{{'In Stock'|translate}}</span> -->
+          <!-- <span class="product-outstock" *ngIf="product.products_quantity==0">{{'Out of Stock'}}</span>
+          <span class="product-instock" *ngIf="product.products_quantity!=0">{{'In Stock'}}</span> -->
           <span class="product-outstock">{{product_avail}}</span>
         </span>
 

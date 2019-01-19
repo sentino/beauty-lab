@@ -6,7 +6,7 @@
         </button>
     
         <ion-title>
-          {{'Categories'| translate }}
+          {{'Categories'}}
         </ion-title>
     
         <ion-buttons end>
@@ -32,7 +32,7 @@
         </ion-list-header>
         <div *ngFor="let s of shared.subCategories">
           <ion-item *ngIf="c.id==s.parent_id" (click)="openProducts(s.id,s.name)">
-            <h2>{{s.name}}<br><small>{{s.total_products}} {{'Products'| translate }}</small></h2>
+            <h2>{{s.name}}<br><small>{{s.total_products}} {{'Products' }}</small></h2>
             <ion-avatar item-end>
               <img src="{{config.url+s.image}}">
             </ion-avatar>

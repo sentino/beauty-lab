@@ -91,30 +91,30 @@ export class SharedDataProvider {
     //private fb: Facebook,
   ) {
     
-    //getting all banners
-    this.http.get(config.url + 'getBanners').map(res => res.json()).subscribe(data => {
-      this.banners = data.data;
-    });
-    //getting tab 1
-    let data: { [k: string]: any } = {};
-    if (this.customerData.customers_id != null)
-      data.customers_id = this.customerData.customers_id;
-    data.page_number = 0;
-    data.language_id = config.langId;
-    data.type = 'top seller';
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      this.tab1 = data.product_data
-    });
-    //getting tab 2
-    data.type = 'special';
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      this.tab2 = data.product_data
-    });
-    //getting tab 3
-    data.type = 'most liked';
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      this.tab3 = data.product_data
-    });
+    // //getting all banners
+    // this.http.get(config.url + 'getBanners').map(res => res.json()).subscribe(data => {
+    //   this.banners = data.data;
+    // });
+    // //getting tab 1
+    // let data: { [k: string]: any } = {};
+    // if (this.customerData.customers_id != null)
+    //   data.customers_id = this.customerData.customers_id;
+    // data.page_number = 0;
+    // data.language_id = config.langId;
+    // data.type = 'top seller';
+    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+    //   this.tab1 = data.product_data
+    // });
+    // //getting tab 2
+    // data.type = 'special';
+    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+    //   this.tab2 = data.product_data
+    // });
+    // //getting tab 3
+    // data.type = 'most liked';
+    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+    //   this.tab3 = data.product_data
+    // });
 
 
     //getting all allCategories
@@ -158,19 +158,19 @@ export class SharedDataProvider {
       // console.log(val);
     });
 
-    //getting allpages from the server
-    this.http.post(config.url + 'getAllPages', { language_id: this.config.langId }).map(res => res.json()).subscribe(data => {
-      if (data.success == 1) {
-        let pages = data.pages_data;
-        for (let value of pages) {
-          if (value.slug == 'privacy-policy') this.privacyPolicy = value.description;
-          if (value.slug == 'term-services') this.termServices = value.description;
-          if (value.slug == 'refund-policy') this.refundPolicy = value.description;
-          if (value.slug == 'about-us') this.aboutUs = value.description;
-        }
-      }
-    });
-    //---------------- end -----------------
+    // //getting allpages from the server
+    // this.http.post(config.url + 'getAllPages', { language_id: this.config.langId }).map(res => res.json()).subscribe(data => {
+    //   if (data.success == 1) {
+    //     let pages = data.pages_data;
+    //     for (let value of pages) {
+    //       if (value.slug == 'privacy-policy') this.privacyPolicy = value.description;
+    //       if (value.slug == 'term-services') this.termServices = value.description;
+    //       if (value.slug == 'refund-policy') this.refundPolicy = value.description;
+    //       if (value.slug == 'about-us') this.aboutUs = value.description;
+    //     }
+    //   }
+    // });
+    // //---------------- end -----------------
   }
   //adding into recent array products
   addToRecent(p) {
@@ -218,7 +218,7 @@ export class SharedDataProvider {
     }
     //  if(checkDublicateService(product.products_id,$rootScope.cartProducts)==false){
 
-    let pprice = product.products_price
+    let pprice = product.products_price;
     let on_sale = false;
     if (product.discount_price != null) {
       pprice = product.discount_price;
@@ -248,7 +248,7 @@ export class SharedDataProvider {
       price: pprice,
       subtotal: finalPrice,
       total: finalPrice
-    }
+    };
     this.cartProducts.push(obj);
     this.storage.set('cartProducts', this.cartProducts);
 
@@ -305,46 +305,46 @@ export class SharedDataProvider {
     return total;
   };
 
-  removeWishList(p) {
-    this.loading.show();
-    let data: { [k: string]: any } = {};
-    data.liked_customers_id = this.customerData.customers_id;
-    data.liked_products_id = p.products_id;
-    this.http.post(this.config.url + 'unlikeProduct', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.events.publish('wishListUpdate', p.products_id, 0);
-        p.isLiked = 0;
-        this.wishList.forEach((value, index) => {
-          if (value.products_id == p.products_id) this.wishList.splice(index, 1);
-        });
-      }
-      if (data.success == 0) {
-
-      }
-    });
-  }
-  addWishList(p) {
-    this.loading.show();
-    let data: { [k: string]: any } = {};
-    data.liked_customers_id = this.customerData.customers_id;
-    data.liked_products_id = p.products_id;
-    this.http.post(this.config.url + 'likeProduct', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.events.publish('wishListUpdate', p.products_id, 1);
-        p.isLiked = 1;
-      }
-
-      if (data.success == 0) { }
-    });
-  }
+  // removeWishList(p) {
+  //   this.loading.show();
+  //   let data: { [k: string]: any } = {};
+  //   data.liked_customers_id = this.customerData.customers_id;
+  //   data.liked_products_id = p.products_id;
+  //   this.http.post(this.config.url + 'unlikeProduct', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.events.publish('wishListUpdate', p.products_id, 0);
+  //       p.isLiked = 0;
+  //       this.wishList.forEach((value, index) => {
+  //         if (value.products_id == p.products_id) this.wishList.splice(index, 1);
+  //       });
+  //     }
+  //     if (data.success == 0) {
+  //
+  //     }
+  //   });
+  // }
+  // addWishList(p) {
+  //   this.loading.show();
+  //   let data: { [k: string]: any } = {};
+  //   data.liked_customers_id = this.customerData.customers_id;
+  //   data.liked_products_id = p.products_id;
+  //   this.http.post(this.config.url + 'likeProduct', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.events.publish('wishListUpdate', p.products_id, 1);
+  //       p.isLiked = 1;
+  //     }
+  //
+  //     if (data.success == 0) { }
+  //   });
+  // }
 
 
   login(data) {
     this.customerData = data;
     this.storage.set('customerData', this.customerData);
-    this.subscribePush();
+    // this.subscribePush();
   }
 
   userInfo(data) {
@@ -356,7 +356,7 @@ export class SharedDataProvider {
     var localInfo = JSON.stringify(this.customerData); 
     localStorage.setItem("localInfo", localInfo);
 
-    this.subscribePush();
+    // this.subscribePush();
   }
 
   logOut() {
@@ -376,46 +376,46 @@ export class SharedDataProvider {
 
   //============================================================================================
   //getting token and passing to server
-  subscribePush() {
-    if (this.platform.is('cordova')) {
-      // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-      if (this.config.notificationType == "fcm") {
-        try {
-          this.fcm.subscribeToTopic('marketing');
-
-          this.fcm.getToken().then(token => {
-            //alert("registration" + token);
-            console.log(token);
-            //this.storage.set('registrationId', token);
-            this.registerDevice(token);
-          })
-
-          this.fcm.onNotification().subscribe(data => {
-            if (data.wasTapped) {
-              console.log("Received in background");
-            } else {
-              console.log("Received in foreground");
-            };
-          })
-
-          this.fcm.onTokenRefresh().subscribe(token => {
-            // this.storage.set('registrationId', token);
-            this.registerDevice(token);
-          });
-
-        } catch (error) {
-
-        }
-      }
-      else if (this.config.notificationType == "onesignal") {
-        this.oneSignal.startInit(this.config.onesignalAppId, this.config.onesignalSenderId);
-        this.oneSignal.endInit();
-        this.oneSignal.getIds().then((data) => {
-          this.registerDevice(data.userId);
-        })
-      }
-    }
-  }
+  // subscribePush() {
+  //   if (this.platform.is('cordova')) {
+  //     // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  //     if (this.config.notificationType == "fcm") {
+  //       try {
+  //         this.fcm.subscribeToTopic('marketing');
+  //
+  //         this.fcm.getToken().then(token => {
+  //           //alert("registration" + token);
+  //           console.log(token);
+  //           //this.storage.set('registrationId', token);
+  //           // this.registerDevice(token);
+  //         })
+  //
+  //         this.fcm.onNotification().subscribe(data => {
+  //           if (data.wasTapped) {
+  //             console.log("Received in background");
+  //           } else {
+  //             console.log("Received in foreground");
+  //           };
+  //         })
+  //
+  //         this.fcm.onTokenRefresh().subscribe(token => {
+  //           // this.storage.set('registrationId', token);
+  //           // this.registerDevice(token);
+  //         });
+  //
+  //       } catch (error) {
+  //
+  //       }
+  //     }
+  //     else if (this.config.notificationType == "onesignal") {
+  //       this.oneSignal.startInit(this.config.onesignalAppId, this.config.onesignalSenderId);
+  //       this.oneSignal.endInit();
+  //       this.oneSignal.getIds().then((data) => {
+  //         // this.registerDevice(data.userId);
+  //       })
+  //     }
+  //   }
+  // }
 
   testData(val) {
     if (this.platform.is('cordova')) {
@@ -428,32 +428,32 @@ export class SharedDataProvider {
 
   //============================================================================================
   //registering device for push notification function
-  registerDevice(registrationId) {
-    //this.storage.get('registrationId').then((registrationId) => {
-    console.log(registrationId);
-    let data: { [k: string]: any } = {};
-    if (this.customerData.customers_id == null)
-      data.customers_id = null;
-    else
-      data.customers_id = this.customerData.customers_id;
-    //	alert("device ready fired");
-    let deviceInfo = this.device;
-    data.device_model = deviceInfo.model;
-    data.device_type = deviceInfo.platform;
-    data.device_id = registrationId;
-    data.device_os = deviceInfo.version;
-    data.manufacturer = deviceInfo.manufacturer;
-    data.ram = '2gb';
-    data.processor = 'mediatek';
-    data.location = 'empty';
-
-    // alert(JSON.stringify(data));
-    this.http.post(this.config.url + "registerDevices", data).map(res => res.json()).subscribe(data => {
-      //  alert(registrationId + " " + JSON.stringify(data));
-    });
-    //  });
-
-  }
+  // registerDevice(registrationId) {
+  //   //this.storage.get('registrationId').then((registrationId) => {
+  //   console.log(registrationId);
+  //   let data: { [k: string]: any } = {};
+  //   if (this.customerData.customers_id == null)
+  //     data.customers_id = null;
+  //   else
+  //     data.customers_id = this.customerData.customers_id;
+  //   //	alert("device ready fired");
+  //   let deviceInfo = this.device;
+  //   data.device_model = deviceInfo.model;
+  //   data.device_type = deviceInfo.platform;
+  //   data.device_id = registrationId;
+  //   data.device_os = deviceInfo.version;
+  //   data.manufacturer = deviceInfo.manufacturer;
+  //   data.ram = '2gb';
+  //   data.processor = 'mediatek';
+  //   data.location = 'empty';
+  //
+  //   // alert(JSON.stringify(data));
+  //   this.http.post(this.config.url + "registerDevices", data).map(res => res.json()).subscribe(data => {
+  //     //  alert(registrationId + " " + JSON.stringify(data));
+  //   });
+  //   //  });
+  //
+  // }
 }
 //  return new Promise(resolve => {
     //     resolve(data.product_data);

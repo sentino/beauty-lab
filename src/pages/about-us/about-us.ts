@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
 import { TermServicesPage } from '../term-services/term-services';
 import { RefundPolicyPage } from '../refund-policy/refund-policy';
@@ -29,8 +29,8 @@ export class AboutUsPage {
     public navParams: NavParams,
     public loading: LoadingProvider,
     public iab: InAppBrowser,
-    translate: TranslateService) {
-  }
+    // translate: TranslateService
+  ) {}
   showModal(value) {
     if (value == 'privacyPolicy') {
       let modal = this.modalCtrl.create(PrivacyPolicyPage);

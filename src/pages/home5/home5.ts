@@ -6,7 +6,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ConfigProvider } from '../../services/config/config';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { NavController, Content } from 'ionic-angular';
@@ -42,8 +42,8 @@ export class Home5Page {
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public navCtrl: NavController,
-    translate: TranslateService) {
-  }
+    // translate: TranslateService
+  ) { }
   openSubCategories(parent) {
     this.navCtrl.push(SubCategories6Page, { 'parent': parent });
   }

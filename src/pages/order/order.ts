@@ -7,7 +7,7 @@ import { NavController, NavParams, ActionSheetController, Content } from 'ionic-
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
 import { ThankYouPage } from '../thank-you/thank-you';
@@ -57,7 +57,7 @@ export class OrderPage {
     public alert: AlertProvider,
     public couponProvider: CouponProvider,
     private payPal: PayPal,
-    public translate: TranslateService,
+    // public translate: TranslateService,
     public actionSheetCtrl: ActionSheetController,
     private stripe: Stripe) {
     // shared.orderDetails.payment_method = 'cash_on_delivery';
@@ -96,9 +96,9 @@ export class OrderPage {
       if (data.success == 0) { this.alert.show(data.message); }
     }, err => {
 
-      this.translate.get("Server Error").subscribe((res) => {
-        this.alert.show(res + " " + err.status);
-      });
+      // this.translate.get("Server Error").subscribe((res) => {
+        this.alert.show("Server Error" + " " + err.status);
+      // });
 
     });
   };
@@ -125,9 +125,9 @@ export class OrderPage {
       }
     },
       err => {
-        this.translate.get("getPaymentMethods Server Error").subscribe((res) => {
-          this.alert.show(res + " " + err.status);
-        });
+        // this.translate.get("getPaymentMethods Server Error").subscribe((res) => {
+          this.alert.show("getPaymentMethods Server Error" + " " + err.status);
+        // });
       });
   }
 
@@ -329,10 +329,10 @@ export class OrderPage {
   }
 
   couponslist() {
-    // + '<li>Cart Percentage <span>(cp9989)</a><p>{{"A percentage discount for the entire cart"|translate}}</p></li>'
-    //   + '<li>Cart Fixed <span>(cf9999)</span> <p>{{"A fixed total discount for the entire cart"|translate}}</p></li>'
-    //   + '<li>Product Fixed <span>(pf8787)</span></a><p>{{"A fixed total discount for selected products only"|translate}}</p></li>'
-    //   + '<li>Product Percentage <span>(pp2233)</span><p>{{"A percentage discount for selected products only"|translate}}</p></li>'
+    // + '<li>Cart Percentage <span>(cp9989)</a><p>{{"A percentage discount for the entire cart"}}</p></li>'
+    //   + '<li>Cart Fixed <span>(cf9999)</span> <p>{{"A fixed total discount for the entire cart"}}</p></li>'
+    //   + '<li>Product Fixed <span>(pf8787)</span></a><p>{{"A fixed total discount for selected products only"}}</p></li>'
+    //   + '<li>Product Percentage <span>(pp2233)</span><p>{{"A percentage discount for selected products only"}}</p></li>'
     //   + '</ul>';
     // this.translate.get(array).subscribe((res) => { });
     let actionSheet = this.actionSheetCtrl.create({
@@ -395,9 +395,9 @@ export class OrderPage {
     }, error => {
       // this.loading.hide();
       if (this.paymentBraintree) {
-        this.translate.get("Server Error").subscribe((res) => {
-          this.alert.show(res + " " + error.status + " Braintree Token");
-        });
+        // this.translate.get("Server Error").subscribe((res) => {
+          this.alert.show("Server Error" + " " + error.status + " Braintree Token");
+        // });
       }
 
     });

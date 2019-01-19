@@ -8,10 +8,10 @@ import { Nav, Platform, ModalController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { MenuController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
-import { LanguagePage } from '../pages/language/language';
+// import { LanguagePage } from '../pages/language/language';
 import { IntroPage } from '../pages/intro/intro';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { AboutUsPage } from '../pages/about-us/about-us';
@@ -45,7 +45,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Http } from '@angular/http';
 import { CartPage } from '../pages/cart/cart';
-import { NavController } from 'ionic-angular';
+// import { NavController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
@@ -94,7 +94,7 @@ export class MyApp {
     public modalCtrl: ModalController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    translate: TranslateService,
+    // translate: TranslateService,
     public storage: Storage,
     public appCtrl: App,
     public menuCtrl: MenuController,
@@ -124,9 +124,9 @@ export class MyApp {
     let connectedToInternet = true;
     network.onDisconnect().subscribe(() => {
       connectedToInternet = false;
-      translate.get(["Please Connect to the Internet!", "Disconnected"]).subscribe((res) => {
-        this.alert.showWithTitle(res["Please Connect to the Internet!"], res["Disconnected"]);
-      });
+      // translate.get(["Please Connect to the Internet!", "Disconnected"]).subscribe((res) => {
+        this.alert.showWithTitle("Please Connect to the Internet!", "Disconnected");
+      // });
       //  console.log('network was disconnected :-(');
 
     });
@@ -136,9 +136,9 @@ export class MyApp {
         window.location.reload();
         //this.loading.show();
         //console.log('network connected!');
-        translate.get(["Network connected Reloading Data", "Connected"]).subscribe((res) => {
-          this.alert.showWithTitle(res["Network connected Reloading Data"] + '...', res["Connected"]);
-        });
+        // translate.get(["Network connected Reloading Data", "Connected"]).subscribe((res) => {
+          this.alert.showWithTitle("Network connected Reloading Data" + '...', "Connected");
+        // });
 
       }
       //connectSubscription.unsubscribe();
@@ -235,10 +235,10 @@ export class MyApp {
     if (this.config.categoryPage == 6) { this.nav.setRoot(Categories6Page); }
   }
 
-  openLanguagePage() {
-    let modal = this.modalCtrl.create(LanguagePage);
-    modal.present();
-  }
+  // openLanguagePage() {
+    // let modal = this.modalCtrl.create(LanguagePage);
+    // modal.present();
+  // }
 
   dismiss(){
     this.menuCtrl.close();

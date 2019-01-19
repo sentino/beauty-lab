@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{'Order Details'| translate }}
+      {{'Order Details' }}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
 <ion-content class="page-order-detail">
   <ion-card>
     <ion-card-header>
-      {{'Shipping Address'|translate}}
+      {{'Shipping Address'}}
     </ion-card-header>
     <ion-card-content>
       {{order.delivery_street_address+', '+order.delivery_city+', '+order.delivery_state+' '+order.delivery_postcode+',
@@ -20,7 +20,7 @@
 
   <ion-card>
     <ion-card-header>
-      {{'Billing Address'|translate}}
+      {{'Billing Address'}}
     </ion-card-header>
     <ion-card-content>
       {{order.billing_street_address+', '+order.billing_city+', '+order.billing_state+' '+order.billing_postcode+',
@@ -30,7 +30,7 @@
 
   <ion-card>
     <ion-card-header>
-      {{'Shipping Method'|translate}}
+      {{'Shipping Method'}}
     </ion-card-header>
     <ion-card-content>
       {{order.shipping_method}}
@@ -39,7 +39,7 @@
 
   <ion-card class="order-product">
     <ion-card-header>
-      {{'Products'|translate}}
+      {{'Products'}}
     </ion-card-header>
     <ion-card-content *ngFor="let product of order.data" (click)="getSingleProductDetail(product.products_id)">
         <ion-row>
@@ -51,7 +51,7 @@
             <img src="{{config.url+product.image}}">
           </ion-thumbnail>
           <ion-row>
-              <ion-col col-6>{{'Price' |translate}}&nbsp;:&nbsp;</ion-col>
+              <ion-col col-6>{{'Price' }}&nbsp;:&nbsp;</ion-col>
               <ion-col col-6>{{product.products_price| curency}}</ion-col>
           </ion-row>
 
@@ -61,11 +61,11 @@
           </ion-row>
 
           <ion-row>
-              <ion-col col-6>{{'Quantity'|translate}}&nbsp;:&nbsp;</ion-col>
+              <ion-col col-6>{{'Quantity'}}&nbsp;:&nbsp;</ion-col>
               <ion-col col-6>{{product.products_quantity}}</ion-col>
             </ion-row>
           <ion-row>
-            <ion-col col-6><strong>{{'Total' |translate}}</strong>&nbsp;:&nbsp;</ion-col>
+            <ion-col col-6><strong>{{'Total' }}</strong>&nbsp;:&nbsp;</ion-col>
             <ion-col col-6><strong>{{product.final_price | curency}}</strong></ion-col>
           </ion-row>
       </ion-item>
@@ -75,12 +75,12 @@
 
   <ion-card>
     <ion-card-header>
-        {{'Price Detail'|translate}}
+        {{'Price Detail'}}
     </ion-card-header>
     <ion-card-content>
         <ion-row>
           <ion-col col-6>
-              {{'Sub Total'|translate}}
+              {{'Sub Total'}}
           </ion-col>
           <ion-col col-6 text-right>
               {{order.order_price-order.shipping_cost | curency }}
@@ -88,7 +88,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-6>
-              {{'Shipping'|translate}}
+              {{'Shipping'}}
           </ion-col>
           <ion-col col-6 text-right>
               {{order.shipping_cost | curency }}
@@ -96,7 +96,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-6>
-              {{'Total'|translate}}
+              {{'Total'}}
           </ion-col>
           <ion-col col-6 text-right>
               {{order.order_price | curency}}
@@ -107,15 +107,15 @@
 
   <ion-card *ngIf="order.coupons.length!=0">
     <ion-card-header>
-      {{'Coupons Applied'|translate}}
+      {{'Coupons Applied'}}
     </ion-card-header>
     <ion-card-content>
       <ion-row>
         <ion-col col-6>
-          {{'Coupon Code'|translate}}
+          {{'Coupon Code'}}
         </ion-col>
         <ion-col col-6 text-right>
-          {{'Coupon Price'|translate}}
+          {{'Coupon Price'}}
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let c of order.coupons">
@@ -131,7 +131,7 @@
 
   <ion-card *ngIf="order.customer_comments!=''">
     <ion-card-header>
-      {{'Order Notes'|translate}}
+      {{'Order Notes'}}
     </ion-card-header>
     <ion-card-content>
       {{order.customer_comments}}
@@ -140,7 +140,7 @@
 
   <ion-card *ngIf="order.admin_comments!=''">
     <ion-card-header>
-      {{'Admin Notes'|translate}}
+      {{'Admin Notes'}}
     </ion-card-header>
     <ion-card-content>
       {{order.admin_comments}}
@@ -149,7 +149,7 @@
 
   <ion-card>
     <ion-card-header>
-      {{'Payment Method'|translate}}
+      {{'Payment Method'}}
     </ion-card-header>
     <ion-card-content>
       {{order.payment_method}}

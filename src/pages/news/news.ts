@@ -9,7 +9,7 @@ import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { Toast } from '@ionic-native/toast';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { NewsDetailPage } from '../news-detail/news-detail';
 import { NewsListPage } from '../news-list/news-list';
 import { CartPage } from '../cart/cart';
@@ -44,7 +44,8 @@ export class NewsPage {
     public loading: LoadingProvider,
     private toast: Toast,
     public shared: SharedDataProvider,
-    translate: TranslateService) {
+    // translate: TranslateService
+  ) {
 
     var dat: { [k: string]: any } = {};
     dat.language_id = this.config.langId;

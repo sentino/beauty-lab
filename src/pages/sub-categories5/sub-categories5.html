@@ -2,7 +2,7 @@
     
       <ion-navbar>
         <ion-title>
-          {{'Sub Categories'| translate }}
+          {{'Sub Categories' }}
         </ion-title>
     
         <ion-buttons end>
@@ -25,7 +25,7 @@
     <ion-card *ngIf="c.parent_id==parent" (click)="openProducts(c.id,c.name)" class="animated flipInX"> 
       <img src="{{config.url+c.image}}" />
       <div class="card-title">{{c.name}}</div>
-      <div class="card-subtitle">{{c.total_products}} {{'Products'| translate }} </div>
+      <div class="card-subtitle">{{c.total_products}} {{'Products' }} </div>
     </ion-card>
   </div>
   

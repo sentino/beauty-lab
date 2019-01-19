@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
@@ -28,7 +28,7 @@ export class MyOrdersPage {
     public http: Http,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
-    translate: TranslateService,
+    // translate: TranslateService,
     public alert: AlertProvider,
     public loading: LoadingProvider
   ) {

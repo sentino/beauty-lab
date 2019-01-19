@@ -7,7 +7,7 @@ import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
@@ -40,9 +40,9 @@ export class WishListPage {
     public http: Http,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
-    translate: TranslateService) {
+    // translate: TranslateService
+  ) { }
 
-  }
   getProducts() {
     var data: { [k: string]: any } = {};
     if (this.shared.customerData.customers_id != null)

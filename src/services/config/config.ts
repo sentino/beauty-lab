@@ -17,7 +17,7 @@ import { OneSignal } from "@ionic-native/onesignal";
 @Injectable()
 
 export class ConfigProvider {
-  public url: string = 'https://api.lab-krasoty.ru/api/v1/';
+  public url: string = '/v1/';
   public langId: string = localStorage.langId;
   public loader = 'dots';
   public newProductDuration = 100;
@@ -74,8 +74,8 @@ export class ConfigProvider {
     private localNotifications: LocalNotifications,
   ) {
   }
-  public siteSetting() {
-    return new Promise(resolve => {
+  // public siteSetting() {
+  //   return new Promise(resolve => {
       // this.http.get(this.url + 'siteSetting').map(res => res.json()).subscribe(data => {
       //   var settings = data.data[0];
       //   this.fbId = settings.facebook_app_id;
@@ -124,8 +124,8 @@ export class ConfigProvider {
       //   this.admobIntidIos=settings.ios_ad_unit_id_interstitial;
       //   resolve();
       // });
-    });
-  }
+  //   });
+  // }
   //Subscribe for local notification when application is start for the first time
   setLocalNotification() {
     this.platform.ready().then(() => {

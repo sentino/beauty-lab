@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
@@ -26,13 +26,11 @@ export class MyShippingAddressesPage {
     public http: Http,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
-    translate: TranslateService,
+    // translate: TranslateService,
     public modalCtrl: ModalController,
     public alert: AlertProvider,
-    public loading: LoadingProvider) {
-
-
-  }
+    public loading: LoadingProvider
+  ) { }
 
   getAllAddress() {
     this.loading.show();

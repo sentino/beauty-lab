@@ -6,7 +6,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ConfigProvider } from '../../services/config/config';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
@@ -40,8 +40,8 @@ export class Home3Page {
     public config: ConfigProvider,
     public navCtrl: NavController,
     public shared: SharedDataProvider,
-    translate: TranslateService) {
-  }
+    // translate: TranslateService
+  ) { }
   openProducts(value){
     this.navCtrl.push(ProductsPage, { sortOrder: value });
   }

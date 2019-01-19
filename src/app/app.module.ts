@@ -4,6 +4,9 @@
 // Author URI: http://vectorcoder.com/
 // Version: 1.0
 
+// import { CommonModule } from '@angular/common';
+
+
 if (localStorage.langId == undefined) {
   localStorage.langId = '1';
 }
@@ -21,12 +24,12 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConfigProvider } from '../services/config/config';
-import { createTranslateLoader } from '../services/translate/translate';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// import { createTranslateLoader } from '../services/translate/translate';
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicStorageModule } from '@ionic/storage';
 import { ProductsProvider } from '../services/products/products';
 import { LoginmodalPage } from '../pages/loginmodal/loginmodal';
-import { LanguagePage } from '../pages/language/language';
+// import { LanguagePage } from '../pages/language/language';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { LoginPage } from '../pages/login/login';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -111,6 +114,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -140,7 +144,7 @@ import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
     SubCategories6Page,
     ProductsPage,
     LoginmodalPage,
-    LanguagePage,
+    // LanguagePage,
     ContactUsPage,
     AboutUsPage,
     IntroPage,
@@ -176,7 +180,9 @@ import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
     SettingsPage
   ],
   imports: [
-    InputMaskModule,
+    FormsModule,
+    // CommonModule,
+    // InputMaskModule,
     TextMaskModule,
     Ionic2RatingModule,
     ModalModule.forRoot(),
@@ -191,13 +197,13 @@ import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
     LazyLoadImageModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [Http]
-      }
-    }),
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: (createTranslateLoader),
+    //     deps: [Http]
+    //   }
+    // }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -226,7 +232,7 @@ import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
     PrivacyPolicyPage,
     RefundPolicyPage,
     TermServicesPage,
-    LanguagePage,
+    // LanguagePage,
     ProductsPage,
     ContactUsPage,
     AboutUsPage,

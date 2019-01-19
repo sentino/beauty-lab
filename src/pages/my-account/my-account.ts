@@ -3,7 +3,7 @@
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition, state } from '@angular/animations';
 import { ConfigProvider } from '../../services/config/config';
@@ -88,7 +88,7 @@ export class MyAccountPage {
     public http: Http,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
-    public translate: TranslateService,
+    // public translate: TranslateService,
     public platform: Platform,
     public navCtrl: NavController,
     public alert: AlertProvider,

@@ -88,16 +88,16 @@ export class ProductComponent {
       modal.present();
     }
     else {
-      if (this.p.isLiked == '0') { this.addWishList(); }
-      else this.removeWishList();
+      // if (this.p.isLiked == '0') { this.addWishList(); }
+      // else this.removeWishList();
     }
   }
-  addWishList() {
-    this.shared.addWishList(this.p);
-  }
-  removeWishList() {
-    this.shared.removeWishList(this.p);
-  }
+  // addWishList() {
+  //   this.shared.addWishList(this.p);
+  // }
+  // removeWishList() {
+    // this.shared.removeWishList(this.p);
+  // }
 
 
   ngOnChanges() {

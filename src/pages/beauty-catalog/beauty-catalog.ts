@@ -7,8 +7,9 @@ import { Http } from '@angular/http';
 import { ViewChild } from '@angular/core';
 import { SearchPage } from '../../pages/search/search';
 import { Slides } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { ProductsPage } from '../products/products';
+import { CartPage } from '../cart/cart';
 
 /**
  * Generated class for the BeautyCatalogPage page.
@@ -17,7 +18,7 @@ import { ProductsPage } from '../products/products';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-beauty-catalog',
   templateUrl: 'beauty-catalog.html',
@@ -65,8 +66,15 @@ export class BeautyCatalogPage {
 
 
   @ViewChild(Slides) slides: Slides;
-  constructor(public translate: TranslateService,public actionSheet: ActionSheetController,public navCtrl: NavController,public config: ConfigProvider, public navParams: NavParams,public loading: LoadingProvider,public http: Http,) {
-  }
+  constructor(
+    // public translate: TranslateService,
+    public actionSheet: ActionSheetController,
+    public navCtrl: NavController,
+    public config: ConfigProvider,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public http: Http,
+    ) {}
 
   getMainInfo(){
     this.loading.show();
@@ -122,7 +130,7 @@ export class BeautyCatalogPage {
 
   openCategoryBy() {
     var buttonArray = [];
-    this.translate.get(this.sections).subscribe((res) => {
+    // this.translate.get(this.sections).subscribe((res) => {
       
       console.log("Sort massive");
       console.log(this.sections);
@@ -144,7 +152,7 @@ export class BeautyCatalogPage {
         buttons: buttonArray
       });
       actionSheet.present();
-    });
+    // });
   }
 
   openCatalog(catalog_id){
@@ -154,6 +162,10 @@ export class BeautyCatalogPage {
 
   ngOnInit() {
     this.getMainInfo();
+  }
+
+  openCart() {
+    this.navCtrl.push(CartPage);
   }
 
 

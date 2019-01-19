@@ -7,7 +7,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { ProductsPage } from '../products/products';
 
 /**
@@ -17,7 +17,7 @@ import { ProductsPage } from '../products/products';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-health-catalog',
   templateUrl: 'health-catalog.html',
@@ -65,8 +65,15 @@ export class HealthCatalogPage {
 
 
   @ViewChild(Slides) slides: Slides;
-  constructor(public translate: TranslateService,public actionSheet: ActionSheetController,public navCtrl: NavController,public config: ConfigProvider, public navParams: NavParams,public loading: LoadingProvider,public http: Http,) {
-  }
+  constructor(
+    // public translate: TranslateService,
+    public actionSheet: ActionSheetController,
+    public navCtrl: NavController,
+    public config: ConfigProvider,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public http: Http,
+    ) { }
 
 
   showHideSearchList(){
@@ -120,7 +127,7 @@ export class HealthCatalogPage {
 
   openCategoryBy() {
     var buttonArray = [];
-    this.translate.get(this.sections).subscribe((res) => {
+    // this.translate.get(this.sections).subscribe((res) => {
       
       console.log("Sort massive");
       console.log(this.sections);
@@ -142,7 +149,7 @@ export class HealthCatalogPage {
         buttons: buttonArray
       });
       actionSheet.present();
-    });
+    // });
   }
 
   openCatalog(catalog_id){

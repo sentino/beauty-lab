@@ -15,6 +15,7 @@ import { StarRatingModule } from 'ionic3-star-rating';
 import { Events } from 'ionic-angular';
 import {Headers, RequestOptions} from '@angular/http';
 import { SearchPage } from '../search/search';
+import { CartPage } from '../cart/cart';
 
 
 
@@ -393,6 +394,10 @@ export class ProductDetailPage {
   // removeWishList() {
   //   this.shared.removeWishList(this.product);
   // }
+
+  openCart() {
+    this.navCtrl.push(CartPage);
+  }
 
 
   ngOnInit() {

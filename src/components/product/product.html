@@ -48,7 +48,7 @@
   </ion-buttons>
 
   <ion-buttons class="bar-buttons-remove"  *ngIf="type=='recent'">
-    <button ion-button block color="danger" (click)="removeRecent()">{{'REMOVE'|translate}}</button>
+    <button ion-button block color="danger" (click)="removeRecent()">{{'REMOVE'}}</button>
   </ion-buttons>
 
   <ion-row class="card-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
@@ -62,9 +62,9 @@
   <ion-row class="list-add-cart" *ngIf="isInCart()" (click)="showProductDetail()">
     <ion-icon name="checkmark-circle"></ion-icon>
   </ion-row>
-  <div class="list-tag-off" *ngIf="p.discount_price!=null">{{pDiscount()}}<br>{{'OFF'|translate}}</div>
+  <div class="list-tag-off" *ngIf="p.discount_price!=null">{{pDiscount()}}<br>{{'OFF'}}</div>
   <ion-thumbnail item-start>
-    <div class="list-tag-new" *ngIf="checkProductNew()" translate></div>
+    <div class="list-tag-new" *ngIf="checkProductNew()"></div>
     <img src="{{p.IMAGE}}" (click)="showProductDetail()">
 
     <div class="labels-block" *ngIf="props_show == true">

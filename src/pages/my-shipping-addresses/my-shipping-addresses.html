@@ -5,7 +5,7 @@
       </button>
   
       <ion-title>
-        {{'Customer Address'| translate }}
+        {{'Customer Address' }}
       </ion-title>
   
       <ion-buttons end>
@@ -23,7 +23,7 @@
 
 <ion-content class="page-my-shipping-addresses" padding>
   <div *ngIf="allShippingAddress.length==0" text-center>
-    {{'Please add your new shipping address for the futher processing of the your order'|translate}}
+    {{'Please add your new shipping address for the futher processing of the your order'}}
   </div>
   <ion-list>
     <ion-item *ngFor="let address of allShippingAddress">
@@ -37,5 +37,5 @@
 
     </ion-item>
   </ion-list>
-  <button ion-button block color="secondary" (click)="addShippingAddress()">{{'Add New Address'|translate}}</button>
+  <button ion-button block color="secondary" (click)="addShippingAddress()">{{'Add New Address'}}</button>
 </ion-content>

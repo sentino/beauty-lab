@@ -6,20 +6,20 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>{{'Zone'|translate}}</ion-title>
+    <ion-title>{{'Zone'}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content class="page-select-zones">
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{'Search'|translate}}" autofocus></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{'Search'}}" autofocus></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="selectZone(item)">
       {{ item.zone_name }}
     </ion-item>
     <ion-item (click)="selectZone('other')">
-      {{'other'|translate}}
+      {{'other'}}
     </ion-item>
   </ion-list>
 </ion-content>

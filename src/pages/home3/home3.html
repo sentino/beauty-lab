@@ -29,7 +29,7 @@
 
     <!-- Top Seller -->
     <div class="module">
-      <h3>{{ 'Top Seller' | translate }}</h3>
+      <h3>{{ 'Top Seller'}}</h3>
       <ion-slides slidesPerView=2.2 spaceBetween=10 class="animate-product" dir="{{shared.dir}}">
         <ion-slide *ngFor="let p of shared.tab1" >
           <product [data]="p" [type]="'normal'"></product>
@@ -46,7 +46,7 @@
     </div>
     <!-- Deals -->
     <div class="module">
-      <h3>{{ 'Deals' | translate }}</h3>
+      <h3>{{ 'Deals'}}</h3>
       <ion-slides slidesPerView=2.2 spaceBetween=10 class="animate-product" dir="{{shared.dir}}">
         <ion-slide *ngFor="let p of shared.tab2" >
           <product [data]="p" [type]="'normal'"></product>
@@ -63,7 +63,7 @@
     </div>
     <!-- Most Liked -->
     <div class="module">
-      <h3>{{ 'Most Liked' | translate }}</h3>
+      <h3>{{ 'Most Liked'}}</h3>
       <ion-slides slidesPerView=2.2 spaceBetween=10 class="animate-product" dir="{{shared.dir}}">
         <ion-slide *ngFor="let p of shared.tab3" >
           <product [data]="p" [type]="'normal'"></product>
@@ -81,7 +81,7 @@
 
     <!-- Recent Viewed items products -->
     <div class="module" *ngIf="shared.recentViewedProducts.length!=0" [@animate]>
-      <h5>{{'Recently Viewed'|translate}}</h5>
+      <h5>{{'Recently Viewed'}}</h5>
       <ion-slides slidesPerView=2.2 spaceBetween=10 dir="{{shared.dir}}">
         <ion-slide *ngFor="let p of shared.recentViewedProducts" [@animate]>
           <product [data]="p" [type]="'recent'"></product>

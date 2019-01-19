@@ -8,8 +8,8 @@ import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoadingProvider } from '../../services/loading/loading';
-import { TranslateService } from '@ngx-translate/core';
-import { share } from 'rxjs/operator/share';
+// import { TranslateService } from '@ngx-translate/core';
+// import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';
 import { CartPage } from '../cart/cart';
 
@@ -150,7 +150,7 @@ export class ProductsPage {
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
-    public translate: TranslateService,
+    // public translate: TranslateService,
     public http: Http,
     public actionSheet: ActionSheetController) {
     this.activeButton = 1;
@@ -694,10 +694,10 @@ export class ProductsPage {
 
   openSortBy() {
     var buttonArray = [];
-    this.translate.get(this.sortArray).subscribe((res) => {
+    // this.translate.get(this.sortArray).subscribe((res) => {
 
-      for (let key in res) {
-        buttonArray.push({ text: res[key], handler: () => { this.getSortProducts(key) } });
+      for (let key in this.sortArray) {
+        buttonArray.push({ text: this.sortArray[key], handler: () => { this.getSortProducts(key) } });
       }
       buttonArray.push(
         {
@@ -713,12 +713,12 @@ export class ProductsPage {
         buttons: buttonArray
       });
       actionSheet.present();
-    });
+    // });
   }
 
   openCategoryBy() {
     var buttonArray = [];
-    this.translate.get(this.all_sections).subscribe((res) => {
+    // this.translate.get(this.all_sections).subscribe((res) => {
       
       console.log("Sort massive");
       console.log(this.all_sections);
@@ -740,7 +740,7 @@ export class ProductsPage {
         buttons: buttonArray
       });
       actionSheet.present();
-    });
+    // });
   }
 
   changeLayout() {
