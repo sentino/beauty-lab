@@ -9,13 +9,13 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build --prod",
-    "ionic:serve": "ionic-app-scripts serve --lab"
+    "ionic:serve": "ionic-app-scripts serve --prod --lab"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
     "@angular/common": "5.2.11",
-    "@angular/compiler": "7.2.1",
-    "@angular/compiler-cli": "7.2.1",
+    "@angular/compiler": "5.2.11",
+    "@angular/compiler-cli": "5.2.11",
     "@angular/core": "5.2.11",
     "@angular/forms": "5.2.11",
     "@angular/http": "5.2.11",
@@ -47,10 +47,11 @@
     "angular2-text-mask": "^9.0.0",
     "auth0-js": "^9.9.0",
     "brmasker-ionic-3": "^1.6.3",
+    "build": "0.1.4",
     "card.io.cordova.mobilesdk": "^2.1.0",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
     "cordova-admob-sdk": "^0.22.0",
-    "cordova-android": "7.1.4",
+    "cordova-android": "6.4.0",
     "cordova-plugin-admob-free": "^0.25.0",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-app-version": "^0.1.9",
@@ -82,7 +83,7 @@
     "ng-lazyload-image": "3.4.2",
     "ng2-cordova-oauth": "0.0.8",
     "ng4-input-counter": "0.1.4",
-    "ngx-bootstrap": "3.1.4",
+    "ngx-bootstrap": "2.0.5",
     "onesignal-cordova-plugin": "^2.4.6",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
@@ -93,7 +94,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.1",
     "@ionic/lab": "1.0.18",
-    "typescript": "3.2.4"
+    "typescript": "2.6.2"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -102,7 +103,9 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "26.+"
+      },
       "com.paypal.cordova.mobilesdk": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-network-information": {},
@@ -118,7 +121,8 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "434196327036743",
         "APP_NAME": "lab-krasoty.ru",
-        "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0"
+        "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false"
       },
       "cordova-plugin-safariviewcontroller": {},
       "cordova-plugin-customurlscheme": {
