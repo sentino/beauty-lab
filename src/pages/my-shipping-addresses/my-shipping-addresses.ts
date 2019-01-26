@@ -13,6 +13,7 @@ import { AlertProvider } from '../../services/alert/alert';
 import { EditShippingAddressPage } from '../edit-shipping-address/edit-shipping-address';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-my-shipping-addresses',
@@ -23,7 +24,7 @@ export class MyShippingAddressesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     // translate: TranslateService,
@@ -32,69 +33,71 @@ export class MyShippingAddressesPage {
     public loading: LoadingProvider
   ) { }
 
-  getAllAddress() {
-    this.loading.show();
-    var data = { customers_id: this.shared.customerData.customers_id };
-    this.http.post(this.config.url + 'getAllAddress', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.allShippingAddress = data.data;
-      }
-    });
-  }
+  // getAllAddress() {
+  //   this.loading.show();
+  //   var data = { customers_id: this.shared.customerData.customers_id };
+  //   this.http.post(this.config.url + 'getAllAddress', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.allShippingAddress = data.data;
+  //     }
+  //   });
+  // }
 
   //============================================================================================  
   // delete shipping address
-  deleteAddress = function (id) {
-    this.loading.show();
-    var data = {
-      customers_id: this.shared.customerData.customers_id,
-      address_book_id: id
-    };
-    this.http.post(this.config.url + 'deleteShippingAddress', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.getAllAddress();
-      }
-    }, function (response) {
-      this.loading.hide();
-      this.alert.show("Error server not reponding");
-    });
-  };
+  // deleteAddress = function (id) {
+  //   this.loading.show();
+  //   var data = {
+  //     customers_id: this.shared.customerData.customers_id,
+  //     address_book_id: id
+  //   };
+  //   this.http.post(this.config.url + 'deleteShippingAddress', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.getAllAddress();
+  //     }
+  //   }, function (response) {
+  //     this.loading.hide();
+  //     this.alert.show("Error server not reponding");
+  //   });
+  // };
 
   //============================================================================================  
   // default shipping address
-  defaultAddress = function (id) {
-    this.loading.show();
-    var data = {
-      customers_id: this.shared.customerData.customers_id,
-      address_book_id: id
-    };
-    this.http.post(this.config.url + 'updateDefaultAddress', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.getAllAddress();
-      }
-    }, function (response) {
-      this.loading.hide();
-      this.alert.show("Error server not reponding");
-    });
-  };
+  // defaultAddress = function (id) {
+  //   this.loading.show();
+  //   var data = {
+  //     customers_id: this.shared.customerData.customers_id,
+  //     address_book_id: id
+  //   };
+  //   this.http.post(this.config.url + 'updateDefaultAddress', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.getAllAddress();
+  //     }
+  //   }, function (response) {
+  //     this.loading.hide();
+  //     this.alert.show("Error server not reponding");
+  //   });
+  // };
   openEditShippingPage(data) {
     let modal = this.modalCtrl.create(EditShippingAddressPage, { data: data, type: 'update' });
     modal.present();
     modal.onDidDismiss(() => {
-      this.getAllAddress();
+      // this.getAllAddress();
     });
   }
   addShippingAddress() {
     let modal = this.modalCtrl.create(EditShippingAddressPage, { type: 'add' });
     modal.onDidDismiss(() => {
-      this.getAllAddress();
+      // this.getAllAddress();
     });
     modal.present();
   }
-  ionViewWillEnter() { this.getAllAddress(); }
+  ionViewWillEnter() {
+    // this.getAllAddress();
+  }
   openCart() {
     this.navCtrl.push(CartPage);
   }

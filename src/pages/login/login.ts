@@ -10,15 +10,15 @@ import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AlertProvider } from '../../services/alert/alert';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { AppVersion } from '@ionic-native/app-version';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Events } from 'ionic-angular';
-import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser/ngx';
 import { LoginmodalPage } from '../loginmodal/loginmodal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -26,6 +26,7 @@ import { ViewChild } from '@angular/core';
 import {VK} from "ng2-cordova-oauth/core";
 import {OauthCordova} from 'ng2-cordova-oauth/platform/cordova';
 import { NavController, Content } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class LoginPage {
   });
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     private modalService: BsModalService,
@@ -85,7 +86,7 @@ export class LoginPage {
       VkData.append('socialToken', success.access_token);
       VkData.append('socialType','vk');
 
-      this.http.post(this.config.url + 'auth/login', VkData).map(res => res.json()).subscribe(data => {
+      this.http.post(this.config.url + 'auth/login', VkData).subscribe((data: any) => {
         console.log(data);
         this.response = data;
         this.shared.userInfo(this.response.result);
@@ -95,13 +96,13 @@ export class LoginPage {
       },
       err => {
         this.loading.hide();
-        alert("Whoops!");
-        alert(err);
-        alert(err.status);
-        console.log(err)
-        if(err.status = 422){
-          alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
-        }
+        // alert("Whoops!");
+        // alert(err);
+        // alert(err.status);
+        // console.log(err)
+        // if(err.status = 422){
+        //   alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
+        // }
       });
   }, (error) => {
       alert(error);
@@ -122,7 +123,7 @@ export class LoginPage {
     LogData.append('email', this.formData.email);
     LogData.append('password', this.formData.password);
 
-    this.http.post(this.config.url + 'auth/login/', LogData).map(res => res.json()).subscribe(data => {
+    this.http.post(this.config.url + 'auth/login/', LogData).subscribe((data: any) => {
       this.loading.hide();
       console.log("User info login");
       console.log(data);
@@ -240,7 +241,7 @@ export class LoginPage {
     FbData.append('socialToken',data.access_token);
     FbData.append('socialType','fb');
     
-    this.http.post(this.config.url + 'auth/login/', FbData).map(res => res.json()).subscribe(data => {
+    this.http.post(this.config.url + 'auth/login/', FbData).subscribe((data: any) => {
       this.loading.hide();
 
       console.log("Face login");

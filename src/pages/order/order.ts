@@ -11,9 +11,10 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
 import { ThankYouPage } from '../thank-you/thank-you';
-import { Stripe } from '@ionic-native/stripe';
+import { Stripe } from '@ionic-native/stripe/ngx';
 import { CouponProvider } from '../../services/coupon/coupon';
-import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+import { HttpClient } from '@angular/common/http';
 
 
 declare var braintree;
@@ -50,7 +51,7 @@ export class OrderPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
@@ -65,85 +66,85 @@ export class OrderPage {
 
   //============================================================================================  
   //placing order
-  addOrder = function (nonce) {
-    this.loading.autoHide(5000);
-    this.orderDetail.customers_id = this.shared.customerData.customers_id;
-    this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
-    this.orderDetail.delivery_name = this.shared.orderDetails.billing_firstname + " " + this.shared.orderDetails.billing_lastname;
-    this.orderDetail.customers_email_address = this.shared.customerData.customers_email_address;
-    this.orderDetail.customers_telephone = this.shared.customerData.customers_telephone;
-    this.orderDetail.delivery_suburb = this.shared.orderDetails.delivery_state
-    this.orderDetail.customers_suburb = this.shared.orderDetails.customers_state;
-    this.orderDetail.customers_address_format_id = '1';
-    this.orderDetail.delivery_address_format_id = '1';
-    this.orderDetail.products = this.products;
-    this.orderDetail.is_coupon_applied = this.couponApplied;
-    this.orderDetail.coupons = this.couponArray;
-    this.orderDetail.coupon_amount = this.discount;
-    this.orderDetail.totalPrice = this.totalAmountWithDisocunt;
-    this.orderDetail.nonce = nonce;
-    this.orderDetail.language_id = this.config.langId;
-    var data = this.orderDetail;
-    this.http.post(this.config.url + 'addToOrder', data).map(res => res.json()).subscribe(data => {
-      //this.loading.hide();
-      if (data.success == 1) {
-        this.shared.emptyCart();
-        this.products = [];
-        this.orderDetail = {};
-        this.shared.orderDetails = {};
-        this.navCtrl.setRoot(ThankYouPage);
-      }
-      if (data.success == 0) { this.alert.show(data.message); }
-    }, err => {
+  // addOrder = function (nonce) {
+  //   this.loading.autoHide(5000);
+  //   this.orderDetail.customers_id = this.shared.customerData.customers_id;
+  //   this.orderDetail.customers_name = this.shared.orderDetails.delivery_firstname + " " + this.shared.orderDetails.delivery_lastname;
+  //   this.orderDetail.delivery_name = this.shared.orderDetails.billing_firstname + " " + this.shared.orderDetails.billing_lastname;
+  //   this.orderDetail.customers_email_address = this.shared.customerData.customers_email_address;
+  //   this.orderDetail.customers_telephone = this.shared.customerData.customers_telephone;
+  //   this.orderDetail.delivery_suburb = this.shared.orderDetails.delivery_state
+  //   this.orderDetail.customers_suburb = this.shared.orderDetails.customers_state;
+  //   this.orderDetail.customers_address_format_id = '1';
+  //   this.orderDetail.delivery_address_format_id = '1';
+  //   this.orderDetail.products = this.products;
+  //   this.orderDetail.is_coupon_applied = this.couponApplied;
+  //   this.orderDetail.coupons = this.couponArray;
+  //   this.orderDetail.coupon_amount = this.discount;
+  //   this.orderDetail.totalPrice = this.totalAmountWithDisocunt;
+  //   this.orderDetail.nonce = nonce;
+  //   this.orderDetail.language_id = this.config.langId;
+  //   var data = this.orderDetail;
+  //   // this.http.post(this.config.url + 'addToOrder', data).map(res => res.json()).subscribe(data => {
+  //   //   //this.loading.hide();
+  //   //   if (data.success == 1) {
+  //   //     this.shared.emptyCart();
+  //   //     this.products = [];
+  //   //     this.orderDetail = {};
+  //   //     this.shared.orderDetails = {};
+  //   //     this.navCtrl.setRoot(ThankYouPage);
+  //   //   }
+  //   //   if (data.success == 0) { this.alert.show(data.message); }
+  //   // }, err => {
+  //   //
+  //   //   // this.translate.get("Server Error").subscribe((res) => {
+  //   //     this.alert.show("Server Error" + " " + err.status);
+  //   //   // });
+  //   //
+  //   // });
+  // };
+  // initializePaymentMethods() {
+  //   // this.loading.show();
+  //   var data: { [k: string]: any } = {};
+  //   data.language_id = this.config.langId;
+  //   this.http.post(this.config.url + 'getPaymentMethods', data).map(res => res.json()).subscribe(data => {
+  //     //  this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.paymentMethods = data.data;
+  //       for (let a of data.data) {
+  //         if (a.method == "braintree_card" && a.active == '1') { this.getToken(); }
+  //         if (a.method == "braintree_paypal" && a.active == '1') { this.getToken(); }
+  //
+  //         if (a.method == "paypal" && a.active == '1') {
+  //           this.paypalClientId = a.public_key;
+  //           if (a.environment == "Test") this.paypalEnviroment = "PayPalEnvironmentSandbox";
+  //           else this.paypalEnviroment = "PayPalEnvironmentProduction"
+  //
+  //         }
+  //         if (a.method == "stripe" && a.active == '1') { this.stripe.setPublishableKey(a.public_key); }
+  //       }
+  //     }
+  //   },
+  //     err => {
+  //       // this.translate.get("getPaymentMethods Server Error").subscribe((res) => {
+  //         this.alert.show("getPaymentMethods Server Error" + " " + err.status);
+  //       // });
+  //     });
+  // }
 
-      // this.translate.get("Server Error").subscribe((res) => {
-        this.alert.show("Server Error" + " " + err.status);
-      // });
-
-    });
-  };
-  initializePaymentMethods() {
-    // this.loading.show();
-    var data: { [k: string]: any } = {};
-    data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getPaymentMethods', data).map(res => res.json()).subscribe(data => {
-      //  this.loading.hide();
-      if (data.success == 1) {
-        this.paymentMethods = data.data;
-        for (let a of data.data) {
-          if (a.method == "braintree_card" && a.active == '1') { this.getToken(); }
-          if (a.method == "braintree_paypal" && a.active == '1') { this.getToken(); }
-
-          if (a.method == "paypal" && a.active == '1') {
-            this.paypalClientId = a.public_key;
-            if (a.environment == "Test") this.paypalEnviroment = "PayPalEnvironmentSandbox";
-            else this.paypalEnviroment = "PayPalEnvironmentProduction"
-
-          }
-          if (a.method == "stripe" && a.active == '1') { this.stripe.setPublishableKey(a.public_key); }
-        }
-      }
-    },
-      err => {
-        // this.translate.get("getPaymentMethods Server Error").subscribe((res) => {
-          this.alert.show("getPaymentMethods Server Error" + " " + err.status);
-        // });
-      });
-  }
-
-  stripePayment() {
-    // this.loading.show();
-    this.stripe.createCardToken(this.stripeCard)
-      .then(token => {
-        // this.loading.hide();
-        //this.nonce = token.id
-        this.addOrder(token.id);
-      })
-      .catch(error => {
-        //this.loading.hide();
-        this.alert.show(error)
-      });
-  }
+  // stripePayment() {
+  //   // this.loading.show();
+  //   this.stripe.createCardToken(this.stripeCard)
+  //     .then(token => {
+  //       // this.loading.hide();
+  //       //this.nonce = token.id
+  //       this.addOrder(token.id);
+  //     })
+  //     .catch(error => {
+  //       //this.loading.hide();
+  //       this.alert.show(error)
+  //     });
+  // }
 
   //============================================================================================  
   //CAlculate Discount total
@@ -198,6 +199,7 @@ export class OrderPage {
       this.products = this.couponProvider.apply(value, this.products);
     });
     this.calculateTotal();
+
     if (this.couponArray.length == 0) {
       this.couponApplied = 0;
     }
@@ -206,29 +208,29 @@ export class OrderPage {
 
   //============================================================================================   
   //getting getMostLikedProducts from the server
-  getCoupon = function (code) {
-    if (code == '' || code == null) {
-      this.alert.show('Please enter coupon code!');
-      return 0;
-    }
-    this.loading.show();
-    var data = { 'code': code };
-    this.http.post(this.config.url + 'getCoupon', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        let coupon = data.data[0]
-        // console.log($scope.coupon)
-        this.applyCouponCart(coupon);
-      }
-      if (data.success == 0) {
-        this.alert.show(data.message);
-      }
-    }, error => {
-      this.loading.hide();
-      console.log(error);
-    });
-
-  };
+  // getCoupon = function (code) {
+  //   if (code == '' || code == null) {
+  //     this.alert.show('Please enter coupon code!');
+  //     return 0;
+  //   }
+  //   this.loading.show();
+  //   var data = { 'code': code };
+  //   this.http.post(this.config.url + 'getCoupon', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       let coupon = data.data[0]
+  //       // console.log($scope.coupon)
+  //       this.applyCouponCart(coupon);
+  //     }
+  //     if (data.success == 0) {
+  //       this.alert.show(data.message);
+  //     }
+  //   }, error => {
+  //     this.loading.hide();
+  //     console.log(error);
+  //   });
+  //
+  // };
 
   //============================================================================================  
   //applying coupon on the cart
@@ -272,6 +274,7 @@ export class OrderPage {
     }
     //applying coupon service
     this.products = this.couponProvider.apply(coupon, this.products);
+
     if (this.couponArray.length != 0) {
       this.couponApplied = 1;
     }
@@ -296,7 +299,7 @@ export class OrderPage {
           // Successfully paid
           //  alert(JSON.stringify(res));
           //this.nonce = res.response.id;
-          this.addOrder(res);
+          // this.addOrder(res);
           // Example sandbox response
           //
           // {
@@ -378,30 +381,30 @@ export class OrderPage {
   }
   //============================================================================================  
   //getting token from server
-  getToken = function () {
-    this.loading.autoHide(2000);
-    this.http.get(this.config.url + 'generateBraintreeToken').map(res => res.json()).subscribe(data => {
-      // this.loading.hide();
-      if (data.success == 1) {
-        if (this.tokenFromServer == null) {
-          this.tokenFromServer = data.token;
-          this.braintreePaypal(this.tokenFromServer);
-          this.braintreeCreditCard(this.tokenFromServer);
-        }
-      }
-      if (data.success == 0) {
-
-      }
-    }, error => {
-      // this.loading.hide();
-      if (this.paymentBraintree) {
-        // this.translate.get("Server Error").subscribe((res) => {
-          this.alert.show("Server Error" + " " + error.status + " Braintree Token");
-        // });
-      }
-
-    });
-  };
+  // getToken = function () {
+  //   this.loading.autoHide(2000);
+  //   this.http.get(this.config.url + 'generateBraintreeToken').map(res => res.json()).subscribe(data => {
+  //     // this.loading.hide();
+  //     if (data.success == 1) {
+  //       if (this.tokenFromServer == null) {
+  //         this.tokenFromServer = data.token;
+  //         this.braintreePaypal(this.tokenFromServer);
+  //         this.braintreeCreditCard(this.tokenFromServer);
+  //       }
+  //     }
+  //     if (data.success == 0) {
+  //
+  //     }
+  //   }, error => {
+  //     // this.loading.hide();
+  //     if (this.paymentBraintree) {
+  //       // this.translate.get("Server Error").subscribe((res) => {
+  //         this.alert.show("Server Error" + " " + error.status + " Braintree Token");
+  //       // });
+  //     }
+  //
+  //   });
+  // };
   //================================================================================
   // braintree paypal method
   braintreePaypal = function (clientToken) {
@@ -527,7 +530,7 @@ export class OrderPage {
     this.products = (JSON.parse(JSON.stringify(this.shared.cartProducts)));
 
     this.calculateTotal();
-    this.initializePaymentMethods();
+    // this.initializePaymentMethods();
 
   }
   openHomePage() {

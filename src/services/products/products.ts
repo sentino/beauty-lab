@@ -4,14 +4,15 @@
 // Author URI: http://vectorcoder.com/
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from "rxjs/operators";
 import { ConfigProvider } from '../config/config';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProductsProvider {
   public tab1;
 
-  constructor(public http: Http, public config: ConfigProvider) {
+  constructor(public http: HttpClient, public config: ConfigProvider) {
     
   }
 

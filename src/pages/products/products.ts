@@ -12,6 +12,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 // import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';
 import { CartPage } from '../cart/cart';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -151,7 +152,7 @@ export class ProductsPage {
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
     // public translate: TranslateService,
-    public http: Http,
+    public http: HttpClient,
     public actionSheet: ActionSheetController) {
     this.activeButton = 1;
     this.search.search_string = null;
@@ -172,7 +173,7 @@ export class ProductsPage {
     if (this.navParams.get('name') != undefined) this.categoryName = this.navParams.get('name');
     if (this.navParams.get('sortOrder') != undefined) this.sortOrder = this.navParams.get('sortOrder');
     // this.getProducts(null);
-    this.getFilters(this.categoryId);
+    // this.getFilters(this.categoryId);
   }
 
 
@@ -247,10 +248,10 @@ export class ProductsPage {
 
   
   filtered(){
-    console.log("Filtered Data --")
+    console.log("Filtered Data --");
     console.log(this.filterList);
 
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '?brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '?brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).subscribe((data: any) => {
       // console.log(data.product_data.length + "   " + this.page);\
       this.Filter = false;
       this.filterListIcon = 'ios-arrow-down'; 
@@ -266,14 +267,14 @@ export class ProductsPage {
         this.pages[i] = ({counter : i+1});
       }
 
-      if(this.all_products.length == 0){
+      if (this.all_products.length == 0){
         this.empty_products = true;
       }
       else{
         this.empty_products = false;
       }
 
-      if(this.all_filters.length == 0){
+      if (this.all_filters.length == 0){
         this.empty_filter = true;
       }
       else{
@@ -287,7 +288,7 @@ export class ProductsPage {
   }
 
   getProducts() {
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id ).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id ).subscribe((data: any) => {
       this.loading.hide();
       // console.log(data.product_data.length + "   " + this.page);
       
@@ -337,12 +338,12 @@ export class ProductsPage {
   }
 
   getSearch(){
+    this.helpMenuOpen = 'in';
     this.loading.show();
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe((data: any) => {
       // console.log(data.product_data.length + "   " + this.page);
       this.loading.hide();
       this.SearchList = false;
-      this.helpMenuOpen = 'in';
       console.log("Search answer:");
       this.current_section = 'Результаты поиска';
       console.log(data);
@@ -381,7 +382,7 @@ export class ProductsPage {
 
   getSubacategories() {
     this.loading.show();
-    this.http.get(this.config.url + 'catalog/sections/' + this.cat_id ).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/sections/' + this.cat_id ).subscribe((data: any) => {
       // console.log(data.product_data.length + "   " + this.page);
       this.loading.hide();
       console.log("Subcategories GET");
@@ -402,15 +403,15 @@ export class ProductsPage {
 
     if( this.search.search_string != null){
       this.current_page = next_page;
+      this.helpMenuOpen = 'in';
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.search.search_string + '&page='+ next_page + '&count=20').map(res => res.json()).subscribe(data => {
+      this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.search.search_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
         // console.log(data.product_data.length + "   " + this.page);
         this.loading.hide();
         console.log("Products GET");
         console.log(data);
         this.all_products = data;
         this.all_products = data.result.products;
-        this.helpMenuOpen = 'in';
         this.all_pages_count = data.result.navigation.pageAll;
     
         this.pages = [];
@@ -425,9 +426,9 @@ export class ProductsPage {
       });
     }
     else{
+      this.helpMenuOpen = 'in';
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page + '&count=20'+ '&brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).map(res => res.json()).subscribe(data => {
-        this.helpMenuOpen = 'in';
+      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page + '&count=20'+ '&brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).subscribe((data: any) => {
         this.loading.hide();
         console.log("Products GET");
         console.log(data);
@@ -591,17 +592,17 @@ export class ProductsPage {
   };
   //============================================================================================  
   //getting countries from server
-  getFilters = function (id) {
-    var data: { [k: string]: any } = {};
-    data.categories_id = id;
-    data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getFilters', data).map(res => res.json()).subscribe(data => {
-      //  console.log(data);
-      if (data.success == 1)
-        this.filters = data.filters;
-      this.maxAmount = this.price.upper = data.maxPrice;
-    });
-  };
+  // getFilters = function (id) {
+  //   var data: { [k: string]: any } = {};
+  //   data.categories_id = id;
+  //   data.language_id = this.config.langId;
+  //   this.http.post(this.config.url + 'getFilters', data).map(res => res.json()).subscribe(data => {
+  //     //  console.log(data);
+  //     if (data.success == 1)
+  //       this.filters = data.filters;
+  //     this.maxAmount = this.price.upper = data.maxPrice;
+  //   });
+  // };
   applyFilters() {
     this.applyFilter = true;
     this.infinite.enable(true);
@@ -609,6 +610,7 @@ export class ProductsPage {
     // this.getProducts(null);
   }
   resetFilters() {
+    this.Filter = false;
     this.getProducts();
   }
   removeFilters() {
@@ -616,7 +618,7 @@ export class ProductsPage {
     this.infinite.enable(true);
     this.page = 0;
     // this.getProducts(null);
-    this.getFilters(this.selectedTab);
+    // this.getFilters(this.selectedTab);
 
   }
   ionViewDidEnter() {
@@ -660,7 +662,7 @@ export class ProductsPage {
 
     getSortsProducts(sort_path) {
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).map(res => res.json()).subscribe(data => {
+      this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).subscribe((data: any) => {
         // console.log(data.product_data.length + "   " + this.page);
         this.loading.hide();
         this.Sort = false;

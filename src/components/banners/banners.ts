@@ -10,6 +10,7 @@ import { ProductsPage } from '../../pages/products/products';
 import { Http } from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { ProductDetailPage } from '../../pages/product-detail/product-detail';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'banners',
@@ -22,7 +23,7 @@ export class BannersComponent {
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     public loading: LoadingProvider,
   ) {
 
@@ -34,31 +35,31 @@ export class BannersComponent {
     if (image.type == 'category') {
       this.navCtrl.push(ProductsPage, { id: parseInt(image.url) });
     }
-    else if (image.type == 'product') {
-      this.getSingleProductDetail(parseInt(image.url));
-    }
+    // else if (image.type == 'product') {
+    //   this.getSingleProductDetail(parseInt(image.url));
+    // }
     else {
       this.navCtrl.push(ProductsPage, { sortOrder: image.type });
     }
   }
   //===============================================================================================
   //getting single product data
-  getSingleProductDetail(id) {
-    this.loading.show();
-
-    var data: { [k: string]: any } = {};
-    if (this.shared.customerData != null)
-      data.customers_id = this.shared.customerData.customers_id;
-    else
-      data.customers_id = null;
-    data.products_id = id;
-    data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.navCtrl.push(ProductDetailPage, { data: data.product_data[0] });
-      }
-    });
-  }
+  // getSingleProductDetail(id) {
+  //   this.loading.show();
+  //
+  //   var data: { [k: string]: any } = {};
+  //   if (this.shared.customerData != null)
+  //     data.customers_id = this.shared.customerData.customers_id;
+  //   else
+  //     data.customers_id = null;
+  //   data.products_id = id;
+  //   data.language_id = this.config.langId;
+  //   this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.navCtrl.push(ProductDetailPage, { data: data.product_data[0] });
+  //     }
+  //   });
+  // }
 
 }

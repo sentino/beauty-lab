@@ -464,3 +464,31 @@ product{
         }
     }
 }
+
+.label {
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 6px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-radius: 100%;
+
+  span {
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+.label-blue {
+  background-color: #2FA9E4;
+}
+.label-red {
+  background-color: #D42A2A;
+  margin-left: -5px;
+}
+.label-green {
+  background-color: #4CB684;
+  margin-left: -4px;
+}

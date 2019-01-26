@@ -12,6 +12,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { ProductsPage } from '../products/products';
 import { CartPage } from '../cart/cart';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -92,7 +93,7 @@ export class SearchPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     public alert: AlertProvider,
     public loading: LoadingProvider,
     public shared: SharedDataProvider,
@@ -110,7 +111,7 @@ export class SearchPage {
     this.Products = this.search_result.result.products;
 
 
-    if(this.Products.length == 0){
+    if (this.Products.length == 0){
       this.empty_status = true;
     }
     else{
@@ -133,7 +134,7 @@ export class SearchPage {
     console.log(next_page);
     this.current_page = next_page;
     this.loading.show();
-    this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.query_string + '&page='+ next_page + '&count=20').map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.query_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
       // console.log(data.product_data.length + "   " + this.page);
       this.loading.hide();
       console.log("Products GET");
@@ -179,7 +180,7 @@ export class SearchPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);
@@ -242,7 +243,7 @@ export class SearchPage {
 
     getSortsProducts(sort_path) {
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/search/?q='+ this.search_string + sort_path).map(res => res.json()).subscribe(data => {
+      this.http.get(this.config.url + 'catalog/search/?q='+ this.search_string + sort_path).subscribe((data: any) => {
         // console.log(data.product_data.length + "   " + this.page);
         this.loading.hide();
         this.Sort = false;
@@ -267,30 +268,30 @@ export class SearchPage {
       });
     }
 
-  getSearchData = function () {
-
-    if (this.search != undefined) {
-      if (this.search == null || this.search == '') {
-        this.alert.show("Please enter something ");
-        return 0;
-      }
-    }
-    else {
-      this.alert.show("Please enter something ");
-      return 0;
-    }
-    this.loading.show();
-    this.http.post(this.config.url + 'getSearchData', { 'searchValue': this.search }).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.searchResult = data.product_data;
-        this.showCategories = false;
-      }
-      if (data.success == 0) {
-        this.alert.show(data.message);
-      }
-    });
-  };
+  // getSearchData = function () {
+  //
+  //   if (this.search != undefined) {
+  //     if (this.search == null || this.search == '') {
+  //       this.alert.show("Please enter something ");
+  //       return 0;
+  //     }
+  //   }
+  //   else {
+  //     this.alert.show("Please enter something ");
+  //     return 0;
+  //   }
+  //   this.loading.show();
+  //   this.http.post(this.config.url + 'getSearchData', { 'searchValue': this.search }).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.searchResult = data.product_data;
+  //       this.showCategories = false;
+  //     }
+  //     if (data.success == 0) {
+  //       this.alert.show(data.message);
+  //     }
+  //   });
+  // };
 
   navHandler(){
     if (this.nav_status == false) { this.nav_status = true; }

@@ -36,9 +36,10 @@
             <ion-icon item-left name="home"></ion-icon>
           </button>
 
-      <button *ngIf="shared.customerData.accessToken != null" ion-item >Профиль
-        <ion-icon item-left name="person"></ion-icon>
-        <ion-icon item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
+      <button class="beuatyBtn" *ngIf="shared.customerData.accessToken != null">
+        <ion-icon class="menu-icon" item-left name="bowtie"></ion-icon>
+        <button menuClose (click)="openPage('myAccount')">Профиль</button>
+        <ion-icon class="btn-plus" item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
       </button>
       <div class="inner-menu" *ngIf="ProfileList" [@animate]>
         <button menuClose ion-item (click)="openPage('myAccount')">

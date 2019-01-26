@@ -7,15 +7,16 @@ import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AlertProvider } from '../../services/alert/alert';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { AppVersion } from '@ionic-native/app-version';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Events } from 'ionic-angular';
-import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser/ngx';
+import { HttpClient } from '@angular/common/http';
 /**
  * Generated class for the LoginmodalPage page.
  *
@@ -32,7 +33,7 @@ export class LoginmodalPage {
   response;
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
@@ -60,7 +61,7 @@ export class LoginmodalPage {
         VkData.append('socialType','vk');
     
         alert("Function next");
-        this.http.post(this.config.url + 'auth/login', VkData).map(res => res.json()).subscribe(data => {
+        this.http.post(this.config.url + 'auth/login', VkData).subscribe((data: any) => {
           this.loading.hide();
           alert("You Win");
           console.log("User info login");

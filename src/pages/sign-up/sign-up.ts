@@ -12,12 +12,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewChild, Input } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { AppVersion } from '@ionic-native/app-version';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from 'ionic-angular';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { App} from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -78,7 +79,7 @@ export class SignUpPage {
   public zip = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
@@ -120,7 +121,7 @@ export class SignUpPage {
     if(this.formData.password === this.formData.passwordConfirmed){
       this.loading.show();
       this.pass_validation = true;
-      this.http.post(this.config.url + 'auth/register/', RegData).map(res => res.json()).subscribe(data => {
+      this.http.post(this.config.url + 'auth/register/', RegData).subscribe(data => {
         this.loading.hide();
         this.response = data;
   

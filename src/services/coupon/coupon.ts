@@ -70,6 +70,7 @@ export class CouponProvider {
   //=============================== service to calculate line items total ==============================
 
   checkCategoriesService = function (value, coupon) {
+
     if (coupon.product_categories.length == 0 && coupon.excluded_product_categories.length == 0)
       return true;
 
@@ -102,6 +103,7 @@ export class CouponProvider {
   //=============================== service to calculate line items total ==============================
 
   couponApplyOnProductService = function (value, coupon) {
+
     if (coupon.product_ids.length == 0 && coupon.exclude_product_ids.length == 0)
       return true;
 
@@ -115,6 +117,7 @@ export class CouponProvider {
         return true;
       }
     }
+
     if (coupon.product_ids.length == 0) {
       found++;
     }
@@ -139,6 +142,7 @@ export class CouponProvider {
   //=============================== service to calculate line items total ==============================
 
   checkAlreadyAppliedService = function (coupon, couponLines) {
+
     if (couponLines.length == 0) return false;
     var found = false;
     for (let value of couponLines) {
@@ -190,6 +194,7 @@ export class CouponProvider {
     // var ExPfound = 0;
     var result = false;
     //checking in products ids
+
     if (productIds.length != 0) {
       for (let x of lineItems) {//upper loop
         var id = x.products_id; var vId = -1;

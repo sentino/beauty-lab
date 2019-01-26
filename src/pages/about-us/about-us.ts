@@ -11,7 +11,7 @@ import { TermServicesPage } from '../term-services/term-services';
 import { RefundPolicyPage } from '../refund-policy/refund-policy';
 import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
 

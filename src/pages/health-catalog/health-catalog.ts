@@ -9,6 +9,7 @@ import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 // import { TranslateService } from '@ngx-translate/core';
 import { ProductsPage } from '../products/products';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the HealthCatalogPage page.
@@ -72,7 +73,7 @@ export class HealthCatalogPage {
     public config: ConfigProvider,
     public navParams: NavParams,
     public loading: LoadingProvider,
-    public http: Http,
+    public http: HttpClient,
     ) { }
 
 
@@ -84,7 +85,7 @@ export class HealthCatalogPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);
@@ -100,7 +101,7 @@ export class HealthCatalogPage {
 
   getMainInfo(){
     this.loading.show();
-    this.http.get(this.config.url + 'catalog/health/').map(res => res.json()).subscribe(
+    this.http.get(this.config.url + 'catalog/health/').subscribe(
       res => {
         this.loading.hide();
         console.log("Beauty catalog:");

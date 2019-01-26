@@ -8,6 +8,7 @@ import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -23,20 +24,20 @@ export class SelectCountryPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     public loading: LoadingProvider,
     public shared: SharedDataProvider, ) {
 
-    loading.show();
-    var data = { type: 'null' };
-    http.post(this.config.url + 'getCountries', data).map(res => res.json()).subscribe(data => {
-      loading.hide();
-      this.items = this.countries = data.data
-      setTimeout(() => { this.searchBar.setFocus(); }, 250);
-    });
+  //   loading.show();
+  //   var data = { type: 'null' };
+  //   http.post(this.config.url + 'getCountries', data).subscribe(data => {
+  //     loading.hide();
+  //     this.items = this.countries = data.data
+  //     setTimeout(() => { this.searchBar.setFocus(); }, 250);
+  //   });
   }
 
   initializeItems() {

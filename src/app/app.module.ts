@@ -7,6 +7,9 @@
 // import { CommonModule } from '@angular/common';
 
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 if (localStorage.langId == undefined) {
   localStorage.langId = '1';
 }
@@ -17,12 +20,12 @@ if (localStorage.direction == undefined) {
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpModule, Http } from '@angular/http';
+// import { HttpModule, Http } from '@angular/http';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { ConfigProvider } from '../services/config/config';
 // import { createTranslateLoader } from '../services/translate/translate';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -50,7 +53,7 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { HeaderComponent } from '../components/header/header';
 import { CartPage } from '../pages/cart/cart';
 import { CurencyPipe } from '../pipes/curency/curency';
-import { Toast } from '@ionic-native/toast';
+import { Toast } from '@ionic-native/toast/ngx';
 import { SearchPage } from '../pages/search/search';
 import { AlertProvider } from '../services/alert/alert';
 import { CategoriesPage } from '../pages/categories/categories';
@@ -62,11 +65,11 @@ import { SelectZonesPage } from '../pages/select-zones/select-zones';
 import { BillingAddressPage } from '../pages/billing-address/billing-address';
 import { ShippingMethodPage } from '../pages/shipping-method/shipping-method';
 import { OrderPage } from '../pages/order/order';
-import { SocialSharing } from '@ionic-native/social-sharing';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ThankYouPage } from '../pages/thank-you/thank-you';
-import { Stripe } from '@ionic-native/stripe';
+import { Stripe } from '@ionic-native/stripe/ngx';
 import { CouponProvider } from '../services/coupon/coupon';
-import { PayPal } from '@ionic-native/paypal';
+import { PayPal } from '@ionic-native/paypal/ngx';
 import { MyAccountPage } from '../pages/my-account/my-account';
 import { MyShippingAddressesPage } from '../pages/my-shipping-addresses/my-shipping-addresses';
 import { EditShippingAddressPage } from '../pages/edit-shipping-address/edit-shipping-address';
@@ -76,11 +79,11 @@ import { NewsPage } from '../pages/news/news';
 import { SettingsPage } from '../pages/settings/settings';
 import { NewsDetailPage } from '../pages/news-detail/news-detail';
 import { NewsListPage } from '../pages/news-list/news-list';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { Push } from '@ionic-native/push';
-import { Device } from '@ionic-native/device';
-import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Push } from '@ionic-native/push/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Categories2Page } from '../pages/categories2/categories2';
 import { SubCategoriesPage } from '../pages/sub-categories/sub-categories';
 import { Home5Page } from '../pages/home5/home5';
@@ -94,22 +97,22 @@ import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { TermServicesPage } from '../pages/term-services/term-services';
 import { RefundPolicyPage } from '../pages/refund-policy/refund-policy';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Network } from '@ionic-native/network';
+import { Network } from '@ionic-native/network/ngx';
 import { SubCategories2Page } from '../pages/sub-categories2/sub-categories2';
 import { SubCategories3Page } from '../pages/sub-categories3/sub-categories3';
 import { SubCategories4Page } from '../pages/sub-categories4/sub-categories4';
 import { SubCategories5Page } from '../pages/sub-categories5/sub-categories5';
 import { Categories6Page } from '../pages/categories6/categories6';
 import { SubCategories6Page } from '../pages/sub-categories6/sub-categories6';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { FCM } from '@ionic-native/fcm';
-import { AppVersion } from '@ionic-native/app-version';
-import { OneSignal } from '@ionic-native/onesignal';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { StarRatingModule } from 'ionic3-star-rating';
-import { InputMaskModule } from 'ionic-input-mask';
+// import { InputMaskModule } from 'ionic-input-mask';
 // Import ionic-rating module
-import { IonicRatingModule } from 'ionic-rating';
+// import { IonicRatingModule } from 'ionic-rating';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
@@ -190,8 +193,9 @@ import { FormsModule } from '@angular/forms';
       backButtonText: '',
       iconMode: 'md',
     }),
-    HttpModule,
+    // HttpModule,
     BrowserModule,
+    HttpClientModule,
     BrMaskerModule,
     StarRatingModule,
     BrowserAnimationsModule,

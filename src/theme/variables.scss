@@ -3,8 +3,12 @@
 
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
+@font-face { font-family: Roboto; src: url("../assets/fonts/Roboto-Regular.ttf"); }
 $font-path: "../assets/fonts";
 
+$font-family-md-base: "Roboto";
+$font-family-ios-base: "Roboto";
+$font-family-wp-base: "Roboto";
 
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:

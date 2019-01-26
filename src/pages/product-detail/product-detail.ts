@@ -7,7 +7,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style,state } from '@angular/animations';
-import { SocialSharing } from '@ionic-native/social-sharing';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { LoginPage } from '../login/login';
 import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
@@ -16,6 +16,7 @@ import { Events } from 'ionic-angular';
 import {Headers, RequestOptions} from '@angular/http';
 import { SearchPage } from '../search/search';
 import { CartPage } from '../cart/cart';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 
 
 
@@ -121,7 +122,7 @@ export class ProductDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     public shared: SharedDataProvider,
     public modalCtrl: ModalController,
     public events: Events,
@@ -209,7 +210,7 @@ export class ProductDetailPage {
   getProductDetails(){
       console.log(this.product_id);
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/product/' + this.product_id).map(res => res.json()).subscribe(data => {
+      this.http.get(this.config.url + 'catalog/product/' + this.product_id).subscribe((data: any) => {
         this.loading.hide();
 
         this.single_product = data.result;
@@ -230,12 +231,12 @@ export class ProductDetailPage {
         console.log(this.products_analogs);
 
         this.anlogs_length = this.products_analogs.length;
-        this.leaders_length = this.products_leaders.length
+        this.leaders_length = this.products_leaders.length;
         this.alsobuy_length = this.products_alsobuy.length;
 
         this.product_url = this.single_product.URL;
         this.product_avail = this.single_product.AVAILABILITY;
-        this.product_delivery = this.single_product.DATE_DELIVERY;
+        this.product_delivery = this.single_product.DATE_DELIVERY + '<br> <br>' + this.single_product.TEXTS.DELIVERY;
 
         this.props_list_hit = this.single_product.PROPS.HIT;
         this.props_list_new = this.single_product.PROPS.NEW;
@@ -307,7 +308,7 @@ export class ProductDetailPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);
@@ -331,10 +332,16 @@ export class ProductDetailPage {
 
     var RevData = new FormData();
 
-    const headers = new Headers();
-    headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    // const headers = new Headers();
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization-Token': this.shared.customerData.accessToken
+    //   })
+    // };
+    // headers.append('Authorization-Token',this.shared.customerData.accessToken);
 
-    const options = new RequestOptions({headers: headers});
+    // const options = new RequestOptions({headers: headers});
 
     RevData.append('product',this.product_id);
     RevData.append('AGE', this.RevData.AGE);
@@ -348,7 +355,8 @@ export class ProductDetailPage {
 
     this.loading.show();
 
-    this.http.post(this.config.url + 'tools/review/', RevData,options).map(res => res.json()).subscribe(data => {
+    // this.http.post(this.config.url + 'tools/review/', RevData, httpOptions).subscribe(data => {
+    this.http.post(this.config.url + 'tools/review/', RevData).subscribe(data => {
       this.loading.hide();
       console.log("Review response");
       console.log(data);
@@ -358,8 +366,8 @@ export class ProductDetailPage {
     },
     err => {
       this.loading.hide();
-      console.log(err)
-      if(err.status = 422){
+      console.log(err);
+      if(err.status == 422){
         alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
       }
     });

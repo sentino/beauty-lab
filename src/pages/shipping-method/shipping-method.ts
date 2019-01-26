@@ -9,6 +9,7 @@ import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { OrderPage } from '../order/order';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ShippingMethodPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public shared: SharedDataProvider,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public loading: LoadingProvider,
   ) {
@@ -39,7 +40,7 @@ export class ShippingMethodPage {
     data.zone = this.shared.orderDetails.delivery_zone;
     data.street_address = this.shared.orderDetails.delivery_street_address;
     data.products_weight = this.calculateWeight();
-    data.products_weight_unit = 'g'
+    data.products_weight_unit = 'g';
     data.products = this.shared.cartProducts;
     data.language_id = config.langId;
     // this.http.post(this.config.url + 'getRate', data).map(res => res.json()).subscribe(data => {

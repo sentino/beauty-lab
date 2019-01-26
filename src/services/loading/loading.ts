@@ -5,7 +5,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import { ConfigProvider } from '../config/config';
-import { OneSignal } from '@ionic-native/onesignal';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @Injectable()
 export class LoadingProvider {
@@ -19,23 +19,22 @@ export class LoadingProvider {
   }
 
   show() {
-    this.loading = this.loadingCtrl.create({
-      duration: 10000
-    });
-    this.loading.present();
+    // this.loading = this.loadingCtrl.create({
+    //   duration: 10000
+    // });
+    // this.loading.present();
   }
+
   hide() {
-    try {
-      this.loading.dismiss();
-    } catch (error) { }
-
-
-
+    // try {
+    //   this.loading.dismiss();
+    // } catch (error) { }
   }
+
   autoHide(time) {
-    this.loading = this.loadingCtrl.create({
-      duration: time
-    });
-    this.loading.present();
+    // this.loading = this.loadingCtrl.create({
+    //   duration: time
+    // });
+    // this.loading.present();
   }
 }

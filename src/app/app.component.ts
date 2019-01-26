@@ -5,8 +5,8 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController, Events } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 // import { TranslateService } from '@ngx-translate/core';
 import { MenuController } from 'ionic-angular';
@@ -27,7 +27,7 @@ import { MyShippingAddressesPage } from '../pages/my-shipping-addresses/my-shipp
 import { NewsPage } from '../pages/news/news';
 import { ProductsPage } from '../pages/products/products';
 import { SettingsPage } from '../pages/settings/settings';
-import { Network } from '@ionic-native/network';
+// import { Network } from '@ionic-native/network';
 import { AlertProvider } from '../services/alert/alert';
 import { LoadingProvider } from '../services/loading/loading';
 import { Home2Page } from '../pages/home2/home2';
@@ -40,15 +40,20 @@ import { Categories5Page } from '../pages/categories5/categories5';
 import { Categories3Page } from '../pages/categories3/categories3';
 import { Categories6Page } from '../pages/categories6/categories6';
 import { trigger, transition, animate, style } from '@angular/animations';
-import { AppVersion } from '@ionic-native/app-version';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SocialSharing } from '@ionic-native/social-sharing';
+// import { AppVersion } from '@ionic-native/app-version';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+// import { SocialSharing } from '@ionic-native/social-sharing';
 import { Http } from '@angular/http';
 import { CartPage } from '../pages/cart/cart';
 // import { NavController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
+import { HttpClient } from '@angular/common/http';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @Component({
@@ -92,14 +97,14 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public modalCtrl: ModalController,
-    public statusBar: StatusBar,
+    private statusBar: StatusBar,
     public splashScreen: SplashScreen,
     // translate: TranslateService,
     public storage: Storage,
     public appCtrl: App,
     public menuCtrl: MenuController,
     public shared: SharedDataProvider,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public network: Network,
     public alert: AlertProvider,

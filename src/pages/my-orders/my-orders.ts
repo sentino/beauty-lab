@@ -13,6 +13,7 @@ import { AlertProvider } from '../../services/alert/alert';
 import { OrderDetailPage } from '../order-detail/order-detail';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class MyOrdersPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     // translate: TranslateService,
@@ -33,29 +34,29 @@ export class MyOrdersPage {
     public loading: LoadingProvider
   ) {
   }
-  getOrders() {
-    this.httpRunning = true;
-    this.orders = [];
-    this.loading.show();
-    var data: { [k: string]: any } = {};
-    data.customers_id = this.shared.customerData.customers_id;
-    data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getOrders', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      this.httpRunning = false;
-      //$rootScope.address=response.data.data;
-      if (data.success == 1) {
-        this.orders = [];
-        this.orders = data.data;
-      }
-      // $scope.$broadcast('scroll.refreshComplete');
-    },
-      function (response) {
-        this.loading.hide();
-        this.alert.show("Server Error while Loading Orders");
-        console.log(response);
-      });
-  };
+  // getOrders() {
+  //   this.httpRunning = true;
+  //   this.orders = [];
+  //   this.loading.show();
+  //   var data: { [k: string]: any } = {};
+  //   data.customers_id = this.shared.customerData.customers_id;
+  //   data.language_id = this.config.langId;
+  //   this.http.post(this.config.url + 'getOrders', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     this.httpRunning = false;
+  //     //$rootScope.address=response.data.data;
+  //     if (data.success == 1) {
+  //       this.orders = [];
+  //       this.orders = data.data;
+  //     }
+  //     // $scope.$broadcast('scroll.refreshComplete');
+  //   },
+  //     function (response) {
+  //       this.loading.hide();
+  //       this.alert.show("Server Error while Loading Orders");
+  //       console.log(response);
+  //     });
+  // };
 
   showOrderDetail(order) {
 
@@ -64,7 +65,7 @@ export class MyOrdersPage {
   }
   ionViewDidLoad() {
     this.httpRunning = true;
-    this.getOrders();
+    // this.getOrders();
   }
   openCart() {
     this.navCtrl.push(CartPage);

@@ -10,6 +10,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition, state } from '@angular/animations';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'header',
@@ -63,16 +64,16 @@ export class HeaderComponent {
     public navCtrl: NavController,
     public shared: SharedDataProvider,
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     public events: Events
 
   ) {
     // console.log(navCtrl);
 
     events.subscribe('cartChange', (id, value) => {
-      this.cartShake = 'inactive'
+      this.cartShake = 'inactive';
       setTimeout(() => {
-        this.cartShake = 'active'
+        this.cartShake = 'active';
       }, 300);
     });
 
@@ -97,7 +98,7 @@ export class HeaderComponent {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);

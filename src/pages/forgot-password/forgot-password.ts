@@ -9,6 +9,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
 import { SearchPage } from '../../pages/search/search';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -64,14 +65,14 @@ export class ForgotPasswordPage {
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     public loading: LoadingProvider,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public navParams: NavParams) {
   }
   forgetPassword() {
     this.loading.show();
     this.errorMessage = '';
-    this.http.post(this.config.url + 'auth/forgotpassword/', this.formData).map(res => res.json()).subscribe(data => {
+    this.http.post(this.config.url + 'auth/forgotpassword/', this.formData).subscribe((data: any) => {
       this.loading.hide();
 
       console.log("Forg Data");
@@ -93,8 +94,8 @@ export class ForgotPasswordPage {
     err => {
       this.forgot_complete = false;
       this.loading.hide();
-      console.log(err)
-      if(err.status = 422){
+      console.log(err);
+      if(err.status == 422){
         alert("Пользователь не найден!Попробуйте ещё раз.")
       }
     }
@@ -110,7 +111,7 @@ export class ForgotPasswordPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);

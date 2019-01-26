@@ -8,6 +8,7 @@ import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -22,19 +23,19 @@ export class SelectZonesPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
     public loading: LoadingProvider,
     public shared: SharedDataProvider, ) {
 
-    loading.show();
-    var data = { zone_country_id: this.navParams.get('id') };
-    http.post(this.config.url + 'getZones', data).map(res => res.json()).subscribe(data => {
-      loading.hide();
-      this.items = this.zones = data.data;
-    });
+    // loading.show();
+    // var data = { zone_country_id: this.navParams.get('id') };
+    // http.post(this.config.url + 'getZones', data).subscribe(data => {
+    //   loading.hide();
+    //   this.items = this.zones = data.data;
+    // });
   }
 
   initializeItems() {

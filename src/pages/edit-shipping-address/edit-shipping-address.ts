@@ -11,6 +11,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { SelectCountryPage } from '../select-country/select-country';
 import { SelectZonesPage } from '../select-zones/select-zones';
 import { AlertProvider } from '../../services/alert/alert';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-edit-shipping-address',
@@ -23,7 +24,7 @@ export class EditShippingAddressPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
     public loading: LoadingProvider,
@@ -69,41 +70,41 @@ export class EditShippingAddressPage {
 
   //============================================================================================  
   //adding shipping address of the user
-  addShippingAddress = function (form) {
-    this.loading.show();
-    this.shippingData.customers_id = this.shared.customerData.customers_id;
-    var data = this.shippingData;
-    data.entry_state = data.delivery_zone;
-    data.entry_zone = data.delivery_zone;
-    this.http.post(this.config.url + 'addShippingAddress', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      this.dismiss();
-      this.alert.show(data.message);
-    }, function (response) {
-      this.loading.hide();
-      console.log(response);
-    });
-  };
+  // addShippingAddress = function (form) {
+  //   this.loading.show();
+  //   this.shippingData.customers_id = this.shared.customerData.customers_id;
+  //   var data = this.shippingData;
+  //   data.entry_state = data.delivery_zone;
+  //   data.entry_zone = data.delivery_zone;
+  //   this.http.post(this.config.url + 'addShippingAddress', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     this.dismiss();
+  //     this.alert.show(data.message);
+  //   }, function (response) {
+  //     this.loading.hide();
+  //     console.log(response);
+  //   });
+  // };
   //============================================================================================  
   //updating shipping address of the user
-  updateShippingAddress = function (form, id) {
-    this.loading.show();
-    this.shippingData.customers_id = this.shared.customerData.customers_id;
-    var data = this.shippingData;
-    data.entry_state = data.delivery_zone;
-    data.entry_zone = data.delivery_zone;
-    this.http.post(this.config.url + 'updateShippingAddress', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.dismiss();
-        this.alert.show(data.message);
-      }
-    }, function (response) {
-      this.loading.hide();
-      console.log(response);
-    });
-
-  };
+  // updateShippingAddress = function (form, id) {
+  //   this.loading.show();
+  //   this.shippingData.customers_id = this.shared.customerData.customers_id;
+  //   var data = this.shippingData;
+  //   data.entry_state = data.delivery_zone;
+  //   data.entry_zone = data.delivery_zone;
+  //   this.http.post(this.config.url + 'updateShippingAddress', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.dismiss();
+  //       this.alert.show(data.message);
+  //     }
+  //   }, function (response) {
+  //     this.loading.hide();
+  //     console.log(response);
+  //   });
+  //
+  // };
   ionViewWillEnter() {
     if (this.shared.tempdata.entry_country_id != undefined) {
 

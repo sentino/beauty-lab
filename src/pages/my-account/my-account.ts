@@ -85,7 +85,7 @@ export class MyAccountPage {
   profilePicture = '';
   passwordData: { [k: string]: any } = {};
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     // public translate: TranslateService,
@@ -96,13 +96,21 @@ export class MyAccountPage {
   }
 
   getProfile(){
-    const headers = new Headers();
-    headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    // const headers = new Headers();
+    // headers.append('Authorization-Token',this.shared.customerData.accessToken);
 
-    const options = new RequestOptions({headers: headers});
+    // const options = new RequestOptions({headers: headers});
 
-    this.http.get(this.config.url + 'user/profile/', options).map(res => res.json()).subscribe(
-      res => {
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization-Token': this.shared.customerData.accessToken
+    //   })
+    // };
+    
+    // this.http.get(this.config.url + 'user/profile/', httpOptions).subscribe(
+    this.http.get(this.config.url + 'user/profile/').subscribe(
+      (res: any) => {
         console.log("User Profile:");
         console.log(res);
 
@@ -131,7 +139,7 @@ export class MyAccountPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);
@@ -148,13 +156,21 @@ export class MyAccountPage {
   updateProfile(){
     if(this.myAccountData.password === this.myAccountData.passwordConfirmed){
     this.loading.show();
-    const headers = new Headers();
-    headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    // const headers = new Headers();
+    // headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    //
+    // const options = new RequestOptions({headers: headers});
 
-    const options = new RequestOptions({headers: headers});
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization-Token': this.shared.customerData.accessToken
+    //   })
+    // };
 
-    this.http.put(this.config.url + 'user/profile/', this.myAccountData, options).map(res => res.json()).subscribe(
-      res => {
+    // this.http.put(this.config.url + 'user/profile/', this.myAccountData, httpOptions).subscribe(
+    this.http.put(this.config.url + 'user/profile/', this.myAccountData).subscribe(
+      (res: any) => {
         this.loading.hide();
         console.log("User Response:");
         console.log(res);

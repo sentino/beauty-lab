@@ -5,7 +5,7 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Events, Platform } from 'ionic-angular';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 // import { LanguagePage } from '../language/language';
 import { ConfigProvider } from '../../services/config/config';
 import { Storage } from '@ionic/storage';
@@ -18,12 +18,13 @@ import { trigger, style, animate, transition, state } from '@angular/animations'
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoginPage } from '../login/login';
 import { MyAccountPage } from '../my-account/my-account';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
-import { SocialSharing } from '@ionic-native/social-sharing';
-import { AppVersion } from '@ionic-native/app-version';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { HomePage} from '../home/home';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -72,7 +73,7 @@ export class SettingsPage {
     public config: ConfigProvider,
     private storage: Storage,
     public loading: LoadingProvider,
-    public http: Http,
+    public http: HttpClient,
     private localNotifications: LocalNotifications,
     public events: Events,
     public shared: SharedDataProvider,
@@ -111,7 +112,7 @@ export class SettingsPage {
   }
 
   getSearch(){
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).map(res => res.json()).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
       console.log("Search answer:");
       console.log(data);
@@ -146,22 +147,22 @@ export class SettingsPage {
   }
   //============================================================================================
   //turning on off local  notification
-  onOffPushNotification() {
-    this.storage.get('registrationId').then((registrationId) => {
-      var data: { [k: string]: any } = {};
-      data.device_id = registrationId;
-      if (this.setting.notification == false) data.is_notify = 0;
-      else data.is_notify = 1;
-      this.http.post(this.config.url + 'notify_me', data).map(res => res.json()).subscribe(data => {
-        if (data.success == 1) {
-
-          this.updateSetting();
-        }
-      }, function (response) {
-        console.log(response);
-      });
-    });
-  };
+  // onOffPushNotification() {
+  //   this.storage.get('registrationId').then((registrationId) => {
+  //     var data: { [k: string]: any } = {};
+  //     data.device_id = registrationId;
+  //     if (this.setting.notification == false) data.is_notify = 0;
+  //     else data.is_notify = 1;
+  //     this.http.post(this.config.url + 'notify_me', data).map(res => res.json()).subscribe(data => {
+  //       if (data.success == 1) {
+  //
+  //         this.updateSetting();
+  //       }
+  //     }, function (response) {
+  //       console.log(response);
+  //     });
+  //   });
+  // };
   hideShowFooterMenu() {
     this.events.publish('setting', this.setting);
     this.updateSetting();

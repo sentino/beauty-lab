@@ -8,12 +8,13 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { Toast } from '@ionic-native/toast';
+import { Toast } from '@ionic-native/toast/ngx';
 // import { TranslateService } from '@ngx-translate/core';
 import { NewsDetailPage } from '../news-detail/news-detail';
 import { NewsListPage } from '../news-list/news-list';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -39,7 +40,7 @@ export class NewsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public loading: LoadingProvider,
     private toast: Toast,
@@ -50,86 +51,86 @@ export class NewsPage {
     var dat: { [k: string]: any } = {};
     dat.language_id = this.config.langId;
     dat.is_feature = 1;
-    this.http.post(this.config.url + 'getAllNews', dat).map(res => res.json()).subscribe(data => {
-      this.featuredPosts = data.news_data;
-    });
+    // this.http.post(this.config.url + 'getAllNews', dat).map(res => res.json()).subscribe(data => {
+    //   this.featuredPosts = data.news_data;
+    // });
 
-    this.getPosts();
-    this.getCategories();
+    // this.getPosts();
+    // this.getCategories();
   }
 
 
   //========================================= tab newest categories ===============================================================================
 
-  getCategories = function () {
-
-    var data: { [k: string]: any } = {};
-    data.language_id = this.config.langId;
-    data.page_number = this.page2;
-    this.http.post(this.config.url + 'allNewsCategories', data).map(res => res.json()).subscribe(data => {
-
-      if (this.page2 == 0) { this.categories = []; }
-      if (data.success == 1) {
-        this.page2++;
-        data.data.forEach((value, index) => {
-          this.categories.push(value);
-        });
-       // console.log(data.data.length);
-        this.getCategories();
-      }
-      if (data.data.length < 9) {// if we get less than 10 products then infinite scroll will de disabled
-
-        if (this.categories.length != 0) {
-          this.toast.show(`All Categories Loaded!`, 'short', 'bottom');
-        }
-      }
-    }, function (response) {
-      // console.log("Error while loading categories from the server");
-      // console.log(response);
-    });
-  };
+  // getCategories = function () {
+  //
+  //   var data: { [k: string]: any } = {};
+  //   data.language_id = this.config.langId;
+  //   data.page_number = this.page2;
+  //   this.http.post(this.config.url + 'allNewsCategories', data).map(res => res.json()).subscribe(data => {
+  //
+  //     if (this.page2 == 0) { this.categories = []; }
+  //     if (data.success == 1) {
+  //       this.page2++;
+  //       data.data.forEach((value, index) => {
+  //         this.categories.push(value);
+  //       });
+  //      // console.log(data.data.length);
+  //       this.getCategories();
+  //     }
+  //     if (data.data.length < 9) {// if we get less than 10 products then infinite scroll will de disabled
+  //
+  //       if (this.categories.length != 0) {
+  //         this.toast.show(`All Categories Loaded!`, 'short', 'bottom');
+  //       }
+  //     }
+  //   }, function (response) {
+  //     // console.log("Error while loading categories from the server");
+  //     // console.log(response);
+  //   });
+  // };
 
   //============================================================================================  
   //getting list of posts
-  getPosts() {
-    var data: { [k: string]: any } = {};
-    data.language_id = this.config.langId;
-    data.page_number = this.page;
-    this.http.post(this.config.url + 'getAllNews', data).map(res => res.json()).subscribe(data => {
-
-      this.infinite.complete();//stopping infinite scroll loader
-      if (this.page == 0) {
-        this.posts = []; this.infinite.enable(true);
-      }
-      if (data.success == 1) {
-        this.page++;
-        data.news_data.forEach((value, index) => {
-          this.posts.push(value);
-        });
-      }
-      if (data.news_data.length < 9) {// if we get less than 10 products then infinite scroll will de disabled
-
-        this.infinite.enable(false);//disabling infinite scroll
-        if (this.posts.length != 0) {
-          this.toast.show(`All Posts Loaded!`, 'short', 'bottom');
-        }
-      }
-    }, function (response) {
-      // console.log("Error while loading posts from the server");
-      // console.log(response);
-    });
-  };
+  // getPosts() {
+  //   var data: { [k: string]: any } = {};
+  //   data.language_id = this.config.langId;
+  //   data.page_number = this.page;
+  //   this.http.post(this.config.url + 'getAllNews', data).map(res => res.json()).subscribe(data => {
+  //
+  //     this.infinite.complete();//stopping infinite scroll loader
+  //     if (this.page == 0) {
+  //       this.posts = []; this.infinite.enable(true);
+  //     }
+  //     if (data.success == 1) {
+  //       this.page++;
+  //       data.news_data.forEach((value, index) => {
+  //         this.posts.push(value);
+  //       });
+  //     }
+  //     if (data.news_data.length < 9) {// if we get less than 10 products then infinite scroll will de disabled
+  //
+  //       this.infinite.enable(false);//disabling infinite scroll
+  //       if (this.posts.length != 0) {
+  //         this.toast.show(`All Posts Loaded!`, 'short', 'bottom');
+  //       }
+  //     }
+  //   }, function (response) {
+  //     // console.log("Error while loading posts from the server");
+  //     // console.log(response);
+  //   });
+  // };
 
   //============================================================================================  
   //getting list of sub categories from the server
-  showPostDetail(post) {
-    this.loading.autoHide(500);
-    this.navCtrl.push(NewsDetailPage, { 'post': post });
-  };
-  openPostsPage(name, id) {
-    this.loading.autoHide(500);
-    this.navCtrl.push(NewsListPage, { 'name':name,'id':id });
-  }
+  // showPostDetail(post) {
+  //   this.loading.autoHide(500);
+  //   this.navCtrl.push(NewsDetailPage, { 'post': post });
+  // };
+  // openPostsPage(name, id) {
+  //   this.loading.autoHide(500);
+  //   this.navCtrl.push(NewsListPage, { 'name':name,'id':id });
+  // }
 
   openCart() {
     this.navCtrl.push(CartPage);

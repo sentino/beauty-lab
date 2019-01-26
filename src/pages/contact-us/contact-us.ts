@@ -11,6 +11,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { AlertProvider } from '../../services/alert/alert';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 declare var google;
 
@@ -27,7 +28,7 @@ export class ContactUsPage {
     message: ''
   };
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public loading: LoadingProvider,
     public shared: SharedDataProvider,
@@ -39,26 +40,26 @@ export class ContactUsPage {
   ionViewDidLoad() {
     this.loadMap();
   }
-  submit() {
-
-    this.loading.show();
-    var data = {};
-    data = this.contact;
-    this.http.post(this.config.url + 'contactUs', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.contact.name = '';
-        this.contact.email = '';
-        this.contact.message = '';
-        this.alert.show(data.message);
-      }
-    }, function (response) {
-      this.loading.hide();
-      this.alert.show("Error server not reponding");
-    });
-
-
-  };
+  // submit() {
+  //
+  //   this.loading.show();
+  //   var data = {};
+  //   data = this.contact;
+  //   this.http.post(this.config.url + 'contactUs', data).map(res => res.json()).subscribe(data => {
+  //     this.loading.hide();
+  //     if (data.success == 1) {
+  //       this.contact.name = '';
+  //       this.contact.email = '';
+  //       this.contact.message = '';
+  //       this.alert.show(data.message);
+  //     }
+  //   }, function (response) {
+  //     this.loading.hide();
+  //     this.alert.show("Error server not reponding");
+  //   });
+  //
+  //
+  // };
   loadMap() {
 
     let latLng = new google.maps.LatLng(this.config.latitude, this.config.longitude);

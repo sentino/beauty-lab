@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from "rxjs/operators";
 import { ConfigProvider } from '../../services/config/config';
 // import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -12,6 +12,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { Content, NavController } from 'ionic-angular';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-home2',
@@ -51,7 +52,7 @@ export class Home2Page {
 
   segments: any = 'topSeller';
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public navCtrl: NavController,

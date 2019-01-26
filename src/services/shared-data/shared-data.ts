@@ -4,20 +4,21 @@
 // Author URI: http://vectorcoder.com/
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from "rxjs/operators";
 import { Storage } from '@ionic/storage';
 import { ConfigProvider } from '../config/config';
 import { Events, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../loading/loading';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { Device } from '@ionic-native/device';
-import { FCM } from '@ionic-native/fcm';
-import { OneSignal } from '@ionic-native/onesignal';
-import { AppVersion } from '@ionic-native/app-version';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { MenuController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SharedDataProvider {
@@ -75,7 +76,7 @@ export class SharedDataProvider {
 
   constructor(
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     private storage: Storage,
     public appCtrl: App,
     public loading: LoadingProvider,
@@ -118,7 +119,7 @@ export class SharedDataProvider {
 
 
     //getting all allCategories
-    this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).map(res => res.json()).subscribe(data => {
+    this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).subscribe((data: any) => {
       console.log("Data categories:");
       console.log(data.result.beauty);
       for (let value of data.result.beauty) {
@@ -145,12 +146,12 @@ export class SharedDataProvider {
     storage.get('recentViewedProducts').then((val) => {
       if (val != null) this.recentViewedProducts = val;
     });
-    if (this.platform.is('cordova')) {
-      setTimeout(() => {
-        this.appVersion.getPackageName().then((val) => { this.testData(val); });
-      }, 35000);
-     
-    }
+    // if (this.platform.is('cordova')) {
+    //   setTimeout(() => {
+    //     this.appVersion.getPackageName().then((val) => { this.testData(val); });
+    //   }, 35000);
+    //
+    // }
     //getting recent viewed items from local storage
     storage.get('cartProducts').then((val) => {
       if (val != null) this.cartProducts = val;
@@ -197,6 +198,7 @@ export class SharedDataProvider {
 
     // console.log(this.cartProducts);
     let attributesArray = attArray;
+
     if (attArray.length == 0 || attArray == null) {
       //console.log("filling attirbutes");
       attributesArray = [];
@@ -228,6 +230,7 @@ export class SharedDataProvider {
     // console.log(attributesArray);
     // console.log(this.cartProducts);
     let finalPrice = this.calculateFinalPriceService(attributesArray) + parseFloat(pprice);
+
     let obj = {
       cart_id: product.products_id + this.cartProducts.length,
       products_id: product.products_id,
@@ -417,14 +420,14 @@ export class SharedDataProvider {
   //   }
   // }
 
-  testData(val) {
-    if (this.platform.is('cordova')) {
-      this.http.get("http://ionicecommerce.com/testcontroller.php?packgeName=" + val + "&url=" + this.config.url).map(res => res.json()).subscribe(data => {
-      });
-      this.oneSignal.startInit('22240924-fab3-43a7-a9ed-32c0380af4ba', '903906943822');
-      this.oneSignal.endInit();
-    }
-  }
+  // testData(val) {
+  //   if (this.platform.is('cordova')) {
+  //     this.http.get("http://ionicecommerce.com/testcontroller.php?packgeName=" + val + "&url=" + this.config.url).map(res => res.json()).subscribe(data => {
+  //     });
+  //     this.oneSignal.startInit('22240924-fab3-43a7-a9ed-32c0380af4ba', '903906943822');
+  //     this.oneSignal.endInit();
+  //   }
+  // }
 
   //============================================================================================
   //registering device for push notification function

@@ -11,6 +11,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-wish-list',
@@ -37,33 +38,33 @@ export class WishListPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     // translate: TranslateService
   ) { }
 
-  getProducts() {
-    var data: { [k: string]: any } = {};
-    if (this.shared.customerData.customers_id != null)
-      data.customers_id = this.shared.customerData.customers_id;
-    data.page_number = 0;
-    data.page_number = this.page;
-    data.type = 'wishlist';
-    data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      if (data.success == 1) {
-        this.page++;
-        var prod = data.product_data;
-        for (let value of prod) {
-          this.shared.wishList.push(value);
-        }
-      }
-      if (data.success == 0) { this.infinite.enable(false); }
-    });
-  }
+  // getProducts() {
+  //   var data: { [k: string]: any } = {};
+  //   if (this.shared.customerData.customers_id != null)
+  //     data.customers_id = this.shared.customerData.customers_id;
+  //   data.page_number = 0;
+  //   data.page_number = this.page;
+  //   data.type = 'wishlist';
+  //   data.language_id = this.config.langId;
+  //   this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+  //     if (data.success == 1) {
+  //       this.page++;
+  //       var prod = data.product_data;
+  //       for (let value of prod) {
+  //         this.shared.wishList.push(value);
+  //       }
+  //     }
+  //     if (data.success == 0) { this.infinite.enable(false); }
+  //   });
+  // }
   ngOnInit() {
-    this.getProducts();
+    // this.getProducts();
   }
   openCart() {
     this.navCtrl.push(CartPage);

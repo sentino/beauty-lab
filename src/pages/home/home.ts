@@ -4,7 +4,7 @@
 // Author URI: http://vectorcoder.com/
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from "rxjs/operators";
 import { ConfigProvider } from '../../services/config/config';
 // import { TranslateService } from '@ngx-translate/core';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -17,6 +17,7 @@ import {Headers, RequestOptions} from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { App} from 'ionic-angular';
 import { Slides } from 'ionic-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'page-home',
@@ -65,7 +66,7 @@ export class HomePage {
 
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
@@ -91,13 +92,21 @@ export class HomePage {
 
   getMainInfo(){
     this.loading.show();
-    const headers = new Headers();
-    headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    // const headers = new Headers();
+    // headers.append('Authorization-Token',this.shared.customerData.accessToken);
+    //
+    // const options = new RequestOptions({headers: headers});
 
-    const options = new RequestOptions({headers: headers});
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization-Token': this.shared.customerData.accessToken
+    //   })
+    // };
 
-    this.http.get(this.config.url + 'pages/index/', options).map(res => res.json()).subscribe(
-      res => {
+    // this.http.get(this.config.url + 'pages/index/', httpOptions).subscribe(
+    this.http.get(this.config.url + 'pages/index/').subscribe(
+      (res: any) => {
         this.loading.hide();
         console.log("User Profile:");
         console.log(res);

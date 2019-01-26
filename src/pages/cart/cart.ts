@@ -7,8 +7,8 @@ import { NavController, Events, ModalController } from 'ionic-angular';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Toast } from '@ionic-native/toast';
+import { map } from "rxjs/operators";
+import { Toast } from '@ionic-native/toast/ngx';
 import { ProductDetailPage } from '../product-detail/product-detail';
 import { LoadingProvider } from '../../services/loading/loading';
 import { Storage } from '@ionic/storage';
@@ -16,6 +16,7 @@ import { LoginPage } from '../login/login';
 import { ShippingAddressPage } from '../shipping-address/shipping-address';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-cart',
@@ -42,7 +43,7 @@ export class CartPage {
     public navCtrl: NavController,
     public shared: SharedDataProvider,
     public config: ConfigProvider,
-    public http: Http,
+    public http: HttpClient,
     public loading: LoadingProvider,
     public toast: Toast,
     private storage: Storage,
@@ -68,12 +69,12 @@ export class CartPage {
       data.customers_id = null;
     data.products_id = id;
     data.language_id = this.config.langId;
-    this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-      this.loading.hide();
-      if (data.success == 1) {
-        this.navCtrl.push(ProductDetailPage, { data: data.product_data[0] });
-      }
-    });
+    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
+    //   this.loading.hide();
+    //   if (data.success == 1) {
+    //     this.navCtrl.push(ProductDetailPage, { data: data.product_data[0] });
+    //   }
+    // });
   }
   removeCart(id) {
     this.shared.removeCart(id);

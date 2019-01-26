@@ -5,10 +5,11 @@
 
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { LocalNotifications } from "@ionic-native/local-notifications";
+import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 import { Storage } from '@ionic/storage';
 import { Platform } from "ionic-angular";
-import { OneSignal } from "@ionic-native/onesignal";
+import { OneSignal } from "@ionic-native/onesignal/ngx";
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -68,7 +69,7 @@ export class ConfigProvider {
   public onesignalSenderId = "";
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     private storage: Storage,
     public platform: Platform,
     private oneSignal: OneSignal,

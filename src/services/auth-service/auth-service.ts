@@ -35,8 +35,6 @@ export class AuthServiceProvider {
 
   constructor(private storage: Storage) {
     console.log('Hello AuthServiceProvider Provider');
-
-
   }
 
   login_vk() {
