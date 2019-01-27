@@ -7,7 +7,7 @@
 // import { CommonModule } from '@angular/common';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 if (localStorage.langId == undefined) {
@@ -118,6 +118,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
 import { FormsModule } from '@angular/forms';
+import { JwtInterceptor } from '../helpers/jwt-interceptor';
 
 @NgModule({
   declarations: [
@@ -278,6 +279,7 @@ import { FormsModule } from '@angular/forms';
     Toast,
     ConfigProvider,
     ProductsProvider,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ProductsProvider,
     LoadingProvider,

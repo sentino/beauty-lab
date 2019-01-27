@@ -3,11 +3,6 @@
   "integrations": {
     "cordova": {}
   },
-  "type": "ionic-angular",
-  "proxies": [
-    {
-      "path": "/v1/",
-      "proxyUrl": "https://api.lab-krasoty.ru/api/v1/"
-    }
-  ]
+  "typescript": true,
+  "type": "ionic-angular"
 }

@@ -99,12 +99,12 @@ export class HomePage {
 
     // const httpOptions = {
     //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
+    //     'Content-Type': 'application/json',
     //     'Authorization-Token': this.shared.customerData.accessToken
     //   })
-    // };
+    // }
+    // const headers = new HttpHeaders().set('Authorization-Token', this.shared.customerData.accessToken);
 
-    // this.http.get(this.config.url + 'pages/index/', httpOptions).subscribe(
     this.http.get(this.config.url + 'pages/index/').subscribe(
       (res: any) => {
         this.loading.hide();

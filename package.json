@@ -14,7 +14,7 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build --prod",
-    "ionic:serve": "ionic-app-scripts serve --prod --lab"
+    "ionic:serve": "ionic-app-scripts serve --prod --aot --lab"
   },
   "dependencies": {
     "@angular/animations": "6.1.10",
@@ -56,6 +56,7 @@
     "@ionic-native/facebook": "^5.0.0",
     "@ionic-native/fcm": "^5.0.0",
     "@ionic-native/google-plus": "^5.0.0",
+    "@ionic-native/http": "^5.0.0",
     "@ionic-native/in-app-browser": "^5.0.0",
     "@ionic-native/local-notifications": "^5.0.0",
     "@ionic-native/network": "^5.0.0",
@@ -100,7 +101,7 @@
     "ionic2-rating": "^1.2.2",
     "ionic3-star-rating": "^1.1.5",
     "ionicons": "^4.5.5",
-    "typescript": "^2.7.2"
+    "typescript": "^2.8.3"
   },
   "description": "An Ionic project",
   "cordova": {

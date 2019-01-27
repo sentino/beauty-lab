@@ -82,7 +82,6 @@ export class ProductComponent {
   }
 
   clickWishList() {
-
     if (this.shared.customerData.customers_id == null || this.shared.customerData.customers_id == undefined) {
       let modal = this.modalCtrl.create(LoginPage);
       modal.present();
@@ -96,7 +95,7 @@ export class ProductComponent {
   //   this.shared.addWishList(this.p);
   // }
   // removeWishList() {
-    // this.shared.removeWishList(this.p);
+  //   this.shared.removeWishList(this.p);
   // }
 
 

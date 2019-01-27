@@ -3,13 +3,13 @@
     <img class="image" src="{{p.IMAGE}}" (click)="showProductDetail(p.ID)"/>
 
     <div class="labels-block" *ngIf="props_show == true">
-        <div *ngIf="p.PROPS.HIT == 'Y'" class="label label-blue">
+        <div *ngIf="p.PROPS.HIT == 'Y'" class="custom-profile-item-menu custom-profile-item-menu-blue">
           <span style="">ХИТ</span>
         </div>
-        <div *ngIf="p.PROPS.NEW  == 'Y'" class="label label-red">
+        <div *ngIf="p.PROPS.NEW  == 'Y'" class="custom-profile-item-menu custom-profile-item-menu-red">
           <span style="">NEW</span>
         </div>
-        <div *ngIf="p.PROPS.MIN_PRICE == 'Y'" class="label label-green">
+        <div *ngIf="p.PROPS.MIN_PRICE == 'Y'" class="custom-profile-item-menu custom-profile-item-menu-green">
           <span style="">MIN</span>
         </div>
         <span class="discount-label">

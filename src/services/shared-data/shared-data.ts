@@ -119,7 +119,8 @@ export class SharedDataProvider {
 
 
     //getting all allCategories
-    this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).subscribe((data: any) => {
+    this.http.get(config.url + 'catalog/sections/').subscribe((data: any) => {
+    // this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).subscribe((data: any) => {
       console.log("Data categories:");
       console.log(data.result.beauty);
       for (let value of data.result.beauty) {
@@ -313,7 +314,7 @@ export class SharedDataProvider {
   //   let data: { [k: string]: any } = {};
   //   data.liked_customers_id = this.customerData.customers_id;
   //   data.liked_products_id = p.products_id;
-  //   this.http.post(this.config.url + 'unlikeProduct', data).map(res => res.json()).subscribe(data => {
+  //   this.http.post(this.config.url + 'unlikeProduct', data).subscribe((data: any) => {
   //     this.loading.hide();
   //     if (data.success == 1) {
   //       this.events.publish('wishListUpdate', p.products_id, 0);
@@ -332,7 +333,7 @@ export class SharedDataProvider {
   //   let data: { [k: string]: any } = {};
   //   data.liked_customers_id = this.customerData.customers_id;
   //   data.liked_products_id = p.products_id;
-  //   this.http.post(this.config.url + 'likeProduct', data).map(res => res.json()).subscribe(data => {
+  //   this.http.post(this.config.url + 'likeProduct', data).subscribe((data: any) => {
   //     this.loading.hide();
   //     if (data.success == 1) {
   //       this.events.publish('wishListUpdate', p.products_id, 1);

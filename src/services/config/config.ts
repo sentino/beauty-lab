@@ -18,8 +18,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 
 export class ConfigProvider {
-  public url: string = '/v1/';
-  // public url: string = 'https://api.lab-krasoty.ru/api/v1/';
+  // public url: string = '/v1/';
+  public url: string = 'https://api.lab-krasoty.ru/api/v1/';
   public langId: string = localStorage.langId;
   public loader = 'dots';
   public newProductDuration = 100;
