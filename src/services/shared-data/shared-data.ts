@@ -370,7 +370,7 @@ export class SharedDataProvider {
     this.customerData = {};
     this.storage.set('customerData', this.customerData);
     this.fb.logout();
-    localStorage.set('token',null);
+    localStorage.setItem('token',null);
     console.log("Customer data");
     console.log(this.customerData);
 

@@ -125,6 +125,7 @@ export class LoginPage {
 
     this.http.post(this.config.url + 'auth/login/', LogData).subscribe((data: any) => {
       this.loading.hide();
+      localStorage.setItem('customerData', data.result.accessToken);
       console.log("User info login");
       console.log(data);
       this.shared.userInfo(data);

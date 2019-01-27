@@ -15,6 +15,8 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { CartPage } from '../cart/cart';
 import { SearchPage } from '../search/search';
 import {Headers, RequestOptions} from '@angular/http';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { validatorFnControlsMatch } from '../../helpers/customValidator';
 
 
 
@@ -56,6 +58,9 @@ export class MyAccountPage {
 
   public zip = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 
+  userForm: FormGroup;
+  // usePasswordrForm: FormGroup;
+
   myAccountData = {
     email: '',                    // type string / required - email
     password: '',                 // type string / required - пароль
@@ -81,9 +86,15 @@ export class MyAccountPage {
     "search_string": '',
   };
 
-
   profilePicture = '';
   passwordData: { [k: string]: any } = {};
+
+
+  get passwordConfirmedControl(): FormControl {
+    return this.userForm.get('passwordConfirmed') as FormControl;
+  }
+
+
   constructor(
     public http: HttpClient,
     public config: ConfigProvider,
@@ -93,6 +104,11 @@ export class MyAccountPage {
     public navCtrl: NavController,
     public alert: AlertProvider,
     public loading: LoadingProvider) {
+
+    this.userForm = new FormGroup({
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),                 // type string / required - пароль
+      passwordConfirmed: new FormControl(null, [Validators.required]),
+    }, validatorFnControlsMatch('password', 'passwordConfirmed'));
   }
 
   getProfile(){
@@ -117,8 +133,8 @@ export class MyAccountPage {
         this.ProfileData = res;
 
         this.myAccountData.email = this.ProfileData.result.email;
-        this.myAccountData.password = this.ProfileData.result.password;
-        this.myAccountData.passwordConfirmed = this.ProfileData.result.passwordConfirmed;
+        this.myAccountData.password = this.userForm.controls['password'].value;
+        this.myAccountData.passwordConfirmed = this.userForm.controls['passwordConfirmed'].value;
         this.myAccountData.name = this.ProfileData.result.name;
         this.myAccountData.lastName = this.ProfileData.result.lastName;
         this.myAccountData.secondName = this.ProfileData.result.secondName;

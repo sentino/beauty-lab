@@ -26,7 +26,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
 
-    this.customerData = JSON.parse(localStorage.getItem('customerData'));
+    this.customerData = localStorage.getItem('customerData');
 
       // if (request.url === this.urls[0] ||
       //     request.url === this.urls[1] ||
@@ -46,15 +46,15 @@ export class JwtInterceptor implements HttpInterceptor {
       //   return next.handle(request);
       //
       // } else {
-        if (this.customerData && this.customerData.accessToken) {
-          request = request.clone({
-            setHeaders: {
-              'Authorization-Token': this.customerData.accessToken,
-              'Access-Control-Allow-Origin': 'http://localhost:8100',
-              'Accept': 'application/json',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
-          });
+        if (this.customerData &&
+            request.url !== "https://api.lab-krasoty.ru/api/v1/catalog/sections/" &&
+            request.url !== "https://api.lab-krasoty.ru/api/v1/pages/index/") {
+
+          // request = request.clone({
+          //   setHeaders: {
+          //     'Authorization-Token': this.customerData
+          //   }
+          // });
           return next.handle(request);
 
         } else {

@@ -1,4 +1,15 @@
 page-my-account {
+
+    .input-wrapper {
+      height: 50px !important;
+      justify-content: center !important;
+
+      ion-label {
+        overflow: visible !important;
+        margin: 0 !important;
+      }
+    }
+
     .submiter{
         padding: 0!important;
     }
@@ -37,6 +48,7 @@ page-my-account {
         padding: 0!important;
         position: absolute;
         top: 0;
+        left: 0;
         padding: 7px 0 0 13px;
         transition: all 200ms;
         opacity: 0.5;

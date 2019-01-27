@@ -44,21 +44,23 @@
 <div [ngSwitch]="pet">
   <ion-list *ngSwitchCase="'puppies'">
     
-    <form #userForm="ngForm" (ngSubmit)="updateProfile()">
+    <form [formGroup]="userForm" novalidate (ngSubmit)="updateProfile()">
       <ion-row>
         <ion-col>
           <ion-list> 
               <div class="container my-5">
                   <div class="row">
-                      <div class="form-group">
-                          <input minlength="6" id="customers_password" name="customers_password"[(ngModel)]="myAccountData.password" type="password" class="form-control">
-                          <label class="form-control-placeholder" for="customers_password">Пароль*</label>
-                      </div>
-                      <div class="form-group">
-                          <input minlength="6" id="customers_confirm" name="customers_confirm" [(ngModel)]="myAccountData.passwordConfirmed"  type="password" class="form-control">
-                          <label class="form-control-placeholder" for="customers_confirm">Подтверждение пароля*</label>
-                      </div>
-                    </div>
+                    <ion-item>
+                      <ion-label color="secondary" floating>Пароль*</ion-label>
+                      <ion-input formControlName="password" type="password"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                      <ion-label color="secondary" floating>Подтверждение пароля*</ion-label>
+                      <ion-input formControlName="passwordConfirmed" type="password"></ion-input>
+                    </ion-item>
+                    <p class="input-error-hint danger" *ngIf="passwordConfirmedControl.errors && passwordConfirmedControl.touched" padding>Пароли не совпадают</p>
+                  </div>
               </div>
           </ion-list>
         </ion-col>
@@ -66,7 +68,7 @@
   
       <ion-row>
         <ion-col>
-          <button ion-button block color="secondary" type="submit">Сохранить</button>
+          <button ion-button block color="secondary" type="submit" [disabled]="userForm.invalid">Сохранить</button>
         </ion-col>
       </ion-row>
     </form>
