@@ -114,7 +114,6 @@ import { StarRatingModule } from 'ionic3-star-rating';
 // Import ionic-rating module
 // import { IonicRatingModule } from 'ionic-rating';
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { TextMaskModule } from 'angular2-text-mask';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
 import { FormsModule } from '@angular/forms';
@@ -185,9 +184,6 @@ import { JwtInterceptor } from '../helpers/jwt-interceptor';
   ],
   imports: [
     FormsModule,
-    // CommonModule,
-    // InputMaskModule,
-    TextMaskModule,
     Ionic2RatingModule,
     ModalModule.forRoot(),
     IonicModule.forRoot(MyApp,{

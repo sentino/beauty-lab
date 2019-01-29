@@ -116,15 +116,19 @@ export class MyApp {
     private socialSharing: SocialSharing,
 
   ) {
-
-
+    let token = localStorage.getItem('customerData');
+    if (!token) {
+      this.rootPage = LoginPage;
+    } else {
+      this.rootPage = HomePage;
+    }
     //open intro page on start
-    storage.get('introPage').then((val) => {
-      if (val == undefined) {
-        this.nav.push(LoginPage);
-        storage.set('introPage', 'firstTime');
-      }
-    });
+    // storage.get('introPage').then((val) => {
+    //   if (val == undefined) {
+    //     this.nav.push(LoginPage);
+    //     storage.set('introPage', 'firstTime');
+    //   }
+    // });
 
     let connectedToInternet = true;
     network.onDisconnect().subscribe(() => {
@@ -159,7 +163,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.rootPage = HomePage;
+      // this.rootPage = HomePage;
       setTimeout(() => { this.splashScreen.hide(); }, 700);
       this.statusBar.styleLightContent();
 

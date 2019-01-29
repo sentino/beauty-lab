@@ -9,7 +9,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 // import { LanguagePage } from '../language/language';
 import { ConfigProvider } from '../../services/config/config';
 import { Storage } from '@ionic/storage';
-import { Http } from '@angular/http';
+import { Http, RequestMethod, RequestOptions } from '@angular/http';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
 import { TermServicesPage } from '../term-services/term-services';
 import { RefundPolicyPage } from '../refund-policy/refund-policy';
@@ -100,7 +100,7 @@ export class SettingsPage {
       });
     }
 
-    this.updateSetting();
+    // this.updateSetting();
   }
 
 
@@ -126,21 +126,25 @@ export class SettingsPage {
     });
   }
 
-  updateSetting() {
-    console.log(this.setting);
-    this.storage.set('setting', this.setting);
-  }
+  // updateSetting() {
+  //   console.log(this.setting);
+  //   this.storage.set('setting', this.setting);
+  // }
+
   openLoginPage() {
     let modal = this.modalCtrl.create(LoginPage);
     modal.present();
   }
-  logOut() {
-    this.shared.logOut();
-    this.navCtrl.push(HomePage);
-  }
+
+  // logOut() {
+  //   this.shared.logOut();
+  //   this.navCtrl.push(HomePage);
+  // }
+
   openPage(page) {
     if (page == 'myAccount') this.navCtrl.push(MyAccountPage);
   }
+
   openSite() {
     this.loading.autoHide(2000);
     this.iab.create(this.config.siteUrl, "blank");
@@ -163,13 +167,35 @@ export class SettingsPage {
   //     });
   //   });
   // };
+
+  onOffNotificationEmail() {
+    let {email} = JSON.parse(localStorage.getItem('localInfo'));
+
+    if (this.setting.notificationEmail) {
+      this.http.post(this.config.url + 'tools/subscribe', {email}).subscribe(data => {
+        console.log(data);
+        localStorage.setItem('notificationEmail', 'true');
+      }, (response) => {
+        console.log(response);
+        localStorage.setItem('notificationEmail', 'false');
+      });
+    } else {
+      this.http.request('delete', this.config.url + 'tools/subscribe', {body: {email: email}}).subscribe(data => {
+        console.log(data);
+        localStorage.setItem('notificationEmail', 'false');
+      }, (response) => {
+        console.log(response);
+      });
+    }
+  };
+
   hideShowFooterMenu() {
-    this.events.publish('setting', this.setting);
-    this.updateSetting();
+    // this.events.publish('setting', this.setting);
+    // this.updateSetting();
   }
   hideShowCartButton() {
-    this.events.publish('setting', this.setting);
-    this.updateSetting();
+    // this.events.publish('setting', this.setting);
+    // this.updateSetting();
   }
   showModal(value) {
     this.loading.autoHide(1000);
@@ -191,18 +217,19 @@ export class SettingsPage {
     }
   }
   ionViewDidLoad() {
-    this.storage.get('setting').then((val) => {
+    this.setting.localNotification = false;
+    let val = JSON.parse(localStorage.getItem('notificationEmail'));
+    // this.storage.get('setting').then((val) => {
       if (val != null || val != undefined) {
-        this.setting = val;
-
+        this.setting.notificationEmail = val;
       }
       else {
-        this.setting.localNotification = true;
-        this.setting.notification = true;
-        this.setting.cartButton = true;
-        this.setting.footer = true;
+        // this.setting.localNotification = false;
+        this.setting.notificationEmail = false;
+        // this.setting.cartButton = false;
+        // this.setting.footer = false;
       }
-    });
+    // });
   }
 
   openCart() {

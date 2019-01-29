@@ -41,7 +41,7 @@
         <button menuClose (click)="openPage('myAccount')">Профиль</button>
         <ion-icon class="btn-plus" item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
       </button>
-      <div class="inner-menu" *ngIf="ProfileList" [@animate]>
+      <div class="inner-menu" *ngIf="shared.customerData.accessToken != null && ProfileList" [@animate]>
         <button menuClose ion-item (click)="openPage('myAccount')">
           <ion-icon small item-left name="list-box"></ion-icon>Редактирование профиля</button>
         <button menuClose ion-item (click)="openPage('myOrders')">

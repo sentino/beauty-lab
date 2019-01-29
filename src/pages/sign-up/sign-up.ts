@@ -54,6 +54,7 @@ export class SignUpPage {
   monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Агуст", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 
   public zip = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
+  public phone = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(
     public http: HttpClient,

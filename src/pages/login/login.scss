@@ -150,7 +150,10 @@ page-login {
         font-weight: 400;
     }
 
-    .ng-valid{
+    ion-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+    }
+    ion-item .ng-valid{
         border-bottom: 2px solid #EF5CEF!important;
     }
 
@@ -223,4 +226,13 @@ page-login {
             }
         }
     }
+
+  .blah1 {
+    border-bottom: none !important;
+    margin-bottom: 10px !important;
+    padding-top: 15px !important;
+  }
+  .blah2 {
+    border-bottom: none !important;
+  }
 }

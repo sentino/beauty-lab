@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input [textMask]="{mask: data_mask}" id="customers_birhday" name="customers_birhday" [(ngModel)]="myAccountData.birthday" type="text" class="form-control" required>
+                            <input id="customers_birhday" name="customers_birhday" [(ngModel)]="myAccountData.birthday" type="text" class="form-control" required>
                             <label class="form-control-placeholder" for="customers_birhday" >Дата рождения*</label> 
                         </div>
                       </div>
@@ -128,7 +128,7 @@
               <div class="container my-5">
                   <div class="row">
                       <div class="form-group">
-                          <input [textMask]="{mask: mask}" id="tel"  name="tel" [(ngModel)]="myAccountData.phone" type="text" class="form-control">
+                          <input id="tel" name="tel" [brmasker]="{mask:'(999) 999 99 99', len:15}" [(ngModel)]="myAccountData.phone" type="text" class="form-control">
                           <label class="form-control-placeholder" for="tel" >+7(000)-0000-000*</label>
                       </div>
 

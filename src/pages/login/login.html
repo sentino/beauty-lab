@@ -10,22 +10,22 @@
 </ion-header>
 
 
-<ng-template #template>
-  
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Востановление пароля</h4>
-      <!--<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">-->
-        <ion-icon (click)="modalRef.hide()"  name="ios-close-circle"></ion-icon>
-      <!--</button>-->
-    </div>
-    <div class="modal-body">
-      <form #ForgForm="ngForm"  class="forg-form form " (ngSubmit)="forgotSent()">
-          <ion-input name="email-forgot"  type="email" placeholder="Введите ваш E-mail*" [(ngModel)]="ForgData.email" required></ion-input>
-          <button class="recover-btn" ion-button round class="no-outline">Восстановить</button>
-      </form>
-    </div>
-  
-  </ng-template>
+<!--<ng-template #template>-->
+  <!---->
+    <!--<div class="modal-header">-->
+      <!--<h4 class="modal-title pull-left">Востановление пароля</h4>-->
+      <!--&lt;!&ndash;<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">&ndash;&gt;-->
+        <!--<ion-icon (click)="modalRef.hide()"  name="ios-close-circle"></ion-icon>-->
+      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<form #ForgForm="ngForm"  class="forg-form form " (ngSubmit)="forgotSent()">-->
+          <!--<ion-input name="email-forgot"  type="email" placeholder="Введите ваш E-mail*" [(ngModel)]="ForgData.email" required></ion-input>-->
+          <!--<button class="recover-btn" ion-button round class="no-outline">Восстановить</button>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!---->
+<!--</ng-template>-->
 
 <ion-content class="page-login" padding>
     <ion-row class="grid-t logo-part">
@@ -33,21 +33,21 @@
         <img class="image" src="assets/beauty-lab_logo.png"/>
       </ion-col>
     </ion-row>
-  <form #loginForm="ngForm" class="form" (ngSubmit)="login()">
+  <form class="form" novalidate [formGroup]="form" (ngSubmit)="login()">
     <ion-row class="grid-b ">
       <ion-col col-12>
         <ion-list >
 
-          <div id="floatContainer1" class="float-container">
-                <label for="floatField1">E-mail</label>
-                <input type="email" id="floatField1" data-placeholder="" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" name="email" email [(ngModel)]="formData.email" required/>
-          </div>
+          <ion-item class="blah1">
+            <ion-label color="secondary" floating>E-mail</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+            <p class="input-error-hint" *ngIf="emailControl.errors && emailControl.touched" class="danger" padding>Email is not valid.</p>
+          </ion-item>
 
-          <div id="floatContainer2" class="float-container">
-              <label for="floatField2">Пароль</label>
-              <input type="password" id="floatField2" data-placeholder="" minlength="6"  name="password" [(ngModel)]="formData.password"
-              required/>
-          <caption></caption></div>
+          <ion-item class="blah2">
+            <ion-label color="secondary" floating>Пароль</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
 
 
           <div class="flex-block">
@@ -65,7 +65,7 @@
 
             
       <ion-col col-12>
-        <button ion-button block class="login-btn" color="secondary" type="submit" [disabled]="!loginForm.form.valid">Вход</button>
+        <button ion-button block class="login-btn" color="secondary" type="submit" [disabled]="!form.valid">Вход</button>
       </ion-col>
     </ion-row>
   </form>
