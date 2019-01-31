@@ -26,13 +26,20 @@
     "@angular/http": "6.1.10",
     "@angular/platform-browser": "6.1.10",
     "@angular/platform-browser-dynamic": "6.1.10",
+    "@ionic-native/facebook": "^5.0.0",
+    "@ionic-native/in-app-browser": "^5.0.0",
+    "@ionic-native/themeable-browser": "^5.0.0",
     "@material/floating-label": "^0.43.0",
     "auth0-js": "^9.9.0",
     "brmasker-ionic-3": "^1.6.3",
     "build": "0.1.4",
     "cordova-admob-sdk": "0.22.0",
-    "cordova-android": "^6.2.3",
+    "cordova-android": "6.4.0",
+    "cordova-browser": "5.0.4",
     "cordova-plugin-admob-free": "^0.25.0",
+    "cordova-plugin-facebook4": "^4.1.0",
+    "cordova-plugin-inappbrowser": "^3.0.0",
+    "cordova-plugin-themeablebrowser": "^0.2.17",
     "css-animator": "^2.3.1",
     "es6-promise-plugin": "^4.2.2",
     "ng-lazyload-image": "5.0.0",
@@ -45,7 +52,23 @@
     "sw-toolbox": "3.6.0",
     "text-mask-addons": "^3.8.0",
     "web-animations-js": "^2.3.1",
-    "zone.js": "0.8.29"
+    "zone.js": "0.8.29",
+    "ionic-plugin-keyboard": "^2.2.1",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-splashscreen": "^4.1.0",
+    "cordova-plugin-ionic-webview": "^1.2.1",
+    "com.paypal.cordova.mobilesdk": "^3.5.0",
+    "cordova-plugin-network-information": "^1.3.4",
+    "cordova-plugin-stripe": "^1.5.3",
+    "cordova-plugin-x-socialsharing": "^5.4.3",
+    "cordova-plugin-x-toast": "^2.7.2",
+    "cordova-plugin-app-version": "^0.1.9",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-safariviewcontroller": "^1.5.4",
+    "cordova-plugin-customurlscheme": "^4.3.0",
+    "cordova-plugin-ulogin": "^1.0.0",
+    "cordova-plugin-android-permissions": "^1.0.0"
   },
   "devDependencies": {
     "@auth0/cordova": "^0.3.0",
@@ -54,11 +77,9 @@
     "@ionic-native/camera": "^5.0.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/device": "^5.0.0",
-    "@ionic-native/facebook": "^5.0.0",
     "@ionic-native/fcm": "^5.0.0",
     "@ionic-native/google-plus": "^5.0.0",
     "@ionic-native/http": "^5.0.0",
-    "@ionic-native/in-app-browser": "^5.0.0",
     "@ionic-native/local-notifications": "^5.0.0",
     "@ionic-native/network": "^5.0.0",
     "@ionic-native/onesignal": "^5.0.0",
@@ -79,8 +100,6 @@
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "^1.1.7",
-    "cordova-plugin-facebook4": "^3.2.0",
-    "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-network-information": "^1.3.4",
     "cordova-plugin-safariviewcontroller": "^1.5.4",
@@ -112,7 +131,6 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "21.+"
       },
       "com.paypal.cordova.mobilesdk": {},
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-stripe": {},
       "cordova-plugin-x-socialsharing": {
@@ -124,7 +142,7 @@
       "onesignal-cordova-plugin": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "434196327036743",
-        "APP_NAME": "lab-krasoty.ru",
+        "APP_NAME": "com.lab_krasoty.app",
         "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0",
         "FACEBOOK_HYBRID_APP_EVENTS": "false"
       },
@@ -136,8 +154,13 @@
         "ANDROID_PATHPREFIX": "/"
       },
       "cordova-plugin-ulogin": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-themeablebrowser": {},
+      "cordova-plugin-inappbrowser": {}
     },
-    "platforms": []
+    "platforms": [
+      "browser",
+      "android"
+    ]
   }
 }

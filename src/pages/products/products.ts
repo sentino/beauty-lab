@@ -260,7 +260,7 @@ export class ProductsPage {
       console.log(data);
       this.all_products = data.result.products;
       this.all_filters = data.result.filters;
-      this.cat_id
+      this.cat_id;
       this.all_pages_count = parseInt(data.result.navigation.pageAll);
       this.pages = [];
       for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
@@ -782,5 +782,11 @@ export class ProductsPage {
 
     console.log("Filter list:");
     console.log(this.filter_list);
+  }
+
+  allThisFilter(filter) {
+    console.log(this.all_filters);
+    console.log(filter);
+    debugger;
   }
 }

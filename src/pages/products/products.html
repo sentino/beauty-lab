@@ -62,7 +62,8 @@
             <h3 class="filter_title">{{filter.name}}:</h3>
             <ion-item class="filter_select">
                 <ion-label>{{filter.name}}:</ion-label>
-                <ion-select name="redic"  [(ngModel)]="filterList[filter.code]"  >  
+                <ion-select name="redic"  [(ngModel)]="filterList[filter.code]"  >
+                    <ion-option value="{{filter.code}}" (click)="allThisFilter(filter.code)">Все</ion-option>
                     <ion-option value="{{brand.id}}" *ngFor="let brand of filter.values">{{brand.name}}</ion-option>
                 </ion-select>
             </ion-item>
