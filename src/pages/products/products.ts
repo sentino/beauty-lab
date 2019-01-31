@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
@@ -12,8 +12,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 // import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';
 import { CartPage } from '../cart/cart';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -53,7 +52,7 @@ export class ProductsPage {
   @ViewChild(Content) content: Content;
   @ViewChild(Slides) slider: Slides;
 
-  
+
   scrollTopButton = false;
   helpMenuOpen: string;
 
@@ -65,11 +64,11 @@ export class ProductsPage {
   categoryName = '';
   sortOrder = 'Сортировка';
   sortArray = [
-    'Новые', 
-    'А - Я', 
-    'Я - А', 
-    'Цена : от большого - к меньшему', 
-    'Цена : от меньшего- к большему', 
+    'Новые',
+    'А - Я',
+    'Я - А',
+    'Цена : от большого - к меньшему',
+    'Цена : от меньшего- к большему',
   ];
 
   formData = {
@@ -80,16 +79,7 @@ export class ProductsPage {
     "search_string": '',
   };
 
-  filter_list = [
-    {
-      name: "brand",
-      values: [{option: 0},{option: 1}]
-    },
-    {
-      name: "test",
-      values: [{option: 0},{option: 1}]
-    },
-  ];
+  filter_list;
 
   page = 0;
   applyFilter = false;
@@ -153,7 +143,8 @@ export class ProductsPage {
     public loading: LoadingProvider,
     // public translate: TranslateService,
     public http: HttpClient,
-    public actionSheet: ActionSheetController) {
+    public actionSheet: ActionSheetController
+  ) {
     this.activeButton = 1;
     this.search.search_string = null;
 
@@ -176,54 +167,83 @@ export class ProductsPage {
     // this.getFilters(this.categoryId);
   }
 
-
-  showHideSearchList(){
-    if (this.SearchList == false) { this.SearchList = true; }
-    else { this.SearchList = false;}
-  }
-
-  navHandler(){
-    if (this.nav_status == false) { this.nav_status = true; }
-    else { this.nav_status = false;}
-  }
-
-  showHideFilterList(){
-      this.loading.show();
-    if (this.Filter == false) { 
-      this.loading.hide();
-      this.Filter = true; 
-      this.filterListIcon = 'ios-arrow-up';
-      this.background_show = 'filter';
-      this.Sort  = false; 
-      console.log("Filter true status:");
-      console.log(this.Filter);
-      console.log("Sort true status:");
-      console.log(this.Sort);
-      this.sortListIcon = 'ios-arrow-down'; 
-      console.log("Background SHOW After true:");
-      console.log(this.background_show);
+  test(filter, brand) {
+    if (this.filterList) {
+      if (filter.code == "brand") {
+        return brand.id == this.filterList.brand;
+      } else if (filter.code == "gamme") {
+        return brand.id == this.filterList.gamme;
+      } else if (filter.code == "deystvie") {
+        return brand.id == this.filterList.deystvie;
+      } else if (filter.code == "mezh_nep_nazvanie") {
+        return brand.id == this.filterList.mezh_nep_nazvanie;
+      } else if (filter.code == "tip_volos") {
+        return brand.id == this.filterList.tip_volos;
+      } else if (filter.code == "tip_kozhi") {
+        return brand.id == this.filterList.tip_kozhi;
+      } else if (filter.code == "form_vypusk") {
+        return brand.id == this.filterList.form_vypusk;
+      }
     }
-    else { 
-      this.loading.hide();
-      this.Filter = false; 
-      this.filterListIcon = 'ios-arrow-down'; 
-      this.background_show = 'none';}
-      
-      console.log("Fiter false status:");
-      console.log(this.Filter);
-      console.log("Background SHOW After false:");
-      console.log(this.background_show);
   }
+
+  //============================================================================================
+  ngOnInit() {
+    this.helpMenuOpen = 'in';
+    this.getProducts();
+    this.getSubacategories();
+
+    console.log("Filter list:");
+    console.log(this.filter_list);
+  }
+
+  //============================================================================================
+  ngOnChanges() {}
+
+  submit() {
+    this.Filter = false;
+    this.filterListIcon = 'ios-arrow-down';
+    this.background_show = 'none';
+  }
+
+  openCategoryBy() {
+    var buttonArray = [];
+    // this.translate.get(this.all_sections).subscribe((res) => {
+
+    console.log("Sort massive");
+    console.log(this.all_sections);
+
+    for (let key of this.all_sections) {
+      buttonArray.push({ text: key.TEXT, handler: () => { this.changeTab(key) } });
+    }
+
+    buttonArray.push(
+      {
+        text: 'Закрыть',
+        role: 'cancel',
+        handler: () => {
+          this.background_show = 'none';
+        }
+      }
+    );
+
+    var actionSheet = this.actionSheet.create({
+      buttons: buttonArray
+    });
+    actionSheet.present();
+    // });
+  }
+
 
   showHideSortsList(){
     this.loading.show();
-    if (this.Sort == false) { 
+    if (this.Sort == false) {
       this.loading.hide();
-      this.Sort = true; 
+      this.Sort = true;
       this.sortListIcon = 'ios-arrow-up';
       this.background_show = 'sort';
-      this.Filter = false; 
-      this.filterListIcon = 'ios-arrow-down'; 
+      this.Filter = false;
+      this.filterListIcon = 'ios-arrow-down';
       console.log("Fiter false status:");
       console.log(this.Filter);
       console.log("Sort true status:");
@@ -232,10 +252,10 @@ export class ProductsPage {
       console.log("Background SHOW After true:");
       console.log(this.background_show);
     }
-    else { 
+    else {
       this.loading.hide();
-      this.Sort  = false; 
-      this.sortListIcon = 'ios-arrow-down'; 
+      this.Sort  = false;
+      this.sortListIcon = 'ios-arrow-down';
       this.background_show = 'none';
 
       console.log("Sort false status:");
@@ -246,52 +266,94 @@ export class ProductsPage {
     }
   }
 
-  
-  filtered(){
+  showHideFilterList(){
+    this.loading.show();
+    if (this.Filter == false) {
+      this.loading.hide();
+      this.Filter = true;
+
+      this.filterListIcon = 'ios-arrow-up';
+      this.background_show = 'filter';
+
+      this.Sort = false;
+
+      console.log("Filter true status:");
+      console.log(this.Filter);
+      console.log("Sort true status:");
+      console.log(this.Sort);
+
+      this.sortListIcon = 'ios-arrow-down';
+      console.log("Background SHOW After true:");
+      console.log(this.background_show);
+    }
+    else {
+      this.loading.hide();
+      this.Filter = false;
+      this.filterListIcon = 'ios-arrow-down';
+      this.background_show = 'none';
+    }
+
+    console.log("Fiter false status:");
+    console.log(this.Filter);
+    console.log("Background SHOW After false:");
+    console.log(this.background_show);
+  }
+
+  filtered(newModel){
     console.log("Filtered Data --");
     console.log(this.filterList);
+    console.log(newModel);
+    debugger;
 
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '?brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).subscribe((data: any) => {
-      // console.log(data.product_data.length + "   " + this.page);\
-      this.Filter = false;
-      this.filterListIcon = 'ios-arrow-down'; 
-      this.background_show = 'none';
-      console.log("Search answer:");
-      console.log(data);
-      this.all_products = data.result.products;
-      this.all_filters = data.result.filters;
-      this.cat_id;
-      this.all_pages_count = parseInt(data.result.navigation.pageAll);
-      this.pages = [];
-      for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
-        this.pages[i] = ({counter : i+1});
-      }
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id, {params: this.params()}).subscribe((data: any) => {
+        // console.log(data.product_data.length + "   " + this.page);\
+        // this.Filter = false;
+        // this.filterListIcon = 'ios-arrow-down';
+        // this.background_show = 'none';
+        console.log("Search answer:");
+        console.log(data);
+        this.all_products = data.result.products;
+        this.all_filters = data.result.filters;
+        this.cat_id;
+        this.all_pages_count = parseInt(data.result.navigation.pageAll);
+        this.pages = [];
+        for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
+          this.pages[i] = ({counter : i+1});
+        }
 
-      if (this.all_products.length == 0){
-        this.empty_products = true;
-      }
-      else{
-        this.empty_products = false;
-      }
+        if (this.all_products.length == 0){
+          this.empty_products = true;
+        }
+        else{
+          this.empty_products = false;
+        }
 
-      if (this.all_filters.length == 0){
-        this.empty_filter = true;
-      }
-      else{
-        this.empty_filter = false;
-      }
-    },
-    err => {
-      var er_status = err.status;
-      console.log(err);
-    });
+        if (this.all_filters.length == 0){
+          this.empty_filter = true;
+        }
+        else{
+          this.empty_filter = false;
+        }
+      },
+      err => {
+        var er_status = err.status;
+        console.log(err);
+      });
+  }
+
+  showHideSearchList(){
+    this.SearchList = !this.SearchList;
+  }
+
+  navHandler(){
+    this.nav_status = !this.nav_status;
   }
 
   getProducts() {
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id ).subscribe((data: any) => {
       this.loading.hide();
       // console.log(data.product_data.length + "   " + this.page);
-      
+
       console.log("Products GET");
       console.log(data);
       this.all_products = data.result.products;
@@ -328,7 +390,7 @@ export class ProductsPage {
       for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
         this.pages[i] = ({counter : i+1});
       }
-      
+
     },
     err => {
       var er_status = err.status;
@@ -372,7 +434,7 @@ export class ProductsPage {
         this.pages[i] = ({counter : i+1});
       }
 
-      
+
     },
     err => {
       var er_status = err.status;
@@ -395,7 +457,6 @@ export class ProductsPage {
     });
   }
 
-
   goToPage(next_page){
     console.log("Next Page:");
     console.log(next_page);
@@ -413,7 +474,7 @@ export class ProductsPage {
         this.all_products = data;
         this.all_products = data.result.products;
         this.all_pages_count = data.result.navigation.pageAll;
-    
+
         this.pages = [];
 
         for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
@@ -428,24 +489,25 @@ export class ProductsPage {
     else{
       this.helpMenuOpen = 'in';
       this.loading.show();
-      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page + '&count=20'+ '&brand='+ this.filterList.brand + '&gamme='+ this.filterList.gamme + '&deystvie='+ this.filterList.deystvie + '&mezh_nep_nazvanie='+ this.filterList.mezh_nep_nazvanie + '&tip_volos='+ this.filterList.tip_volos + '&tip_kozhi='+ this.filterList.tip_kozhi + '&form_vypusk='+ this.filterList.form_vypusk).subscribe((data: any) => {
+
+      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page, {params: this.params()}).subscribe((data: any) => {
         this.loading.hide();
         console.log("Products GET");
         console.log(data);
         this.all_products = data.result.products;
         this.navigation = data.result.navigation;
-  
+
         console.log("Navigation All");
         console.log(this.navigation);
-  
+
         console.log("Products All");
         console.log(this.all_products);
-  
+
         console.log("Pages All");
         console.log(this.navigation.pageAll);
 
         this.all_pages_count = data.result.navigation.pageAll;
-    
+
         this.pages = [];
 
         for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
@@ -460,7 +522,7 @@ export class ProductsPage {
 
 
   }
-  
+
   showPages(){
     console.log("Maximum:");
     console.log(this.n_maximum);
@@ -528,7 +590,6 @@ export class ProductsPage {
     this.navCtrl.setRoot(ProductsPage, { id_cat: ID,section_list: sections});
   }
 
-
   //changing tab
   changeTab(c) {
     this.activeButton = 1;
@@ -576,8 +637,7 @@ export class ProductsPage {
     // });
   }
 
-  //============================================================================================  
-  // filling filter array for keyword search 
+  // filling filter array for keyword search
   fillFilterArray = function (fValue, fName, keyword) {
     if (fValue._value == true) {
       this.selectedFilters.push({ 'name': fName, 'value': keyword });
@@ -590,7 +650,7 @@ export class ProductsPage {
       });
     } //console.log(this.selectedFilters);
   };
-  //============================================================================================  
+
   //getting countries from server
   // getFilters = function (id) {
   //   var data: { [k: string]: any } = {};
@@ -603,16 +663,19 @@ export class ProductsPage {
   //     this.maxAmount = this.price.upper = data.maxPrice;
   //   });
   // };
+
   applyFilters() {
     this.applyFilter = true;
     this.infinite.enable(true);
     this.page = 0;
     // this.getProducts(null);
   }
+
   resetFilters() {
     this.Filter = false;
     this.getProducts();
   }
+
   removeFilters() {
     this.applyFilter = false;
     this.infinite.enable(true);
@@ -621,11 +684,9 @@ export class ProductsPage {
     // this.getFilters(this.selectedTab);
 
   }
+
   ionViewDidEnter() {
     //this.product = this.navParams.get('data');
-  }
-  ngOnChanges() {
-
   }
 
   getSortProducts(value) {
@@ -633,23 +694,23 @@ export class ProductsPage {
       value = 'Новые';
       this.sort_path = '?sort=POPULATE';
     }
-    
+
     else if (value == 'А - Я'){
-      value = 'а - я ⇵'; 
+      value = 'а - я ⇵';
       this.sort_path = '?sort=NAME&by=ASC';
-    } 
+    }
     else if (value == 'Я - А'){
       value = 'я - а ⇅';
       this.sort_path ='?sort=NAME&by=DESC';
-    } 
+    }
     else if (value == 'Цена : от большого - к меньшему'){
       value = 'Цена ⇅';
       this.sort_path = '?sort=PRICE&by=DESC';
-    } 
+    }
     else if (value == 'Цена : от меньшего- к большему'){
       value = 'Цена ⇵';
       this.sort_path = '?sort=PRICE&by=ASC';
-    } 
+    }
     else value = value;
     if (value == this.sortOrder) return 0;
     else {
@@ -660,39 +721,38 @@ export class ProductsPage {
 
 }
 
-    getSortsProducts(sort_path) {
-      this.loading.show();
-      this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).subscribe((data: any) => {
-        // console.log(data.product_data.length + "   " + this.page);
-        this.loading.hide();
-        this.Sort = false;
-        console.log("Sort GET");
-        console.log(data);
-        this.all_products = data.result.products;
-        this.navigation = data.result.navigation;
+  getSortsProducts(sort_path) {
+    this.loading.show();
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).subscribe((data: any) => {
+      // console.log(data.product_data.length + "   " + this.page);
+      this.loading.hide();
+      this.Sort = false;
+      console.log("Sort GET");
+      console.log(data);
+      this.all_products = data.result.products;
+      this.navigation = data.result.navigation;
 
-        console.log("Navigation All");
-        console.log(this.navigation);
+      console.log("Navigation All");
+      console.log(this.navigation);
 
-        console.log("Products All");
-        console.log(this.all_products);
+      console.log("Products All");
+      console.log(this.all_products);
 
-        console.log("Pages All");
-        console.log(this.navigation.pageAll);
+      console.log("Pages All");
+      console.log(this.navigation.pageAll);
 
-        for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
-          this.pages[i] = ({counter : i+1});
-          console.log(i);
-        }
-        console.log(this.pages);
-      },
-      err => {
-        this.loading.hide();
-        var er_status = err.status;
-        console.log(err);
-      });
-    }
-
+      for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
+        this.pages[i] = ({counter : i+1});
+        console.log(i);
+      }
+      console.log(this.pages);
+    },
+    err => {
+      this.loading.hide();
+      var er_status = err.status;
+      console.log(err);
+    });
+  }
 
   openSortBy() {
     var buttonArray = [];
@@ -706,34 +766,7 @@ export class ProductsPage {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            
-          }
-        }
-      );
 
-      var actionSheet = this.actionSheet.create({
-        buttons: buttonArray
-      });
-      actionSheet.present();
-    // });
-  }
-
-  openCategoryBy() {
-    var buttonArray = [];
-    // this.translate.get(this.all_sections).subscribe((res) => {
-      
-      console.log("Sort massive");
-      console.log(this.all_sections);
-      for (let key of this.all_sections) {
-        buttonArray.push({ text: key.TEXT, handler: () => { this.changeTab(key) } });
-      }
-
-      buttonArray.push(
-        {
-          text: 'Закрыть',
-          role: 'cancel',
-          handler: () => {
-            this.background_show = 'none';
           }
         }
       );
@@ -756,6 +789,7 @@ export class ProductsPage {
     this.content.scrollToTop(700);
     this.scrollTopButton = false;
   }
+
   onScroll(e) {
 
     if (e.scrollTop >= 600) {
@@ -769,24 +803,39 @@ export class ProductsPage {
       console.log(this.scrollTopButton);
     }
   }
+
   openCart() {
     this.navCtrl.push(CartPage);
   }
-  ionViewDidLoad() {
+
+  ionViewDidLoad() {}
+
+  params(): HttpParams {
+    let params = new HttpParams();
+
+    if (this.filterList.brand.trim().length && this.filterList.brand !== "blah") {
+      params = params.append("brand", this.filterList.brand);
+    }
+    if (this.filterList.gamme.trim().length && this.filterList.gamme !== "blah") {
+      params = params.append("gamme", this.filterList.gamme);
+    }
+    if (this.filterList.deystvie.trim().length && this.filterList.deystvie !== "blah") {
+      params = params.append("deystvie", this.filterList.deystvie);
+    }
+    if (this.filterList.mezh_nep_nazvanie.trim().length && this.filterList.mezh_nep_nazvanie !== "blah") {
+      params = params.append("mezh_nep_nazvanie", this.filterList.mezh_nep_nazvanie);
+    }
+    if (this.filterList.tip_volos.trim().length && this.filterList.tip_volos !== "blah") {
+      params = params.append("tip_volos", this.filterList.tip_volos);
+    }
+    if (this.filterList.tip_kozhi.trim().length && this.filterList.tip_kozhi !== "blah") {
+      params = params.append("tip_kozhi", this.filterList.tip_kozhi);
+    }
+    if (this.filterList.form_vypusk.trim().length && this.filterList.form_vypusk !== "blah") {
+      params = params.append("form_vypusk", this.filterList.form_vypusk);
+    }
+
+    return params;
   }
 
-  ngOnInit() {
-    this.helpMenuOpen = 'in';
-    this.getProducts();
-    this.getSubacategories();
-
-    console.log("Filter list:");
-    console.log(this.filter_list);
-  }
-
-  allThisFilter(filter) {
-    console.log(this.all_filters);
-    console.log(filter);
-    debugger;
-  }
 }

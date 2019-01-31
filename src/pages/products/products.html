@@ -52,8 +52,16 @@
       </button>
     </div>
 
-    <form *ngIf="background_show == 'filter'&&Filter"   [ngClass]="{ 'height_auto': empty_filter == true}" #loginForm="ngForm" class="form filter-list" [@animate] (ngSubmit)="filtered()">
-        
+    <form *ngIf="background_show == 'sort' && Sort" #loginForm="ngForm" class="form sort-list" [@animate] (ngSubmit)="filtered()">
+
+      <div class="sort list" >
+        <p *ngFor="let sort of sortArray" (click)="activeButton = sort" [ngClass]="{ 'active-sort': activeButton == sort }" (click)="getSortProducts(sort)" >{{sort}}</p>
+        <p (click)="showHideSortsList()">закрыть</p>
+      </div>
+    </form>
+
+    <form *ngIf="background_show == 'filter' && Filter"  [ngClass]="{ 'height_auto': empty_filter == true}" #filterForm="ngForm" class="form filter-list" [@animate] (ngSubmit)="submit()">
+
         <div class="empty_list" *ngIf="empty_filter == true" >
             <p>Список доступных фильтров пуст, попробуйте пожалуйста еще раз!</p>
         </div>
@@ -62,9 +70,11 @@
             <h3 class="filter_title">{{filter.name}}:</h3>
             <ion-item class="filter_select">
                 <ion-label>{{filter.name}}:</ion-label>
-                <ion-select name="redic"  [(ngModel)]="filterList[filter.code]"  >
-                    <ion-option value="{{filter.code}}" (click)="allThisFilter(filter.code)">Все</ion-option>
-                    <ion-option value="{{brand.id}}" *ngFor="let brand of filter.values">{{brand.name}}</ion-option>
+                <ion-select name="redic" [(ngModel)]="filterList[filter.code]" (ngModelChange)="filtered($event)">
+                    <ion-option value="blah">Все</ion-option>
+                    <ion-option value="{{brand.id}}"
+                                *ngFor="let brand of filter.values"
+                                [selected]="test(filter, brand)">{{brand.name}}</ion-option>
                 </ion-select>
             </ion-item>
         </div>
@@ -78,20 +88,12 @@
               </ion-buttons>
               <ion-title></ion-title>
               <ion-buttons right>
-                <button class="apply-filters" ion-button solid color="secondary" menuClose="right" (click)="filtered()">
+                <button class="apply-filters" ion-button solid color="secondary" menuClose="right" type="submit">
                   Применить
                 </button>
               </ion-buttons>
             </ion-toolbar>
           </ion-footer>
-    </form>
-
-    <form *ngIf="background_show == 'sort'&&Sort" #loginForm="ngForm" class="form sort-list" [@animate] (ngSubmit)="filtered()">
-
-      <div class="sort list" >
-        <p *ngFor="let sort of sortArray" (click)="activeButton = sort" [ngClass]="{ 'active-sort': activeButton == sort }" (click)="getSortProducts(sort)" >{{sort}}</p>
-        <p (click)="showHideSortsList()">закрыть</p>
-      </div>
     </form>
   </ion-toolbar>
 </ion-header>

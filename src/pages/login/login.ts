@@ -28,6 +28,7 @@ import {OauthCordova} from "ng2-cordova-oauth/platform/cordova";
 import { NavController, Content } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Categories2Page } from '../categories2/categories2';
 
 
 @Component({
@@ -87,7 +88,7 @@ export class LoginPage {
     public events: Events,
     public alert: AlertProvider,
     private iab: InAppBrowser,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
   ) {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.pattern("[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")]),
@@ -404,9 +405,14 @@ export class LoginPage {
 
 
   dismiss() {
-    this.appCtrl.getRootNav().setRoot(HomePage);
-    // this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
     this.menuCtrl.close();
+    // this.appCtrl.getRootNav().setRoot(HomePage);
+
+    // this.appCtrl.getRootNav().setRoot(HomePage);
+    // this.viewCtrl.dismiss();
+    // this.navCtrl.goToRoot(HomePage);
+    // this.menuCtrl.close();
   }
 
   postAuth(formData) {
