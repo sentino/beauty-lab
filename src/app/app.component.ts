@@ -158,7 +158,7 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       this.rootPage = HomePage;
-      setTimeout(() => { this.splashScreen.hide(); }, 700);
+      setTimeout(() => { this.splashScreen.hide(); }, 2000);
       this.statusBar.styleLightContent();
 
       console.log("Beauty App:");
