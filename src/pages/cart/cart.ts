@@ -17,6 +17,8 @@ import { ShippingAddressPage } from '../shipping-address/shipping-address';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
 import { HttpClient } from '@angular/common/http';
+import { ConfirmOrderContainer } from '../confirm-order/confirm-order-container';
+import { PayPaylerService } from '../../services/pay-payler.service';
 
 @Component({
   selector: 'page-cart',
@@ -35,6 +37,9 @@ import { HttpClient } from '@angular/common/http';
     )
   ],
   templateUrl: 'cart.html',
+  providers: [
+    PayPaylerService
+  ]
 })
 export class CartPage {
   total: any;
@@ -49,8 +54,11 @@ export class CartPage {
     private storage: Storage,
     public events: Events,
     public modalCtrl: ModalController,
+    private payPayler: PayPaylerService
   ) {
+    this.payPayler.testPostItem();
   }
+
   totalPrice() {
     var price = 0;
     for (let value of this.shared.cartProducts) {
@@ -120,7 +128,9 @@ export class CartPage {
     }
   }
   openProductsPage() {
-    this.navCtrl.push(ProductsPage, { sortOrder: 'newest' });
+    // this.navCtrl.push(ProductsPage, { sortOrder: 'newest' });
+    //TODO: вернуть обратно после тестов!!!
+    this.navCtrl.push(ConfirmOrderContainer);
   }
   ionViewDidLeave() {
    // this.storage.set('cartProducts', this.shared.cartProducts);

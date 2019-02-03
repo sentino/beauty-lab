@@ -302,8 +302,8 @@ export class ProductsPage {
   filtered(newModel){
     console.log("Filtered Data --");
     console.log(this.filterList);
-    console.log(newModel);
-    debugger;
+    // console.log(newModel);
+    // debugger;
 
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id, {params: this.params()}).subscribe((data: any) => {
         // console.log(data.product_data.length + "   " + this.page);\
