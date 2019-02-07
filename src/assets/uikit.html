@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UIKIT</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/uikit_styles.scss">
+</head>
+<body>
+    <div class="container">
+        <div class="l-form">
+            <form class="c-form" action="#" method="post">
+                <div class="c-input-field">
+                    <input id="second_name" class="c-input-field__input" type="text" maxlength="50" required="required">
+                    <label for="second_name" class="c-input-field__label">Фамилия*</label>
+                </div>
+                <div class="c-input-field">
+                    <input id="first_name" class="c-input-field__input" type="text" maxlength="50" required="required">
+                    <label for="first_name" class="c-input-field__label">Имя*</label>
+                    <span class="c-input-field__char-counter">8/50</span>
+                </div>
+                <div class="c-input-field">
+                    <input id="patronymic_name" class="c-input-field__input c-input-field__input--invalid" type="text" maxlength="50" required="required">
+                    <label for="patronymic_name" class="c-input-field__label">Отчество*</label>
+                    <span class="c-input-field__text c-input-field__text--invalid">Неверно введенное отчество</span>
+                </div>
+                <div class="c-input-field">
+                    <input id="birth-date" class="c-input-field__input" type="text" maxlength="50" required="required">
+                    <label for="birth-date" class="c-input-field__label">Дата рождения*</label>
+                </div>
+                <div class="c-input-field">
+                    <textarea name="textarea" id="textarea" class="c-input-field__input c-input-field__input--textarea" maxlength="150" required="required"></textarea>
+                    <label for="textarea" class="c-input-field__label">Input Label</label>
+                </div>
+
+                <!-- CHECKBOXES -->
+
+                <label class="c-checkbox">
+                    <input class="c-checkbox__input" type="checkbox" checked="checked"/>
+                    <span class="c-checkbox__checkmark"></span>
+                    <span class="c-checkbox__text">Получать эксклюзивные специальные предложения, информацию о скидках и новости</span>
+                </label>
+                <label class="c-checkbox">
+                    <input class="c-checkbox__input" type="checkbox"/>
+                    <span class="c-checkbox__checkmark"></span>
+                    <span class="c-checkbox__text">Получать эксклюзивные специальные предложения, информацию о скидках и новости</span>
+                </label>
+
+
+                <!-- BUTTONS -->
+                <div class="l-button-container">
+                    <div class="l-primary-button">
+                        <button class="c-primary-button">NORMAL</button>
+                        <button class="c-primary-button c-primary-button--pressed">PRESSED</button>
+                        <button class="c-primary-button c-primary-button--disabled" disabled="disabled">DISABLED</button>
+                    </div>
+                    <div class="l-default-button">
+                        <button class="c-default-button">NORMAL</button>
+                        <button class="c-default-button c-default-button--pressed">PRESSED</button>
+                        <button class="c-default-button c-default-button--disabled" disabled="disabled">DISABLED</button>
+                    </div>
+                </div>
+
+                <!-- CHECKBOXES -->
+
+                <div class="l-radiobutton-container">
+                    <div class="l-switch">
+                        <div class="c-switch">
+                            <label class="c-switch__label">
+                                <input class="c-switch__checkbox" type="checkbox" checked="checked">
+                                <span class="c-switch__lever"></span>
+                            </label>
+                        </div>
+                        <div class="c-switch">
+                            <label class="c-switch__label">
+                                <input class="c-switch__checkbox" type="checkbox">
+                                <span class="c-switch__lever"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="l-radiobutton">
+                        <label>
+                            <input class="c-radiobutton" name="group1" type="radio" checked="checked" />
+                            <span class="c-radiobutton--with-gap"></span>
+                        </label>
+                        <label>
+                            <input class="c-radiobutton" name="group1" type="radio" />
+                            <span class="c-radiobutton--with-gap"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Search Input -->
+                <div class="l-search-input">
+                    <div class="c-search-input">
+                        <input class="c-search-input__field" type="search" placeholder="Поиск">
+                        <span class="c-search-input__icon"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+       <!-- HEADERS --> 
+        <div class="l-headers">
+            <h2>ОБЫЧНОЕ</h2>
+            
+            <div class="l-container">
+                <header class="c-header">
+                    <div class="c-menu">
+                        <button class="c-menu__button"></button>
+                    </div>
+                    <h2 class="c-header__title">Каталог</h2>
+                    <div class="l-action">
+                        <div class="c-search">
+                            <button class="c-search__button"></button>
+                        </div>
+                        <div class="c-cart">
+                            <button class="c-cart__button"></button>
+                            <div class="c-cart__counter">3</div>
+                        </div>
+                    </div>
+                </header>
+                <div class="c-filter">
+                    <div class="l-filter__row">
+                        <button class="c-filter__button">Категории:</button>
+                        <button class="c-filter__button">Сортировка:</button>
+                        <button class="c-filter__button">Фильтр:</button>
+                        <div class="c-mode">
+                            <button class="c-mode__button"></button>
+                        </div>
+                    </div>
+                    <div class="l-filter__row l-filter__row--unactive">
+                        <ul class="c-filter__dropdown">
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+            <h2>ПРИ НАЖАТИИ</h2>
+
+            <div class="l-container">
+                <header class="c-header">
+                    <div class="c-menu">
+                        <button class="c-menu__button"></button>
+                    </div>
+                    <h2 class="c-header__title">Каталог</h2>
+                    <div class="l-action">
+                        <div class="c-search">
+                            <button class="c-search__button"></button>
+                        </div>
+                        <div class="c-cart">
+                            <button class="c-cart__button"></button>
+                            <div class="c-cart__counter">3</div>
+                        </div>
+                    </div>
+                </header>
+                <div class="c-filter">
+                    <div class="l-filter__row">
+                        <button class="c-filter__button">Категории:</button>
+                        <button class="c-filter__button">Сортировка:</button>
+                        <button class="c-filter__button">Фильтр:</button>
+                        <div class="c-mode">
+                            <button class="c-mode__button c-mode__button--list"></button>
+                        </div>
+                    </div>
+                    <div class="l-filter__row l-filter__row--unactive">
+                        <ul class="c-filter__dropdown">
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                            <li class="c-filter__item"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>ПОСЛЕ НАЖАТИЯ ВЫПАДАЕТ СПИСОК</h2>
+
+            <div class="l-container">
+                <header class="c-header">
+                    <div class="c-menu">
+                        <button class="c-menu__button"></button>
+                    </div>
+                    <h2 class="c-header__title">Каталог</h2>
+                    <div class="l-action">
+                        <div class="c-search">
+                            <button class="c-search__button"></button>
+                        </div>
+                        <div class="c-cart">
+                            <button class="c-cart__button"></button>
+                            <div class="c-cart__counter">3</div>
+                        </div>
+                    </div>
+                </header>
+                <div class="c-filter">
+                    <div class="l-filter__row">
+                        <button class="c-filter__button">Категории:</button>
+                        <button class="c-filter__button c-filter__button--active">Сортировка:</button>
+                        <button class="c-filter__button">Фильтр:</button>
+                        <div class="c-mode">
+                            <button class="c-mode__button c-mode__button--hidden"></button>
+                        </div>
+                    </div>
+                    <div class="l-filter__row l-filter__row--active">
+                        <ul class="c-filter__dropdown c-filter__dropdown--active">
+                            <li class="c-filter__item">от Я до А</li>
+                            <li class="c-filter__item">от А до Я</li>
+                            <li class="c-filter__item">цена: от большего - к меньшему</li>
+                            <li class="c-filter__item">цена: от меньшего - к большему</li>
+                            <li class="c-filter__item">отмена</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <h2>ВЫБРАННЫЙ ФИЛЬТР ПОДСВЕЧИВАЕТСЯ ГОЛУБЫМ И СКРЫВАЕТСЯ СПИСОК</h2>
+
+            <div class="l-container">
+                <header class="c-header">
+                    <div class="c-menu">
+                        <button class="c-menu__button"></button>
+                    </div>
+                    <h2 class="c-header__title">Каталог</h2>
+                    <div class="l-action">
+                        <div class="c-search">
+                            <button class="c-search__button"></button>
+                        </div>
+                        <div class="c-cart">
+                            <button class="c-cart__button"></button>
+                            <div class="c-cart__counter">3</div>
+                        </div>
+                    </div> 
+                </header>
+                <div class="c-filter">
+                    <div class="l-filter__row">
+                        <button class="c-filter__button">Категории:</button>
+                        <button class="c-filter__button c-filter__button--active">Сортировка:</button>
+                        <button class="c-filter__button">Фильтр:</button>
+                        <div class="c-mode">
+                            <button class="c-mode__button c-mode__button--hidden"></button>
+                        </div>
+                    </div>
+                    <div class="l-filter__row l-filter__row--active">
+                        <ul class="c-filter__dropdown c-filter__dropdown--active">
+                            <li class="c-filter__item">от Я до А</li>
+                            <li class="c-filter__item c-filter__item--active">от А до Я</li>
+                            <li class="c-filter__item">цена: от большего - к меньшему</li>
+                            <li class="c-filter__item">цена: от меньшего - к большему</li>
+                            <li class="c-filter__item">отмена</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>ВЫБРАННЫЙ ФИЛЬТР СТАНОВИТСЯ НА МЕСТО СЛОВА СОРТИРОВКА</h2>
+            
+            <div class="l-container">
+                <header class="c-header">
+                    <div class="c-menu">
+                        <button class="c-menu__button"></button>
+                    </div>
+                    <h2 class="c-header__title">Каталог</h2>
+                    <div class="l-action">
+                        <div class="c-search">
+                            <button class="c-search__button"></button>
+                        </div>
+                        <div class="c-cart">
+                            <button class="c-cart__button"></button>
+                            <div class="c-cart__counter">3</div>
+                        </div>
+                    </div>
+                </header> 
+                <div class="c-filter">
+                    <div class="l-filter__row">
+                        <button class="c-filter__button">Категории:</button>
+                        <button class="c-filter__button c-filter__button--picked">от А до Я</button>
+                        <button class="c-filter__button">Фильтр:</button>
+                        <div class="c-mode">
+                            <button class="c-mode__button c-mode__button--hidden"></button>
+                        </div>
+                    </div>
+                    <div class="l-filter__row l-filter__row--unactive">
+                        <ul class="c-filter__dropdown c-filter__dropdown--active">
+                            <li class="c-filter__item">от Я до А</li>
+                            <li class="c-filter__item c-filter__item--active">от А до Я</li>
+                            <li class="c-filter__item">цена: от большего - к меньшему</li>
+                            <li class="c-filter__item">цена: от меньшего - к большему</li>
+                            <li class="c-filter__item">отмена</li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

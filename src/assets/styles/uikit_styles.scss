@@ -1,0 +1,24 @@
+@import "partials";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
+  caret-color: $cursorColor;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+}
+
+//.container {
+//  padding: 20px;
+//  display: flex;
+//}
+//
+//.l-form {
+//  display: flex;
+//  justify-content: center;
+//  width: 360px;
+//}
+//
+//.l-headers {
+//  padding-left: 100px;
+//  width: 360px;
+//}

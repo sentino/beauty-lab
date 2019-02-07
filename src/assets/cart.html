@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CART</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/cart.scss">
+</head>
+<body>
+    <div class="l-container">
+        <div class="l-modal l-modal--hidden">
+            <div class="c-modal">
+                <h2 class="c-modal__title">
+                    Оформить заказ в 1 клик
+                </h2>
+                <button class="c-modal__close"></button>
+                <p class="c-modal__text">
+                    Просто оставьте свой номер телефона, и наш консультант свяжется с Вами
+                    с понедельника по пятницу с 10:00 до 20:00, в
+                    субботу и воскресенье с 11:00 до 17:00.
+                </p>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_name" class="c-input-field__input" type="text" maxlength="150" required="required">
+                    <label for="user_name" class="c-input-field__label">Имя</label>
+                </div>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_tel" class="c-input-field__input" type="tel" maxlength="50" required="required">
+                    <label for="user_tel" class="c-input-field__label">Моб. телефон в формате 7(…)*</label>
+                </div>
+                <button class="c-default-button c-default-button--resized">ОТПРАВИТЬ</button>
+            </div>
+        </div>
+        <header class="c-header c-header--shadowed">
+            <div class="c-menu">
+                <button class="c-menu__button"></button>
+            </div>
+            <h2 class="c-header__title">Корзина</h2>
+            <div class="l-action">
+                <div class="c-search">
+                    <button class="c-search__button"></button>
+                </div>
+                <div class="c-cart">
+                    <button class="c-cart__button"></button>
+                    <div class="c-cart__counter">3</div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="l-goods">
+                <div class="c-good">
+                    <button class="c-good__close"></button>
+                    <div class="c-good__discount">10%</div>
+                    <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    <div class="l-good__info">
+                        <h2 class="c-good__title">
+                            Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл
+                        </h2>
+                        <div class="l-good__row">
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--del">1 783 
+                                    <span class="c-good__currency c-good__currency--small">&#8381;</span></span>
+                                <span class="c-good__price c-good__price--new">1 783 
+                                    <span class="c-good__currency c-good__currency--large">&#8381;</span>
+                                </span>
+                            </div>
+                            <button class="c-good__favorite"></button>
+                        </div>
+                        <div class="l-good__row l-good__row--large-margin">
+                            <div class="c-quantity">
+                                <span class="c-quantity__text">кол-во</span>
+                                <button class="c-quantity__button c-quantity__button--remove"></button>
+                                <div class="c-quantity__number">2</div>
+                                <button class="c-quantity__button c-quantity__button--add"></button>
+                            </div>
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--total">2 783 
+                                    <span class="c-good__currency c-good__currency--large">&#8381;</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-good c-good--without-discount">
+                    <button class="c-good__close"></button>
+                    <div class="c-good__discount">10%</div>
+                    <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    <div class="l-good__info">
+                        <h2 class="c-good__title">
+                            Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл
+                        </h2>
+                        <div class="l-good__row">
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--del">1 783 
+                                    <span class="c-good__currency c-good__currency--small">&#8381;</span>
+                                </span>
+                                <span class="c-good__price">1 783 
+                                    <span class="c-good__currency c-good__currency--large">&#8381;</span>
+                                </span>
+                            </div>
+                            <button class="c-good__favorite"></button>
+                        </div>
+                        <div class="l-good__row l-good__row--large-margin">
+                            <div class="c-quantity">
+                                <span class="c-quantity__text">кол-во</span>
+                                <button class="c-quantity__button c-quantity__button--remove"></button>
+                                <div class="c-quantity__number">2</div>
+                                <button class="c-quantity__button c-quantity__button--add"></button>
+                            </div>
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--total">2 783 
+                                    <span class="c-good__currency c-good__currency--large">&#8381;</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-good">
+                    <button class="c-good__close"></button>
+                    <div class="c-good__discount">10%</div>
+                    <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    <div class="l-good__info">
+                        <h2 class="c-good__title">
+                            Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл
+                        </h2>
+                        <div class="l-good__row">
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--del">1 783 &#8381;</span>
+                                <span class="c-good__price c-good__price--new">1 783 &#8381;</span>
+                            </div>
+                            <button class="c-good__favorite"></button>
+                        </div>
+                        <div class="l-good__row l-good__row--large-margin">
+                            <div class="c-quantity">
+                                <span class="c-quantity__text">кол-во</span>
+                                <button class="c-quantity__button c-quantity__button--remove"></button>
+                                <div class="c-quantity__number">2</div>
+                                <button class="c-quantity__button c-quantity__button--add"></button>
+                            </div>
+                            <div class="l-good__price">
+                                <span class="c-good__price c-good__price--total">2 783 &#8381;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-gift">
+                    <h2 class="c-gift__title">Ваши подарки</h2>
+                    <div class="c-good c-good--gift">
+                        <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                        <div class="l-good__info">
+                            <h2 class="c-good__title">
+                                Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл
+                            </h2>
+                            <div class="l-good__row l-good__row--hidden">
+                                <div class="l-good__price">
+                                    <span class="c-good__price c-good__price--del">1 783 &#8381;</span>
+                                    <span class="c-good__price c-good__price--new">1 783 &#8381;</span>
+                                </div>
+                                <button class="c-good__favorite"></button>
+                            </div>
+                            <div class="l-good__row l-good__row--large-margin">
+                                <div class="c-quantity">
+                                    <span class="c-quantity__text">кол-во</span>
+                                    <button class="c-quantity__button c-quantity__button--remove" disabled></button>
+                                    <div class="c-quantity__number">1</div>
+                                    <button class="c-quantity__button c-quantity__button--add" disabled></button>
+                                </div>
+                                <div class="l-good__price">
+                                    <span class="c-good__price c-good__price--total">0 
+                                        <span class="c-good__currency c-good__currency--large">&#8381;</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-input-field c-input-field--light">
+                <input id="promocode" class="c-input-field__input c-input-field__input--light" type="text" maxlength="50" required="required">
+                <label for="promocode" class="c-input-field__label c-input-field__label--light">Введите промокод</label>
+            </div>
+            <div class="c-total-sum">
+                <h2 class="c-total-sum__title">Общая сумма:</h2>
+                <span class="c-total-sum__price">
+                    <span class="c-total-sum__price--del">1 783 &#8381;</span>
+                    <span class="c-total-sum__price--total">1 783 &#8381;</span>
+                </span>
+            </div>
+            <div class="l-button-container">
+                <button class="c-primary-button c-primary-button--halfofpage">КУПИТЬ</button>
+                <button class="c-default-button c-default-button--halfofpage">КУПИТЬ В 1 КЛИК</button>
+            </div>
+            <div class="c-disclaimer">
+                <h2 class="c-disclaimer__title">Информация о юрлице продавца и лицензии</h2>
+                <p class="c-disclaimer__text">
+                    РЫБНЫЙ ТЕКСТ <br /> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                    ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
+                    enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+                    In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                    felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

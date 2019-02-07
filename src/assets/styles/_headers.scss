@@ -1,0 +1,209 @@
+.l-container {
+  width: 360px;
+  background: $lightBackgroundColor;
+  box-sizing: border-box;
+  box-shadow: 0 8px 8px 0 lighten($color: $primaryTextColor, $amount: 76%);
+}
+
+.c-header {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 56px;
+  padding: 0 20px;
+
+  &--shadowed {
+    box-shadow: 0 8px 8px 0 lighten($color: $primaryTextColor, $amount: 76%);
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 19px 0 19px 4px;
+    min-width: 178px;
+    text-align: left;
+  }
+}
+
+.c-menu {
+  &__button {
+    @extend .buttonReset;
+    margin: 22px 0;
+    position: relative;
+    width: 18px;
+    height: 12px;
+
+    &:after {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "\e5d2";
+      @include material-icons($font-size: 20px);
+    }
+  }
+}
+
+.l-action {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 63px;
+  margin: 19px 0;
+}
+
+.c-search {
+  &__button {
+    @extend .buttonReset;
+    position: relative;
+    width: 20px;
+    height: 12px;
+
+    &:after {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "\e8b6";
+      @include material-icons($font-size: 21px);
+    }
+  }
+}
+
+.c-cart {
+  position: relative;
+
+  &__button {
+    @extend .buttonReset;
+    position: relative;
+    width: 20px;
+    height: 12px;
+
+    &:after {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "\e8cc";
+      @include material-icons($font-size: 20px);
+    }
+  }
+
+  &__counter {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: $defaultBackgroundColor;
+    color: $buttonTextColor;
+    font-size: 6px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: -3px;
+    top: -2px;
+    z-index: 100;
+  }
+}
+
+.c-filter {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 41px;
+  font-size: 14px;
+  color: lighten($color: $primaryTextColor, $amount: 13%);
+  box-shadow: 0 8px 8px 0 lighten($color: $primaryTextColor, $amount: 76%);
+}
+
+.l-filter__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+
+  &--unactive {
+    display: none;
+  }
+
+  &--active {
+    background: $activeFilterBackground;
+    padding: 14px 0 0 0;
+  }
+}
+
+.c-filter__button {
+  @extend .buttonReset;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+
+  &:active {
+    @extend .active-filter;
+  }
+
+  &::after {
+    content: "\e313";
+    @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 13%));
+  }
+
+  &--active {
+    @extend .active-filter;
+
+    &::after {
+      content: "\e316";
+    }
+  }
+
+  &--picked {
+    @extend .active-filter;
+  }
+}
+
+.c-mode {
+  &__button {
+    @extend .buttonReset;
+
+    &::after {
+      content: "\e5c3";
+      @include material-icons($font-size: 20px);
+    }
+
+    &--list {
+      width: 16px;
+      height: 16px;
+      background-image: url("../svg-files/Group 136.svg");
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+}
+
+.c-filter__dropdown {
+  max-height: 169px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: $activeFilterBackground;
+  overflow-y: auto;
+
+  &--active {
+    display: block;
+  }
+}
+
+.c-filter__item {
+  padding: 0 16px 14px;
+
+  &--active {
+    color: $defaultBackgroundColor;
+  }
+}

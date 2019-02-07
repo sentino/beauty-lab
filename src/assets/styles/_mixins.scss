@@ -1,0 +1,53 @@
+@mixin material-icons ($color: lighten($color: $primaryTextColor, $amount: 48%), $font-size: 24px) {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: $color;
+  font-size: $font-size;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+@mixin customCheckBoxBackground () {
+  background: $defaultBackgroundColor;
+  border: none;
+}
+
+@mixin buttonStyle($inputBorderColor: $inputBorderColor, $backgroundColor: $defaultBackgroundColor, $activeBackgroundColor: $activeDefaultBackgroundColor, $width: 88px, $height: 36px) {
+  width: $width;
+  height: $height;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background: $backgroundColor;
+  box-shadow: 0 2px 2px 0 $inputBorderColor;
+  font-size: 14px;
+  color: $buttonTextColor;
+
+  &:active {
+    background: $activeBackgroundColor;
+    box-shadow: 0 8px 8px 0 $inputBorderColor;
+  }
+
+  &:disabled {
+    background: lighten($color: $primaryTextColor, $amount: 88%);
+    box-shadow: none;
+    color: lighten($color: $primaryTextColor, $amount: 74%);
+  }
+}

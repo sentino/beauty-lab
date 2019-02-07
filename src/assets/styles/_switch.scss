@@ -1,0 +1,74 @@
+//Switch
+
+.c-switch {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+
+    &__checkbox {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+
+        &:checked+.c-switch__lever {
+            background-color: lighten($color: $defaultBackgroundColor, $amount: 15%) ;
+        }
+
+        &:checked+.c-switch__lever:after {
+            background-color: $activeDefaultBackgroundColor;
+        }
+
+        &:checked+.c-switch__lever:after,
+        &:checked+.c-switch__lever:before  {
+            left: 18px;
+        }
+    }
+
+    &__lever {
+        content: "";
+        display: inline-block;
+        position: relative;
+        width: 36px;
+        height: 14px;
+        background-color: lighten($color: #221F1F, $amount: 65%);
+        border-radius: 15px;
+        margin-right: 10px;
+        -webkit-transition: background 0.3s ease;
+        transition: background 0.3s ease;
+        vertical-align: middle;
+        margin: 0 16px;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 0 1px 1px 0 lighten($color: $primaryTextColor, $amount: 76%);
+            left: 0;
+            top: -3px;
+            -webkit-transition: left 0.3s ease, background .3s ease, -webkit-box-shadow 0.1s ease, -webkit-transform .1s ease;
+            transition: left 0.3s ease, background .3s ease, -webkit-box-shadow 0.1s ease, -webkit-transform .1s ease;
+            transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease, transform .1s ease;
+            transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease, transform .1s ease, -webkit-box-shadow 0.1s ease, -webkit-transform .1s ease;
+        }
+
+        &:before {
+            background-color: lighten($color: #221F1F, $amount: 76%);
+        }
+
+        &:after {
+            background-color: #F1F1F1;
+            box-shadow: 0 1px 1px 0 lighten($color: $primaryTextColor, $amount: 76%);
+        }
+    }
+}

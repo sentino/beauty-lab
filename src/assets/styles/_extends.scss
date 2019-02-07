@@ -1,0 +1,63 @@
+.buttonReset {
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.checkboxStyle {
+  position: relative;
+  z-index: 100;
+  transform: scale(1.5);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmarkStyle {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 2px solid lighten($color: $primaryTextColor, $amount: 48%);
+  border-radius: 2px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.check {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 4.5px;
+  top: 0px;
+  width: 7px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.active-filter {
+  background: $activeFilterBackground;
+  border-radius: 2px;
+}
+
+.list-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: $primaryTextColor;
+  padding: 0;
+  margin: 0;
+}
+
+.card-text {
+  font-size: 10px;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+  line-height: 13px;
+  font-weight: 500;
+}

@@ -13,7 +13,7 @@ export class PayPaylerService {
   ) {}
 
   testPostItem() {
-    this.http.post(this.config.url + 'cart/item', {"product": '458179', "quantity": "5" }).subscribe(res => {
+    this.http.post(this.config.url + 'cart/item', {"product": '104810', "quantity": "1" }).subscribe(res => {
       console.log(res);
     });
   }

@@ -1,0 +1,35 @@
+.c-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  margin: 18px 0;
+
+  &__input {
+    @extend .checkboxStyle;
+
+    &:checked ~ .c-checkbox__checkmark {
+      @include customCheckBoxBackground;
+    }
+
+    &:checked ~ .c-checkbox__checkmark::after {
+      display: block;
+    }
+  }
+
+  &__checkmark {
+    @extend .checkmarkStyle;
+
+    &::after {
+      @extend .check;
+    }
+  }
+
+  &__text {
+    font-size: 12px;
+    text-align: left;
+    margin-left: 18px;
+  }
+}

@@ -1,0 +1,50 @@
+.l-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 22px 0;
+}
+
+.l-primary-button,
+.l-default-button {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 160px;
+}
+
+.c-primary-button {
+  @include buttonStyle($backgroundColor: $primaryBackgroundColor, $activeBackgroundColor: $activePrimaryBackgroundColor);
+
+  &--pressed {
+    background: $activePrimaryBackgroundColor;
+    box-shadow: 0 8px 8px 0 $inputBorderColor;
+  }
+
+  &--halfofpage {
+    width: 156px;
+  }
+}
+
+.c-default-button {
+  @include buttonStyle;
+
+  &--large {
+    @include buttonStyle($width: calc(100% - #{$basePageMargin * 2}));
+    margin: 16px;
+  }
+
+  &--resized {
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  &--pressed {
+    background: $activeDefaultBackgroundColor;
+    box-shadow: 0 8px 8px 0 $inputBorderColor;
+  }
+
+  &--halfofpage {
+    width: 156px;
+  }
+}

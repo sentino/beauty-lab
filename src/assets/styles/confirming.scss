@@ -1,0 +1,285 @@
+//@import "partials";
+//
+//body {
+//  -webkit-font-smoothing: antialiased;
+//  font-family: 'Roboto', sans-serif;
+//  caret-color: $cursorColor;
+//  color: lighten($color: $primaryTextColor, $amount: 48%);
+//  max-width: 360px;
+//  margin: 0 auto;
+//
+//  main {
+//    width: 100%;
+//    padding: 24px 0;
+//    box-sizing: border-box;
+//  }
+//}
+//
+//.l-order-page {
+//  width: 100%;
+//  padding: 0 16px;
+//  box-sizing: border-box;
+//  border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+//}
+//
+//.l-order {
+//  margin: 0;
+//  padding-inline-start: 10px;
+//  font-size: 10px;
+//  color: $primaryTextColor;
+//
+//  &__wrapper {
+//    display: flex;
+//    justify-content: space-between;
+//    font-size: 8px;
+//    line-height: 8px;
+//    transform: translateY(-3px);
+//  }
+//
+//  &__item {
+//    width: 214px;
+//    display: flex;
+//    flex-direction: column;
+//  }
+//}
+//
+//.c-order {
+//  padding-left: 11px;
+//  margin: 18px 0 16px;
+//
+//  &__quantity {
+//    color: $quantityColor;
+//    font-family: 'Segoe UI';
+//  }
+//
+//  &__price {
+//    color: lighten($color: $primaryTextColor, $amount: 13%);
+//    font-weight: 500;
+//    font-size: 12px;
+//    min-width: 56px;
+//    text-align: right;
+//  }
+//}
+//
+//.c-gift {
+//  &--hidden {
+//    display: none;
+//  }
+//
+//  &__title {
+//    @extend .list-title;
+//  }
+//}
+//
+//.l-delivery-section {
+//  font-size: 12px;
+//  font-weight: 500;
+//  color: $primaryTextColor;
+//}
+//
+//.l-delivery {
+//  border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+//  padding: 0 16px;
+//
+//  &--hidden {
+//    display: none;
+//  }
+//}
+//
+//.c-delivery {
+//  display: flex;
+//  justify-content: space-between;
+//  padding: 8px 0;
+//
+//  &--total {
+//    padding: 16px;
+//  }
+//
+//  &__title {
+//    @extend .list-title;
+//
+//    &--thin {
+//      font-weight: 400;
+//    }
+//
+//    &--total {
+//      font-size: 17px;
+//      font-weight: 400;
+//      color: lighten($color: $primaryTextColor, $amount: 13%);
+//    }
+//  }
+//
+//  &__price {
+//    max-width: 150px;
+//    display: flex;
+//    justify-content: space-between;
+//    align-items: center;
+//
+//    &--hidden {
+//      display: none;
+//    }
+//
+//    &--del {
+//      font-size: 14px;
+//      font-weight: 500;
+//      color: lighten($color: $primaryTextColor, $amount: 48%);
+//      text-decoration: line-through;
+//      margin-right: 13px;
+//    }
+//
+//    &--total {
+//      font-size: 17px;
+//      font-weight: 400;
+//      color: lighten($color: $primaryTextColor, $amount: 13%);
+//    }
+//  }
+//
+//  &__price,
+//  &__weight {
+//    text-align: right;
+//  }
+//
+//  &__quantity {
+//    &--thin {
+//      font-size: 12px;
+//      color: $primaryTextColor;
+//      font-weight: 400;
+//    }
+//  }
+//}
+//
+//.l-info {
+//  margin-bottom: 114px;
+//  width: 100%;
+//}
+//
+//.c-info {
+//  &__dropdown {
+//    display: none;
+//    padding: 0 16px;
+//
+//    &--translated {
+//      transform: translateY(-5px);
+//    }
+//  }
+//
+//  &__text {
+//    max-width: 229px;
+//  }
+//
+//  &__button {
+//    @extend .buttonReset;
+//    display: flex;
+//    justify-content: space-between;
+//    align-items: center;
+//    padding: 15px 16px;
+//    width: 100%;
+//    text-align: left;
+//    color: lighten($color: $primaryTextColor, $amount: 50%);
+//    font-size: 17px;
+//    font-weight: 500;
+//    border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+//
+//    &::after {
+//      content: "\e5cd";
+//      transform: rotate(45deg);
+//      @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+//    }
+//
+//    &--picked {
+//      color: lighten($color: $primaryTextColor, $amount: 13%);
+//      border-bottom: none;
+//
+//      &::after {
+//        transform: rotate(0deg);
+//        @include material-icons($font-size: 20px, $color:$primaryTextColor);
+//      }
+//
+//      & + .c-info__dropdown {
+//        display: block;
+//      }
+//    }
+//  }
+//}
+//
+//.c-warning {
+//  box-sizing: border-box;
+//  height: 58px;
+//  border-radius: 4px;
+//  background: $errorColor;
+//  color: $buttonTextColor;
+//  font-size: 12px;
+//  padding: 8px 20px 8px 8px;
+//  margin: 4px 16px 7px;
+//}
+//
+//.l-radiobutton {
+//  width: 100%;
+//  padding: 0;
+//  min-height: 73px;
+//
+//  &__label {
+//    padding: 8px 0 14px 0;
+//  }
+//}
+//
+//.c-radiobutton {
+//  &__text {
+//    vertical-align: 4px;
+//  }
+//
+//  &:checked + .c-radiobutton--with-gap:after {
+//    background-color: $defaultBackgroundColor;
+//  }
+//
+//  &:checked + .c-radiobutton--with-gap:after,
+//  &:checked + .c-radiobutton--with-gap:before {
+//    border: 2px solid $defaultBackgroundColor;
+//  }
+//
+//  &:checked .l-radiobutton__info {
+//    padding: 8px 0;
+//  }
+//}
+//
+//.l-radiobutton__info {
+//  display: none;
+//  padding: 16px 0 0;
+//
+//  &--picked {
+//    display: block;
+//  }
+//}
+//
+//.l-checkbox {
+//  padding: 26px 0 0px;
+//}
+//
+//.c-checkbox {
+//  margin: 0;
+//  display: block;
+//
+//  &__input {
+//    margin: 3px 20px 3px 3px;
+//  }
+//
+//  &__checkmark {
+//    @extend .checkmarkStyle;
+//    top: 0;
+//    margin: 1px 20px 3px 1px;
+//  }
+//
+//  &__text {
+//    font-size: 17px;
+//    margin: 0;
+//  }
+//}
+//
+//.c-disclaimer {
+//  margin: 9px 16px 4px;
+//  font-size: 12px;
+//
+//  &__link {
+//    color: inherit;
+//  }
+//}

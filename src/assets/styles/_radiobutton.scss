@@ -1,0 +1,70 @@
+// Radiobutton
+
+.l-radiobutton-container {
+  display: flex;
+  margin-top: 50px;
+}
+
+.l-switch,
+.l-radiobutton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 50%;
+  height: 60px;
+}
+
+.c-radiobutton {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+
+  &--with-gap {
+    position: relative;
+    padding-left: 36px;
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    -webkit-transition: 0.28s ease;
+    transition: 0.28s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      z-index: 0;
+      -webkit-transition: 0.28s ease;
+      transition: 0.28s ease;
+      box-sizing: border-box;
+    }
+  }
+
+  & + .c-radiobutton--with-gap:after,
+  & + .c-radiobutton--with-gap:before {
+    border: 2px solid lighten($color: $primaryTextColor, $amount: 48%);
+  }
+
+  &:checked + .c-radiobutton--with-gap:after {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    background-color: $radiobuttonColor;
+  }
+
+  &:checked + .c-radiobutton--with-gap:after,
+  &:checked + .c-radiobutton--with-gap:before {
+    border: 2px solid $radiobuttonColor;
+  }
+}

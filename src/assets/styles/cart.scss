@@ -1,0 +1,347 @@
+@import "partials";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
+  caret-color: $cursorColor;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+  max-width: 360px;
+  margin: 0 auto;
+
+  .l-container {
+    position: relative;
+  }
+
+  main {
+    width: 100%;
+    padding: 22px 16px 65px;
+    box-sizing: border-box;
+    margin-bottom: 150px;
+  }
+}
+
+.l-good {
+  &__info {
+    padding: 8px 8px 12px;
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+
+    &--large-margin {
+      margin-top: 12px;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.c-good {
+  margin-bottom: 22px;
+  width: 328px;
+  height: 109px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+
+  &--gift {
+    margin-bottom: 12px;
+  }
+
+  &--without-discount {
+    .c-good__discount {
+      display: none;
+    }
+
+    .c-good__price--del {
+      display: none;
+    }
+  }
+
+  &__discount {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 34.38px;
+    height: 34.38px;
+    border: 0.5px solid transparentize($color: $lightBorderColor, $amount: 0.9);
+    box-sizing: border-box;
+    border-radius: 50%;
+    box-shadow: 0 6px 6px 0
+      transparentize($color: lighten($color: $primaryTextColor, $amount: 24%), $amount: 0.77);
+    font-size: 12px;
+    color: $buttonTextColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $discountBackground;
+  }
+
+  &__close {
+    position: absolute;
+    top: -10.5px;
+    right: -10.5px;
+    @extend .buttonReset;
+    @include buttonStyle($width: 21px, $height: 21px, $inputBorderColor: lighten($color: $primaryTextColor, $amount: 76%));
+    box-sizing: border-box;
+    box-shadow: none;
+    border: none;
+    border-radius: 50%;
+
+    &::after {
+      content: "\e5cd";
+      @include material-icons($font-size: 20px, $color: $buttonTextColor);
+      position: absolute;
+      top: 0.8px;
+      left: 0px;
+      width: 21px;
+      height: 21px;
+    }
+  }
+
+  &__image {
+    width: 135.91px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-weight: 500;
+    color: $primaryTextColor;
+  }
+
+  &__price {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+
+    &--new {
+      color: $highlightColor;
+    }
+
+    &--del {
+      @extend .card-text;
+      font-size: 10px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      line-height: 13px;
+      font-weight: 500;
+      text-decoration: line-through;
+      margin-right: 13px;
+    }
+  }
+
+  &__currency {
+    &--small {
+      font-size: 11px;
+    }
+
+    &--large {
+      font-size: 13px;
+    }
+  }
+
+  &__favorite {
+    @extend .buttonReset;
+    width: 18px;
+    height: 16px;
+
+    &:after {
+      position: absolute;
+      top: -2px;
+      right: 0;
+      content: "\e87d";
+      @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+    }
+  }
+}
+
+.c-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 104px;
+
+  &__text {
+    @extend .card-text;
+  }
+
+  &__button {
+    position: relative;
+    @extend .buttonReset;
+    @include buttonStyle($width: 18px, $height: 18px, $inputBorderColor: lighten($color: $primaryTextColor, $amount: 76%));
+    border-radius: 0;
+
+    &::after {
+      @include material-icons($font-size: 14px, $color: $buttonTextColor);
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    &--add {
+      &::after {
+        content: "\e145";
+      }
+    }
+
+    &--remove {
+      &::after {
+        content: "\e15b";
+      }
+    }
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 0.5px solid $lightBorderColor;
+    box-sizing: border-box;
+    @extend .card-text;
+    text-align: center;
+  }
+}
+
+.c-gift {
+  &__title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 20px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+    padding: 0;
+    margin: 0 0 12px;
+  }
+}
+
+.c-total-sum {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 22px;
+
+  &__title {
+    @extend .list-title;
+    font-size: 17px;
+    font-weight: 500;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+  }
+
+  &__price {
+    max-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    font-weight: 500;
+
+    &--del {
+      font-size: 14px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      text-decoration: line-through;
+      margin-right: 13px;
+    }
+
+    &--total {
+      font-size: 17px;
+      color: lighten($color: $primaryTextColor, $amount: 13%);
+    }
+  }
+}
+
+.c-disclaimer {
+  font-size: 12px;
+  color: $primaryTextColor;
+
+  &__title {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  &__text {
+    height: 146px;
+    overflow: hidden;
+  }
+}
+
+.l-modal {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: transparentize($color: #323232, $amount: 0.5);
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
+
+.c-modal {
+  position: relative;
+  background: $lightBackgroundColor;
+  margin: 150px 16px;
+  padding: 16px;
+  height: 311px;
+  box-sizing: border-box;
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 22px;
+    @extend .buttonReset;
+    @include buttonStyle($width: 14px, $height: 14px, $inputBorderColor: transparent);
+    background: transparent;
+    box-sizing: border-box;
+    box-shadow: none;
+    border: none;
+    width: 14px;
+    height: 14px;
+
+    &::after {
+      content: "\e5cd";
+      @include material-icons($font-size: 24px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+      position: absolute;
+      top: 0.8px;
+      left: 0px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__text {
+    font-size: 12px;
+    margin: 16px 0 10px;
+  }
+}

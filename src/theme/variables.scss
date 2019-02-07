@@ -3,8 +3,8 @@
 
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
-@font-face { font-family: Roboto; src: url("../assets/fonts/Roboto-Regular.ttf"); }
-$font-path: "../assets/fonts";
+@font-face { font-family: Roboto; src: url("../assets/Roboto-Regular.ttf"); }
+$font-path: "../assets";
 
 $font-family-md-base: "Roboto";
 $font-family-ios-base: "Roboto";
@@ -123,3 +123,22 @@ $item-wp-padding-bottom: 10px;
 
 @import "roboto";
 @import "noto-sans";
+
+
+
+@import "../assets/styles/variables";
+@import "../assets/styles/color-matrix";
+
+@import "../assets/styles/typography";
+
+@import "../assets/styles/extends";
+@import "../assets/styles/mixins";
+
+@import "../assets/styles/buttons";
+@import "../assets/styles/switch";
+@import "../assets/styles/radiobutton";
+@import "../assets/styles/search-input";
+@import "../assets/styles/checkboxes";
+@import "../assets/styles/text-inputs";
+@import "../assets/styles/headers";
+
