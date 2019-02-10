@@ -1,0 +1,102 @@
+.l-good {
+  &__info {
+    padding: 8px;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3px 0 8px;
+
+    &--little-margin {
+      margin: 7px 0 3px;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.c-good {
+  margin-bottom: 16px;
+  width: 328px;
+  height: 127px;
+  min-height: 127px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+
+  &__image {
+    width: 156px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0 0 2px;
+    font-size: 10px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    line-height: 11px;
+    width: 100%;
+  }
+
+  &__price {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+
+    &--new {
+      color: $highlightColor;
+    }
+
+    &--del {
+      @extend .card-text;
+      font-size: 10px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      line-height: 13px;
+      font-weight: 500;
+      text-decoration: line-through;
+    }
+  }
+
+  &__country {
+    @extend .card-text;
+  }
+
+  &__favorite {
+    @extend .buttonReset;
+    width: 18px;
+    height: 16px;
+
+    &:after {
+      position: absolute;
+      top: -2px;
+      right: 0;
+      content: "\e87d";
+      @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+    }
+
+    &--selected {
+      &:after {
+        @include material-icons($font-size: 20px, $color:  $highlightColor);
+      }
+    }
+  }
+}

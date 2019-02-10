@@ -1,0 +1,194 @@
+.l-goods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &--nowrap {
+    flex-wrap: nowrap;
+    margin-top: 16px;
+  }
+}
+
+.l-good {
+  &__info {
+    padding: 8px;
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+
+    &--large-margin {
+      margin: 10px 0 3px;
+    }
+
+    &--little-margin {
+      margin-top: 0;
+    }
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.c-good {
+  margin-bottom: 16px;
+  width: 156px;
+  min-height: 227px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+
+  &--without-discount {
+    .c-good__label {
+      display: none;
+    }
+  }
+
+  &--long {
+    width: 143px;
+    height: 269px;
+    margin-right: 16px;
+  }
+
+  &__label {
+    position: absolute;
+
+    width: 34.38px;
+    height: 34.38px;
+    border: 0.5px solid transparentize($color: $lightBorderColor, $amount: 0.9);
+    box-sizing: border-box;
+    border-radius: 50%;
+    box-shadow: 0 6px 6px 0
+      transparentize($color: lighten($color: $primaryTextColor, $amount: 24%), $amount: 0.77);
+    font-size: 12px;
+    color: $buttonTextColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--hit {
+      top: -12px;
+      left: 0;
+      background: $hitLabelBackground;
+    }
+
+    &--new {
+      top: -12px;
+      left: 32px;
+      background: $discountBackground;
+    }
+
+    &--min-price {
+      top: -12px;
+      left: 64px;
+      background: $minLabelBackground;
+    }
+
+    &--discount {
+      top: -12px;
+      right: 0;
+      background: $discountBackground;
+    }
+  }
+
+  &__picked {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: transparentize($color: #323232, $amount: 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__checked-circle {
+    &::after {
+      content: '\e86c';
+      @include material-icons($font-size: 72px, $color: white);
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  &__image {
+    height: 127.07px;
+    padding: 0 16px;
+
+    &--without-spaces {
+      padding: 0;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    width: 100%;
+  }
+
+  &__price {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+
+    &--new {
+      color: $highlightColor;
+    }
+
+    &--current {
+      color: $highlightHeadersColor;
+    }
+
+    &--del {
+      @extend .card-text;
+      font-size: 12px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      line-height: 13px;
+      font-weight: 500;
+      text-decoration: line-through;
+      margin-right: 13px;
+    }
+  }
+
+  &__country {
+    @extend .card-text;
+  }
+
+  &__favorite {
+    @extend .buttonReset;
+    width: 18px;
+    height: 16px;
+
+    &:after {
+      position: absolute;
+      top: -2px;
+      right: 0;
+      content: "\e87d";
+      @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+    }
+
+    &--selected {
+      &:after {
+        @include material-icons($font-size: 20px, $color:  $highlightColor);
+      }
+    }
+  }
+}

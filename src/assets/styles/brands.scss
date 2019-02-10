@@ -1,0 +1,80 @@
+@import "partials";
+@import "footer";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
+  caret-color: $cursorColor;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+  max-width: 360px;
+  margin: 0 auto;
+
+  .l-container {
+    position: relative;
+  }
+
+  main {
+    width: 100%;
+    padding: 22px 16px 65px;
+    box-sizing: border-box;
+    max-height: 463px;
+    overflow-y: hidden;
+  }
+}
+
+.l-param__items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+
+  &--vertical {
+    flex-direction: column;
+    padding-top: 3px;
+  }
+}
+
+.c-param {
+  margin: 0 0 14px;
+  &--vertical {
+    display: flex;
+    margin: 0 0 27px;
+  }
+
+  &__title {
+    @extend .main-title;
+    margin-bottom: 16px;
+    text-align: center;
+
+    &--vertical {
+      font-size: 22px;
+      color: $highlightHeadersColor;
+      margin-right: 22px;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+
+  &__img {
+    width: 70.25px;
+    max-height: 68.14px;
+    margin-bottom: 3px;
+  }
+
+  &__text {
+    @extend .card-text;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+    font-weight: 400;
+
+    &--vertical {
+      padding-bottom: 17px;
+      font-size: 12px;
+    }
+  }
+}

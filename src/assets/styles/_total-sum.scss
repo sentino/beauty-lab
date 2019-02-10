@@ -1,0 +1,42 @@
+.c-total-sum {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 22px;
+
+  &--large-margin {
+    margin: 22px 0;
+  }
+
+  &__title {
+    @extend .list-title;
+    font-size: 17px;
+    font-weight: 500;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+  }
+
+  &__price {
+    max-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    font-weight: 500;
+
+    &--del {
+      font-size: 14px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      text-decoration: line-through;
+      margin-right: 13px;
+    }
+
+    &--hidden {
+      display: none;
+    }
+
+    &--total {
+      font-size: 17px;
+      color: lighten($color: $primaryTextColor, $amount: 13%);
+    }
+  }
+}

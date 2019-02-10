@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ConfigProvider } from '../../services/config/config';
@@ -12,6 +12,8 @@ import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { BonusesService } from '../../services/bonuses.service';
+import 'rxjs/add/operator/map';
 
 
 
@@ -33,27 +35,37 @@ import { Store } from '@ngrx/store';
   ],
   templateUrl: 'categories3.html',
 })
-export class Categories3Page {
+export class Categories3Page implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
-    public shared: SharedDataProvider,
-    public config: ConfigProvider
+    // public shared: SharedDataProvider,
+    // public config: ConfigProvider
+    private bonusesService: BonusesService
   ) {
 
   }
-  openSubCategories(parent) {
-    this.navCtrl.push(SubCategories3Page, { 'parent': parent });
+
+
+  public ngOnInit(): void {
+    let blah = this.bonusesService.getBonuses().map(res => res);
+    blah.subscribe(res => {
+      console.log(res);
+    })
   }
+
+
+  // openSubCategories(parent) {
+  //   this.navCtrl.push(SubCategories3Page, { 'parent': parent });
+  // }
   openCart() {
     this.navCtrl.push(CartContainer);
-}
-openSearch() {
-    this.navCtrl.push(SearchPage);
-}
-ionViewWillEnter() {
-}
+  }
+  openSearch() {
+      this.navCtrl.push(SearchPage);
+  }
+
 }
 

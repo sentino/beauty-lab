@@ -1,0 +1,213 @@
+.l-good {
+  &__info {
+    padding: 8px 8px 12px;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+
+    &--large-margin {
+      margin-top: 12px;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.c-good {
+  margin-bottom: 22px;
+  width: 328px;
+  height: 109px;
+  min-height: 109px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+
+  &--gift {
+    margin-bottom: 12px;
+  }
+
+  &--without-discount {
+    .c-good__label {
+      display: none;
+    }
+
+    .c-good__price--del {
+      display: none;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 34.38px;
+    height: 34.38px;
+    border: 0.5px solid transparentize($color: $lightBorderColor, $amount: 0.9);
+    box-sizing: border-box;
+    border-radius: 50%;
+    box-shadow: 0 6px 6px 0
+      transparentize($color: lighten($color: $primaryTextColor, $amount: 24%), $amount: 0.77);
+    font-size: 12px;
+    color: $buttonTextColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $discountBackground;
+  }
+
+  &__close {
+    position: absolute;
+    top: -10.5px;
+    right: -10.5px;
+    @extend .buttonReset;
+    @include buttonStyle($width: 21px, $height: 21px, $inputBorderColor: lighten($color: $primaryTextColor, $amount: 76%));
+    box-sizing: border-box;
+    box-shadow: none;
+    border: none;
+    border-radius: 50%;
+
+    &::after {
+      content: "\e5cd";
+      @include material-icons($font-size: 20px, $color: $buttonTextColor);
+      position: absolute;
+      top: 0.8px;
+      left: 0px;
+      width: 21px;
+      height: 21px;
+    }
+  }
+
+  &__image {
+    width: 135.91px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-weight: 500;
+    color: $primaryTextColor;
+  }
+
+  &__price {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+
+    &--new {
+      color: $highlightColor;
+    }
+
+    &--del {
+      @extend .card-text;
+      font-size: 10px;
+      color: lighten($color: $primaryTextColor, $amount: 48%);
+      line-height: 13px;
+      font-weight: 500;
+      text-decoration: line-through;
+      margin-right: 13px;
+    }
+  }
+
+  &__currency {
+    &--small {
+      font-size: 11px;
+    }
+
+    &--large {
+      font-size: 13px;
+    }
+  }
+
+  &__favorite {
+    @extend .buttonReset;
+    width: 18px;
+    height: 16px;
+
+    &:after {
+      position: absolute;
+      top: -2px;
+      right: 0;
+      content: "\e87d";
+      @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+    }
+
+    &--selected {
+      &:after {
+        @include material-icons($font-size: 20px, $color:  $highlightColor);
+      }
+    }
+  }
+}
+
+.c-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 104px;
+
+  &__text {
+    @extend .card-text;
+  }
+
+  &__button {
+    position: relative;
+    @extend .buttonReset;
+    @include buttonStyle($width: 18px, $height: 18px, $inputBorderColor: lighten($color: $primaryTextColor, $amount: 76%));
+    border-radius: 0;
+
+    &::after {
+      @include material-icons($font-size: 14px, $color: $buttonTextColor);
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    &--add {
+      &::after {
+        content: "\e145";
+      }
+    }
+
+    &--remove {
+      &::after {
+        content: "\e15b";
+      }
+    }
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 0.5px solid $lightBorderColor;
+    box-sizing: border-box;
+    @extend .card-text;
+    text-align: center;
+  }
+}

@@ -1,0 +1,43 @@
+.c-footer {
+  max-height: 56px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 -2px 4px 0 lighten($color: $primaryTextColor, $amount: 90%);
+
+  &__button {
+    @extend .buttonReset;
+    margin: 20px 0;
+    position: relative;
+    width: 18px;
+    height: 17px;
+    background-color: $primaryTextColor;
+
+    &--home {
+      mask: url("../svg-files/baseline-home-24px.svg") no-repeat center;
+    }
+
+    &--menu {
+      mask: url("../svg-files/baseline-menu-24px.svg") no-repeat center;
+    }
+
+    &--globe {
+      background-color: $primaryTextColor;
+      mask: url("../svg-files/001-makeup.svg") no-repeat center;
+    }
+
+    &--leaf {
+      background-color: $primaryTextColor;
+      mask: url("../svg-files/002-leaf.svg") no-repeat center;
+    }
+
+    &--note {
+      mask: url("../svg-files/005-newspaper-folded.svg") no-repeat center;
+    }
+
+    &--active {
+      background-color: $highlightColor;
+    }
+  }
+}

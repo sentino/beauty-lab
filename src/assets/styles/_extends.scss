@@ -61,3 +61,11 @@
   line-height: 13px;
   font-weight: 500;
 }
+
+.main-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: lighten($color: $primaryTextColor, $amount: 13%);
+  padding: 0;
+  margin: 0;
+}

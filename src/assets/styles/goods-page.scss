@@ -1,0 +1,39 @@
+@import "partials";
+@import "info-accordion";
+@import "good-card--vertical";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
+  caret-color: $cursorColor;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+  max-width: 360px;
+  margin: 0 auto;
+
+  .l-container {
+    position: relative;
+  }
+
+  main {
+    width: 100%;
+    padding: 22px 16px 65px;
+    box-sizing: border-box;
+    margin-bottom: 150px;
+  }
+}
+
+.c-section {
+  margin: 0 0 16px;
+
+  &--no-space {
+    overflow-x: hidden;
+    margin-right: -16px;
+  }
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    padding: 0;
+    margin: 5px 0 12px;
+  }
+}

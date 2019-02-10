@@ -133,6 +133,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { MainEffects } from './store/main.effects';
+import { BonusesService } from '../services/bonuses.service';
 
 
 
@@ -259,6 +260,7 @@ const PIPES = [
   declarations: [...PAGES, PIPES],
   entryComponents: [...PAGES],
   providers: [
+    BonusesService,
     CartService,
     ConfigProvider,
     StatusBar,

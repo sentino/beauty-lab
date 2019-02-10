@@ -1,0 +1,61 @@
+.l-modal {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: transparentize($color: #323232, $amount: 0.5);
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
+
+.c-modal {
+  position: relative;
+  background: $lightBackgroundColor;
+  margin: 150px 16px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  &--edgeless {
+    padding: 0;
+    margin: 56px 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 22px;
+    @extend .buttonReset;
+    @include buttonStyle($width: 14px, $height: 14px, $inputBorderColor: transparent);
+    background: transparent;
+    box-sizing: border-box;
+    box-shadow: none;
+    border: none;
+    width: 14px;
+    height: 14px;
+
+    &::after {
+      content: "\e5cd";
+      @include material-icons($font-size: 24px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+      position: absolute;
+      top: 0.8px;
+      left: 0px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__text {
+    font-size: 12px;
+    margin: 16px 0 10px;
+  }
+}

@@ -1,40 +1,96 @@
 <ion-header>
-    
-      <ion-navbar>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    
-        <ion-title>
-          {{'Categories'}}
-        </ion-title>
-    
-        <ion-buttons end>
-          <button ion-button icon-only (click)="openSearch()">
-            <ion-icon name="search"></ion-icon>
-          </button>
-          <button ion-button icon-only class="cart-button" (click)="openCart()">
-            <ion-icon name="cart">
-              <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
-            </ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-navbar>
-    
-    </ion-header>
-  
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-  <ion-content class="page-categories3">
-      <ion-list>
-          <ion-item *ngFor="let c of shared.categories" (click)="openSubCategories(c.id)" class="animated flipInX">
-            <ion-avatar item-start>
-              <img src="{{config.url+c.image}}">
-            </ion-avatar>
-            <h2>{{c.name}}<br><small>{{c.total_products}} {{'Products'}} </small></h2>
-          </ion-item>
-        </ion-list>
-      
-  </ion-content>
-  <ion-footer *ngIf="config.footerShowHide=='1'">
-    <footer ></footer>
-  </ion-footer>
+    <ion-title>
+      Мои бонусы
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-button icon-only class="cart-button" (click)="openCart()">
+        <ion-icon name="cart">
+          <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<main style="margin-top: 56px;">
+  <div class="c-bonus">
+    <span class="c-bonus__title">Ваши бонусы</span>
+    <span class="c-bonus__quantity">1 874</span>
+  </div>
+  <div class="l-order l-order--bonus">
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Номер заказа</div>
+      <div class="c-paragraph__value">№97281</div>
+    </div>
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Дата заказа</div>
+      <div class="c-paragraph__value">02.02.2018</div>
+    </div>
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Сумма</div>
+      <div class="c-paragraph__value">1 783 руб.</div>
+    </div>
+    <div class="c-order-list">
+      <h2 class="c-order-list__title">Состав заказа</h2>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+    </div>
+    <div class="c-order-bonus">
+      <span class="c-order-bonus__title">Количество заработанных бонусов</span>
+      <span class="c-order-bonus__quantity">20 бонусов</span>
+    </div>
+  </div>
+  <div class="l-order l-order--bonus">
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Номер заказа</div>
+      <div class="c-paragraph__value">№97281</div>
+    </div>
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Дата заказа</div>
+      <div class="c-paragraph__value">02.02.2018</div>
+    </div>
+    <div class="c-paragraph">
+      <div class="c-paragraph__title">Сумма</div>
+      <div class="c-paragraph__value">1 783 руб.</div>
+    </div>
+    <div class="c-order-list">
+      <h2 class="c-order-list__title">Состав заказа</h2>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+      <div class="c-order-item">
+        <span class="c-order-item__title">Ламизил 1% 30мл спрей </span>
+        <span class="c-order-item__quantity">- 1 шт.</span>
+      </div>
+    </div>
+    <div class="c-order-bonus">
+      <span class="c-order-bonus__title">Количество заработанных бонусов</span>
+      <span class="c-order-bonus__quantity">20 бонусов</span>
+    </div>
+  </div>
+</main>

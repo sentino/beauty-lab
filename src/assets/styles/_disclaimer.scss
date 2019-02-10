@@ -1,0 +1,16 @@
+.c-disclaimer {
+  font-size: 12px;
+  color: $primaryTextColor;
+
+  &__title {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  &__text {
+    padding: 1px 0;
+    overflow: hidden;
+  }
+}
