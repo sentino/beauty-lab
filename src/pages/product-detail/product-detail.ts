@@ -15,8 +15,12 @@ import { StarRatingModule } from 'ionic3-star-rating';
 import { Events } from 'ionic-angular';
 import {Headers, RequestOptions} from '@angular/http';
 import { SearchPage } from '../search/search';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { CartService } from '../../services/cart.service';
+import { AlertProvider } from '../../services/alert/alert';
+import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 
@@ -51,6 +55,8 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
   ]
 })
 export class ProductDetailPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   public product;
   pet: string = "kittens";
   attributes = [];
@@ -119,6 +125,7 @@ export class ProductDetailPage {
 }
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
@@ -127,7 +134,9 @@ export class ProductDetailPage {
     public modalCtrl: ModalController,
     public events: Events,
     public loading: LoadingProvider,
-    private socialSharing: SocialSharing) {
+    private socialSharing: SocialSharing,
+    private cartService: CartService,
+    private alert: AlertProvider) {
 
     events.subscribe('star-rating:changed', (starRating) => {console.log(starRating)});
       
@@ -155,6 +164,15 @@ export class ProductDetailPage {
     // }
 
   }
+
+  addProduct() {
+    // console.log('!!!!!!!!!!!!!!!!', this.product_id);
+    this.store.dispatch(new PostProductCartAction({id: this.product_id, quantity: 1}));
+    // this.cartService.postProduct(this.product_id, 1).subscribe((res: any) => {
+    //   this.alert.showWithTitle('', res.result.successText);
+    // })
+  }
+
   // addToCartProduct() {
   //   this.loading.autoHide(500);
   //  // console.log(this.product);
@@ -404,7 +422,7 @@ export class ProductDetailPage {
   // }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
 
 

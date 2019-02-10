@@ -10,6 +10,9 @@ import { Slides } from 'ionic-angular';
 // import { TranslateService } from '@ngx-translate/core';
 import { ProductsPage } from '../products/products';
 import { HttpClient } from '@angular/common/http';
+import { CartContainer } from '../cart/cart-container';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 /**
  * Generated class for the HealthCatalogPage page.
@@ -48,6 +51,8 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class HealthCatalogPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   banners;
   sections;
   leaders;
@@ -67,6 +72,7 @@ export class HealthCatalogPage {
 
   @ViewChild(Slides) slides: Slides;
   constructor(
+    private store: Store<any>,
     // public translate: TranslateService,
     public actionSheet: ActionSheetController,
     public navCtrl: NavController,
@@ -159,5 +165,8 @@ export class HealthCatalogPage {
 
   ngOnInit() {
     this.getMainInfo();
+  }
+  openCart() {
+    this.navCtrl.push(CartContainer);
   }
 }

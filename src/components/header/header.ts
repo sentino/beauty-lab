@@ -4,13 +4,15 @@
 // Author URI: http://vectorcoder.com/
 import { Component, Input } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
-import { CartPage } from '../../pages/cart/cart';
+import { CartContainer } from '../../pages/cart/cart-container';
 import { SearchPage } from '../../pages/search/search';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition, state } from '@angular/animations';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'header',
@@ -42,6 +44,7 @@ import { HttpClient } from '@angular/common/http';
 
 })
 export class HeaderComponent {
+  productsLength$ = this.store.select(selectCartProductsLength);
 
   @Input('title') title;
   page;
@@ -61,6 +64,7 @@ export class HeaderComponent {
   };
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public shared: SharedDataProvider,
     public config: ConfigProvider,
@@ -80,7 +84,7 @@ export class HeaderComponent {
   }
   openCart() {
     if (this.openCartPage)
-      this.navCtrl.push(CartPage);
+      this.navCtrl.push(CartContainer);
   }
   openSearch() {
     if (this.title != 'Search')

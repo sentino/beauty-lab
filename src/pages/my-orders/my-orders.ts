@@ -11,9 +11,11 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
 import { OrderDetailPage } from '../order-detail/order-detail';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -21,9 +23,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'my-orders.html',
 })
 export class MyOrdersPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   orders = new Array;
   httpRunning = true;
+
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
@@ -68,7 +74,7 @@ export class MyOrdersPage {
     // this.getOrders();
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

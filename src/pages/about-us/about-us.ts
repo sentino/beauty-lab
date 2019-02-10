@@ -12,16 +12,20 @@ import { RefundPolicyPage } from '../refund-policy/refund-policy';
 import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-about-us',
   templateUrl: 'about-us.html',
 })
 export class AboutUsPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public shared: SharedDataProvider,
     public modalCtrl: ModalController,
@@ -50,7 +54,7 @@ export class AboutUsPage {
     this.iab.create(this.config.siteUrl,"blank");
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
 }
 openSearch() {
     this.navCtrl.push(SearchPage);

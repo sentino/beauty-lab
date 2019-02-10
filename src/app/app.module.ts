@@ -51,7 +51,7 @@ import { FooterComponent } from '../components/footer/footer';
 import { SlidingTabsComponent } from '../components/sliding-tabs/sliding-tabs';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { HeaderComponent } from '../components/header/header';
-import { CartPage } from '../pages/cart/cart';
+import { CartContainer } from '../pages/cart/cart-container';
 import { CurencyPipe } from '../pipes/curency/curency';
 import { Toast } from '@ionic-native/toast/ngx';
 import { SearchPage } from '../pages/search/search';
@@ -125,6 +125,24 @@ import { AppSectionListItemOne } from '../pages/confirm-order/components/app-sec
 import { AppSectionListItemTwo } from '../pages/confirm-order/components/app-section-list-item-two';
 import { AppSectionListItemThree } from '../pages/confirm-order/components/app-section-list-item-three';
 import { AppSectionListItemFour } from '../pages/confirm-order/components/app-section-list-item-four';
+import { CartService } from '../services/cart.service';
+import { AppCart } from '../pages/cart/components/cart';
+import { AppPresents } from '../pages/cart/components/presents';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { MainEffects } from './store/main.effects';
+
+
+
+// export interface BeautyLabState {
+//   // cart: any
+// }
+
+// export const reducers: ActionReducerMap<BeautyLabState> = {
+//   // cart: cartReducer
+// }
 
 
 const ORDER_MODULE = [
@@ -137,6 +155,12 @@ const ORDER_MODULE = [
   AppSectionListItemFour
 ];
 
+const CART_MODULE = [
+  CartContainer,
+  AppCart,
+  AppPresents
+];
+
 const PAGES = [
   MyApp,
   HomePage,
@@ -145,7 +169,6 @@ const PAGES = [
   Home4Page,
   Home5Page,
   SearchPage,
-  CartPage,
   CategoriesPage,
   Categories2Page,
   Categories3Page,
@@ -194,7 +217,8 @@ const PAGES = [
   NewsDetailPage,
   NewsListPage,
   SettingsPage,
-  ...ORDER_MODULE
+  ...ORDER_MODULE,
+  ...CART_MODULE
 ];
 
 const PIPES = [
@@ -210,6 +234,12 @@ const PIPES = [
       backButtonText: '',
       iconMode: 'md',
     }),
+    StoreModule.forRoot({main: reducer}),
+    EffectsModule.forRoot([MainEffects]),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      }),
     // HttpModule,
     BrowserModule,
     HttpClientModule,
@@ -229,6 +259,7 @@ const PIPES = [
   declarations: [...PAGES, PIPES],
   entryComponents: [...PAGES],
   providers: [
+    CartService,
     ConfigProvider,
     StatusBar,
     SplashScreen,

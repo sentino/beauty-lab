@@ -9,9 +9,11 @@ import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 // import { TranslateService } from '@ngx-translate/core';
 import { trigger, transition, animate, style } from '@angular/animations';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-wish-list',
@@ -32,10 +34,14 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'wish-list.html',
 })
 export class WishListPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
 
   page = 0;
+
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
@@ -67,7 +73,7 @@ export class WishListPage {
     // this.getProducts();
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

@@ -19,6 +19,8 @@ import { MenuController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
 import { HttpClient } from '@angular/common/http';
+import { GetDataCartAction, InitDataCart } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class SharedDataProvider {
@@ -75,6 +77,7 @@ export class SharedDataProvider {
   };
 
   constructor(
+    private store: Store<any>,
     public config: ConfigProvider,
     public http: HttpClient,
     private storage: Storage,
@@ -348,6 +351,7 @@ export class SharedDataProvider {
   login(data) {
     this.customerData = data;
     this.storage.set('customerData', this.customerData);
+    this.store.dispatch(new GetDataCartAction());
     // this.subscribePush();
   }
 
@@ -359,16 +363,18 @@ export class SharedDataProvider {
 
     var localInfo = JSON.stringify(this.customerData); 
     localStorage.setItem("localInfo", localInfo);
+    this.store.dispatch(new GetDataCartAction());
 
     // this.subscribePush();
   }
 
   logOut() {
     this.loading.autoHide(500);
-    this.appCtrl.getRootNav().setRoot(HomePage); 
+    this.appCtrl.getRootNav().setRoot(HomePage);
+    this.store.dispatch(new InitDataCart());
     this.menuCtrl.close();
     this.customerData = {};
-    this.storage.set('customerData', this.customerData);
+    this.storage.set('customerData', '');
     this.fb.logout();
     localStorage.setItem('token',null);
     console.log("Customer data");

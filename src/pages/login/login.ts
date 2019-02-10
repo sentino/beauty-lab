@@ -29,6 +29,8 @@ import { NavController, Content } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Categories2Page } from '../categories2/categories2';
+import { Store } from '@ngrx/store';
+import { GetDataCartAction } from '../../app/store';
 
 
 @Component({
@@ -73,6 +75,7 @@ export class LoginPage {
   // });
 
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public viewCtrl: ViewController,
@@ -107,6 +110,7 @@ export class LoginPage {
   //============================================================================================
   ngOnInit() {
     localStorage.setItem("token",null);
+    // this.store.dispatch(new GetDataCartAction());
 
 
     // const FloatLabel = (() => {
@@ -168,6 +172,7 @@ export class LoginPage {
       };
 
       this.http.post(this.config.url + "auth/login", vkData).subscribe((data: any) => {
+        this.store.dispatch(new GetDataCartAction());
         console.log(data);
         this.response = data;
         this.shared.userInfo(this.response.result);
@@ -370,6 +375,7 @@ export class LoginPage {
     };
 
     this.http.post(this.config.url + "auth/login/", socialData).subscribe((data: any) => {
+      this.store.dispatch(new GetDataCartAction());
       this.loading.hide();
 
       console.log("Face login");
@@ -401,6 +407,7 @@ export class LoginPage {
   //close modal
   logout() {
     this.fb.logout();
+    this.store.dispatch(new GetDataCartAction());
   }
 
 
@@ -417,6 +424,7 @@ export class LoginPage {
 
   postAuth(formData) {
     this.http.post(this.config.url + "auth/login/", formData).subscribe((data: any) => {
+        this.store.dispatch(new GetDataCartAction());
         this.loading.hide();
         localStorage.setItem("customerData", data.result.accessToken);
         console.log("User info login");

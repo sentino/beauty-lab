@@ -8,12 +8,15 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { ProductDetailPage } from '../../pages/product-detail/product-detail';
 import { LoginPage } from '../../pages/login/login';
+import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'product',
   templateUrl: 'product.html'
 })
 export class ProductComponent {
+  productsLength$ = this.store.select(selectCartProductsLength);
 
   all_props;
   props_show = true;
@@ -22,6 +25,7 @@ export class ProductComponent {
   @Input('type') type;
   // @Output() someEvent = new EventEmitter();
   constructor(
+    private store: Store<any>,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public navCtrl: NavController,
@@ -63,6 +67,14 @@ export class ProductComponent {
       return true;
     else
       return false
+  }
+
+  addProduct() {
+    // console.log('!!!!!!!!!!!!!!!!', this.p.ID);
+    this.store.dispatch(new PostProductCartAction({id: this.p.ID, quantity: 1}));
+    // this.cartService.postProduct(this.p.ID, 1).subscribe((res: any) => {
+    //   this.alert.showWithTitle('', res.result.successText);
+    // })
   }
 
   addToCart() { this.shared.addToCart(this.p, []); }

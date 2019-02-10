@@ -11,17 +11,23 @@ import { Http } from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
 import { EditShippingAddressPage } from '../edit-shipping-address/edit-shipping-address';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-my-shipping-addresses',
   templateUrl: 'my-shipping-addresses.html',
 })
 export class MyShippingAddressesPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   allShippingAddress = new Array;
+
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
@@ -99,7 +105,7 @@ export class MyShippingAddressesPage {
     // this.getAllAddress();
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

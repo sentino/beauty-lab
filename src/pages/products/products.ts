@@ -11,8 +11,10 @@ import { LoadingProvider } from '../../services/loading/loading';
 // import { TranslateService } from '@ngx-translate/core';
 // import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -49,6 +51,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 export class ProductsPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
+
   @ViewChild(Content) content: Content;
   @ViewChild(Slides) slider: Slides;
 
@@ -136,6 +141,7 @@ export class ProductsPage {
 
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
@@ -199,6 +205,13 @@ export class ProductsPage {
 
   //============================================================================================
   ngOnChanges() {}
+
+  addProduct(id, quantity) {
+    // console.log('!!!!!!!!!!!!!!!!', this.product_id);
+    // this.cartService.postProduct(this.product_id, 1).subscribe((res: any) => {
+    //   this.alert.showWithTitle('', res.result.successText);
+    // })
+  }
 
   submit() {
     this.Filter = false;
@@ -805,7 +818,7 @@ export class ProductsPage {
   }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
 
   ionViewDidLoad() {}

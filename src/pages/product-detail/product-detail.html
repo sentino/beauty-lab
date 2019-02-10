@@ -15,7 +15,7 @@
           </button>
         <button ion-button icon-only class="cart-button" (click)="openCart()">
           <ion-icon name="cart">
-            <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+            <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
           </ion-icon>
         </button>
       </ion-buttons>
@@ -90,7 +90,7 @@
       </div>
 
       <div class="flex-block buy_btns-part">
-          <button class="left-button" ion-button block color="secondary"  >КУПИТЬ</button>
+          <button class="left-button" ion-button block color="secondary"  (click)="addProduct()">КУПИТЬ</button>
           <button class="right-button" ion-button block color="secondary"  >Купить в 1 клик</button>
       </div>
 

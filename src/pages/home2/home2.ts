@@ -10,9 +10,11 @@ import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Content, NavController } from 'ionic-angular';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-home2',
@@ -34,6 +36,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class Home2Page {
+  productsLength$ = this.store.select(selectCartProductsLength);
 
   @ViewChild(Content) content: Content;
 
@@ -52,6 +55,7 @@ export class Home2Page {
 
   segments: any = 'topSeller';
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
@@ -62,7 +66,7 @@ export class Home2Page {
     this.content.resize();
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

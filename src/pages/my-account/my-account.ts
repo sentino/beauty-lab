@@ -12,11 +12,13 @@ import { Platform, NavController } from 'ionic-angular';
 import { AlertProvider } from '../../services/alert/alert';
 import { LoadingProvider } from '../../services/loading/loading';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import {Headers, RequestOptions} from '@angular/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { validatorFnControlsMatch } from '../../helpers/customValidator';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 
@@ -49,6 +51,8 @@ import { validatorFnControlsMatch } from '../../helpers/customValidator';
   ],
 })
 export class MyAccountPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   pet: string = "puppies";
 
   phoneNumber: any = "";
@@ -96,6 +100,7 @@ export class MyAccountPage {
 
 
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
@@ -335,7 +340,7 @@ export class MyAccountPage {
 
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
 
   steps: string = "first";

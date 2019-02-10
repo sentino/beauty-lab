@@ -9,8 +9,10 @@ import { SearchPage } from '../../pages/search/search';
 import { Slides } from 'ionic-angular';
 // import { TranslateService } from '@ngx-translate/core';
 import { ProductsPage } from '../products/products';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 /**
  * Generated class for the BeautyCatalogPage page.
@@ -49,6 +51,8 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class BeautyCatalogPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   banners;
   sections;
   leaders;
@@ -68,6 +72,7 @@ export class BeautyCatalogPage {
 
   @ViewChild(Slides) slides: Slides;
   constructor(
+    private store: Store<any>,
     // public translate: TranslateService,
     public actionSheet: ActionSheetController,
     public navCtrl: NavController,
@@ -166,7 +171,7 @@ export class BeautyCatalogPage {
   }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
 
 

@@ -19,12 +19,14 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoginPage } from '../login/login';
 import { MyAccountPage } from '../my-account/my-account';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { HomePage} from '../home/home';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 
@@ -57,6 +59,8 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class SettingsPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   setting: { [k: string]: any } = {};
   SearchList = false;
   Search_result;
@@ -67,6 +71,7 @@ export class SettingsPage {
   };
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -233,7 +238,7 @@ export class SettingsPage {
   }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

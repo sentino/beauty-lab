@@ -12,9 +12,11 @@ import { Toast } from '@ionic-native/toast/ngx';
 // import { TranslateService } from '@ngx-translate/core';
 import { NewsDetailPage } from '../news-detail/news-detail';
 import { NewsListPage } from '../news-list/news-list';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 
 
@@ -23,6 +25,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'news.html',
 })
 export class NewsPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
   featuredPosts = new Array;
   segments = 'newest';
@@ -38,6 +42,7 @@ export class NewsPage {
   page2 = 0;
 
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
@@ -133,7 +138,7 @@ export class NewsPage {
   // }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);

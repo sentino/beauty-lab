@@ -8,8 +8,10 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ConfigProvider } from '../../services/config/config';
 import { ProductsPage } from '../products/products';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-sub-categories',
@@ -30,9 +32,13 @@ import { SearchPage } from '../search/search';
   templateUrl: 'sub-categories.html',
 })
 export class SubCategoriesPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   subcategories=[];
   parent;
+
   constructor(
+    private store: Store<any>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public shared: SharedDataProvider,
@@ -49,7 +55,7 @@ export class SubCategoriesPage {
     this.navCtrl.push(ProductsPage, { id: id, name: name, sortOrder: 'newest' });
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
 }
 openSearch() {
     this.navCtrl.push(SearchPage);

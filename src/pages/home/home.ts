@@ -11,7 +11,7 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
 import { NavController, Content } from 'ionic-angular';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import {Headers, RequestOptions} from '@angular/http';
 import { LoadingProvider } from '../../services/loading/loading';
@@ -148,7 +148,7 @@ export class HomePage {
   
 
   openCart() {
-      this.navCtrl.push(CartPage);
+      this.navCtrl.push(CartContainer);
   }
   openSearch() {
       this.navCtrl.push(SearchPage);

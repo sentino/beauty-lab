@@ -11,9 +11,11 @@ import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ProductsPage } from '../products/products';
 import { NavController, Content } from 'ionic-angular';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-home3',
@@ -35,8 +37,12 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class Home3Page {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   @ViewChild(Content) content: Content;
+
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public navCtrl: NavController,
@@ -50,7 +56,7 @@ export class Home3Page {
     this.content.resize(); 
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
 }
 openSearch() {
     this.navCtrl.push(SearchPage);

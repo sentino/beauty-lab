@@ -44,7 +44,7 @@ import { trigger, transition, animate, style } from '@angular/animations';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 // import { SocialSharing } from '@ionic-native/social-sharing';
 import { Http } from '@angular/http';
-import { CartPage } from '../pages/cart/cart';
+import { CartContainer } from '../pages/cart/cart-container';
 // import { NavController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
@@ -54,6 +54,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { GetDataCartAction, InitDataCart } from './store';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -114,6 +116,7 @@ export class MyApp {
     private appVersion: AppVersion,
     public iab: InAppBrowser,
     private socialSharing: SocialSharing,
+    private store: Store<any>
 
   ) {
     //open intro page on start
@@ -157,6 +160,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.store.dispatch(new GetDataCartAction());
       this.rootPage = HomePage;
       setTimeout(() => { this.splashScreen.hide(); }, 2000);
       this.statusBar.styleLightContent();
@@ -173,7 +177,7 @@ export class MyApp {
   }
 
   openCart() {
-      this.nav.push(CartPage);
+      this.nav.push(CartContainer);
   }
 
   openPage(page) {
@@ -258,7 +262,8 @@ export class MyApp {
   logOut() {
     this.shared.logOut();
     this.menuCtrl.close();
-    this.appCtrl.getRootNav().setRoot(HomePage); 
+    this.appCtrl.getRootNav().setRoot(HomePage);
+    this.store.dispatch(new InitDataCart());
   }
   showHideHomeList() {
     if (this.homeList == false) { this.homeList = true; this.homeListIcon = 'close'; }

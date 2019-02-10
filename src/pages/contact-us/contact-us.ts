@@ -9,9 +9,11 @@ import { ConfigProvider } from '../../services/config/config';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { AlertProvider } from '../../services/alert/alert';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 declare var google;
 
@@ -20,6 +22,8 @@ declare var google;
   templateUrl: 'contact-us.html',
 })
 export class ContactUsPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   contact = {
@@ -27,7 +31,9 @@ export class ContactUsPage {
     email: '',
     message: ''
   };
+
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public loading: LoadingProvider,
@@ -90,7 +96,7 @@ export class ContactUsPage {
   }
 
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
 }
 openSearch() {
     this.navCtrl.push(SearchPage);

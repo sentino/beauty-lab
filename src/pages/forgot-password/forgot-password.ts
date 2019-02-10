@@ -10,6 +10,8 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
 import { SearchPage } from '../../pages/search/search';
 import { HttpClient } from '@angular/common/http';
+import { selectCartProductsLength } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -47,6 +49,8 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class ForgotPasswordPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   formData = {
     email: '',
   };
@@ -62,7 +66,9 @@ export class ForgotPasswordPage {
     "search_string": '',
   };
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    private store: Store<any>,
+    public navCtrl: NavController,
     public viewCtrl: ViewController,
     public loading: LoadingProvider,
     public http: HttpClient,

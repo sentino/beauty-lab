@@ -11,8 +11,10 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { ProductsPage } from '../products/products';
-import { CartPage } from '../cart/cart';
+import { CartContainer } from '../cart/cart-container';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { selectCartProductsLength } from '../../app/store';
 
 
 @Component({
@@ -47,6 +49,8 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class SearchPage {
+  productsLength$ = this.store.select(selectCartProductsLength);
+
   @ViewChild(Content) content: Content;
   searchResult = [];
   showCategories = true;
@@ -90,7 +94,9 @@ export class SearchPage {
   query_string;
   empty_status = false;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    private store: Store<any>,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
     public http: HttpClient,
@@ -302,7 +308,7 @@ export class SearchPage {
     this.navCtrl.push(ProductsPage, { id: id, name: name, sortOrder: 'newest' });
   }
   openCart() {
-    this.navCtrl.push(CartPage);
+    this.navCtrl.push(CartContainer);
   }
 
   ngOnInit() {

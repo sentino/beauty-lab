@@ -15,7 +15,7 @@
           </button>
           <button ion-button icon-only class="cart-button" (click)="openCart()">
             <ion-icon name="cart">
-              <ion-badge color="secondary">{{shared.cartquantity}}</ion-badge>
+              <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
             </ion-icon>
           </button>
         </ion-buttons>

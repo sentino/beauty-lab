@@ -49,7 +49,7 @@
   </ion-buttons>
 
   <ion-buttons *ngIf="type=='normal'">
-    <button ion-button block color="#EF5CEF">Купить</button>
+    <button ion-button block color="#EF5CEF" (click)="addProduct()">Купить</button>
     <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
   </ion-buttons>
 
@@ -107,7 +107,7 @@
     </ion-col>
   </ion-row>
   <ion-buttons >
-      <button ion-button block color="#EF5CEF">Купить</button>
+      <button ion-button block color="#EF5CEF" (click)="addProduct()">Купить</button>
       <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
   </ion-buttons>
 </ion-card-content>
@@ -119,7 +119,7 @@
 </ion-buttons>
 
 <ion-buttons *ngIf="type=='normal'">
-  <button ion-button block color="#EF5CEF">Купить</button>
+  <button ion-button block color="#EF5CEF" (click)="addProduct()">Купить</button>
   <button ion-button block color="danger" *ngIf="config.cartButton==1 && p.products_quantity==0">Убрать</button>
 </ion-buttons>
 
