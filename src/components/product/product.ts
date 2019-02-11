@@ -10,6 +10,7 @@ import { ProductDetailPage } from '../../pages/product-detail/product-detail';
 import { LoginPage } from '../../pages/login/login';
 import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { WishListService } from '../../services/wish-list.service';
 
 @Component({
   selector: 'product',
@@ -25,6 +26,7 @@ export class ProductComponent {
   @Input('type') type;
   // @Output() someEvent = new EventEmitter();
   constructor(
+    private wishListService: WishListService,
     private store: Store<any>,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
@@ -94,15 +96,32 @@ export class ProductComponent {
   }
 
   clickWishList() {
-    if (this.shared.customerData.customers_id == null || this.shared.customerData.customers_id == undefined) {
-      let modal = this.modalCtrl.create(LoginPage);
-      modal.present();
-    }
-    else {
+    if (localStorage.getItem('customerData')) {
+      // console.log(this.p);
+      // debugger;
       // if (this.p.isLiked == '0') { this.addWishList(); }
       // else this.removeWishList();
+      this.addWishList();
     }
   }
+
+  addWishList() {
+    this.wishListService.putItem(this.p.ID);
+  }
+  removeWishList() {
+    this.wishListService.delItem(this.p.ID)
+  }
+
+  // clickWishList() {
+  //   if (this.shared.customerData.customers_id == null || this.shared.customerData.customers_id == undefined) {
+  //     let modal = this.modalCtrl.create(LoginPage);
+  //     modal.present();
+  //   }
+    // else {
+      // if (this.p.isLiked == '0') { this.addWishList(); }
+      // else this.removeWishList();
+  //   }
+  // }
   // addWishList() {
   //   this.shared.addWishList(this.p);
   // }

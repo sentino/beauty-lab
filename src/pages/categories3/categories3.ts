@@ -14,6 +14,7 @@ import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { BonusesService } from '../../services/bonuses.service';
 import 'rxjs/add/operator/map';
+import { Observable, Subscription } from 'rxjs';
 
 
 
@@ -37,6 +38,8 @@ import 'rxjs/add/operator/map';
 })
 export class Categories3Page implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
+  dataPoints$: Observable<any>;
+  dataTransacts$: Observable<any>;
 
   constructor(
     private store: Store<any>,
@@ -50,10 +53,11 @@ export class Categories3Page implements OnInit {
 
 
   public ngOnInit(): void {
-    let blah = this.bonusesService.getBonuses().map(res => res);
-    blah.subscribe(res => {
-      console.log(res);
-    })
+    this.dataPoints$ = this.bonusesService.getBonuses().map(res => res.result.points);
+    this.dataTransacts$ = this.bonusesService.getBonuses().map(res => res.result.transacts);
+    // blah.subscribe(res => {
+    //   console.log(res);
+    // })
   }
 
 

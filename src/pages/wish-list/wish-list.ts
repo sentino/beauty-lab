@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
@@ -12,8 +12,11 @@ import { trigger, transition, animate, style } from '@angular/animations';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { HttpClient } from '@angular/common/http';
-import { selectCartProductsLength } from '../../app/store';
+import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { WishListService } from '../../services/wish-list.service';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-wish-list',
@@ -33,22 +36,30 @@ import { Store } from '@ngrx/store';
   ],
   templateUrl: 'wish-list.html',
 })
-export class WishListPage {
+export class WishListPage implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
+  productsWishList$: Observable<any>;
 
-  @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
+  // @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
 
-  page = 0;
+  // page = 0;
 
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
-    public navParams: NavParams,
-    public http: HttpClient,
-    public config: ConfigProvider,
-    public shared: SharedDataProvider,
+    private wishListService: WishListService
+    // public navParams: NavParams,
+    // public http: HttpClient,
+    // public config: ConfigProvider,
+    // public shared: SharedDataProvider,
     // translate: TranslateService
   ) { }
+
+
+  public ngOnInit(): void {
+    this.productsWishList$ = this.wishListService.getList().map(res => res.result.products);
+  }
+
 
   // getProducts() {
   //   var data: { [k: string]: any } = {};
@@ -69,15 +80,19 @@ export class WishListPage {
   //     if (data.success == 0) { this.infinite.enable(false); }
   //   });
   // }
-  ngOnInit() {
+  // ngOnInit() {
     // this.getProducts();
+  // }
+  addProduct(id) {
+    this.store.dispatch(new PostProductCartAction({id: id, quantity: 1}));
   }
+
   openCart() {
     this.navCtrl.push(CartContainer);
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
   }
-  ionViewWillEnter() {
-  }
+  // ionViewWillEnter() {
+  // }
 }

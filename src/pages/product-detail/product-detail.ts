@@ -21,6 +21,7 @@ import { CartService } from '../../services/cart.service';
 import { AlertProvider } from '../../services/alert/alert';
 import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { WishListService } from '../../services/wish-list.service';
 
 
 
@@ -126,6 +127,7 @@ export class ProductDetailPage {
 
   constructor(
     private store: Store<any>,
+    private wishListService: WishListService,
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: ConfigProvider,
@@ -403,23 +405,24 @@ export class ProductDetailPage {
         // Error!
       });
   }
-  // clickWishList() {
 
-  //   if (this.shared.customerData.customers_id == null || this.shared.customerData.customers_id == undefined) {
-  //     let modal = this.modalCtrl.create(LoginPage);
-  //     modal.present();
-  //   }
-  //   else {
-  //     if (this.product.isLiked == '0') { this.addWishList(); }
-  //     else this.removeWishList();
-  //   }
-  // }
-  // addWishList() {
-  //   this.shared.addWishList(this.product);
-  // }
-  // removeWishList() {
-  //   this.shared.removeWishList(this.product);
-  // }
+
+  clickWishList() {
+    if (localStorage.getItem('customerData')) {
+    //   console.log(this.single_product);
+    //   debugger;
+      // if (this.product.isLiked == '0') { this.addWishList(); }
+      // else this.removeWishList();
+      this.addWishList();
+    }
+  }
+
+  addWishList() {
+    this.wishListService.putItem(this.product_id);
+  }
+  removeWishList() {
+    this.wishListService.delItem(this.product_id)
+  }
 
   openCart() {
     this.navCtrl.push(CartContainer);
