@@ -58,6 +58,8 @@ import { WishListService } from '../../services/wish-list.service';
 export class ProductDetailPage {
   productsLength$ = this.store.select(selectCartProductsLength);
 
+  modal = false;
+
   public product;
   pet: string = "kittens";
   attributes = [];
@@ -431,6 +433,10 @@ export class ProductDetailPage {
 
   ngOnInit() {
     this.getProductDetails();
+  }
+
+  openModal() {
+    this.modal = !this.modal;
   }
 
 }

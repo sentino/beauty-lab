@@ -25,19 +25,19 @@ import { Store } from '@ngrx/store';
 export class MyOrdersPage {
   productsLength$ = this.store.select(selectCartProductsLength);
 
-  orders = new Array;
-  httpRunning = true;
+  // orders = new Array;
+  // httpRunning = true;
 
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
-    public navParams: NavParams,
-    public http: HttpClient,
-    public config: ConfigProvider,
-    public shared: SharedDataProvider,
+    // public navParams: NavParams,
+    // public http: HttpClient,
+    // public config: ConfigProvider,
+    // public shared: SharedDataProvider,
     // translate: TranslateService,
-    public alert: AlertProvider,
-    public loading: LoadingProvider
+    // public alert: AlertProvider,
+    // public loading: LoadingProvider
   ) {
   }
   // getOrders() {
@@ -64,15 +64,16 @@ export class MyOrdersPage {
   //     });
   // };
 
-  showOrderDetail(order) {
+  // showOrderDetail(order) {
+  //
+  //   this.navCtrl.push(OrderDetailPage, { 'data': order });
+  //
+  // }
+  // ionViewDidLoad() {
+  //   this.httpRunning = true;
+  //   // this.getOrders();
+  // }
 
-    this.navCtrl.push(OrderDetailPage, { 'data': order });
-
-  }
-  ionViewDidLoad() {
-    this.httpRunning = true;
-    // this.getOrders();
-  }
   openCart() {
     this.navCtrl.push(CartContainer);
   }

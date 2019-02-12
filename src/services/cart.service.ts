@@ -27,6 +27,25 @@ export class CartService {
     return this.http.post(this.config.url + 'cart/item', {'product': id, 'quantity': quantity });
   }
 
+  orderGoodsInOneClick(name, phone, id) {
+    this.http.post(this.config.url + 'order/createshortitem', {
+      "name": name,
+      "phone": phone,
+      "item": id
+    }).subscribe(res => {
+      console.log('заказ товара в 1 клик', res);
+    })
+  }
+
+  oneClickOrder(name, phone) {
+    this.http.post(this.config.url + 'order/createshort', {
+      "name": name,
+      "phone": phone
+    }).subscribe(res => {
+      console.log('заказ в 1 клик', res);
+    })
+  }
+
   putProduct(id, quantity) {
     return this.http.put(this.config.url + 'cart/item', {'itemId': id, 'quantity': quantity });
   }

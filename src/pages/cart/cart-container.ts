@@ -138,7 +138,7 @@ export class ValidateCoupon {
             class="c-primary-button c-primary-button--halfofpage" (click)="submit()">
             КУПИТЬ
           </button>
-          <button class="c-default-button c-default-button--halfofpage">
+          <button class="c-default-button c-default-button--halfofpage" (click)="openModal()">
             КУПИТЬ В 1 КЛИК
           </button>
         </div>
@@ -159,7 +159,11 @@ export class ValidateCoupon {
 
     </ion-content>
 
-
+    <app-modal-one-click-order
+      *ngIf="modal"
+      (close)="openModal()"
+    ></app-modal-one-click-order>
+    
     <ion-footer>
       <footer></footer>
     </ion-footer>
@@ -185,6 +189,7 @@ export class CartContainer implements OnInit, OnDestroy {
   subscribeQuantity: Subscription;
 
   promoCode: FormControl;
+  modal = false;
   // total: any;
 
   constructor(
@@ -263,6 +268,10 @@ export class CartContainer implements OnInit, OnDestroy {
     } else {
       this.navCtrl.push(ConfirmOrderContainer);
     }
+  }
+
+  openModal() {
+    this.modal = !this.modal;
   }
 
 

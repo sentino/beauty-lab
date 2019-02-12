@@ -9,7 +9,7 @@ export const selectsState = (state) => state.main;
 export const selectCartData = createSelector(selectsState, fromReducer.getCartData);
 export const selectCartProducts = createSelector(selectCartData, (cart) => cart.basket);
 export const selectCartProductsLength = createSelector(selectCartData, (cart) => {
-  if (!cart.basket[0].id || cart.basket[0].id === "") {
+  if (!cart.basket.length || !cart.basket[0].id || cart.basket[0].id === "") {
     return 0;
   }
   return cart.basket.length;

@@ -34,7 +34,68 @@ import 'rxjs/add/operator/map';
       ]
     )
   ],
-  templateUrl: 'wish-list.html',
+  template: `
+    <ion-header>
+      <ion-navbar>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>
+          Избранные
+        </ion-title>
+
+        <ion-buttons end>
+          <button ion-button icon-only (click)="openSearch()">
+            <ion-icon name="search"></ion-icon>
+          </button>
+          <button ion-button icon-only class="cart-button" (click)="openCart()">
+            <ion-icon name="cart">
+              <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
+            </ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
+    </ion-header>
+
+
+    <div class="scroll-content">
+      <main style="margin-top: 56px; padding: 22px 16px 65px;" *ngIf="productsWishList$ | async">
+        <div class="l-goods" *ngFor="let item of (productsWishList$ | async)">
+          <div class="c-good" style="margin: 0 auto 16px;">
+            <img [src]="item.IMAGE" alt="vichy-cream" class="c-good__image">
+            <div class="l-good__info">
+              <h2 class="c-good__title" style="margin: 0;">
+                {{(item.NAME.length > 65)? (item.NAME | slice:0:65)+'...':(item.NAME)}}
+              </h2>
+              <div class="l-good__row l-good__row--little-margin" *ngIf="item.PRICE !== item.PRICE_DISCOUNT">
+                <span class="c-good__price c-good__price--del">{{item.PRICE_DISCOUNT_FORMAT}}</span>
+                <span class="c-good__country">{{item.COUNTRY}}</span>
+              </div>
+              <div class="l-good__row">
+                <span class="c-good__price c-good__price--new">{{item.PRICE_FORMAT}}</span>
+                <button class="c-good__favorite c-good__favorite--selected"></button>
+              </div>
+              <button class="c-primary-button c-primary-button--narrow" (click)="addProduct(item.ID)">КУПИТЬ</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="c-disclaimer">
+          <h2 class="c-disclaimer__title">Информация о юрлице продавца и лицензии</h2>
+          <p class="c-disclaimer__text">
+            РЫБНЫЙ ТЕКСТ <br /> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
+            enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+            felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+          </p>
+        </div>
+      </main>
+    </div>
+  `,
 })
 export class WishListPage implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
@@ -57,7 +118,7 @@ export class WishListPage implements OnInit {
 
 
   public ngOnInit(): void {
-    this.productsWishList$ = this.wishListService.getList().map(res => res.result.products);
+    this.productsWishList$ = this.wishListService.getList().map(res => res.result ? res.result.products : undefined);
   }
 
 

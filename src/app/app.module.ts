@@ -135,6 +135,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MainEffects } from './store/main.effects';
 import { BonusesService } from '../services/bonuses.service';
 import { WishListService } from '../services/wish-list.service';
+import { ModalOneClickOrder } from '../helpers/modal/modalOneClickOrder';
 
 
 
@@ -219,6 +220,7 @@ const PAGES = [
   NewsDetailPage,
   NewsListPage,
   SettingsPage,
+  ModalOneClickOrder,
   ...ORDER_MODULE,
   ...CART_MODULE
 ];

@@ -385,9 +385,9 @@ cart-container {
   .c-modal {
     position: relative;
     background: $lightBackgroundColor;
-    margin: 150px 16px;
+    margin: 100px 16px;
     padding: 16px;
-    height: 311px;
+    //height: 311px;
     box-sizing: border-box;
 
     &__close {

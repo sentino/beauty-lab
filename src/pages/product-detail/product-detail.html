@@ -92,7 +92,7 @@
 
       <div class="flex-block buy_btns-part">
           <button class="left-button" ion-button block color="secondary"  (click)="addProduct()">КУПИТЬ</button>
-          <button class="right-button" ion-button block color="secondary"  >Купить в 1 клик</button>
+          <button class="right-button" ion-button block color="secondary"  (click)="openModal()">Купить в 1 клик</button>
       </div>
 
 
@@ -234,7 +234,15 @@
     </div>
     
   </ion-grid>
+
 </ion-content>
+
+<app-modal-one-click-order
+  *ngIf="modal"
+  [productId]="product_id"
+  (close)="openModal()"
+></app-modal-one-click-order>
+
 <ion-footer>
 <footer></footer>
 </ion-footer>
