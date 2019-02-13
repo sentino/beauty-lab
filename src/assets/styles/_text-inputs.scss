@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column;
   position: relative;
-  width: 328px;
+  width: 100%;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   padding: 7px 0 10px;
@@ -117,16 +117,20 @@
 .l-select {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   position: relative;
-  width: 328px;
-  margin-bottom: 16px;
+  width: 100%;
+  margin-bottom: 22px;
   border-bottom: 1px solid $inputBorderColor;
+
+  &:last-child {
+    margin-bottom: 14px;
+  }
 
   &::after {
     position: absolute;
-    top: 16px;
-    right: 2px;
+    top: 13px;
+    right: 4px;
     content: "\e313";
-    @include material-icons($font-size: 22px, $color: lighten($color: $primaryTextColor, $amount: 13%));
+    @include material-icons($color: lighten($color: $primaryTextColor, $amount: 13%));
   }
 }
 
@@ -135,8 +139,8 @@
   font-family: inherit;
   background-color: transparent;
   width: 100%;
-  padding: 10px 10px 10px 0;
-  font-size: 18px;
+  padding: 10px 10px 12px 0;
+  font-size: 16px;
   border-radius: 0;
   border: none;
   box-sizing: border-box;
@@ -171,12 +175,17 @@
     -webkit-transform: translateY(12px);
     transform: translateY(12px);
     color: lighten($color: $primaryTextColor, $amount: 48%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+    display: inline-block;
+    white-space: nowrap;
   }
 
   &__bar {
     position: relative;
     display: block;
-    width: 328px;
+    width: 100%;
 
     &::before,
     &::after {

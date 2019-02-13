@@ -14,7 +14,7 @@
 //}
 
 .l-order {
-  padding: 21px 16px;
+  padding: 22px 16px;
   font-size: 12px;
   border-top: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
 
@@ -26,23 +26,30 @@
 
 .c-paragraph {
   display: flex;
+  width: 100%;
 
   margin-bottom: 8px;
   font-weight: 500;
 
   &__title {
-    width: 90px;
+    min-width: 90px;
     margin-right: 16px;
+    white-space: nowrap;
   }
 
   &__value {
     color: $primaryTextColor;
+    width: 70%;
   }
 }
 
 .c-order-list {
-  margin-top: 20px;
+  margin-top: 19px;
   margin-bottom: 7px;
+
+  &--big-margin {
+    margin-top: 20px;
+  }
 
   &__title {
     margin: 0;

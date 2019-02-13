@@ -10,11 +10,35 @@
 </head>
 <body>
     <div class="l-container">
-        <header class="c-header c-header--shadowed">
-            <div class="c-menu">
-                <button class="c-menu__button"></button>
+        <div class="l-modal l-modal--hidden">
+            <div class="c-modal">
+                <h2 class="c-modal__title">
+                    Оформить заказ в 1 клик
+                </h2>
+                <button class="c-modal__close"></button>
+                <p class="c-modal__text">
+                    Просто оставьте свой номер телефона, и наш консультант свяжется с Вами
+                    с понедельника по пятницу с 10:00 до 20:00, в
+                    субботу и воскресенье с 11:00 до 17:00.
+                </p>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_name" class="c-input-field__input" type="text" maxlength="150" required="required">
+                    <label for="user_name" class="c-input-field__label">Имя</label>
+                </div>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_tel" class="c-input-field__input" type="tel" maxlength="50" required="required">
+                    <label for="user_tel" class="c-input-field__label">Моб. телефон в формате 7(…)*</label>
+                </div>
+                <button class="c-default-button c-default-button--resized">ОТПРАВИТЬ</button>
             </div>
-            <h2 class="c-header__title">Избранные</h2>
+        </div>
+        <header class="c-header c-header--shadowed">
+            <div class="l-nav">
+                <div class="c-menu">
+                    <button class="c-menu__button"></button>
+                </div>
+                <h2 class="c-header__title">Избранные</h2>
+            </div>
             <div class="l-action">
                 <div class="c-search">
                     <button class="c-search__button"></button>
@@ -28,7 +52,10 @@
         <main>
             <div class="l-goods">
                 <div class="c-good">
-                    <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    <button class="c-good__close"></button>
+                    <div class="l-good__image">
+                        <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    </div>
                     <div class="l-good__info">
                         <h2 class="c-good__title">
                             Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл
@@ -45,7 +72,10 @@
                     </div>
                 </div>
                 <div class="c-good">
-                    <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    <button class="c-good__close"></button>
+                    <div class="l-good__image">
+                        <img src="./images/завантаження.jpg" alt="vichy-cream" class="c-good__image">
+                    </div>
                     <div class="l-good__info">
                         <h2 class="c-good__title">
                             Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл

@@ -1,36 +1,24 @@
 @import "partials";
+@import "body";
 @import "good-card--vertical";
 @import "footer";
 
 body {
-  -webkit-font-smoothing: antialiased;
-  font-family: 'Roboto', sans-serif;
-  caret-color: $cursorColor;
-  color: lighten($color: $primaryTextColor, $amount: 48%);
-  max-width: 360px;
-  margin: 0 auto;
-
-  .l-container {
-    position: relative;
-  }
-
   main {
-    width: 100%;
-    padding: 22px 16px 65px;
-    box-sizing: border-box;
-    max-height: 215px;
-    overflow-y: hidden;
+    height: 74.1vh;
+    overflow-y: auto;
+    padding: 0;
   }
 }
 
 .c-slider {
   position: relative;
-  height: 250px;
+  min-height: 250px;
 
   &__item {
     display: none;
     width: 100%;
-    height: 250px;
+    min-height: 250px;
 
     &--current {
       display: block;

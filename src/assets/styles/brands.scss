@@ -1,24 +1,12 @@
 @import "partials";
+@import "body";
 @import "footer";
 
 body {
-  -webkit-font-smoothing: antialiased;
-  font-family: 'Roboto', sans-serif;
-  caret-color: $cursorColor;
-  color: lighten($color: $primaryTextColor, $amount: 48%);
-  max-width: 360px;
-  margin: 0 auto;
-
-  .l-container {
-    position: relative;
-  }
-
   main {
-    width: 100%;
-    padding: 22px 16px 65px;
-    box-sizing: border-box;
-    max-height: 463px;
-    overflow-y: hidden;
+    height: 74.1vh;
+    overflow-y: auto;
+    padding-bottom: 0;
   }
 }
 
@@ -27,6 +15,10 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+
+  @media screen and (min-width: 390px) {
+    justify-content: flex-start;
+  }
 
   &--vertical {
     flex-direction: column;
@@ -49,9 +41,11 @@ body {
     &--vertical {
       font-size: 22px;
       color: $highlightHeadersColor;
-      margin-right: 22px;
+      margin-right: 16px;
       margin-bottom: 0;
       font-weight: 400;
+      width: 20px;
+      text-align: left;
     }
   }
 
@@ -59,6 +53,11 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 8px;
+    flex-basis: 21.39%;
+
+    @media screen and (min-width: 390px) {
+      flex-basis: 20%;
+    }
   }
 
   &__img {
@@ -75,6 +74,10 @@ body {
     &--vertical {
       padding-bottom: 17px;
       font-size: 12px;
+    }
+
+    &--active {
+      color: $defaultBackgroundColor;
     }
   }
 }

@@ -11,10 +11,12 @@
 <body>
     <div class="l-container">
         <header class="c-header c-header--shadowed">
-            <div class="c-menu">
-                <button class="c-menu__button"></button>
+            <div class="l-nav">
+                <div class="c-menu">
+                    <button class="c-menu__button"></button>
+                </div>
+                <h2 class="c-header__title">Подтверждение заказа</h2>
             </div>
-            <h2 class="c-header__title">Подтверждение заказа</h2>
             <div class="l-action">
                 <div class="c-search">
                     <button class="c-search__button"></button>
@@ -36,8 +38,10 @@
                                 <span class="c-order__title">Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл</span>
                                 <span class="c-order__category">Крем</span>
                             </div>
-                            <span class="c-order__quantity">2 шт.</span>
-                            <span class="c-order__price">1 783 руб.</span>
+                            <div class="l-order__details">
+                                <span class="c-order__quantity">2 шт.</span>
+                                <span class="c-order__price">1 783 руб.</span>
+                            </div>
                         </div>
                     </li>
                     <li class="c-order">
@@ -46,8 +50,10 @@
                                 <span class="c-order__title">Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл</span>
                                 <span class="c-order__category">Крем</span>
                             </div>
-                            <span class="c-order__quantity">2 шт.</span>
-                            <span class="c-order__price">1 783 руб.</span>
+                            <div class="l-order__details">
+                                <span class="c-order__quantity">2 шт.</span>
+                                <span class="c-order__price">1 783 руб.</span>
+                            </div>
                         </div>
                     </li>
                     <li class="c-order">
@@ -56,8 +62,10 @@
                                 <span class="c-order__title">Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл</span>
                                 <span class="c-order__category">Крем</span>
                             </div>
-                            <span class="c-order__quantity">2 шт.</span>
-                            <span class="c-order__price">1 783 руб.</span>
+                            <div class="l-order__details">
+                                <span class="c-order__quantity">2 шт.</span>
+                                <span class="c-order__price">1 783 руб.</span>
+                            </div>
                         </div>
                     </li>
                 </ol>
@@ -70,8 +78,10 @@
                                     <span class="c-order__title">Виши (Viсhy) СЛОУ АЖ Флюид укрепляющий антивозрастной уход 50мл Крем</span>
                                     <span class="c-order__category">Крем</span>
                                 </div>
-                                <span class="c-order__quantity">1 шт.</span>
-                                <span class="c-order__price">0 руб.</span>
+                                <div class="l-order__details">
+                                    <span class="c-order__quantity">2 шт.</span>
+                                    <span class="c-order__price">1 783 руб.</span>
+                                </div>
                             </div>
                         </li>
                     </ol>
@@ -116,7 +126,7 @@
                                 <option value="3">Option 3</option>
                             </select>
                             <span class="c-select__bar"></span>
-                            <label class="c-select__label">Выбор области</label>
+                            <label class="c-select__label" title="Выбор области">Выбор области</label>
                         </div>
                         <div class="l-select">
                             <select class="c-select" required>
@@ -126,13 +136,13 @@
                                 <option value="3">Option 3</option>
                             </select>
                             <span class="c-select__bar"></span>
-                            <label class="c-select__label">Выбор города или населенного пункта</label>
+                            <label class="c-select__label" title="Выбор города или населенного пункта">Выбор города или населенного пункта</label>
                         </div>
                     </div>
                 </div>
                 <div class="c-info c-info--picked">
                     <button class="c-info__button c-info__button--picked">
-                        <span class="c-info__text">2. Выбор способа доставки, с указанием ее цены</span>
+                        <span class="c-info__text">2. Выбор способа доставки,<br /> с указанием ее цены</span>
                     </button>
                     <div class="c-info__dropdown">
                         <div class="l-radiobutton">

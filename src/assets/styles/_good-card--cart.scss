@@ -7,7 +7,7 @@
 
 .l-good {
   &__info {
-    padding: 8px;
+    padding: 8px 8px 12px;
     box-sizing: border-box;
   }
 
@@ -16,10 +16,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 3px 0 8px;
+    margin: 8px 0;
 
-    &--little-margin {
-      margin: 7px 0 3px;
+    &--large-margin {
+      margin-top: 12px;
     }
 
     &--hidden {
@@ -35,10 +35,10 @@
 }
 
 .c-good {
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   width: 328px;
-  height: 127px;
-  min-height: 127px;
+  height: 109px;
+  min-height: 109px;
   box-sizing: border-box;
   border-radius: 2px;
   box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
@@ -54,8 +54,37 @@
     display: none;
   }
 
-  &:last-child {
-    margin-bottom: 0;
+  &--gift {
+    margin-bottom: 12px;
+  }
+
+  &--without-discount {
+    .c-good__label {
+      display: none;
+    }
+
+    .c-good__price--del {
+      display: none;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 34.38px;
+    height: 34.38px;
+    border: 0.5px solid transparentize($color: $lightBorderColor, $amount: 0.9);
+    box-sizing: border-box;
+    border-radius: 50%;
+    box-shadow: 0 6px 6px 0
+      transparentize($color: lighten($color: $primaryTextColor, $amount: 24%), $amount: 0.77);
+    font-size: 12px;
+    color: $buttonTextColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $discountBackground;
   }
 
   &__close {
@@ -81,7 +110,7 @@
   }
 
   &__image {
-    width: 156px;
+    width: 135.91px;
     height: 100%;
     object-fit: cover;
 
@@ -92,12 +121,10 @@
 
   &__title {
     margin: 0;
-    padding: 0 0 2px;
+    padding: 0;
     font-size: 10px;
     font-weight: 500;
     color: $primaryTextColor;
-    line-height: 11px;
-    width: 100%;
     height: 36px;
     overflow: hidden;
   }
@@ -119,11 +146,18 @@
       line-height: 13px;
       font-weight: 500;
       text-decoration: line-through;
+      margin-right: 13px;
     }
   }
 
-  &__country {
-    @extend .card-text;
+  &__currency {
+    &--small {
+      font-size: 11px;
+    }
+
+    &--large {
+      font-size: 13px;
+    }
   }
 
   &__favorite {
@@ -144,5 +178,61 @@
         @include material-icons($font-size: 20px, $color:  $highlightColor);
       }
     }
+  }
+}
+
+.c-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text {
+    @extend .card-text;
+    margin-right: 9px;
+
+    @media screen and (max-width: 340px) {
+      display: none;
+    }
+  }
+
+  &__button {
+    position: relative;
+    @extend .buttonReset;
+    @include buttonStyle($width: 18px, $height: 18px, $inputBorderColor: lighten($color: $primaryTextColor, $amount: 76%));
+    border-radius: 0;
+
+    &::after {
+      @include material-icons($font-size: 14px, $color: $buttonTextColor);
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    &--add {
+      &::after {
+        content: "\e145";
+      }
+    }
+
+    &--remove {
+      &::after {
+        content: "\e15b";
+      }
+    }
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 0.5px solid $lightBorderColor;
+    box-sizing: border-box;
+    @extend .card-text;
+    text-align: center;
+    margin: 0 5.7px;
   }
 }

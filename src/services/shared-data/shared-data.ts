@@ -351,6 +351,7 @@ export class SharedDataProvider {
   login(data) {
     this.customerData = data;
     this.storage.set('customerData', this.customerData);
+    localStorage.setItem('customerData', this.customerData.accessToken);
     this.store.dispatch(new GetDataCartAction());
     // this.subscribePush();
   }
@@ -363,6 +364,7 @@ export class SharedDataProvider {
 
     var localInfo = JSON.stringify(this.customerData); 
     localStorage.setItem("localInfo", localInfo);
+    localStorage.setItem('customerData', this.customerData.accessToken);
     this.store.dispatch(new GetDataCartAction());
 
     // this.subscribePush();
@@ -377,6 +379,8 @@ export class SharedDataProvider {
     this.storage.set('customerData', '');
     this.fb.logout();
     localStorage.setItem('token',null);
+    localStorage.setItem('customerData', '');
+    this.store.dispatch(new GetDataCartAction());
     console.log("Customer data");
     console.log(this.customerData);
 

@@ -136,6 +136,7 @@ import { MainEffects } from './store/main.effects';
 import { BonusesService } from '../services/bonuses.service';
 import { WishListService } from '../services/wish-list.service';
 import { ModalOneClickOrder } from '../helpers/modal/modalOneClickOrder';
+import { OrdersService } from '../services/orders.service';
 
 
 
@@ -263,6 +264,7 @@ const PIPES = [
   declarations: [...PAGES, PIPES],
   entryComponents: [...PAGES],
   providers: [
+    OrdersService,
     WishListService,
     BonusesService,
     CartService,

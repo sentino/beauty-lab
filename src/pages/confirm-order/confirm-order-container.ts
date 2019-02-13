@@ -178,7 +178,6 @@ export class ConfirmOrderContainer implements OnInit{
   putSelectedLocation(event) {
     this.payPayler.putData({location: event}).subscribe(res => {
       console.log(res);
-      debugger;
     })
   }
 }

@@ -67,4 +67,9 @@
   &:checked + .c-radiobutton--with-gap:before {
     border: 2px solid $radiobuttonColor;
   }
+
+  &__text {
+    font-size: 16px;
+    vertical-align: 4px;
+  }
 }

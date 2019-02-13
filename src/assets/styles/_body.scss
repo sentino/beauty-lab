@@ -1,0 +1,20 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
+  caret-color: $cursorColor;
+  color: lighten($color: $primaryTextColor, $amount: 48%);
+  min-width: 311px;
+  max-width: 499px;
+  margin: 0 auto;
+
+  .l-container {
+    position: relative;
+  }
+
+  main {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 65px;
+    box-sizing: border-box;
+  }
+}

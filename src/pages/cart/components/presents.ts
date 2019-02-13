@@ -19,7 +19,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
     )
   ],
   template: `    
-    <div class="c-gift" [@animate]>
+    <div class="c-gift" [@animate] style="margin-top: 22px; margin-bottom: 10px;">
       <h2 class="c-gift__title">Ваши подарки</h2>
       <div class="c-good c-good--gift" *ngFor="let product of presents">
         <img [src]="product.image" alt="vichy-cream" class="c-good__image">

@@ -60,7 +60,7 @@ import 'rxjs/add/operator/map';
 
 
     <div class="scroll-content">
-      <main style="margin-top: 56px; padding: 22px 16px 65px;" *ngIf="productsWishList$ | async">
+      <main style="margin-top: 56px; padding: 22px 0 65px 16px;" *ngIf="productsWishList$ | async">
         <div class="l-goods" *ngFor="let item of (productsWishList$ | async)">
           <div class="c-good" style="margin: 0 auto 16px;">
             <img [src]="item.IMAGE" alt="vichy-cream" class="c-good__image">

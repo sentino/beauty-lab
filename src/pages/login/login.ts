@@ -110,6 +110,7 @@ export class LoginPage {
   //============================================================================================
   ngOnInit() {
     localStorage.setItem("token",null);
+    this.store.dispatch(new GetDataCartAction());
     // this.store.dispatch(new GetDataCartAction());
 
 
@@ -172,7 +173,6 @@ export class LoginPage {
       };
 
       this.http.post(this.config.url + "auth/login", vkData).subscribe((data: any) => {
-        this.store.dispatch(new GetDataCartAction());
         console.log(data);
         this.response = data;
         this.shared.userInfo(this.response.result);
@@ -257,7 +257,6 @@ export class LoginPage {
 
 
     this.fb.getLoginStatus().then((res: any) => {
-      debugger;
       if (res.status == "connected") {
         console.log("user connected already" + res.authResponse.accessToken);
         this.createAccount(res.authResponse.accessToken, "fb");
@@ -375,7 +374,7 @@ export class LoginPage {
     };
 
     this.http.post(this.config.url + "auth/login/", socialData).subscribe((data: any) => {
-      this.store.dispatch(new GetDataCartAction());
+      // this.store.dispatch(new GetDataCartAction());
       this.loading.hide();
 
       console.log("Face login");
@@ -407,6 +406,7 @@ export class LoginPage {
   //close modal
   logout() {
     this.fb.logout();
+    localStorage.set('customerData', '');
     this.store.dispatch(new GetDataCartAction());
   }
 
@@ -424,9 +424,9 @@ export class LoginPage {
 
   postAuth(formData) {
     this.http.post(this.config.url + "auth/login/", formData).subscribe((data: any) => {
-        this.store.dispatch(new GetDataCartAction());
         this.loading.hide();
         localStorage.setItem("customerData", data.result.accessToken);
+        this.store.dispatch(new GetDataCartAction());
         console.log("User info login");
         console.log(data);
         this.shared.userInfo(data);
