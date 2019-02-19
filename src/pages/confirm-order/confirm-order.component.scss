@@ -136,8 +136,9 @@ app-confirm-order-component {
     color: $primaryTextColor;
     padding: 0;
     min-height: 40px;
-    max-height: 250px;
-    overflow-y: auto;
+    //max-height: 250px;
+    //overflow-y: auto;
+    list-style-type: none;
 
     &__wrapper {
       display: flex;
@@ -148,7 +149,7 @@ app-confirm-order-component {
     }
 
     &__item {
-      width: 200px;
+      width: 190px;
       display: flex;
       flex-direction: column;
     }
@@ -168,13 +169,15 @@ app-confirm-order-component {
     &__quantity {
       color: $quantityColor;
       font-family: 'Segoe UI';
+      margin-left: 10px;
+      white-space: nowrap;
     }
 
     &__price {
       color: lighten($color: $primaryTextColor, $amount: 13%);
       font-weight: 500;
       font-size: 12px;
-      min-width: 56px;
+      min-width: 85px;
       text-align: right;
       transform: translateY(2px);
       margin-left: 8px;

@@ -407,6 +407,7 @@ export class LoginPage {
   logout() {
     this.fb.logout();
     localStorage.set('customerData', '');
+    localStorage.set('x-content-session', '');
     this.store.dispatch(new GetDataCartAction());
   }
 

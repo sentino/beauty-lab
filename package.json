@@ -28,7 +28,7 @@
     "@angular/platform-browser": "6.1.10",
     "@angular/platform-browser-dynamic": "6.1.10",
     "@ionic-native/facebook": "^5.0.0",
-    "@ionic-native/in-app-browser": "^5.0.0",
+    "@ionic-native/in-app-browser": "^5.1.0",
     "@ionic-native/themeable-browser": "^5.0.0",
     "@material/floating-label": "^0.43.0",
     "@ngrx/effects": "^4.0.5",

@@ -138,6 +138,9 @@ import { WishListService } from '../services/wish-list.service';
 import { ModalOneClickOrder } from '../helpers/modal/modalOneClickOrder';
 import { OrdersService } from '../services/orders.service';
 import { PayPaylerService } from '../services/pay-payler.service';
+import { BrandsContainer } from '../pages/brands/brands-container';
+import { BrandsComponent } from '../pages/brands/brands.component';
+import { SanitizeHtmlPipe } from '../helpers/pipe/sanitize-html.pipe';
 
 
 
@@ -164,6 +167,11 @@ const CART_MODULE = [
   CartContainer,
   AppCart,
   AppPresents
+];
+
+const BRANDS_MODULE = [
+  BrandsContainer,
+  BrandsComponent
 ];
 
 const PAGES = [
@@ -224,11 +232,13 @@ const PAGES = [
   SettingsPage,
   ModalOneClickOrder,
   ...ORDER_MODULE,
-  ...CART_MODULE
+  ...CART_MODULE,
+  ...BRANDS_MODULE
 ];
 
 const PIPES = [
-  CurencyPipe
+  CurencyPipe,
+  SanitizeHtmlPipe
 ];
 
 @NgModule({
@@ -262,9 +272,10 @@ const PIPES = [
     //   }
     // }),
   ],
-  declarations: [...PAGES, PIPES],
+  declarations: [...PAGES, ...PIPES],
   entryComponents: [...PAGES],
   providers: [
+    InAppBrowser,
     PayPaylerService,
     OrdersService,
     WishListService,

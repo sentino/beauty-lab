@@ -56,6 +56,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { GetDataCartAction, InitDataCart } from './store';
 import { Store } from '@ngrx/store';
+import { BrandsContainer } from '../pages/brands/brands-container';
 
 
 @Component({
@@ -204,6 +205,7 @@ export class MyApp {
     else if (page == 'news') this.nav.setRoot(NewsPage);
     else if (page == 'intro') this.nav.setRoot(IntroPage);
     else if (page == 'settings') this.nav.setRoot(SettingsPage);
+    else if (page == 'brands') this.nav.setRoot(BrandsContainer);
     else if (page == 'newest') this.nav.push(ProductsPage, { sortOrder: 'newest' });
     else if (page == 'topSeller') this.nav.push(ProductsPage, { sortOrder: 'top seller' });
     else if (page == 'deals') this.nav.push(ProductsPage, { sortOrder: 'special' });

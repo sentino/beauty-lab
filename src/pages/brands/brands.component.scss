@@ -1,0 +1,73 @@
+brands-component {
+  .l-param__items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @media screen and (min-width: 390px) {
+      justify-content: flex-start;
+    }
+
+    &--vertical {
+      flex-direction: column;
+      padding-top: 3px;
+    }
+  }
+
+  .c-param {
+    margin: 0 0 14px;
+    &--vertical {
+      display: flex;
+      margin: 0 0 27px;
+    }
+
+    &__title {
+      @extend .main-title;
+      margin-bottom: 16px;
+      text-align: center;
+
+      &--vertical {
+        font-size: 22px;
+        color: $highlightHeadersColor;
+        margin-right: 16px;
+        margin-bottom: 0;
+        font-weight: 400;
+        width: 20px;
+        text-align: left;
+      }
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+      flex-basis: 21.39%;
+
+      @media screen and (min-width: 390px) {
+        flex-basis: 20%;
+      }
+    }
+
+    &__img {
+      width: 70.25px;
+      max-height: 68.14px;
+      margin-bottom: 3px;
+    }
+
+    &__text {
+      @extend .card-text;
+      color: lighten($color: $primaryTextColor, $amount: 13%);
+      font-weight: 400;
+
+      &--vertical {
+        padding-bottom: 17px;
+        font-size: 12px;
+      }
+
+      &--active {
+        color: $defaultBackgroundColor;
+      }
+    }
+  }
+}

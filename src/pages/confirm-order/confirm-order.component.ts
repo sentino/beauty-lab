@@ -18,7 +18,7 @@ import { FormGroup } from '@angular/forms';
             <span class="c-order__price" *ngIf="item.price !== 0">
               {{item.sumFormat}}<br>
               <i *ngIf="item.price !== item.priceFull">{{item.sumFullFormat}}</i></span>
-            <span class="c-order__price" *ngIf="item.price === 0">Подарок!</span>
+            <span class="c-order__price" *ngIf="item.price === 0">бесплатно</span>
           </div>
         </li>
       </ul>
@@ -149,7 +149,7 @@ export class ConfirmOrderComponent implements OnInit {
       idSection: 1
     },
     {
-      title: '2. Выбор способа доставки, с указанием ее цены',
+      title: '2. Выбор способа доставки',
       idSection: 2
     },
     {

@@ -380,6 +380,7 @@ export class SharedDataProvider {
     this.fb.logout();
     localStorage.setItem('token',null);
     localStorage.setItem('customerData', '');
+    localStorage.setItem('x-content-session', '');
     this.store.dispatch(new GetDataCartAction());
     console.log("Customer data");
     console.log(this.customerData);

@@ -69,11 +69,11 @@ import 'rxjs/add/operator/map';
                 {{(item.NAME.length > 65)? (item.NAME | slice:0:65)+'...':(item.NAME)}}
               </h2>
               <div class="l-good__row l-good__row--little-margin" *ngIf="item.PRICE !== item.PRICE_DISCOUNT">
-                <span class="c-good__price c-good__price--del">{{item.PRICE_DISCOUNT_FORMAT}}</span>
+                <span class="c-good__price c-good__price--del">{{item.PRICE_FORMAT}}</span>
                 <span class="c-good__country">{{item.COUNTRY}}</span>
               </div>
               <div class="l-good__row">
-                <span class="c-good__price c-good__price--new">{{item.PRICE_FORMAT}}</span>
+                <span class="c-good__price c-good__price--new">{{item.PRICE_DISCOUNT_FORMAT}}</span>
                 <button class="c-good__favorite c-good__favorite--selected"></button>
               </div>
               <button class="c-primary-button c-primary-button--narrow" (click)="addProduct(item.ID)">КУПИТЬ</button>

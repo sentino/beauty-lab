@@ -15,7 +15,7 @@ import { Component, Input } from '@angular/core';
       <ion-list [formGroupName]="'bonuses'" *ngIf="innerPayment && innerPayment.maxSumBonusPay > 0">
         <ion-item style="display: flex; flex-direction: row-reverse;">
           <ion-checkbox [formControlName]="'writeOffBonuses'" 
-                        style="margin-right: 9px"></ion-checkbox>
+                        style="margin-right: 2px !important;"></ion-checkbox>
           <ion-label>{{innerPayment.name}}</ion-label>
         </ion-item>
 

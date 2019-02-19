@@ -242,7 +242,7 @@ export class CartContainer implements OnInit, OnDestroy {
     this.subscribeQuantity = of({id, quantity})
       .pipe(
         distinctUntilChanged(),
-        delay(700)
+        delay(2000)
       ).subscribe(({id, quantity}) => {
         this.store.dispatch(new UpdateQuantityCartAction({id, quantity}))
     })
