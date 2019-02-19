@@ -18,6 +18,8 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { App} from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GetDataCartAction } from '../../app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'page-home',
@@ -66,6 +68,7 @@ export class HomePage {
 
 
   constructor(
+    private store: Store<any>,
     public http: HttpClient,
     public config: ConfigProvider,
     public shared: SharedDataProvider,
@@ -143,6 +146,7 @@ export class HomePage {
 
   ngOnInit() {
     this.getMainInfo();
+    this.store.dispatch(new GetDataCartAction());
   }
 
   

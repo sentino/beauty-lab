@@ -579,7 +579,9 @@ button {
     box-shadow: none;
 }
 
-
+.item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
 //.list.list-md.ng-touched.ng-dirty.ng-valid .item-input,
 //.item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus).ng-dirty .item-inner,
 //.item.item-block.item-md.item-input.item-label-floating.ng-dirty.ng-touched.input-has-value.item-input-has-value.ng-valid.item-input-has-focus.input-has-focus,
@@ -658,4 +660,9 @@ app-confirm-order-component app-section-list-item-two .list-md > .item-block .it
 app-confirm-order-component app-section-list-item-three .list-md:first-child > .item-block .item-inner,
 app-confirm-order-component app-section-list-item-three .list-md:last-child > .item-block:first-child .item-inner{
   border: none  !important;
+}
+
+
+.alert-md .alert-radio-label {
+  white-space: normal!important;
 }

@@ -18,3 +18,8 @@ export const selectCartPresents = createSelector(selectCartData, (cart) => cart.
 export const selectCartTotalOldPrice = createSelector(selectCartData, (cart) => cart.summary.sumFullFormat);
 export const selectCartTotalNewPrice = createSelector(selectCartData, (cart) => cart.summary.sumFormat);
 // export const selectContainsDiscount = createSelector(selectCartData, (cart) => cart.summary.sum > cart.summary.sumFull);
+
+
+export const selectDataConfirmOrder = createSelector(selectsState, fromReducer.getDataConfirmOrder);
+export const selectDataConfirmOrderWarning = createSelector(selectDataConfirmOrder, (confirmOrder) => confirmOrder.messages.warning);
+export const selectDataConfirmOrderNotify = createSelector(selectDataConfirmOrder, (confirmOrder) => confirmOrder.messages.notify);

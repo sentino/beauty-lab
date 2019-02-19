@@ -5,21 +5,22 @@ import { animate, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'app-cart',
   animations: [
-    trigger(
-      'animate', [
-        transition(':enter', [
-          style({ opacity: 0 }),
-          animate('500ms', style({ opacity: 1 }))
-        ]),
-        transition(':leave', [
-          style({ opacity: 1 }),
-          animate('700ms', style({ transform: 'scale(0)', opacity: 0 }))
-        ])
-      ]
-    )
+    // trigger(
+    //   'animate', [
+    //     transition(':enter', [
+    //       style({ opacity: 0 }),
+    //       animate('500ms', style({ opacity: 1 }))
+    //     ]),
+    //     transition(':leave', [
+    //       style({ opacity: 1 }),
+    //       animate('700ms', style({ transform: 'scale(0)', opacity: 0 }))
+    //     ])
+    //   ]
+    // )
   ],
   template: `
-    <div class="c-good" *ngFor="let product of products" [@animate]>
+    <!--<div class="c-good" *ngFor="let product of products" [@animate]>-->
+    <div class="c-good" *ngFor="let product of products">
       <button class="c-good__close" style="z-index: 1;" [disabled]="product.loading" (click)="delete(product.id)"></button>
       <div class="c-good__discount" style="z-index: 1"
            *ngIf="product.discountPercent">{{product.discountPercent}}%

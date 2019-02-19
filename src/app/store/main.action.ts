@@ -12,29 +12,37 @@ export function type<T>(label: T | ''): T {
 }
 
 
-const CATEGORY = 'Cart';
+const CATEGORY_CART = 'Cart';
+const CATEGORY_CONFIRM_ORDER = 'Confirm order';
 
-export const INIT_DATA_CART = type(`[${CATEGORY}] initialize data cart`);
+export const INIT_DATA_CART = type(`[${CATEGORY_CART}] initialize data cart`);
 
-export const GET_DATA_CART = type(`[${CATEGORY}] get data`);
-export const GET_DATA_CART_SUCCESS = type(`[${CATEGORY}] get data success`);
-export const GET_DATA_CART_FAIL = type(`[${CATEGORY}] get data fail`);
+export const GET_DATA_CART = type(`[${CATEGORY_CART}] get data`);
+export const GET_DATA_CART_SUCCESS = type(`[${CATEGORY_CART}] get data success`);
+export const GET_DATA_CART_FAIL = type(`[${CATEGORY_CART}] get data fail`);
 
-export const DELETE_PRODUCT = type(`[${CATEGORY}] delete product`);
-export const DELETE_PRODUCT_SUCCESS = type(`[${CATEGORY}] delete product success`);
-export const DELETE_PRODUCT_FAIL = type(`[${CATEGORY}] delete product fail`);
+export const DELETE_PRODUCT = type(`[${CATEGORY_CART}] delete product`);
+export const DELETE_PRODUCT_SUCCESS = type(`[${CATEGORY_CART}] delete product success`);
+export const DELETE_PRODUCT_FAIL = type(`[${CATEGORY_CART}] delete product fail`);
 
-export const UPDATE_DATA_CART = type(`[${CATEGORY}] update data`);
-export const UPDATE_DATA_CART_SUCCESS = type(`[${CATEGORY}] update data success`);
-export const UPDATE_DATA_CART_FAIL = type(`[${CATEGORY}] update data fail`);
+export const UPDATE_DATA_CART = type(`[${CATEGORY_CART}] update data`);
+export const UPDATE_DATA_CART_SUCCESS = type(`[${CATEGORY_CART}] update data success`);
+export const UPDATE_DATA_CART_FAIL = type(`[${CATEGORY_CART}] update data fail`);
 
-export const UPDATE_QUANTITY_CART = type(`[${CATEGORY}] update quantity cart`);
-export const UPDATE_QUANTITY_CART_SUCCESS = type(`[${CATEGORY}] update quantity cart success`);
-export const UPDATE_QUANTITY_CART_FAIL = type(`[${CATEGORY}] update quantity cart fail`);
+export const UPDATE_QUANTITY_CART = type(`[${CATEGORY_CART}] update quantity cart`);
+export const UPDATE_QUANTITY_CART_SUCCESS = type(`[${CATEGORY_CART}] update quantity cart success`);
+export const UPDATE_QUANTITY_CART_FAIL = type(`[${CATEGORY_CART}] update quantity cart fail`);
 
-export const POST_PRODUCT = type(`[${CATEGORY}] post product`);
-export const POST_PRODUCT_SUCCESS = type(`[${CATEGORY}] post product success`);
-export const POST_PRODUCT_FAIL = type(`[${CATEGORY}] post product fail`);
+export const POST_PRODUCT = type(`[${CATEGORY_CART}] post product`);
+export const POST_PRODUCT_SUCCESS = type(`[${CATEGORY_CART}] post product success`);
+export const POST_PRODUCT_FAIL = type(`[${CATEGORY_CART}] post product fail`);
+
+
+
+export const GET_DATA_CONFIRM_ORDER = type(`[${CATEGORY_CONFIRM_ORDER}] get data confirm order`);
+export const GET_DATA_CONFIRM_ORDER_SUCCESS = type(`[${CATEGORY_CONFIRM_ORDER}] get data confirm order success`);
+export const GET_DATA_CONFIRM_ORDER_FAIL = type(`[${CATEGORY_CONFIRM_ORDER}] get data confirm order fail`);
+
 
 
 export class InitDataCart implements Action {
@@ -113,6 +121,24 @@ export class PostProductCartFailAction implements Action {
 }
 
 
+
+
+export class GetDataConfirmOrderAction implements Action {
+  readonly type = GET_DATA_CONFIRM_ORDER;
+  constructor(public payload?: any) {}
+}
+export class GetDataConfirmOrderSuccessAction implements Action {
+  readonly type = GET_DATA_CONFIRM_ORDER_SUCCESS;
+  constructor(public payload?: any) {}
+}
+export class GetDataConfirmOrderFailAction implements Action {
+  readonly type = GET_DATA_CONFIRM_ORDER_FAIL;
+  constructor(public payload?: any) {}
+}
+
+
+
+
 export type All =
   InitDataCart |
   GetDataCartAction |
@@ -129,4 +155,7 @@ export type All =
   UpdateQuantityCartFailAction |
   PostProductCartAction |
   PostProductCartSuccessAction |
-  PostProductCartFailAction;
+  PostProductCartFailAction |
+  GetDataConfirmOrderAction |
+  GetDataConfirmOrderSuccessAction |
+  GetDataConfirmOrderFailAction;

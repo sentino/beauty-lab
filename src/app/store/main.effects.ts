@@ -9,6 +9,8 @@ import { mergeMap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { CartModel, UpdateCartModel } from './main.model';
 import { AlertProvider } from '../../services/alert/alert';
+import { GET_DATA_CONFIRM_ORDER } from './main.action';
+import { PayPaylerService } from '../../services/pay-payler.service';
 
 
 @Injectable()
@@ -61,7 +63,7 @@ export class MainEffects {
       mergeMap(result => {
         return [
           result,
-          new fromAction.UpdateDataCartAction()
+          new fromAction.GetDataCartAction()
         ]
       })
     );
@@ -83,9 +85,23 @@ export class MainEffects {
     );
 
 
+
+  /////////////////////////////////////////////////
+  @Effect()
+  public getDataConfirmOrder$ = this.action$
+    .ofType(fromAction.GET_DATA_CONFIRM_ORDER)
+    .pipe(
+      map((arg: fromAction.All) => arg.payload),
+      mergeMap(payload => {
+        return this.getDataConfirmOrder();
+      })
+    );
+
+
   constructor(
     private action$: Actions,
     private cartService: CartService,
+    private payPayler: PayPaylerService,
     private alert: AlertProvider
   ) {}
 
@@ -153,4 +169,18 @@ export class MainEffects {
         })
       )
   };
+
+
+  /////////////////////////////////////////////////////////
+  private getDataConfirmOrder() {
+    return this.payPayler.getData()
+      .pipe(
+        map((res: any) => {
+          return new fromAction.GetDataConfirmOrderSuccessAction(res.result);
+        }),
+        catchError(e => {
+          return of(new fromAction.GetDataConfirmOrderFailAction(e));
+        })
+      )
+  }
 }

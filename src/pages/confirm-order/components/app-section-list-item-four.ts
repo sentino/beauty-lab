@@ -16,11 +16,11 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
       </ion-item>
       
       <ion-item>
-        <ion-label color="secondary" floating>Моб. телефон в формате 7(…)*</ion-label>
+        <ion-label color="secondary" floating>Мобильный телефон</ion-label>
         <ion-input [formControl]="form.controls['phone']"></ion-input>
       </ion-item>
       
-      <ion-item>
+      <ion-item *ngIf="_fieldAddress">
         <ion-label color="secondary" floating>Адрес*</ion-label>
         <ion-input [formControl]="form.controls['address']"></ion-input>
       </ion-item> 
@@ -47,8 +47,13 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 export class AppSectionListItemFour {
   @Input() form;
   @Input() displayNone;
+  @Input() fieldAddress;
 
   @ViewChild('myTextArea') myTextArea: ElementRef;
+
+  get _fieldAddress() {
+    return this.fieldAddress;
+  }
 
   resize() {
     let element = this.myTextArea['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];

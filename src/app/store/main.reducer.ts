@@ -40,8 +40,10 @@ export interface ISunnary {
 
 
 export interface State {
-  cart: ICart
+  cart: ICart;
+  confirmOrder: any;
 }
+
 
 export const initialCart = {
   basket: [
@@ -81,19 +83,31 @@ export const initialCart = {
   }
 };
 
+export const confirmOrder = {
+  basket: [],
+  can_order: false,
+  delivery: [],
+  fields: [],
+  location: {},
+  messages: {},
+  payments: [],
+  summary: {}
+};
+
 
 export const initialState: State = {
-  cart: initialCart
+  cart: initialCart,
+  confirmOrder: confirmOrder
 };
 
 export function reducer(state = initialState, action: fromAction.All): State {
   switch (action.type) {
 
-    case fromAction.GET_DATA_CART: {
-      return {
-        ...state
-      };
-    }
+    // case fromAction.GET_DATA_CART: {
+    //   return {
+    //     ...state
+    //   };
+    // }
 
     case fromAction.INIT_DATA_CART: {
       return {
@@ -154,6 +168,15 @@ export function reducer(state = initialState, action: fromAction.All): State {
     }
 
 
+    ///////////////////////////////////////////////
+    case fromAction.GET_DATA_CONFIRM_ORDER_SUCCESS: {
+      return {
+        ...state,
+        confirmOrder: action.payload
+      }
+    }
+
+
     default: {
       return state;
     }
@@ -161,3 +184,4 @@ export function reducer(state = initialState, action: fromAction.All): State {
 }
 
 export const getCartData = (state) => state.cart;
+export const getDataConfirmOrder = (state) => state.confirmOrder;

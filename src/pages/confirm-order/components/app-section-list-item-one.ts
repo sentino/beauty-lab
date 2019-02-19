@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="_city">
         <ion-label>Выбор города или населенного пункта</ion-label>
         <ion-select [formControl]="form.controls['city']">
           <ion-option *ngFor="let item of _city"

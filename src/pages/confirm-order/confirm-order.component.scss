@@ -7,17 +7,125 @@ app-confirm-order-component {
     display: none;
   }
 
+  .l-info {
+    width: 100%;
+  }
+
+  .c-info {
+    &__dropdown {
+      display: none;
+      padding: 0 16px;
+
+      &--without-spaces {
+        padding: 0;
+      }
+
+      &--translated {
+        transform: translateY(-5px);
+      }
+    }
+
+    &__button {
+      @extend .buttonReset;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 16px;
+      width: 100%;
+      text-align: left;
+      color: lighten($color: $primaryTextColor, $amount: 50%);
+      //color: rgb(33, 33, 33);
+      font-size: 17px;
+      font-weight: 500;
+      border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+      position: relative;
+
+      &::after {
+        content: "\e5cd";
+        transform: rotate(45deg);
+        @include material-icons($font-size: 24px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+        //color: rgb(33, 33, 33);
+      }
+
+      &--small {
+        font-size: 12px;
+        font-weight: 500;
+        color: $primaryTextColor;
+        padding: 8px 0;
+
+        &::after {
+          font-size: 20px;
+        }
+      }
+
+      &--picked {
+        //color: lighten($color: $primaryTextColor, $amount: 13%);
+        border-bottom: none;
+        color: rgb(33, 33, 33);
+
+        &::after {
+          transform: rotate(0deg);
+          @include material-icons($font-size: 20px, $color:$primaryTextColor);
+          color: rgb(33, 33, 33);
+        }
+
+        & + .c-info__dropdown {
+          display: block;
+        }
+      }
+
+      &--stable-picked {
+        border-bottom: none;
+
+        &::after {
+          transform: rotate(0deg);
+        }
+        & + .c-info__dropdown {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .c-article {
+    font-size: 10px;
+    color: $primaryTextColor;
+    line-height: 12px;
+    font-weight: 400;
+
+    &__subtitle {
+      font-size: 10px;
+      color: $primaryTextColor;
+      line-height: 12px;
+      font-weight: 500;
+      margin: 12px 0;
+    }
+
+    &__text {
+      &--space {
+        margin: 12px 0;
+      }
+    }
+  }
+
+
   .l-order-page {
     width: 100%;
-    padding: 0 16px;
+    padding: 0 0 0 16px;
     box-sizing: border-box;
     border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+
+    &__title {
+      @extend .list-title;
+    }
 
     i {
       font-style: normal;
       font-size: 10px;
       text-decoration: line-through;
       opacity: 0.5;
+      margin-top: 5px;
+      display: block;
     }
   }
 
@@ -27,6 +135,7 @@ app-confirm-order-component {
     font-size: 10px;
     color: $primaryTextColor;
     padding: 0;
+    min-height: 40px;
     max-height: 250px;
     overflow-y: auto;
 
@@ -43,16 +152,22 @@ app-confirm-order-component {
       display: flex;
       flex-direction: column;
     }
+
+    &__details {
+      display: flex;
+      align-items: baseline;
+    }
   }
 
   .c-order {
-    //padding-left: 11px;
-    margin: 18px 0 16px;
+    padding-left: 10px;
+    //margin: 18px 0 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
 
     &__quantity {
       color: $quantityColor;
       font-family: 'Segoe UI';
-      margin-right: 10px;
     }
 
     &__price {
@@ -61,6 +176,9 @@ app-confirm-order-component {
       font-size: 12px;
       min-width: 56px;
       text-align: right;
+      transform: translateY(2px);
+      margin-left: 8px;
+      margin-right: 16px;
     }
   }
 
@@ -71,6 +189,7 @@ app-confirm-order-component {
 
     &__title {
       @extend .list-title;
+      margin-top: 16px;
     }
   }
 
@@ -103,6 +222,8 @@ app-confirm-order-component {
 
       &--thin {
         font-weight: 400;
+        min-width: 84px;
+        margin-right: 15px !important;
       }
 
       &--total {
@@ -157,59 +278,20 @@ app-confirm-order-component {
     width: 100%;
   }
 
-  .c-info {
-    &__dropdown {
-      display: none;
-      padding: 0 16px;
-
-      &--translated {
-        transform: translateY(-5px);
-      }
-    }
-
-    &__text {
-      max-width: 229px;
-    }
-
-    &__button {
-      @extend .buttonReset;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 16px;
-      width: 100%;
-      text-align: left;
-      color: lighten($color: $primaryTextColor, $amount: 50%);
-      font-size: 17px;
-      font-weight: 500;
-      border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
-
-      &::after {
-        content: "\e5cd";
-        transform: rotate(45deg);
-        @include material-icons($font-size: 20px, $color: lighten($color: $primaryTextColor, $amount: 48%));
-      }
-
-      &--picked {
-        color: lighten($color: $primaryTextColor, $amount: 13%);
-        border-bottom: none;
-
-        &::after {
-          transform: rotate(0deg);
-          @include material-icons($font-size: 20px, $color: $primaryTextColor);
-        }
-
-        & + .c-info__dropdown {
-          display: block;
-        }
-      }
-    }
-  }
-
   .c-warning {
     box-sizing: border-box;
     border-radius: 4px;
     background: $errorColor;
+    color: $buttonTextColor;
+    font-size: 12px;
+    padding: 8px 20px 8px 8px;
+    margin: 4px 16px 7px;
+  }
+
+  .c-warning-notify {
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: $errorNotifyColor;
     color: $buttonTextColor;
     font-size: 12px;
     padding: 8px 20px 8px 8px;
@@ -227,10 +309,6 @@ app-confirm-order-component {
   }
 
   .c-radiobutton {
-    &__text {
-      vertical-align: 4px;
-    }
-
     &:checked + .c-radiobutton--with-gap:after {
       background-color: $defaultBackgroundColor;
     }
@@ -260,31 +338,44 @@ app-confirm-order-component {
 
   .c-checkbox {
     margin: 0;
-    display: block;
+    display: flex;
+    justify-content: flex-start;
 
     &__input {
-      margin: 3px 20px 3px 3px;
+      margin-right: 23px;
     }
 
     &__checkmark {
       @extend .checkmarkStyle;
       top: 0;
-      margin: 1px 20px 3px 1px;
+      margin: 1px 0 3px 1px;
     }
 
     &__text {
-      font-size: 17px;
+      font-size: 16px;
       margin: 0;
     }
   }
 
   .c-disclaimer {
-    margin: 22px 16px;
+    margin: 9px 16px 4px;
     font-size: 12px;
 
     &__link {
       color: inherit;
     }
   }
+
+  .item-md .radio-md {
+    margin-right: 2px !important;
+  }
+
+  //.item-block .item-inner .select-md {
+  //  position: absolute;
+  //  z-index: 1;
+  //  min-width: 100%;
+  //  background-color: #f1f1f1;
+  //  padding: 5px 5px 5px 0;
+  //}
 }
 

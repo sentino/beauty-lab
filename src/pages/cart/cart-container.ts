@@ -128,9 +128,9 @@ export class ValidateCoupon {
         <div class="c-total-sum">
           <h2 class="c-total-sum__title">Общая сумма:</h2>
           <span class="c-total-sum__price" *ngIf="(oldPrice$ && newPrice$) | async">
-                  <span class="c-total-sum__price--del">{{oldPrice$ | async}}</span>
-                  <span class="c-total-sum__price--total">{{newPrice$ | async}}</span>
-              </span>
+              <span class="c-total-sum__price--del" *ngIf="(oldPrice$ | async) !== (newPrice$ | async)">{{oldPrice$ | async}}</span>
+              <span class="c-total-sum__price--total">{{newPrice$ | async}}</span>
+          </span>
         </div>
 
         <div class="l-button-container">

@@ -8,8 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       <button 
           class="c-info__button"
           (click)="clickPicked()"
-          [ngClass]="picked ? 'c-info__button--picked' : ''"
-          [style.color]="validGroup ? '#212121' : ''">
+          [ngClass]="picked || validGroup ? 'c-info__button--picked' : ''">
         <span class="c-info__text">{{title}}</span>
       </button>
 
@@ -27,6 +26,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           [displayNone]="form.controls['listItemOne'].invalid"
           [delivery]="delivery"
           [priceDelivery]="priceDelivery"
+          (pointResultId)="_pointResultId($event)"
+          (selectedDeliveryPrice)="_selectedDeliveryPrice($event)"
         ></app-section-list-item-two>
 
         <app-section-list-item-three
@@ -34,11 +35,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           [form]="form.controls['listItemThree']"
           [displayNone]="form.controls['listItemTwo'].invalid"
           [payments]="payments"
+          [innerPayment]="innerPayment"
         ></app-section-list-item-three>
 
         <app-section-list-item-four
           *ngSwitchCase="4"
           [form]="form.controls['listItemFour']"
+          [fieldAddress]="fieldAddress"
           [displayNone]="form.controls['listItemThree'].invalid"
         ></app-section-list-item-four>
       </section>
@@ -57,6 +60,12 @@ export class AppSectionList {
   @Input() delivery;
   @Input() priceDelivery;
   @Input() payments;
+  @Input() innerPayment;
+  @Input() fieldAddress;
+  // @Input() deliveryInfo;
+
+  @Output() pointResultId: EventEmitter<any> = new EventEmitter();
+  @Output() selectedDeliveryPrice: EventEmitter<any> = new EventEmitter();
 
   picked = false;
   validColor = false;
@@ -96,6 +105,14 @@ export class AppSectionList {
     }
 
     return this.validColor = false;
+  }
+
+  _pointResultId(e) {
+    this.pointResultId.emit(e);
+  }
+
+  _selectedDeliveryPrice(e) {
+    this.selectedDeliveryPrice.emit(e);
   }
 
 }

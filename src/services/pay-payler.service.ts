@@ -12,12 +12,6 @@ export class PayPaylerService {
     public config: ConfigProvider,
   ) {}
 
-  testPostItem() {
-    this.http.post(this.config.url + 'cart/item', {"product": '104810', "quantity": "1" }).subscribe(res => {
-      console.log(res);
-    });
-  }
-
   getData() {
     return this.http.get(this.config.url + 'order/create/')
   }
@@ -28,5 +22,9 @@ export class PayPaylerService {
 
   postData(body) {
     return this.http.post(this.config.url + 'order/create/', body)
+  }
+
+  postPay(orderId) {
+    return this.http.post(this.config.url + 'order/pay/', {orderId: orderId})
   }
 }

@@ -137,6 +137,7 @@ import { BonusesService } from '../services/bonuses.service';
 import { WishListService } from '../services/wish-list.service';
 import { ModalOneClickOrder } from '../helpers/modal/modalOneClickOrder';
 import { OrdersService } from '../services/orders.service';
+import { PayPaylerService } from '../services/pay-payler.service';
 
 
 
@@ -264,6 +265,7 @@ const PIPES = [
   declarations: [...PAGES, PIPES],
   entryComponents: [...PAGES],
   providers: [
+    PayPaylerService,
     OrdersService,
     WishListService,
     BonusesService,
