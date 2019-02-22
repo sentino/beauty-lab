@@ -15,4 +15,16 @@ export class BrandsService {
   getBrands(): Observable<any> {
     return this.http.get(this.config.url + 'brands/list')
   }
+
+  getBrandById(id): Observable<any> {
+    return this.http.get(this.config.url + `brands/view/${id}/?count=100`)
+  }
+
+  getMoreProducts(id, page): Observable<any> {
+    return this.http.get(this.config.url + `brands/view/${id}/?page=${page}&count=100`)
+  }
+
+  getBrandForGamme(id, gamme): Observable<any> {
+    return this.http.get(this.config.url + `brands/view/${id}/?count=100&gamme=${gamme}`)
+  }
 }

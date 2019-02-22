@@ -1,4 +1,4 @@
-brands-component {
+medicines-component {
   .l-param__items {
     display: flex;
     justify-content: space-between;
@@ -52,6 +52,7 @@ brands-component {
     &__img {
       width: 70.25px;
       max-height: 68.14px;
+      margin-bottom: 3px;
     }
 
     &__text {
@@ -68,18 +69,5 @@ brands-component {
         color: $defaultBackgroundColor;
       }
     }
-  }
-
-  .box-images {
-    min-width: 70px;
-    min-height: 68px;
-    max-width: 70px;
-    max-height: 68px;
-    background-color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 3px;
   }
 }

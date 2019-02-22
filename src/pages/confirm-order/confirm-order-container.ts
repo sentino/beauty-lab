@@ -16,13 +16,13 @@ import {
   selectDataConfirmOrderNotify,
   selectDataConfirmOrderWarning
 } from '../../app/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import * as Rx from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { HomePage } from '../home/home';
 import { App } from 'ionic-angular';
 import { AlertProvider } from '../../services/alert/alert';
-// import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 export function bonusesQuantity(controlOne: AbstractControl, controlTwo: AbstractControl): ValidatorFn {
@@ -157,7 +157,7 @@ export class ConfirmOrderContainer implements OnInit{
     private store: Store<any>,
     private appCtrl: App,
     public alert: AlertProvider,
-    // private theInAppBrowser: InAppBrowser
+    private theInAppBrowser: InAppBrowser
   ) {
     this.form = this.fb.group({
       'listItemOne': this.fb.group({
@@ -385,52 +385,11 @@ export class ConfirmOrderContainer implements OnInit{
     let peyment: any = this.payments.filter(el => el.id === this.form.controls['listItemThree'].get('typeOfPayment').value)[0];
 
     if (peyment.cash === 'A') {
-      // this.paymentBody = `
-      // <div id="tmg_pk_form_container"><br>
-      //   <h3>Сейчас Вы будете перенаправлены на страницу банка.</h3>
-      //   <form id="pay_form" action="http://lab-krasoty.server.paykeeper.ru/create/" accept-charset="utf-8" method="post">
-      //     <input type="hidden" name="sum" value = "1939.00"/>
-      //     <input type="hidden" name="batch_date" value = "23.01.2019 16:31:11"/>
-      //     <input type="hidden" name="orderid" value = "55290"/>
-      //     <input type="hidden" name="clientid" value = "Артем Артемов"/>
-      //     <input type="hidden" name="client_email" value = "arelat@ya.ru"/>
-      //     <input type="hidden" name="client_phone" value = "+7 (999) 999-99-99"/>
-      //     <input type="hidden" name="service_name" value = "paykeeper_payment_system"/>
-      //     <input type="hidden" name="cart" value = '[{"name":"\u0412\u0438\u0448\u0438 (Vi\u0441hy) \u0421\u041b\u041e\u0423 \u0410\u0416 \u0424\u043b\u044e\u0438\u0434 \u0443\u043a\u0440\u0435\u043f\u043b\u044f\u044e\u0449\u0438\u0439 \u0430\u043d\u0442\u0438\u0432\u043e\u0437\u0440\u0430\u0441\u0442\u043d\u043e\u0439 \u0443\u0445\u043e\u0434 50\u043c\u043b","price":"1939.00","quantity":"1.0000","sum":"1939.00","tax":"none","tax_sum":"0.00"},{"name":"Fabrik cosmetology Collagen Crystal Mask Bio Gold \u041f\u0430\u0442\u0447\u0438 \u0434\u043b\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u0432\u043e\u043a\u0440\u0443\u0433 \u0433\u043b\u0430\u0437 \u0441 \u0411\u0438\u043e \u0437\u043e\u043b\u043e\u0442\u043e\u043c N1","price":"0.00","quantity":"1.0000","sum":"0.00","tax":"none","tax_sum":"0.00"}]' />
-      //     <input type="hidden" name="lang" value = ru />
-      //     <input type="hidden" name="sign" value = "dac95cc31fd376ceef044b58db29acfeddd7f086b9e3f76be18b2e54be1a7130"/>
-      //     <input type="submit" class="btn btn-default" value="Оплатить"/>
-      //   </form>
-      //   <script type="text/javascript">
-      //       window.onload=function(){
-      //           setTimeout(fSubmit, 2000);
-      //       }
-      //       function fSubmit() {
-      //           document.forms["pay_form"].submit();
-      //       }
-      //   </script>
-      //   <div>
-      // `;
-
-      // const browser = this.theInAppBrowser.create('../next.html', '_self');
-      // browser.on('loadstop').subscribe(event => {
-      //   browser.executeScript({ code: paymentBody });
-      // });
-
-      // this.payPayler.postData(body)
-      //   .pipe(
-      //     switchMap((res: any) => {
-      //       debugger;
-      //       // return this.payPayler.postPay(55290)
-      //       // debugger;
-      //       return this.payPayler.postPay(res.result.orderId)
-      //     })
-      //   ).subscribe(res => {
-      //   // console.log(res);
-      //   // debugger;
-      //   this.appCtrl.getRootNav().setRoot(HomePage);
-      //   this.alert.showWithTitle('Ваш заказ №##### от 15.02.2019 09:36:20 успешно создан.', 'Заказ сформирован')
-      // })
+      this.payPayler.postData(body).subscribe((res: any) => {
+        //TODO: если юзер не зареган, будет ошибка
+        const browser = this.theInAppBrowser.create(res.result.payLink, '_blank');
+        this.appCtrl.getRootNav().setRoot(HomePage);
+      })
     } else {
       this.payPayler.postData(body).subscribe((res: any) => {
         let day = this.formatDate(new Date().getDate()),

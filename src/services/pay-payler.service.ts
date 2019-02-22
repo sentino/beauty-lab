@@ -23,8 +23,4 @@ export class PayPaylerService {
   postData(body) {
     return this.http.post(this.config.url + 'order/create/', body)
   }
-
-  postPay(orderId) {
-    return this.http.post(this.config.url + 'order/pay/', {orderId: orderId})
-  }
 }

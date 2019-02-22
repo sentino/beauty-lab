@@ -141,6 +141,15 @@ import { PayPaylerService } from '../services/pay-payler.service';
 import { BrandsContainer } from '../pages/brands/brands-container';
 import { BrandsComponent } from '../pages/brands/brands.component';
 import { SanitizeHtmlPipe } from '../helpers/pipe/sanitize-html.pipe';
+import { BrandsPageContainer } from '../pages/brands-page/brands-page-container';
+import { BrandsPageComponent } from '../pages/brands-page/brands-page.component';
+import { MedicinesContainer } from '../pages/medicines/medicines.container';
+import { MedicinesComponent } from '../pages/medicines/medicines.component';
+import { SubstancesContainer } from '../pages/substances/substances.container';
+import { SubstancesComponent } from '../pages/substances/substances.component';
+import { AppProductCartComponent } from '../helpers/cart/app-product-cart.component';
+import { MedicinesSubstancesPageContainer } from '../pages/medicines-substances-page/medicines-substances-page.container';
+import { MedicinesSubstancesPageComponent } from '../pages/medicines-substances-page/medicines-substances-page.component';
 
 
 
@@ -171,7 +180,29 @@ const CART_MODULE = [
 
 const BRANDS_MODULE = [
   BrandsContainer,
-  BrandsComponent
+  BrandsComponent,
+  BrandsPageContainer,
+  BrandsPageComponent
+];
+
+const MEDICINES_MODULE = [
+  MedicinesContainer,
+  MedicinesComponent
+];
+
+const SUBSTANCES_MODULE = [
+  SubstancesContainer,
+  SubstancesComponent
+];
+
+const MEDICINES_SUBSTANCES_MODULE = [
+  MedicinesSubstancesPageContainer,
+  MedicinesSubstancesPageComponent
+];
+
+const SHARED_MODULE = [
+  AppProductCartComponent,
+  ModalOneClickOrder,
 ];
 
 const PAGES = [
@@ -230,10 +261,13 @@ const PAGES = [
   NewsDetailPage,
   NewsListPage,
   SettingsPage,
-  ModalOneClickOrder,
+  ...SHARED_MODULE,
   ...ORDER_MODULE,
   ...CART_MODULE,
-  ...BRANDS_MODULE
+  ...BRANDS_MODULE,
+  ...MEDICINES_MODULE,
+  ...SUBSTANCES_MODULE,
+  ...MEDICINES_SUBSTANCES_MODULE
 ];
 
 const PIPES = [

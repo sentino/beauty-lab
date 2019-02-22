@@ -1,0 +1,285 @@
+app-product-cart {
+  .l-goods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 350px) {
+      justify-content: center;
+    }
+
+    @media screen and (min-width: 400px) {
+      justify-content: space-around;
+    }
+
+    &--horizontal {
+      justify-content: center;
+
+      @media screen and (max-width: 400px) {
+        justify-content: center;
+      }
+    }
+
+    &--nowrap {
+      flex-wrap: nowrap;
+      padding-top: 16px;
+      overflow-x: auto;
+
+      @media screen and (max-width: 350px) {
+        justify-content: space-between;
+      }
+    }
+
+    &--space {
+      margin-top: 22px;
+      padding: 0 16px;
+    }
+  }
+
+  .l-good {
+    &__info {
+      padding: 7.93px 8px 8px;
+      width: 100%;
+      box-sizing: border-box;
+
+      &--horizontal {
+        padding: 8px;
+        width: 52.43%;
+      }
+    }
+
+    &__row {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 0 9px;
+
+      &--horizontal {
+        margin: 0 0 3px;
+      }
+
+      &--promo {
+        margin: 0 0 7px;
+      }
+
+      &--little-margin {
+        margin: 0 0 6px;
+      }
+    }
+
+    &__price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .c-good {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    width: 156px;
+    height: 273px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+
+    @media screen and (max-width: 350px) {
+      margin-right: 5px;
+    }
+
+    &--promo {
+      width: 131px;
+      height: 271px;
+      margin-right: 16px;
+    }
+
+    &--horizontal {
+      width: 328px;
+      height: 130px;
+      flex-direction: row;
+
+      @media screen and (max-width: 350px) {
+        width: 100%;
+      }
+    }
+
+    &--without-discount {
+      .c-good__label {
+        display: none;
+      }
+    }
+
+    &__label {
+      position: absolute;
+      top: -12px;
+      width: 34.38px;
+      height: 34.38px;
+      border: 0.5px solid transparentize($color: $lightBorderColor, $amount: 0.9);
+      box-sizing: border-box;
+      border-radius: 50%;
+      box-shadow: 0 6px 6px 0
+      transparentize($color: lighten($color: $primaryTextColor, $amount: 24%), $amount: 0.77);
+      font-size: 12px;
+      color: $buttonTextColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &--hit {
+        left: 0;
+        background: transparentize($hitLabelBackground, 0.1);
+      }
+
+      &--new {
+        left: 28px;
+        background: transparentize($discountBackground, 0.1);
+      }
+
+      &--min-price {
+        left: 58px;
+        background: transparentize($minLabelBackground, 0.1);
+      }
+
+      &--discount {
+        right: 0;
+        background: transparentize($discountBackground, 0.1);
+      }
+
+      &--horizontal {
+        right: 52.1%;
+
+        @media screen and (max-width: 350px) {
+          right: 49.1%;
+        }
+      }
+    }
+
+    &__picked {
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background: transparentize($color: #323232, $amount: 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &--hidden {
+        visibility: hidden;
+      }
+    }
+
+    &__checked-circle {
+      &::after {
+        content: '\e86c';
+        @include material-icons($font-size: 72px, $color: white);
+        width: 72px;
+        height: 72px;
+      }
+    }
+
+    &__image {
+      height: 127.08px;
+      width: auto;
+
+      &--promo {
+        width: 131px;
+      }
+
+      &--horizontal {
+        width: 156px;
+        height: 100%;
+
+        @media screen and (max-width: 350px) {
+          width: 130px;
+        }
+      }
+    }
+
+    &__title {
+      margin: 0;
+      font-size: 12px;
+      line-height: 11px;
+      font-weight: 500;
+      color: $primaryTextColor;
+      width: 100%;
+      height: 47px;
+      overflow: hidden;
+      margin-bottom: 9px;
+
+      &--horizontal {
+        height: 36px;
+        margin-bottom: 4px;
+        width: 156px;
+
+        @media screen and (max-width: 340px) {
+          width: 100%;
+          font-size: 12px;
+          line-height: 12px;
+        }
+      }
+
+      &--promo {
+        margin-bottom: 7px;
+      }
+    }
+
+    &__price {
+      font-size: 16px;
+      font-size: 16px;
+      font-weight: 500;
+      color: lighten($color: $primaryTextColor, $amount: 13%);
+
+      &--new {
+        font-size: 16px;
+        line-height: 19px;
+        color: $highlightColor;
+      }
+
+      &--del {
+        @extend .card-text;
+        font-size: 10px;
+        color: lighten($color: $primaryTextColor, $amount: 48%);
+        line-height: 13px;
+        font-weight: 500;
+        text-decoration: line-through;
+        margin-right: 13px;
+      }
+
+      &--hidden {
+        visibility: hidden;
+      }
+    }
+
+    &__country {
+      @extend .card-text;
+    }
+
+    &__favorite {
+      @extend .buttonReset;
+      position: relative;
+      width: 18px;
+      height: 16px;
+
+      &:after {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        content: "\e87d";
+        @include material-icons($font-size: 22px, $color: lighten($color: $primaryTextColor, $amount: 48%));
+      }
+
+      &--selected {
+        &:after {
+          @include material-icons($font-size: 22px, $color:  $highlightColor);
+        }
+      }
+    }
+  }
+}

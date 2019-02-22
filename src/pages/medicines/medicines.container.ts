@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { BrandsService } from '../../services/brands.service';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { Store } from '@ngrx/store';
 import { NavController } from 'ionic-angular';
 import { selectCartProductsLength } from '../../app/store';
-import { BrandsPageContainer } from '../brands-page/brands-page-container';
+import { MedicinesService } from '../../services/medicines.service';
+import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/medicines-substances-page.container';
 
 
 @Component({
-  selector: 'brands-container',
+  selector: 'medicines-container',
   template: `
     <ion-header>
       <ion-navbar style="box-shadow: none;">
@@ -18,7 +18,7 @@ import { BrandsPageContainer } from '../brands-page/brands-page-container';
         </button>
         
         <ion-title>
-          Бренды
+          Все лекарства
         </ion-title>
 
         <ion-buttons end>
@@ -46,21 +46,21 @@ import { BrandsPageContainer } from '../brands-page/brands-page-container';
     </ion-header>
 
     <ion-content>
-      <brands-component
+      <medicines-component
         [result]="result"
         (goToBrand)="goToBrand($event)"
         (filterArray)="filterArray($event)"
-      ></brands-component>
+      ></medicines-component>
     </ion-content>
 
     <ion-footer>
       <footer></footer>
     </ion-footer>
   `,
-  providers: [BrandsService]
+  providers: [MedicinesService]
 })
 
-export class BrandsContainer implements OnInit {
+export class MedicinesContainer implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   result = [];
@@ -70,12 +70,12 @@ export class BrandsContainer implements OnInit {
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
-    private brandService: BrandsService
+    private medicinesService: MedicinesService
   ) { }
 
 
   public ngOnInit(): void {
-    this.brandService.getBrands().subscribe(res => {
+    this.medicinesService.getMedicines().subscribe(res => {
       let result = res.result;
       for (const key of Object.keys(result)) {
         let item = {
@@ -92,7 +92,7 @@ export class BrandsContainer implements OnInit {
   }
 
   goToBrand(id) {
-    this.navCtrl.setRoot(BrandsPageContainer, { id: id, brands: this.arrayForParameter })
+    this.navCtrl.setRoot(MedicinesSubstancesPageContainer, { id: id, type: 'medicines' })
   }
 
   filterArray(sort) {

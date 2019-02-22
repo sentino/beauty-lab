@@ -179,7 +179,7 @@
 
   &--active {
     background: $activeFilterBackground;
-    padding: 14px 0 0 0;
+    padding: 9px 0px;
     position: absolute;
     width: 100%;
     z-index: 2;
@@ -249,7 +249,7 @@
     }
 
     &--list {
-      background-image: url("../svg-files/Group 136.svg");
+      //background-image: url("../svg-files/group.svg");
 
       &::after {
         display: none;
@@ -279,6 +279,7 @@
     color: lighten($color: $primaryTextColor, $amount: 13%);
     font-size: 12px;
     font-weight: 500;
+    min-width: 9px;
   }
 
   &--active {
