@@ -23,7 +23,9 @@ export class WishListService {
     })
   }
 
-  delItem(id): Observable<any> {
-    return this.http.request('DELETE', this.config.url + 'user/wishlist', {body: {'product': id}});
+  delItem(id) {
+    this.http.request('DELETE', this.config.url + 'user/wishlist', {body: {'product': id}}).subscribe((res: any) => {
+      this.alert.show(res.result.successText);
+    });
   }
 }

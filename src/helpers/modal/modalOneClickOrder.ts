@@ -9,7 +9,7 @@ import { CartService } from '../../services/cart.service';
     <div class="l-modal" style="overflow-y: auto">
         <div class="l-modal" style="background: none;" (click)="close.emit()"></div>
         <div class="c-modal" style="z-index: 2">
-            <h2 class="c-modal__title">
+            <h2 class="c-modal__title" style="margin-top: 0;">
                 Оформить заказ в 1 клик
             </h2>
             <button class="c-modal__close" (click)="close.emit()"></button>
@@ -31,7 +31,7 @@ import { CartService } from '../../services/cart.service';
             <ion-item style=" border: none;
                             padding: 0;
                             background-color: white;">
-              <ion-label color="secondary" floating>Моб. телефон в формате 7(…)*</ion-label>
+              <ion-label color="secondary" floating>Мобильный телефон</ion-label>
               <ion-input [formControl]="this.form.controls['phone']"></ion-input>
             </ion-item>
           </ion-list>

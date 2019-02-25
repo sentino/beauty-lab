@@ -35,6 +35,7 @@ import {
 } from '../../app/store';
 import { Observable, of, pipe, Subscription } from 'rxjs';
 import { AlertProvider } from '../../services/alert/alert';
+import { HomePage } from '../home/home';
 
 
 export class ValidateCoupon {
@@ -93,7 +94,7 @@ export class ValidateCoupon {
             <h4 text-center>Ваша корзина пуста</h4>
             <h5 text-center>продолжить покупки</h5>
             <p text-center>
-              <button ion-button color="secondary" (click)="openProductsPage()">Страница товаров</button>
+              <button ion-button color="secondary" (click)="openHomePage()">Главная страница</button>
             </p>
           </ion-col>
         </ion-row>
@@ -144,16 +145,16 @@ export class ValidateCoupon {
         </div>
 
         <div class="c-disclaimer">
-          <h2 class="c-disclaimer__title">Информация о юрлице продавца и лицензии</h2>
-          <p class="c-disclaimer__text">
-            РЫБНЫЙ ТЕКСТ <br /> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-            et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-            enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
-            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-            felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
-          </p>
+          <!--<h2 class="c-disclaimer__title">Информация о юрлице продавца и лицензии</h2>-->
+          <!--<p class="c-disclaimer__text">-->
+            <!--РЫБНЫЙ ТЕКСТ <br /> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.-->
+            <!--Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus-->
+            <!--et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,-->
+            <!--ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis-->
+            <!--enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.-->
+            <!--In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum-->
+            <!--felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum-->
+          <!--</p>-->
         </div>
       </main>
 
@@ -343,8 +344,8 @@ export class CartContainer implements OnInit, OnDestroy {
   //     this.navCtrl.push(ShippingAddressPage);
   //   }
   // }
-  openProductsPage() {
-    this.navCtrl.setRoot(ProductsPage, { sortOrder: 'newest' });
+  openHomePage() {
+    this.navCtrl.setRoot(HomePage);
   }
   // ionViewDidLeave() {
   //  // this.storage.set('cartProducts', this.shared.cartProducts);

@@ -18,6 +18,7 @@ import { GetDataCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { OrdersService } from '../../services/orders.service';
 import { Observable } from 'rxjs';
+import { ProductDetailPage } from '../product-detail/product-detail';
 
 
 @Component({
@@ -82,20 +83,28 @@ import { Observable } from 'rxjs';
             <h2 class="c-order-list__title">Состав заказа</h2>
             <div class="c-order-item" *ngFor="let item of order.basket">
               <!--<span class="c-order-item__title">{{(item.name.length > 30)? (item.name | slice:0:30)+'...':(item.name)}}</span>-->
-              <p class="c-order-item__title" style="word-wrap: break-word;
-                                                      text-overflow: ellipsis;
-                                                      white-space: nowrap;
-                                                      overflow: hidden;
-                                                      max-width: 83%;
-                                                      float: left;
-                                                      margin: 0;">{{item.name}} </p>
-              <span class="c-order-item__quantity"> - {{item.quantity.split('.')[0]}} шт.</span>
+              <p class="c-order-item__title" 
+                 style="word-wrap: break-word;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        max-width: 83%;
+                        float: left;
+                        margin: 0;"
+                 (click)="showProductDetail(item.productId)">
+                {{item.name}}
+              </p>
+              <span class="c-order-item__quantity">&nbsp;- {{item.quantity.split('.')[0]}} шт.</span>
             </div>
           </div>
           <button class="c-default-button c-default-button--resized" (click)="repeatOrder(order.number)">ПОВТОРИТЬ ЗАКАЗ</button>
         </div>
       </main>
     </div>
+
+    <ion-footer>
+      <footer></footer>
+    </ion-footer>
   `,
 })
 export class MyOrdersPage  implements OnInit{
@@ -131,6 +140,10 @@ export class MyOrdersPage  implements OnInit{
         this.store.dispatch(new GetDataCartAction());
       }
     })
+  }
+
+  showProductDetail(id) {
+    this.navCtrl.push(ProductDetailPage, { prod_id: id });
   }
 
   // getOrders() {

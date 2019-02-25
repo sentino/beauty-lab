@@ -11,9 +11,11 @@ import { NavController } from 'ionic-angular';
   template: `
     <section [ngSwitch]="type">
       <div class="c-good" *ngSwitchCase="'lg'" style="margin-bottom: 35px !important;">
-        <div class="c-good__label c-good__label--hit" *ngIf="cart.PROPS.HIT && cart.PROPS.HIT === 'Y'">ХИТ</div>
-        <div class="c-good__label c-good__label--new" *ngIf="cart.PROPS.NEW && cart.PROPS.NEW === 'Y'">NEW</div>
-        <div class="c-good__label c-good__label--min-price" *ngIf="cart.PROPS.MIN_PRICE && cart.PROPS.MIN_PRICE === 'Y'">MIN</div>
+        <div class="c-good--box">
+          <div class="c-good__label c-good__label--hit" *ngIf="cart.PROPS.HIT && cart.PROPS.HIT === 'Y'">ХИТ</div>
+          <div class="c-good__label c-good__label--new" *ngIf="cart.PROPS.NEW && cart.PROPS.NEW === 'Y'">NEW</div>
+          <div class="c-good__label c-good__label--min-price" *ngIf="cart.PROPS.MIN_PRICE && cart.PROPS.MIN_PRICE === 'Y'">MIN</div>
+        </div>
         <div class="c-good__label c-good__label--discount" *ngIf="cart.PROPS.DISCOUNT_PERCENT">{{cart.PROPS.DISCOUNT_PERCENT}}%</div>
         <div [ngClass]="cart.IN_BASKET === 'Y' ? 'c-good__picked c-good__picked' : 'c-good__picked c-good__picked--hidden'">
           <span class="c-good__checked-circle"></span>
@@ -40,9 +42,11 @@ import { NavController } from 'ionic-angular';
 
       
       <div class="c-good c-good--promo" *ngSwitchCase="'md'" style="margin-bottom: 35px !important;">
-        <div class="c-good__label c-good__label--hit" *ngIf="cart.PROPS.HIT && cart.PROPS.HIT === 'Y'">ХИТ</div>
-        <div class="c-good__label c-good__label--new" *ngIf="cart.PROPS.NEW && cart.PROPS.NEW === 'Y'">NEW</div>
-        <div class="c-good__label c-good__label--min-price" *ngIf="cart.PROPS.MIN_PRICE && cart.PROPS.MIN_PRICE === 'Y'">MIN</div>
+        <div class="c-good--box">
+          <div class="c-good__label c-good__label--hit" *ngIf="cart.PROPS.HIT && cart.PROPS.HIT === 'Y'">ХИТ</div>
+          <div class="c-good__label c-good__label--new" *ngIf="cart.PROPS.NEW && cart.PROPS.NEW === 'Y'">NEW</div>
+          <div class="c-good__label c-good__label--min-price" *ngIf="cart.PROPS.MIN_PRICE && cart.PROPS.MIN_PRICE === 'Y'">MIN</div>
+        </div>
         <div class="c-good__label c-good__label--discount" *ngIf="cart.PROPS.DISCOUNT_PERCENT">{{cart.PROPS.DISCOUNT_PERCENT}}%</div>
         <div [ngClass]="cart.IN_BASKET === 'Y' ? 'c-good__picked c-good__picked' : 'c-good__picked c-good__picked--hidden'">
           <span class="c-good__checked-circle"></span>

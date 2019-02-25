@@ -27,7 +27,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
              style="display: flex;
                     flex-wrap: wrap;">
           <h2 class="c-good__title">
-            {{product.name}}
+            {{(product.name.length > 80) ? (product.name | slice:0:80)+'...' : (product.name)}}
           </h2>
           <div class="l-good__row l-good__row--large-margin" 
                style="margin-bottom: 0;

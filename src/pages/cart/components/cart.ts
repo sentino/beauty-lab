@@ -28,7 +28,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
       <img [src]="product.image" alt="vichy-cream" class="c-good__image">
       <div class="l-good__info">
         <h2 class="c-good__title">
-          {{product.name}}
+          {{(product.name.length > 80) ? (product.name | slice:0:80)+'...' : (product.name)}}
         </h2>
         <div class="l-good__row">
           <div class="l-good__price" *ngIf="product.priceFull > product.price">

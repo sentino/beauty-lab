@@ -49,6 +49,18 @@
   justify-content: flex-start;
   position: relative;
 
+  &--box {
+    &:nth-child(1) {
+      left: 0;
+    }
+    &:nth-child(2) {
+      left: 32px;
+    }
+    &:nth-child(3) {
+      left: 64px;
+    }
+  }
+
   &--without-discount {
     .c-good__label {
       display: none;
@@ -79,19 +91,19 @@
 
     &--hit {
       top: -12px;
-      left: 0;
+      //left: 0;
       background: $hitLabelBackground;
     }
 
     &--new {
       top: -12px;
-      left: 32px;
+      //left: 32px;
       background: $discountBackground;
     }
 
     &--min-price {
       top: -12px;
-      left: 64px;
+      //left: 64px;
       background: $minLabelBackground;
     }
 

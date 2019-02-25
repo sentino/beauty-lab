@@ -252,9 +252,9 @@ export class ProductDetailPage {
         console.log("Anglogs:");
         console.log(this.products_analogs);
 
-        this.anlogs_length = this.products_analogs.length;
-        this.leaders_length = this.products_leaders.length;
-        this.alsobuy_length = this.products_alsobuy.length;
+        if (this.products_analogs && this.products_analogs.length) this.anlogs_length = this.products_analogs.length;
+        if (this.products_leaders && this.products_leaders.length) this.leaders_length = this.products_leaders.length;
+        if (this.products_alsobuy && this.products_alsobuy.length) this.alsobuy_length = this.products_alsobuy.length;
 
         this.product_url = this.single_product.URL;
         this.product_avail = this.single_product.AVAILABILITY;

@@ -89,23 +89,15 @@ app-product-cart {
     border-radius: 2px;
     box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
 
-    @media screen and (max-width: 350px) {
-      margin-right: 5px;
-    }
-
-    &--promo {
-      width: 131px;
-      height: 271px;
-      margin-right: 16px;
-    }
-
-    &--horizontal {
-      width: 328px;
-      height: 130px;
-      flex-direction: row;
-
-      @media screen and (max-width: 350px) {
-        width: 100%;
+    &--box {
+      & div:nth-child(1) {
+        left: 0 !important;
+      }
+      & div:nth-child(2) {
+        left: 32px !important;
+      }
+      & div:nth-child(3) {
+        left: 64px !important;
       }
     }
 
@@ -132,18 +124,18 @@ app-product-cart {
       align-items: center;
 
       &--hit {
-        left: 0;
-        background: transparentize($hitLabelBackground, 0.1);
+        top: -12px;
+        background: $hitLabelBackground;
       }
 
       &--new {
-        left: 28px;
-        background: transparentize($discountBackground, 0.1);
+        top: -12px;
+        background: $discountBackground;
       }
 
       &--min-price {
-        left: 58px;
-        background: transparentize($minLabelBackground, 0.1);
+        top: -12px;
+        background: $minLabelBackground;
       }
 
       &--discount {
