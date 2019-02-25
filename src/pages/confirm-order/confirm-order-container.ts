@@ -103,9 +103,7 @@ export function bonusesQuantity(controlOne: AbstractControl, controlTwo: Abstrac
         (submit)="submit()"
       ></app-confirm-order-component>
       
-      <section *ngIf="paymentBody" [innerHTML]="paymentBody | sanitizeHtml">
-        
-      </section>
+      <!--<section *ngIf="paymentBody" [innerHTML]="paymentBody | sanitizeHtml"></section>-->
     </ion-content>
 
     <ion-footer>

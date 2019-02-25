@@ -150,6 +150,8 @@ import { SubstancesComponent } from '../pages/substances/substances.component';
 import { AppProductCartComponent } from '../helpers/cart/app-product-cart.component';
 import { MedicinesSubstancesPageContainer } from '../pages/medicines-substances-page/medicines-substances-page.container';
 import { MedicinesSubstancesPageComponent } from '../pages/medicines-substances-page/medicines-substances-page.component';
+import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articles-promotions-container';
+import { ArticlesPromotionsComponent } from '../pages/articles-promotions/articles-promotions.component';
 
 
 
@@ -161,6 +163,10 @@ import { MedicinesSubstancesPageComponent } from '../pages/medicines-substances-
 //   // cart: cartReducer
 // }
 
+const SHARED_MODULE = [
+  AppProductCartComponent,
+  ModalOneClickOrder,
+];
 
 const ORDER_MODULE = [
   ConfirmOrderContainer,
@@ -200,9 +206,9 @@ const MEDICINES_SUBSTANCES_MODULE = [
   MedicinesSubstancesPageComponent
 ];
 
-const SHARED_MODULE = [
-  AppProductCartComponent,
-  ModalOneClickOrder,
+const ARTICLES_PROMOTIONS_MODULE = [
+  ArticlesPromotionsContainer,
+  ArticlesPromotionsComponent
 ];
 
 const PAGES = [
@@ -267,7 +273,8 @@ const PAGES = [
   ...BRANDS_MODULE,
   ...MEDICINES_MODULE,
   ...SUBSTANCES_MODULE,
-  ...MEDICINES_SUBSTANCES_MODULE
+  ...MEDICINES_SUBSTANCES_MODULE,
+  ...ARTICLES_PROMOTIONS_MODULE
 ];
 
 const PIPES = [

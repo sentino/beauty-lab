@@ -12,7 +12,7 @@ import { MedicinesService } from '../../services/medicines.service';
   selector: 'medicines-substances-page-container',
   template: `
     <ion-header>
-      <ion-navbar style="box-shadow: none;">
+      <ion-navbar>
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -45,46 +45,28 @@ import { MedicinesService } from '../../services/medicines.service';
     </ion-header>
 
     <ion-content>
-      <main style="padding: 0 16px; padding-left: 22px;">
-        <div class="l-goods">
-          <div class="c-good c-good--without-discount">
-            <div class="c-good__label c-good__label--hit">ХИТ</div>
-            <div class="c-good__label c-good__label--new">NEW</div>
-            <div class="c-good__label c-good__label--min-price">MIN</div>
-            <div class="c-good__label c-good__label--discount">10%</div>
-            <div class="c-good__picked c-good__picked--hidden">
-              <span class="c-good__checked-circle"></span>
-            </div>
-            <img src="./images/pills.jpg" alt="pills" class="c-good__image">
-            <div class="l-good__info">
-              <h2 class="c-good__title">
-                Дексаметазон таблетки 0,5мг N56
-              </h2>
-              <div class="l-good__row l-good__row--little-margin">
-                <span class="c-good__price c-good__price--del c-good__price--hidden">183 &#8381;</span>
-                <span class="c-good__country">Poccия</span>
-              </div>
-              <div class="l-good__row l-good__row--little-margin">
-                <span class="c-good__price">1 783 &#8381;</span>
-                <button class="c-good__favorite"></button>
-              </div>
-              <button class="c-primary-button c-primary-button--narrow">КУПИТЬ</button>
-            </div>
-          </div>
+      <main style="padding: 0 16px; padding-left: 22px; margin-top: 22px;">
+        <div class="l-goods" style="display: flex; flex-flow: wrap;">
+          <app-product-cart *ngFor="let item of products"
+                            [type]="'lg'"
+                            [cart]="item"
+                            style="margin: auto;"
+          ></app-product-cart>
         </div>
+        
+        <medicines-substances-page-component
+          *ngIf="name"
+          [name]="name"
+          [desc]="desc"
+          [type]="type"
+        ></medicines-substances-page-component>
 
-        <section class="c-section">
-          <h2 class="c-section__title">Инструкция по применению Дексаметазон</h2>
-          <div class="l-info">
-            <medicines-substances-page-component
-            ></medicines-substances-page-component>
-          </div>
-        </section>
-
-        <section class="c-section c-section--recommended c-section--no-space" style="margin-left: -5px">
-          <h2 style="padding-left: 5px;" class="c-section__title">Рекомендуемые товары</h2>
+        <section class="c-section c-section--recommended c-section--no-space"
+                 style="margin-left: -5px"
+                 *ngIf="analogs && analogs.length">
+          <h2 style="padding-left: 5px; margin-top: 22px;" class="c-section__title">Рекомендуемые товары</h2>
           <div class="l-goods l-goods--nowrap" style="flex-direction: row; padding-left: 5px;">
-            <app-product-cart *ngFor="let item of products"
+            <app-product-cart *ngFor="let item of analogs"
                               [type]="'md'"
                               [cart]="item"
             ></app-product-cart>
@@ -107,6 +89,7 @@ export class MedicinesSubstancesPageContainer implements OnInit{
   type;
 
   name;
+  desc;
   products;
   analogs;
 
@@ -131,6 +114,7 @@ export class MedicinesSubstancesPageContainer implements OnInit{
         console.log(res);
         // debugger;
         this.name = res.result.name;
+        this.desc = res.result.desc;
         this.products = res.result.products;
         this.analogs = res.result.analogs;
       })
@@ -139,6 +123,17 @@ export class MedicinesSubstancesPageContainer implements OnInit{
         console.log(res);
         // debugger;
         this.name = res.result.name;
+
+        let arr = [];
+        for (let i = 0; i < res.result.desc.length; i++) {
+          arr.push({
+            name: res.result.desc[i].name,
+            text: res.result.desc[i].text,
+            open: false
+          });
+        }
+        this.desc = arr;
+
         this.products = res.result.products;
         this.analogs = res.result.analogs;
       })

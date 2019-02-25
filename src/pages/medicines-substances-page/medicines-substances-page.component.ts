@@ -1,69 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
   selector: 'medicines-substances-page-component',
   template: `
-    <div class="c-info">
-      <button class="c-info__button c-info__button--small">
-        <span class="c-info__text">Применение при беременности и кормлении грудью</span>
-      </button>
-      <div class="c-info__dropdown c-info__dropdown--without-spaces"></div>
-    </div>
-    <div class="c-info c-info--picked">
-      <button class="c-info__button c-info__button--small c-info__button--stable-picked">
-        <span class="c-info__text">Фармакологическое действие</span>
-      </button>
-      <div class="c-info__dropdown c-info__dropdown--without-spaces">
-        <article class="c-article">
-          <p class="c-article__text">
-            Дексаметазон - синтетический глюкокортикоидный препарат, в
-            состав которого входит атом фтора. <br />
-            Оказывает выраженное противовоспалительное,
-            противоаллергическое и десенсибилизирующее действие, обладает
-            иммунодепрессивной активностью. Незначительно задерживает
-            натрий и воду в организме. Эти эффекты связаны с угнетением
-            высвобождения эозинофилами медиаторов воспаления;
-            индуцированием образования липокортинов и уменьшения
-            количества тучных клеток, вырабатывающих гиалуроновую кислоту;
-            с уменьшением проницаемости капилляров; стабилизацией
-            клеточных мембран (особенно лизосомальных) и мембран
-            органелл. Иммунодепрессивный эффект обусловлен торможением
-            высвобождения цитокининов (интерлейкина 1, 2, гамма-
-            интерферона) из лимфоцитов и макрофагов. Основное влияние на
-            обмен веществ связано с катаболизмом белка, повышением
-            глюконеогенеза в печени и снижением утилизации глюкозы
-            периферическими тканями.
-          </p>
-          <p class="c-article__text">
-            Препарат подавляет активность витамина Д, что приводит к
-            снижению всасывания кальция и увеличению его выведения.
-            Дексаметазон подавляет синтез и секрецию АКТГ и вторично -
-            синтез эндогенных глюкокортикоидов. Особенностью действия
-            препарата является значительное ингибирование функции гипофиза
-            и полное отсутствие минералокортикоидной активности.
-          </p>
-          <h3 class="c-article__subtitle">Фармакокинетика</h3>
-          <p class="c-article__text">
-            В крови связывается (60-70%) со специфическим белком-
-            переносчиком - транскортином. Легко проходит через
-            гистогематические барьеры (в т.ч. через гемато-энцефалический и
-            плацентарный).
-          </p>
-          <p class="c-article__text c-article__text--space">
-            Метаболизируется в печени (в основном путем конъюгации с
-            глюкуроновой и серной кислотами) до неактивных метаболитов.
-          </p>
-          <p class="c-article__text c-article__text--space">
-            Выводится почками (небольшая часть - лактирующими
-            железами). T1/2дексаметазона из плазмы - 3-5 ч.
-          </p>
-        </article>
+    
+    <section 
+      class="c-section" 
+      *ngIf="type === 'medicines' && desc"
+      [innerHTML]="desc | sanitizeHtml"
+    ></section>
+
+
+    <section class="c-section" *ngIf="type === 'substances'">
+      <h2 class="c-section__title">Инструкция по применению {{name}}</h2>
+
+      <div class="l-info">
+        <div [ngClass]="item.open ? 'c-info c-info--picked' : 'c-info'"
+             *ngFor="let item of desc; let i = index;">
+          <section *ngIf="item.text.length">
+            <button (click)="item.open = !item.open"
+                    [ngClass]="item.open ?
+                     'c-info__button c-info__button--small c-info__button--stable-picked' :
+                      'c-info__button c-info__button--small'">
+              <span class="c-info__text">{{item.name}}</span>
+            </button>
+            <div class="c-info__dropdown c-info__dropdown--without-spaces">
+              <article class="c-article">
+                {{item.text}}
+              </article>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </section>
   `
 })
 
 export class MedicinesSubstancesPageComponent {
-
+  @Input() type;
+  @Input() name;
+  @Input() desc;
 }
