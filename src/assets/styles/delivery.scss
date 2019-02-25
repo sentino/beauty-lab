@@ -1,0 +1,77 @@
+@import "partials";
+@import "body";
+
+body {
+  main {
+    padding: 22px 0;
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+  }
+}
+
+.c-address-picker {
+  padding: 0 16px;
+}
+
+.l-calculation {
+  &__head {
+    background: $lightBorderColor;
+  }
+
+  &__row {
+    &:nth-child(2n) {
+      background: $lightBorderColor;
+    }
+  }
+}
+
+.c-delivery {
+  margin-top: 25px;
+  &__title {
+    font-size: 17px;
+    line-height: 20px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+    font-weight: 500;
+    margin: 16px;
+  }
+
+  &__info {
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+    font-weight: 400;
+    margin: 15px 16px;
+
+    &--bold {
+      font-weight: 500;
+    }
+  }
+}
+
+.c-calculation {
+  border-collapse: collapse;
+  padding: 0;
+  width: 100%;
+  margin: 17px 0;
+
+  &__title,
+  &__sum {
+    padding: 8px 16px 8px 0;
+    text-align: left;
+    font-size: 12px;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 48%);
+    width: 50%;
+    box-sizing: border-box;
+
+    &--left-padding {
+      padding: 8px 0 8px 16px;
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+    color: $primaryTextColor;
+  }
+}

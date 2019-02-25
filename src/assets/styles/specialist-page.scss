@@ -1,0 +1,87 @@
+@import "partials";
+@import "body";
+@import "modal";
+
+.c-consultant {
+  width: 100%;
+  &__image {
+    width: 100%;
+    height: 163.78px;
+
+    @media screen and (max-width: 359px) {
+      height: auto;
+    }
+
+    @media screen and (min-width: 361px) {
+      height: auto;
+    }
+  }
+
+  &__name {
+    font-size: 17px;
+    line-height: 21px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    margin: 8px 0;
+  }
+}
+
+.c-info {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.c-experience,
+.c-education,
+.c-upgrading {
+  &__value {
+    color: $primaryTextColor;
+  }
+}
+
+.c-personal-info {
+  margin: 0 0 22px;
+  color: $primaryTextColor;
+  font-size: 12px;
+  line-height: 14px;
+
+  &__title {
+    font-size: inherit;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+
+  &__text {
+    margin: 9px 0;
+  }
+}
+
+.c-share {
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__button {
+    @extend .buttonReset;
+    position: relative;
+    width: 18px;
+    height: 19.9px;
+
+    &::after {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      content: '\e80d';
+      @include material-icons($color: $primaryTextColor);
+    }
+  }
+}

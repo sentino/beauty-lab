@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SPECIALIST PAGE</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/specialist-page.css">
+</head>
+<body>
+    <div class="l-container">
+        <div class="l-modal l-modal--hidden">
+            <div class="c-modal c-modal--little-margin">
+                <h2 class="c-modal__title c-modal__title--large-margin">
+                    Задайте вопрос специалисту
+                </h2>
+                <button class="c-modal__close"></button>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_name" class="c-input-field__input" type="text" maxlength="150" required="required">
+                    <label for="user_name" class="c-input-field__label">Имя*</label>
+                </div>
+                <div class="l-select l-select--space">
+                    <select class="c-select" required>
+                        <option value="">&nbsp;</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="c-select__bar"></span>
+                    <label class="c-select__label" title="Укажите ваш возраст">Укажите ваш возраст</label>
+                </div>
+                <div class="c-input-field c-input-field--resized">
+                    <input id="user_email" class="c-input-field__input" type="email" maxlength="50" required="required">
+                    <label for="user_email" class="c-input-field__label">E-mail</label>
+                </div>
+                <div class="c-input-field c-input-field--space">
+                    <textarea name="textarea" id="textarea" class="c-input-field__input c-input-field__input--textarea" maxlength="150"
+                        required="required"></textarea>
+                    <label for="textarea" class="c-input-field__label">Ваш вопрос*</label>
+                </div>
+                <button class="c-default-button c-default-button--resized">ОТПРАВИТЬ</button>
+            </div>
+        </div>
+        <header class="c-header c-header--shadowed">
+            <div class="l-nav">
+                <div class="c-menu">
+                    <button class="c-menu__button"></button>
+                </div>
+                <h2 class="c-header__title">Вопрос специалисту</h2>
+            </div>
+            <div class="l-action">
+                <div class="c-search">
+                    <button class="c-search__button"></button>
+                </div>
+                <div class="c-cart">
+                    <button class="c-cart__button"></button>
+                    <div class="c-cart__counter">3</div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="c-consultant">
+                <img src="./images/provizor.jpg" alt="#" class="c-consultant__image">
+                <h2 class="c-consultant__name">Ирина Верина</h2>
+                <div class="c-info">
+                    <div class="c-info__article">
+                        <span class="c-position">Консультант-провизор</span>
+                    </div>
+                    <div class="c-info__article">
+                        <span class="c-experience">Стаж работы:</span>
+                        <span class="c-experience__value">6 лет</span>
+                    </div>
+                    <div class="c-info__article">
+                        <span class="c-education">Образование:</span>
+                        <span class="c-education__value">высшее</span>
+                    </div>
+                    <div class="c-info__article">
+                        <span class="c-upgrading">Повышение квалификации:</span>
+                        <span class="c-upgrading__value">28 часов</span>
+                    </div>
+                </div>
+                <div class="c-personal-info">
+                    <h3 class="c-personal-info__title">О себе:</h3>
+                    <p class="c-personal-info__text">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
+                        natoque penatibus et magnis dis parturient montes,
+                        nascetur ridiculus mus.
+                    </p>
+                </div>
+                <button class="c-primary-button c-primary-button--narrow">ЗАДАТЬ ВОПРОС</button>
+                <div class="c-share">
+                    <h2 class="c-share__title">Поделиться в соц-сетях:</h2>
+                    <button class="c-share__button"></button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

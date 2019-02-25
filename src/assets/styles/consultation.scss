@@ -1,0 +1,204 @@
+@import "partials";
+@import "body";
+
+body {
+  main {
+    padding: 0 0;
+  }
+}
+
+.c-proclaiming {
+  margin: 22px 16px;
+
+  &__text {
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 400;
+    color: $primaryTextColor;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+
+    &--bold {
+      font-weight: 500;
+    }
+  }
+}
+
+.l-consultants {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.l-consultant {
+  &__info {
+    padding: 8px 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    margin: 0 0 12px;
+
+    &--large-margin {
+      margin: 0 0 15px;
+    }
+  }
+}
+.c-consultant {
+  margin-bottom: 15.93px;
+  width: 328px;
+  height: 127px;
+  min-height: 127px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+
+  @media screen and (max-width: 350px) {
+    width: 100%;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__image {
+    width: 143px;
+    height: 100%;
+    object-fit: cover;
+
+    @media screen and (max-width: 350px) {
+      width: 110px;
+    }
+  }
+
+  &__name {
+    font-size: 14px;
+    line-height: 16px;
+    color: $primaryTextColor;
+    font-weight: 500;
+    margin: 0;
+    height: 16px;
+    overflow: hidden;
+  }
+
+  &__position {
+    @extend .card-text;
+    font-weight: 400;
+    line-height: 13px;
+  }
+
+  &__page-link {
+    @extend .card-text;
+    font-weight: 400;
+    color: $highlightHeadersColor;
+    line-height: 13px;
+  }
+}
+
+.c-consultations {
+  margin-top: 22px;
+
+  &__title {
+    font-size: 17px;
+    line-height: 20px;
+    color: $primaryTextColor;
+    font-weight: 500;
+    margin: 0 16px 16px;
+  }
+}
+
+.l-consultation {
+  border-top: 1px solid lighten($color:$primaryTextColor, $amount: 84%);
+  box-shadow: 0 3px 6px 0 lighten($color:$primaryTextColor, $amount: 84%);
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.c-question {
+  padding: 4px 16px;
+  max-width: 328px;
+
+  &__name {
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+    font-weight: 500;
+    margin: 4px 0 8px;
+  }
+
+  &__date {
+    @extend .card-text;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    margin: 4px 0 8px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 17px;
+    color: $primaryTextColor;
+    margin: 4px 0 8px;
+  }
+}
+
+.c-answer {
+  display: flex;
+  padding: 6px 8px;
+
+  &__icon {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid lighten($color: $primaryTextColor, $amount: 48%);
+    background: $defaultBackgroundColor;
+    margin-right: 8px;
+    margin-top: 4px;
+  }
+
+  &__name {
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+    font-weight: 500;
+    margin: 4px 0 8px;
+  }
+
+  &__position,
+  &__date {
+    @extend .card-text;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    margin: 4px 0 8px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 17px;
+    color: $primaryTextColor;
+    margin: 4px 0 0;
+  }
+
+  &__link {
+    color: $highlightHeadersColor;
+  }
+}
+
+.l-answer {
+  &__info {
+    flex: 70%;
+  }
+}

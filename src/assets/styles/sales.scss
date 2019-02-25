@@ -1,0 +1,124 @@
+@import "partials";
+@import "body";
+@import 'good-card--products-pages';
+
+body {
+  main {
+    width: 100%;
+    padding: 0 0 65px;
+    box-sizing: border-box;
+  }
+}
+
+.l-promotion {
+  margin-bottom: 20px;
+}
+
+.c-banner {
+  height: 132.19px;
+  padding: 0 37px;
+  margin-bottom: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background: $defaultBackgroundColor;
+  box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 88%);
+
+  &__title {
+    overflow: hidden;
+    font-size: 22px;
+    line-height: 27px;
+    color: $lightTextColor;
+    text-align: center;
+  }
+}
+
+.c-share {
+  padding: 11px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__button {
+    @extend .buttonReset;
+    position: relative;
+    width: 18px;
+    height: 19.9px;
+
+    &::after {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      content: '\e80d';
+      @include material-icons();
+    }
+  }
+}
+
+.c-message {
+  margin: 0 16px 16px;
+  &__text {
+    margin: 11px 0;
+    font-size: 10px;
+    color: $primaryTextColor;
+    line-height: 12px;
+
+    &:last-child {
+      margin-top: 13px;
+    }
+  }
+}
+
+.l-brands {
+  width: 100%;
+}
+
+.c-brands {
+  flex-basis: 70.25px;
+  margin: 12px 0 0;
+  float: left;
+  margin-right: 15.5px;
+
+  @media screen and (min-width: 360px) and (max-width: 377px) {
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+
+  &__img {
+    width: 70.25px;
+    height: 68.14px;
+  }
+}
+
+.c-section {
+  margin: 0 16px 0;
+  clear: both;
+
+  &--large-top-margin {
+    margin: 24px 16px 0;
+  }
+
+  &--no-space {
+    overflow-x: hidden;
+    margin-right: -16px;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $primaryTextColor;
+    padding: 0;
+    margin: 5px 0;
+  }
+}

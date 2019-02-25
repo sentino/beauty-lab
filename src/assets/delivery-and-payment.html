@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DELIVERY AND PAYMENT</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/delivery-and-payment.css">
+</head>
+<body>
+    <div class="l-container">
+        <header class="c-header c-header--shadowed">
+            <div class="l-nav">
+                <div class="c-menu">
+                    <button class="c-menu__button"></button>
+                </div>
+                <h2 class="c-header__title">Доставка и Оплата</h2>
+            </div>
+            <div class="l-action">
+                <div class="c-search">
+                    <button class="c-search__button"></button>
+                </div>
+                <div class="c-cart">
+                    <button class="c-cart__button"></button>
+                    <div class="c-cart__counter">3</div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="c-address-picker">
+                <div class="l-select">
+                    <select class="c-select c-select--detailes" required>
+                        <option value="">&nbsp;</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="c-select__bar"></span>
+                    <label class="c-select__label  c-select__label--max-top" title="Выберите регион">Выберите регион</label>
+                </div>
+                <div class="l-select">
+                    <select class="c-select c-select--detailes" required disabled>
+                        <option value="">&nbsp;</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="c-select__bar"></span>
+                    <label class="c-select__label c-select__label--max-top" title="Выберите город">Выберите город</label>
+                </div>
+                <p class="c-address-picker__text">
+                    Оформить заказ на сайте можно круглосуточно 24 часа в сутки, 7 дней в неделю.
+                </p>
+            </div>
+            <div class="c-info">
+                <h2 class="c-info__title">Адрес пункта САМОВЫВОЗА г. Москва</h2>
+                <p class="c-info__text">
+                    м. Сокол. Волоколамское шоссе, д.2 <br />
+                    Гидропроект.
+                    Вход со стороны Волоколамского <br />
+                    шоссе - вывеска "АПТЕКА".
+                </p>
+            </div>
+            <div class="c-info">
+                <h2 class="c-info__title">Режим работы</h2>
+                <p class="c-info__text">
+                    Пн-пт с 10:00 до 19:00, <br />
+                    сб-вс с 11:00 до 18:00
+                </p>
+            </div>
+            <div class="c-info">
+                <p class="c-info__text">
+                    <span class="c-info__text--bold">Внимание! </span>
+                    Необходим предварительный заказ на сайте или по телефону.
+                    Дождитесь подтверждения оператора, прежде чем
+                    приезжать в аптеку. Для получения необходимо назвать номер заказа.
+                </p>
+            </div>
+            <div class="c-position">
+                <img src="./images/аптека.jpg" alt="img" class="c-position__image">
+                <div class="c-position__map"></div>
+            </div>
+            <div class="c-info c-info--little-space">
+                <p class="c-info__text">
+                    <span class="c-info__text--bold">ВНИМАНИЕ! Стоимость доставки рассчитывается <br /> при оформлении заказа.</span>
+                </p>
+                <p class="c-info__text c-info__text--medium-space">
+                    <span class="c-info__text--bold">Минимальная сумма заказа 1000 рублей</span>
+                     для доставки в города России за исключением Москвы, Московской области и
+                    Санкт-Петербурга.
+                </p>
+                <p class="c-info__text c-info__text--large-space">
+                    Чтобы узнать подробности и условия <br /> доставки - выберите Ваш регион:
+                </p>
+            </div>
+            <section class="c-detailes-section c-detailes-section--detailes">
+                <h2 class="c-detailes-section__title">Способы доставки</h2>
+                <section class="c-detailes c-detailes--large-space">
+                    <h2 class="c-detailes__title c-detailes__title--main">
+                        1) МОСКВА (в пределах МКАД):
+                    </h2>
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition">
+                            курьерская доставка - ежедневно с 10.00 до 21.00
+                        </li>
+                        <li class="c-detailes__condition c-detailes__condition--minor-space">
+                            стоимость курьерской доставки заказов до 2900 руб. - 150 рублей,
+                            при заказе более 2900 руб. - Бесплатно
+                        </li>
+                    </ul>
+                    <h2 class="c-detailes__title">
+                        ПУНКТЫ ВЫДАЧИ ЗАКАЗОВ г. Москва (в пределах МКАД)
+                    </h2>
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition">
+                            срок доставки до пункта выдачи от 2 до 3-х дней
+                        </li>
+                        <li class="c-detailes__condition">
+                            стоимость доставки заказов до 2900 руб. - 150 рублей,
+                            при заказе более 2900 руб. - Бесплатно
+                        </li>
+                    </ul>
+                    <p class="c-detailes__info">
+                        Уважаемые покупатели, обратите внимание на дополнительные
+                        тарифы для крупногабаритных и тяжелых заказов:
+                    </p>
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition c-detailes__condition--min-space">5-10 кг - 100 рублей*</li>
+                        <li class="c-detailes__condition c-detailes__condition--min-space">10-20 кг - 250 рублей*</li>
+                        <li class="c-detailes__condition c-detailes__condition--min-space">20-30 кг - 400 рублей*</li>
+                        <li class="c-detailes__condition c-detailes__condition--min-space">30-50 кг - 600 рублей*</li>
+                    </ul>
+                    <p class="c-detailes__info c-detailes__info--bold">
+                        * Данная тарифная сетка применяется дополнительно к стандартным условиям по доставке!
+                    </p>
+                </section>
+                <section class="c-detailes">
+                    <h2 class="c-detailes__title">
+                        2) МОСКОВСКАЯ ОБЛАСТЬ:
+                    </h2>
+                    <p class="c-detailes__info c-detailes__info--middle-space">
+                        Курьерская доставка осуществляется по недельному графику
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--middle-space c-detailes__info--minor-space ">
+                        * день недели подставляется автоматически при выборе пункта назначения
+                    </p>
+                </section>
+                <section class="c-detailes">
+                    <h2 class="c-detailes__title">
+                        3) ПО РОССИИ:
+                    </h2>
+                    <p class="c-detailes__info c-detailes__info--bold c-detailes__info--middle">
+                        Boxberry, Im-Logistic, DPD, Почта РФ, О-Курьер, РЭД Экспресс,
+                        ТОП Деливери
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--large-space">
+                        * с помощью курьерских компаний от 1 до 10 дней
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--bold">
+                        ВНИМАНИЕ!
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--bold">
+                        ДОСТАВКА ПОЧТОЙ РФ осуществляется только по полной ПРЕДОПЛАТЕ!
+                    </p>
+                    <p class="c-detailes__info">
+                        Частичный отказ от товара НЕВОЗМОЖЕН!!
+                    </p>
+                    <p class="c-detailes__info">
+                        Операторы Службы клиентов обязательно перезвонят
+                        Вам для подтверждения интернет-заказ и согласования
+                        даты доставки.
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--bold">
+                        Операторы работают ЕЖЕДНЕВНО.
+                    </p>
+                    <p class="c-detailes__info">
+                        Понедельник - пятница: с 10:00 до 19:00. <br />
+                        Суббота, воскресенье: с 11:00 до 18:00.
+                    </p>
+                    <p class="c-detailes__info">
+                        Если у Вас есть вопросы по доставке или оплате заказа
+                        обращайтесь на нашу горячую линию по телефону 8
+                        (495) 981-55-90
+                    </p>
+                    <p class="c-detailes__info">
+                        В день доставки КУРЬЕР позвонит Вам и согласует
+                        время доставки. К заказу обязательно прилагается
+                        товарная накладная и кассовый чек. Пожалуйста,
+                        проверяйте Ваш заказ при курьере.
+                    </p>
+                </section>
+            </section>
+            <section class="c-detailes-section c-detailes-section--payment">
+                <h2 class="c-detailes-section__title">Способы доставки</h2>
+                <div class="c-detailes">
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition c-detailes__condition--bottom-space">
+                            <span class="c-detailes__condition--bold">Наличный расчет</span> <br />
+                            Оплата заказа и доставки осуществляется при 
+                            получении заказа непосредственно курьеру или на 
+                            кассе в пункте самовывоза.
+                        </li>
+                        <li class="c-detailes__condition c-detailes__condition--minor-space">
+                            <span class="c-detailes__condition--bold">Банковской картой</span> на сайте <br />
+                            Оплата происходит через платежный сервис Payler с
+                            использованием Банковских карт всех популярных
+                            платежных систем: Mastercard, VISA, МИР.
+                        </li>
+                    </ul>
+                    <div class="l-detailes__img">
+                        <img src="./images/mastercard-logo-jpg.jpeg" alt="img" class="c-detailes__image">
+                        <img src="./images/visa.png" alt="img" class="c-detailes__image c-detailes__image--wide">
+                        <img src="./images/мир.png" alt="img" class="c-detailes__image c-detailes__image--widest">
+                    </div>
+                </div>
+            </section>
+            <section class="c-detailes-section c-detailes-section--restitution">
+                <h2 class="c-detailes-section__title">Порядок обмена и возврата товара</h2>
+                <div class="c-detailes">
+                    <p class="c-detailes__info">
+                        Отказаться от доставленного заказа и его оплаты
+                        возможно в следующих случаях:
+                    </p>
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition c-detailes__condition--bottom-space">
+                            Доставленный товар не соответствует заказанному;
+                        </li>
+                        <li class="c-detailes__condition">
+                            Товар поврежден в следствие нарушения целостности упаковки.
+                        </li>
+                    </ul>
+                    <p class="c-detailes__info c-detailes__info--middle-space c-detailes__info--minor-space">
+                        Товар может быть возвращен только в момент доставки.
+                    </p>
+                    <p class="c-detailes__info">
+                        Согласно постановлению Правительства РФ от 
+                        19.01.1998 г №55 не подлежат обмену и возврату 
+                        следующие товары надлежащего качества: 
+                    </p>
+                    <ul class="l-detailes__conditions">
+                        <li class="c-detailes__condition c-detailes__condition--little-bottom-space">
+                            Предметы личной гигиены, средства гигиены полости рта; 
+                        </li>
+                        <li class="c-detailes__condition c-detailes__condition--little-bottom-space">
+                            Инструменты, приборы и аппаратура медицинские, 
+                            предметы санитарии и гигиены из металла, резины, 
+                            текстиля и других материалов; 
+                        </li>
+                        <li class="c-detailes__condition c-detailes__condition--little-bottom-space">
+                            Предметы по уходу за детьми;
+                        </li>
+                        <li class="c-detailes__condition c-detailes__condition--little-bottom-space">
+                            Линзы очковые; 
+                        </li>
+                        <li class="c-detailes__condition">
+                            Парфюмерно-косметические средства
+                        </li>
+                    </ul>
+                    <p class="c-detailes__info c-detailes__info--middle-space">
+                        <span class="c-detailes__info--bold">Возврат денежных средств,</span> в случает оплаты картой 
+                        производится на Ваш банковский счет в течение 5—30
+                        рабочих дней (срок зависит от Банка, который выдал
+                        Вашу банковскую карту).
+                    </p>
+                    <p class="c-detailes__info">
+                        Отзывы и пожелания по доставке оставляйте на
+                        <a href="mailto:director@lab-krasoty.ru" class="c-detailes__link">director@lab-krasoty.ru.</a> <br />
+                        Ваша заявка будет обязательно рассмотрена!
+                    </p>
+                    <p class="c-detailes__info c-detailes__info--first-letter c-detailes__info--minor-space">
+                        *Доставка лекарств осуществляется только для
+                        льготной категории граждан на основании ст. 2
+                        Федерального закона РФ от 09.01.1997 N 5-ФЗ «О
+                        предоставлении социальных гарантий героям
+                        социалистического труда и полным кавалерам ордена
+                        трудовой славы» (в ред. от 02.07.2013) и ст 1.1 Закона РФ
+                        от 15.01.1993 N 4301-1 «О статусе Героев Советского
+                        Союза, Героев Российской Федерации и полных
+                        кавалеров Ордена Славы».
+                    </p>
+                    <p class="c-detailes__info">
+                        Товары из раздела "Лекарства и БАДы" возможно
+                        забронировать, внести предоплаты и забрать в нашей
+                        аптеке по адресу: Волоколамское ш., д.2.
+                    </p>
+                </div> 
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+

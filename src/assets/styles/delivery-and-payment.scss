@@ -1,0 +1,200 @@
+@import "partials";
+@import "body";
+
+body {
+  main {
+    padding-right: 22px;
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+  }
+}
+
+.c-address-picker {
+  &__text {
+    color: $secondaryTextColor;
+    margin-right: 52px;
+    margin-top: 24px;
+  }
+}
+
+.c-info {
+  margin: 22px 0;
+
+  &--little-space {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    font-size: inherit;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+
+  &__text {
+    margin: 10px 0;
+    &--bold {
+      font-weight: 500;
+    }
+
+    &--medium-space {
+      margin: 13px 0;
+    }
+
+    &--large-space {
+      margin: 16px 0;
+    }
+  }
+}
+
+.c-position {
+  margin: 22px 0;
+  &__image {
+    width: 100%;
+    height: 118px;
+    margin-bottom: 14px;
+    object-fit: cover;
+  }
+
+  &__map {
+    width: 100%;
+    height: 162px;
+    background: url(./../images/russia_632_1.jpg);
+    background-size: cover;
+  }
+}
+
+.c-detailes-section {
+  &--payment {
+    margin: 23px 0;
+  }
+
+  &__title {
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+}
+
+.c-detailes {
+  margin: 16px 0 14px;
+  &--large-space {
+    margin: 16px 0 25px;
+  }
+
+  &--little-space {
+    margin: 14px 0;
+  }
+
+  &__title {
+    font-size: 12px;
+    line-height: 14px;
+    color: lighten($color: $primaryTextColor, $amount: 13%);
+    font-weight: 500;
+    margin: 16px 0 14px;
+
+    &--main {
+      margin: 16px 0 15px 3px;
+    }
+  }
+
+  &__info {
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+    font-weight: 400;
+    margin: 15px 0;
+
+    &--bold {
+      font-weight: 500;
+    }
+
+    &--middle-space {
+      margin: 14px 0;
+    }
+
+    &--minor-space {
+      margin-right: -6px;
+    }
+
+    &--large-space {
+      margin-top: 28px;
+    }
+  }
+
+  &__condition {
+    position: relative;
+    padding-left: 15px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: $defaultBackgroundColor;
+      display: inline-block;
+    }
+
+    &--bold {
+      font-weight: 500;
+    }
+
+    &--minor-space {
+      margin-right: -6px;
+    }
+
+    &--min-space {
+      padding-left: 13px;
+    }
+
+    &--little-bottom-space {
+      margin-bottom: 15px;
+    }
+
+    &--bottom-space {
+      margin-bottom: 16px;
+    }
+  }
+  &__image {
+    width: 46.83px;
+    height: 33.72px;
+    object-fit: cover;
+    margin-right: 8.37px;
+
+    &--wide {
+      width: 51.14px;
+      height: 34.09px;
+    }
+
+    &--widest {
+      width: 70.86px;
+      object-fit: contain;
+    }
+  }
+
+  &__link {
+    color: $highlightHeadersColor;
+  }
+}
+
+.l-detailes__conditions {
+  list-style: none;
+  padding-left: 8px;
+}
+
+.l-detailes__img {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.c-detailes__info--first-letter {
+  &::first-letter {
+    padding-left: 14px;
+  }
+}
