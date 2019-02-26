@@ -33,14 +33,14 @@ export class ProductComponent {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public events: Events
+    // public events: Events
   ) {
 
     
 
-    events.subscribe('wishListUpdate', (id, value) => {
-      if (this.p.products_id == id) this.p.isLiked = value
-    });
+    // events.subscribe('wishListUpdate', (id, value) => {
+    //   if (this.p.products_id == id) this.p.isLiked = value
+    // });
   }
 
   pDiscount() {

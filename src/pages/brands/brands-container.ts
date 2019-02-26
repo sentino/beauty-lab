@@ -92,7 +92,7 @@ export class BrandsContainer implements OnInit {
   }
 
   goToBrand(id) {
-    this.navCtrl.setRoot(BrandsPageContainer, { id: id, brands: this.arrayForParameter })
+    this.navCtrl.push(BrandsPageContainer, { id: id, brands: this.arrayForParameter })
   }
 
   filterArray(sort) {

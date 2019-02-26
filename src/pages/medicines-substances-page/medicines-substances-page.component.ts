@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
     <section 
       class="c-section" 
       *ngIf="type === 'medicines' && desc"
-      [innerHTML]="desc | sanitizeHtml"
+      [innerHTML]="desc | sanitizeHtml" [href]
     ></section>
 
 

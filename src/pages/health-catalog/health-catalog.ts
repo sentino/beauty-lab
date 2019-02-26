@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { CartContainer } from '../cart/cart-container';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
 
 /**
  * Generated class for the HealthCatalogPage page.
@@ -161,6 +162,10 @@ export class HealthCatalogPage {
 
   openCatalog(catalog_id){
     this.navCtrl.setRoot(ProductsPage, { id_cat: catalog_id});
+  }
+
+  goToArticles(id) {
+    this.navCtrl.setRoot(ArticlesPromotionsPageContainer, { id: id, type: 'articles' })
   }
 
   ngOnInit() {

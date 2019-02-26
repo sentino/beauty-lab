@@ -152,6 +152,9 @@ import { MedicinesSubstancesPageContainer } from '../pages/medicines-substances-
 import { MedicinesSubstancesPageComponent } from '../pages/medicines-substances-page/medicines-substances-page.component';
 import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articles-promotions-container';
 import { ArticlesPromotionsComponent } from '../pages/articles-promotions/articles-promotions.component';
+import { ArticlesPromotionsPageContainer } from '../pages/articles-promotions-page/articles-promotions-page-container';
+import { ArticlesPromotionsPageComponent } from '../pages/articles-promotions-page/articles-promotions-page.component';
+import { HrefDirective } from '../helpers/pipe/href.directive';
 
 
 
@@ -208,7 +211,9 @@ const MEDICINES_SUBSTANCES_MODULE = [
 
 const ARTICLES_PROMOTIONS_MODULE = [
   ArticlesPromotionsContainer,
-  ArticlesPromotionsComponent
+  ArticlesPromotionsComponent,
+  ArticlesPromotionsPageContainer,
+  ArticlesPromotionsPageComponent
 ];
 
 const PAGES = [
@@ -313,7 +318,11 @@ const PIPES = [
     //   }
     // }),
   ],
-  declarations: [...PAGES, ...PIPES],
+  declarations: [
+    HrefDirective,
+    ...PAGES,
+    ...PIPES
+  ],
   entryComponents: [...PAGES],
   providers: [
     InAppBrowser,

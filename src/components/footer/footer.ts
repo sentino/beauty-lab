@@ -25,6 +25,7 @@ import { Categories4Page } from '../../pages/categories4/categories4';
 import { Categories6Page } from '../../pages/categories6/categories6';
 import { BeautyCatalogPage } from '../../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../../pages/health-catalog/health-catalog';
+import { ArticlesPromotionsContainer } from '../../pages/articles-promotions/articles-promotions-container';
 
 
 
@@ -48,7 +49,7 @@ export class FooterComponent {
     if (page == "HomePage") { this.openHomePage(); }
     else if (page == "CategoriesPage") { this.openCategoryPage(); }
     else if (page == "ProductsPage") { this.navCtrl.push(ProductsPage); }
-    else if (page == "NewsPage") { this.navCtrl.setRoot(NewsPage); }
+    else if (page == "articles") { this.navCtrl.setRoot(ArticlesPromotionsContainer, {type: 'articles'}) }
     else if (page == "SettingsPage") { this.navCtrl.setRoot(SettingsPage); }
   }
   openHomePage() {

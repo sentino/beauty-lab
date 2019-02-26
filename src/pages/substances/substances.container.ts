@@ -92,7 +92,7 @@ export class SubstancesContainer implements OnInit {
   }
 
   goToBrand(id) {
-    this.navCtrl.setRoot(MedicinesSubstancesPageContainer, { id: id, type: 'substances' })
+    this.navCtrl.push(MedicinesSubstancesPageContainer, { id: id, type: 'substances' })
   }
 
   filterArray(sort) {

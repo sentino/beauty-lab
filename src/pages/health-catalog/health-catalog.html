@@ -59,7 +59,7 @@
     
         <p class="slider-header">Последнии статьи</p>
         <ion-slides slidesPerView=2.1 spaceBetween=10 class="articles_list">
-            <ion-slide *ngFor="let p of last_articles">
+            <ion-slide *ngFor="let p of last_articles" (click)="goToArticles(p.ID)">
                 <div class="card-thumb">
                     <img class="image" src="{{p.IMAGE}}"/>
                   </div>

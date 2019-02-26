@@ -88,6 +88,7 @@ app-product-cart {
     box-sizing: border-box;
     border-radius: 2px;
     box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
+    background-color: white;
 
     &--box {
       & div:nth-child(1) {

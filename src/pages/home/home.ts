@@ -20,6 +20,7 @@ import { Slides } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetDataCartAction } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
 
 @Component({
   selector: 'page-home',
@@ -149,7 +150,9 @@ export class HomePage {
     this.store.dispatch(new GetDataCartAction());
   }
 
-  
+  goToArticles(id) {
+    this.navCtrl.setRoot(ArticlesPromotionsPageContainer, { id: id, type: 'articles' })
+  }
 
   openCart() {
       this.navCtrl.push(CartContainer);

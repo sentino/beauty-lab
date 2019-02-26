@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { NavController, NavParams } from 'ionic-angular';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
-import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @Component({
-  selector: 'articles-promotions-container',
+  selector: 'articles-promotions-page-container',
   template: `
     <ion-header>
-      <ion-navbar>
+      <ion-navbar style="box-shadow: none;">
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -46,11 +46,13 @@ import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/art
     </ion-header>
 
     <ion-content>
-      <articles-promotions-component
-        *ngIf="items && items.length"
-        [items]="items"
-        (goToPage)="goToPage($event)"
-      ></articles-promotions-component>
+      <articles-promotions-page-component
+        [type]="type"
+        [name]="name"
+        [desc]="desc"
+        [products]="products"
+        (share)="share()"
+      ></articles-promotions-page-component>
     </ion-content>
 
     <ion-footer>
@@ -60,39 +62,65 @@ import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/art
   providers: [ArticlesPromotionsService]
 })
 
-export class ArticlesPromotionsContainer implements OnInit {
+export class ArticlesPromotionsPageContainer implements OnInit{
   productsLength$ = this.store.select(selectCartProductsLength);
 
-  items;
   type;
+  id;
+
   title;
+  name;
+  desc;
+  products;
+  image;
+  url;
 
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
     private navParams: NavParams,
-    private articlesPromotionsService: ArticlesPromotionsService
+    private articlesPromotionsService: ArticlesPromotionsService,
+    private socialSharing: SocialSharing,
   ) { }
 
 
   public ngOnInit(): void {
     this.type = this.navParams.get('type');
+    this.id = this.navParams.get('id');
 
     if (this.type === 'articles') {
-      this.title = 'Статьи';
-      this.articlesPromotionsService.getArticles().subscribe(res => {
-        this.items = res.result;
+      this.title = 'Статья';
+      this.articlesPromotionsService.getArticlesById(this.id).subscribe(res => {
+        console.log(res);
+        this.name = res.result.NAME;
+        this.desc = res.result.DESC;
+        this.products = res.result.products;
+        this.image = res.result.IMAGE;
+        this.url = res.result.URL;
       });
     } else if (this.type === 'promotions') {
-      this.title = 'Акции';
-      this.articlesPromotionsService.getPromotions().subscribe(res => {
-        this.items = res.result;
+      this.title = 'Акция';
+      this.articlesPromotionsService.getPromotionsById(this.id).subscribe(res => {
+        console.log(res);
+        this.name = res.result.NAME;
+        this.desc = res.result.DESC;
+        this.products = res.result.products;
+        this.image = res.result.IMAGE;
+        this.url = res.result.URL;
       });
     }
   }
 
-  goToPage(id) {
-    this.navCtrl.push(ArticlesPromotionsPageContainer, { id: id, type: this.type })
+  share() {
+    this.socialSharing.share(
+      this.name,
+      this.name,
+      this.image,
+      this.url).then(() => {
+      // Success!
+    }).catch(() => {
+      // Error!
+    });
   }
 
   openCart() {
