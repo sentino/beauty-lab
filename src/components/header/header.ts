@@ -95,8 +95,8 @@ export class HeaderComponent {
   }
 
   showHideSearchList(){
-    console.log("Search status");
-    console.log(this.SearchList);
+    // console.log("Search status");
+    // console.log(this.SearchList);
     if (this.SearchList == false) { this.SearchList = true; }
     else { this.SearchList = false;}
   }
@@ -104,15 +104,15 @@ export class HeaderComponent {
   getSearch(){
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
-      console.log("Search answer:");
-      console.log(data);
+      // console.log("Search answer:");
+      // console.log(data);
 
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
     err => {
       var er_status = err.status;
-      console.log(err);
+      // console.log(err);
     });
   }
 

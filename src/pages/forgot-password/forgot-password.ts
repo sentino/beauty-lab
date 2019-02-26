@@ -81,8 +81,8 @@ export class ForgotPasswordPage {
     this.http.post(this.config.url + 'auth/forgotpassword/', this.formData).subscribe((data: any) => {
       this.loading.hide();
 
-      console.log("Forg Data");
-      console.log(data);
+      // console.log("Forg Data");
+      // console.log(data);
       this.response = data;
       
       if(this.response.result.error == 0){
@@ -92,15 +92,15 @@ export class ForgotPasswordPage {
 
       if(this.response.result.error == 1){
         this.forgot_complete = false;
-        console.log("Ошибочки"); 
-        console.log(this.response.result.errorText);
+        // console.log("Ошибочки");
+        // console.log(this.response.result.errorText);
         alert(this.response.result.errorText);
       }
     },
     err => {
       this.forgot_complete = false;
       this.loading.hide();
-      console.log(err);
+      // console.log(err);
       if(err.status == 422){
         alert("Пользователь не найден!Попробуйте ещё раз.")
       }
@@ -110,8 +110,8 @@ export class ForgotPasswordPage {
 
   
   showHideSearchList(){
-    console.log("Search status");
-    console.log(this.SearchList);
+    // console.log("Search status");
+    // console.log(this.SearchList);
     if (this.SearchList == false) { this.SearchList = true; }
     else { this.SearchList = false;}
   }
@@ -119,15 +119,15 @@ export class ForgotPasswordPage {
   getSearch(){
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
-      console.log("Search answer:");
-      console.log(data);
+      // console.log("Search answer:");
+      // console.log(data);
 
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
     err => {
       var er_status = err.status;
-      console.log(err);
+      // console.log(err);
     });
   }
 

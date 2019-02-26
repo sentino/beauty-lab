@@ -22,7 +22,7 @@ export class NewsDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewsDetailPage');
+    // console.log('ionViewDidLoad NewsDetailPage');
   }
 
 }

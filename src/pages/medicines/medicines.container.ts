@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { Store } from '@ngrx/store';
@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { selectCartProductsLength } from '../../app/store';
 import { MedicinesService } from '../../services/medicines.service';
 import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/medicines-substances-page.container';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
@@ -60,7 +61,7 @@ import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/m
   providers: [MedicinesService]
 })
 
-export class MedicinesContainer implements OnInit {
+export class MedicinesContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   result = [];
@@ -71,22 +72,28 @@ export class MedicinesContainer implements OnInit {
     private store: Store<any>,
     private navCtrl: NavController,
     private medicinesService: MedicinesService
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
-    this.medicinesService.getMedicines().subscribe(res => {
+    this.wrapToUnsubscribe(this.medicinesService.getMedicines()).subscribe(res => {
       let result = res.result;
+
       for (const key of Object.keys(result)) {
         let item = {
           'category': key,
           'brandItems': result[key]
         };
+
         this.result.push(item);
+
         for (let i = 0; i < result[key].length; i++) {
           this.arrayForParameter.push(result[key][i]);
         }
       }
+
       this.baseArr = this.result;
     })
   }
@@ -96,7 +103,9 @@ export class MedicinesContainer implements OnInit {
   }
 
   filterArray(sort) {
-    this.result = this.baseArr.filter(el => el.category === sort);
+    if (this.baseArr.length) {
+      this.result = this.baseArr.filter(el => el.category === sort);
+    }
   }
 
   openCart() {
@@ -104,5 +113,9 @@ export class MedicinesContainer implements OnInit {
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

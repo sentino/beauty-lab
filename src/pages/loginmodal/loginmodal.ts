@@ -51,7 +51,7 @@ export class LoginmodalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginmodalPage');
+    // console.log('ionViewDidLoad LoginmodalPage');
   }
 
   senter(){
@@ -64,10 +64,10 @@ export class LoginmodalPage {
         this.http.post(this.config.url + 'auth/login', VkData).subscribe((data: any) => {
           this.loading.hide();
           alert("You Win");
-          console.log("User info login");
-          console.log(data);
+          // console.log("User info login");
+          // console.log(data);
           this.response = data;
-          console.log("Ошибок нету"); 
+          // console.log("Ошибок нету");
           this.shared.userInfo(this.response.result);
             
           this.viewCtrl.dismiss();
@@ -79,7 +79,7 @@ export class LoginmodalPage {
           alert("Whoops!");
           alert(err);
           alert(err.status);
-          console.log(err)
+          // console.log(err)
           if(err.status = 422){
             alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
           }

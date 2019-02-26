@@ -110,8 +110,8 @@ export class SettingsPage {
 
 
   showHideSearchList(){
-    console.log("Search status");
-    console.log(this.SearchList);
+    // console.log("Search status");
+    // console.log(this.SearchList);
     if (this.SearchList == false) { this.SearchList = true; }
     else { this.SearchList = false;}
   }
@@ -119,15 +119,15 @@ export class SettingsPage {
   getSearch(){
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
-      console.log("Search answer:");
-      console.log(data);
+      // console.log("Search answer:");
+      // console.log(data);
 
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
     err => {
       var er_status = err.status;
-      console.log(err);
+      // console.log(err);
     });
   }
 
@@ -178,18 +178,18 @@ export class SettingsPage {
 
     if (this.setting.notificationEmail) {
       this.http.post(this.config.url + 'tools/subscribe', {email}).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         localStorage.setItem('notificationEmail', 'true');
       }, (response) => {
-        console.log(response);
+        // console.log(response);
         localStorage.setItem('notificationEmail', 'false');
       });
     } else {
       this.http.request('delete', this.config.url + 'tools/subscribe', {body: {email: email}}).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         localStorage.setItem('notificationEmail', 'false');
       }, (response) => {
-        console.log(response);
+        // console.log(response);
       });
     }
   };

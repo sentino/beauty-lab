@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { NavController, NavParams } from 'ionic-angular';
@@ -6,6 +6,7 @@ import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { SubstancesService } from '../../services/substances.service';
 import { MedicinesService } from '../../services/medicines.service';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
@@ -82,7 +83,7 @@ import { MedicinesService } from '../../services/medicines.service';
   providers: [MedicinesService, SubstancesService]
 })
 
-export class MedicinesSubstancesPageContainer implements OnInit{
+export class MedicinesSubstancesPageContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   id;
@@ -99,7 +100,9 @@ export class MedicinesSubstancesPageContainer implements OnInit{
     private navParams: NavParams,
     private medicinesService: MedicinesService,
     private substancesService: SubstancesService
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.id = this.navParams.get('id');
@@ -110,18 +113,14 @@ export class MedicinesSubstancesPageContainer implements OnInit{
 
   initializeData(id, type) {
     if (type === 'medicines') {
-      this.medicinesService.getMedicinesById(id).subscribe( res => {
-        console.log(res);
-        // debugger;
+      this.wrapToUnsubscribe(this.medicinesService.getMedicinesById(id)).subscribe( res => {
         this.name = res.result.name;
         this.desc = res.result.desc;
         this.products = res.result.products;
         this.analogs = res.result.analogs;
       })
     } else if (type === 'substances') {
-      this.substancesService.getSubstancesById(id).subscribe(res => {
-        console.log(res);
-        // debugger;
+      this.wrapToUnsubscribe(this.substancesService.getSubstancesById(id)).subscribe(res => {
         this.name = res.result.name;
 
         let arr = [];
@@ -145,5 +144,9 @@ export class MedicinesSubstancesPageContainer implements OnInit{
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

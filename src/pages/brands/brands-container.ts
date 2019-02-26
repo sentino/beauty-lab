@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BrandsService } from '../../services/brands.service';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { NavController } from 'ionic-angular';
 import { selectCartProductsLength } from '../../app/store';
 import { BrandsPageContainer } from '../brands-page/brands-page-container';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
@@ -60,22 +61,23 @@ import { BrandsPageContainer } from '../brands-page/brands-page-container';
   providers: [BrandsService]
 })
 
-export class BrandsContainer implements OnInit {
+export class BrandsContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   result = [];
-  arrayForParameter = [];
   baseArr;
 
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
     private brandService: BrandsService
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
-    this.brandService.getBrands().subscribe(res => {
+    this.wrapToUnsubscribe(this.brandService.getBrands()).subscribe(res => {
       let result = res.result;
       for (const key of Object.keys(result)) {
         let item = {
@@ -83,16 +85,13 @@ export class BrandsContainer implements OnInit {
           'brandItems': result[key]
         };
         this.result.push(item);
-        for (let i = 0; i < result[key].length; i++) {
-          this.arrayForParameter.push(result[key][i]);
-        }
       }
       this.baseArr = this.result;
     })
   }
 
   goToBrand(id) {
-    this.navCtrl.push(BrandsPageContainer, { id: id, brands: this.arrayForParameter })
+    this.navCtrl.push(BrandsPageContainer, { id: id })
   }
 
   filterArray(sort) {
@@ -104,5 +103,9 @@ export class BrandsContainer implements OnInit {
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

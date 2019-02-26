@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticlesPromotionsService } from '../../services/articles-promotions.service';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
@@ -6,13 +6,14 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
   selector: 'articles-promotions-page-container',
   template: `
     <ion-header>
-      <ion-navbar style="box-shadow: none;">
+      <ion-navbar>
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -62,7 +63,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   providers: [ArticlesPromotionsService]
 })
 
-export class ArticlesPromotionsPageContainer implements OnInit{
+export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   type;
@@ -81,7 +82,9 @@ export class ArticlesPromotionsPageContainer implements OnInit{
     private navParams: NavParams,
     private articlesPromotionsService: ArticlesPromotionsService,
     private socialSharing: SocialSharing,
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
@@ -90,8 +93,8 @@ export class ArticlesPromotionsPageContainer implements OnInit{
 
     if (this.type === 'articles') {
       this.title = 'Статья';
-      this.articlesPromotionsService.getArticlesById(this.id).subscribe(res => {
-        console.log(res);
+      this.wrapToUnsubscribe(this.articlesPromotionsService.getArticlesById(this.id)).subscribe(res => {
+        // console.log(res);
         this.name = res.result.NAME;
         this.desc = res.result.DESC;
         this.products = res.result.products;
@@ -100,8 +103,8 @@ export class ArticlesPromotionsPageContainer implements OnInit{
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акция';
-      this.articlesPromotionsService.getPromotionsById(this.id).subscribe(res => {
-        console.log(res);
+      this.wrapToUnsubscribe(this.articlesPromotionsService.getPromotionsById(this.id)).subscribe(res => {
+        // console.log(res);
         this.name = res.result.NAME;
         this.desc = res.result.DESC;
         this.products = res.result.products;
@@ -128,5 +131,9 @@ export class ArticlesPromotionsPageContainer implements OnInit{
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

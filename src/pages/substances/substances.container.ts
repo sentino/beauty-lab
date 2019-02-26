@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { Store } from '@ngrx/store';
@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { selectCartProductsLength } from '../../app/store';
 import { SubstancesService } from '../../services/substances.service';
 import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/medicines-substances-page.container';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
@@ -60,7 +61,7 @@ import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/m
   providers: [SubstancesService]
 })
 
-export class SubstancesContainer implements OnInit {
+export class SubstancesContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   result = [];
@@ -71,11 +72,13 @@ export class SubstancesContainer implements OnInit {
     private store: Store<any>,
     private navCtrl: NavController,
     private substancesService: SubstancesService
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
-    this.substancesService.getSubstances().subscribe(res => {
+    this.wrapToUnsubscribe(this.substancesService.getSubstances()).subscribe(res => {
       let result = res.result;
       for (const key of Object.keys(result)) {
         let item = {
@@ -104,5 +107,9 @@ export class SubstancesContainer implements OnInit {
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

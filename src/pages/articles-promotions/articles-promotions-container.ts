@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticlesPromotionsService } from '../../services/articles-promotions.service';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
@@ -6,6 +6,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
@@ -60,7 +61,7 @@ import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/art
   providers: [ArticlesPromotionsService]
 })
 
-export class ArticlesPromotionsContainer implements OnInit {
+export class ArticlesPromotionsContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   items;
@@ -72,7 +73,9 @@ export class ArticlesPromotionsContainer implements OnInit {
     private navCtrl: NavController,
     private navParams: NavParams,
     private articlesPromotionsService: ArticlesPromotionsService
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
@@ -80,12 +83,12 @@ export class ArticlesPromotionsContainer implements OnInit {
 
     if (this.type === 'articles') {
       this.title = 'Статьи';
-      this.articlesPromotionsService.getArticles().subscribe(res => {
+      this.wrapToUnsubscribe(this.articlesPromotionsService.getArticles()).subscribe(res => {
         this.items = res.result;
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акции';
-      this.articlesPromotionsService.getPromotions().subscribe(res => {
+      this.wrapToUnsubscribe(this.articlesPromotionsService.getPromotions()).subscribe(res => {
         this.items = res.result;
       });
     }
@@ -100,5 +103,9 @@ export class ArticlesPromotionsContainer implements OnInit {
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

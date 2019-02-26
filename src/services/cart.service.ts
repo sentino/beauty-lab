@@ -33,7 +33,7 @@ export class CartService {
       "phone": phone,
       "item": id
     }).subscribe(res => {
-      console.log('заказ товара в 1 клик', res);
+      // console.log('заказ товара в 1 клик', res);
     })
   }
 
@@ -42,7 +42,7 @@ export class CartService {
       "name": name,
       "phone": phone
     }).subscribe(res => {
-      console.log('заказ в 1 клик', res);
+      // console.log('заказ в 1 клик', res);
     })
   }
 

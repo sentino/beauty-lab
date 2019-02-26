@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { ActionSheetController, NavController, NavParams } from 'ionic-angular';
 import { BrandsService } from '../../services/brands.service';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
+import { Unsubscriber } from '../../helpers/unsubscriber';
+import { debounceTime } from 'rxjs/operators';
+
 
 
 @Component({
@@ -63,11 +66,11 @@ import { SearchPage } from '../search/search';
   providers: [BrandsService]
 })
 
-export class BrandsPageContainer implements OnInit {
+export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   id;
-  brands: any[];
+  brands = [];
 
   name;
   nameGamme = 'Гамма';
@@ -82,19 +85,29 @@ export class BrandsPageContainer implements OnInit {
     private brandService: BrandsService,
     private navParams: NavParams,
     private actionSheet: ActionSheetController,
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
-    this.brands = this.navParams.get('brands');
     this.id = this.navParams.get('id');
+
+    this.wrapToUnsubscribe(this.brandService.getBrands()).subscribe(res => {
+      let result = res.result;
+      for (const key of Object.keys(result)) {
+        for (let i = 0; i < result[key].length; i++) {
+          this.brands.push(result[key][i]);
+        }
+      }
+    });
 
     this.initializeData(this.id);
   }
 
   initializeData(id) {
-    this.brandService.getBrandById(id).subscribe(res => {
-      console.log(res);
+    this.wrapToUnsubscribe(this.brandService.getBrandById(id)).subscribe(res => {
+      // console.log(res);
 
       this.gamme = res.result.gamme;
       this.name = res.result.name;
@@ -106,8 +119,8 @@ export class BrandsPageContainer implements OnInit {
   initializeDataForGamme(idGamme, name) {
     this.nameGamme = name;
 
-    this.brandService.getBrandForGamme(this.id, idGamme).subscribe( res => {
-      console.log(res);
+    this.wrapToUnsubscribe(this.brandService.getBrandForGamme(this.id, idGamme)).subscribe( res => {
+      // console.log(res);
 
       this.gamme = res.result.gamme;
       this.products = res.result.products;
@@ -162,13 +175,16 @@ export class BrandsPageContainer implements OnInit {
   }
 
   loadMoreProducts() {
-    this.brandService.getMoreProducts(this.id, this.navigation.pageCurrent + 1)
-      .subscribe(res => {
+    this.wrapToUnsubscribe(this.brandService.getMoreProducts(this.id, this.navigation.pageCurrent + 1))
+      .pipe(
+        debounceTime(2000)
+      )
+      .subscribe((res: any) => {
         for (let i = 0; i < res.result.products.length; i++) {
           this.products.push(res.result.products[i]);
         }
         this.navigation = res.result.navigation;
-        console.log(this.products);
+        // console.log(this.products);
     })
   }
 
@@ -177,5 +193,9 @@ export class BrandsPageContainer implements OnInit {
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

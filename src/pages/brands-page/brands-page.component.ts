@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { InfiniteScroll } from 'ionic-angular';
 
 
@@ -40,7 +40,7 @@ import { InfiniteScroll } from 'ionic-angular';
   `
 })
 
-export class BrandsPageComponent implements OnInit {
+export class BrandsPageComponent implements OnInit, OnDestroy {
   @Input() name;
   @Input() gamme;
   @Input() nameGamme;
@@ -61,7 +61,7 @@ export class BrandsPageComponent implements OnInit {
 
 
   public ngOnInit(): void {
-    this.infinite.threshold = '5000px';
+    this.infinite.threshold = '8000px';
     this.infinite.enable(true);
   }
 
@@ -78,7 +78,7 @@ export class BrandsPageComponent implements OnInit {
 
   doInfinite(infiniteScroll) {
     if (this.counter === 0 && this.navigation.pageAll > 1 && this.navigation.pageAll !== this.navigation.pageCurrent) {
-      console.log('Begin async operation');
+      // console.log('Begin async operation');
       this.loadMoreProducts.emit();
       this.counter = 1;
       setTimeout(() => {
@@ -88,6 +88,14 @@ export class BrandsPageComponent implements OnInit {
     }
 
     if (this.navigation.pageAll === 1 || this.navigation.pageAll === this.navigation.pageCurrent) {
+      this.infinite.enable(false);
+    }
+  }
+
+
+  public ngOnDestroy(): void {
+    if (this.infinite) {
+      this.infinite.complete();
       this.infinite.enable(false);
     }
   }

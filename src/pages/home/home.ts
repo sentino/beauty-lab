@@ -80,8 +80,8 @@ export class HomePage {
   ) {
       this.loading.hide();
       
-      console.log(this.shared.subCategoriesBeauty);
-      console.log(this.shared.subCategoriesHealth);
+      // console.log(this.shared.subCategoriesBeauty);
+      // console.log(this.shared.subCategoriesHealth);
 
       this.healthSubs = this.shared.subCategoriesBeauty;
       this.beautySubs = this.shared.subCategoriesHealth;
@@ -112,23 +112,23 @@ export class HomePage {
     this.http.get(this.config.url + 'pages/index/').subscribe(
       (res: any) => {
         this.loading.hide();
-        console.log("User Profile:");
-        console.log(res);
+        // console.log("User Profile:");
+        // console.log(res);
         this.mainInfo = res;
         
         this.banners = this.mainInfo.result.banners;
         this.hits_products = this.mainInfo.result.hits;
         this.last_articles = this.mainInfo.result.articles;
 
-        console.log("Banners:");
-        console.log(this.banners);
+        // console.log("Banners:");
+        // console.log(this.banners);
 
-        console.log("Hits:");
-        console.log(this.hits_products);
+        // console.log("Hits:");
+        // console.log(this.hits_products);
 
         
-        console.log("Articles:");
-        console.log(this.last_articles);
+        // console.log("Articles:");
+        // console.log(this.last_articles);
 
 
       // if(this.response.result.error == 0){

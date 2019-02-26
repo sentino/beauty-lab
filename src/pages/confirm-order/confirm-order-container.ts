@@ -230,7 +230,7 @@ export class ConfirmOrderContainer implements OnInit{
       }
 
       this.result = res.result;
-      console.log('getData', this.result);
+      // console.log('getData', this.result);
     });
   }
   
@@ -268,7 +268,7 @@ export class ConfirmOrderContainer implements OnInit{
     this.payPayler.putData({location: event}).subscribe((res: any) => {
       this.store.dispatch(new GetDataConfirmOrderSuccessAction(res.result));
 
-      console.log('location upd', res);
+      // console.log('location upd', res);
       this.form.controls['listItemTwo'].get('delivery').setValue('');
       this.form.controls['listItemTwo'].get('delivery').updateValueAndValidity();
       // this.deliveryInfo = undefined;
@@ -326,7 +326,7 @@ export class ConfirmOrderContainer implements OnInit{
     this.payPayler.putData(body).subscribe((res: any) => {
       this.store.dispatch(new GetDataConfirmOrderSuccessAction(res.result));
 
-      console.log('delivery upd', res);
+      // console.log('delivery upd', res);
       this.payments = res.result.payments;
       this.innerPayment = res.result.innerPayment;
 
@@ -353,7 +353,7 @@ export class ConfirmOrderContainer implements OnInit{
 
       this.canOrder = res.result.can_order;
 
-      console.log(this.form);
+      // console.log(this.form);
     })
   }
 
@@ -396,7 +396,7 @@ export class ConfirmOrderContainer implements OnInit{
             hour = this.formatDate(new Date().getHours()),
             minutes = this.formatDate(new Date().getMinutes()),
             seconds = this.formatDate(new Date().getSeconds());
-        console.log(res);
+        // console.log(res);
         // debugger;
         this.appCtrl.getRootNav().setRoot(HomePage);
         this.alert.showWithTitle(

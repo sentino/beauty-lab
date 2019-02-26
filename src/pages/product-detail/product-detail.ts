@@ -142,7 +142,9 @@ export class ProductDetailPage {
     private cartService: CartService,
     private alert: AlertProvider) {
 
-    events.subscribe('star-rating:changed', (starRating) => {console.log(starRating)});
+    events.subscribe('star-rating:changed', (starRating) => {
+      // console.log(starRating)});
+    });
       
     this.product_id = navParams.get('prod_id');
    // console.log(this.product);
@@ -230,15 +232,15 @@ export class ProductDetailPage {
 
 
   getProductDetails(){
-      console.log(this.product_id);
+      // console.log(this.product_id);
       this.loading.show();
       this.http.get(this.config.url + 'catalog/product/' + this.product_id).subscribe((data: any) => {
         this.loading.hide();
 
         this.single_product = data.result;
 
-        console.log("Product Single:");
-        console.log(this.single_product);
+        // console.log("Product Single:");
+        // console.log(this.single_product);
 
         this.product_image = this.single_product.IMAGE;
         this.product_name =  this.single_product.NAME;
@@ -249,8 +251,8 @@ export class ProductDetailPage {
         this.products_alsobuy = this.single_product.ALSO_BUY;
         this.products_analogs = this.single_product.ANALOGS;
 
-        console.log("Anglogs:");
-        console.log(this.products_analogs);
+        // console.log("Anglogs:");
+        // console.log(this.products_analogs);
 
         if (this.products_analogs && this.products_analogs.length) this.anlogs_length = this.products_analogs.length;
         if (this.products_leaders && this.products_leaders.length) this.leaders_length = this.products_leaders.length;
@@ -280,8 +282,8 @@ export class ProductDetailPage {
 
         this.can_add = this.single_product.REVIEWS.CAN_ADD;
 
-        console.log("Rewiews ADD info");
-        console.log(this.reviews_info);
+        // console.log("Rewiews ADD info");
+        // console.log(this.reviews_info);
 
 
         if(this.single_product.PROPERTIES.RATING){
@@ -300,15 +302,15 @@ export class ProductDetailPage {
         //   i++;
         // })
 
-        console.log("Propers List");
-        console.log(this.AllProperties);
+        // console.log("Propers List");
+        // console.log(this.AllProperties);
 
         this.product_properties
 
       },
       err => {
         var er_status = err.status;
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -332,25 +334,25 @@ export class ProductDetailPage {
   getSearch(){
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
-      console.log("Search answer:");
-      console.log(data);
+      // console.log("Search answer:");
+      // console.log(data);
 
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
     err => {
       var er_status = err.status;
-      console.log(err);
+      // console.log(err);
     });
   }
 
   newReview(){
-    console.log("First");
-    console.log(this.product_rating_one);
-    console.log("Second");
-    console.log(this.product_rating_two);
-    console.log("Third");
-    console.log(this.product_rating_three);
+    // console.log("First");
+    // console.log(this.product_rating_one);
+    // console.log("Second");
+    // console.log(this.product_rating_two);
+    // console.log("Third");
+    // console.log(this.product_rating_three);
 
     var RevData = new FormData();
 
@@ -380,15 +382,15 @@ export class ProductDetailPage {
     // this.http.post(this.config.url + 'tools/review/', RevData, httpOptions).subscribe(data => {
     this.http.post(this.config.url + 'tools/review/', RevData).subscribe(data => {
       this.loading.hide();
-      console.log("Review response");
-      console.log(data);
+      // console.log("Review response");
+      // console.log(data);
       this.review_response = data;
 
       alert(this.review_response.result.successText);
     },
     err => {
       this.loading.hide();
-      console.log(err);
+      // console.log(err);
       if(err.status == 422){
         alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
       }

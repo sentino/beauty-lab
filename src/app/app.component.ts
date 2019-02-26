@@ -169,12 +169,12 @@ export class MyApp {
       setTimeout(() => { this.splashScreen.hide(); }, 2000);
       this.statusBar.styleLightContent();
 
-      console.log("Beauty App:");
-      console.log(this.shared.subCategoriesBeauty);
+      // console.log("Beauty App:");
+      // console.log(this.shared.subCategoriesBeauty);
       this.healthSubs = this.shared.subCategoriesBeauty;
   
-      console.log("Health App:");
-      console.log(this.shared.subCategoriesHealth);
+      // console.log("Health App:");
+      // console.log(this.shared.subCategoriesHealth);
       this.beautySubs = this.shared.subCategoriesHealth;
 
     });
@@ -299,7 +299,7 @@ export class MyApp {
   }
   ionViewWillEnter() {
 
-    console.log("ionViewCanEnter");
+    // console.log("ionViewCanEnter");
   }
   rateUs() {
     this.loading.autoHide(2000);

@@ -173,7 +173,7 @@ export class LoginPage {
       };
 
       this.http.post(this.config.url + "auth/login", vkData).subscribe((data: any) => {
-        console.log(data);
+        // console.log(data);
         this.response = data;
         this.shared.userInfo(this.response.result);
         this.dismiss();
@@ -190,8 +190,8 @@ export class LoginPage {
       });
   }, (error) => {
       alert(error);
-      console.log("VK Error");
-      console.log(error);
+      // console.log("VK Error");
+      // console.log(error);
   });
   }
 
@@ -258,15 +258,15 @@ export class LoginPage {
 
     this.fb.getLoginStatus().then((res: any) => {
       if (res.status == "connected") {
-        console.log("user connected already" + res.authResponse.accessToken);
+        // console.log("user connected already" + res.authResponse.accessToken);
         this.createAccount(res.authResponse.accessToken, "fb");
       }
       else {
-        console.log("USer Not login ");
+        // console.log("USer Not login ");
         this.fb.login(["public_profile", "user_friends", "email"])
           .then((res: FacebookLoginResponse) => {
             // this.alert.show("Logged into Facebook!" + JSON.stringify(res));
-            console.log("successfully login ");
+            // console.log("successfully login ");
             this.createAccount(res.authResponse.accessToken, "fb");
           })
           .catch(e => this.alert.show("Error logging into Facebook" + JSON.stringify(e)));
@@ -377,22 +377,22 @@ export class LoginPage {
       // this.store.dispatch(new GetDataCartAction());
       this.loading.hide();
 
-      console.log("Face login");
-      console.log(data);
+      // console.log("Face login");
+      // console.log(data);
       this.shared.userInfo(data);
 
       this.response = data;
 
       if(this.response.result.error == 0){
-        console.log("Ошибок нету");
+        // console.log("Ошибок нету");
         this.shared.userInfo(this.response.result);
 
         this.dismiss();
       }
 
       if(this.response.result.error == 1){
-        console.log("Ошибочки");
-        console.log(this.response.result.errorText);
+        // console.log("Ошибочки");
+        // console.log(this.response.result.errorText);
         alert(this.response.result.errorText);
       }
     },
@@ -428,20 +428,20 @@ export class LoginPage {
         this.loading.hide();
         localStorage.setItem("customerData", data.result.accessToken);
         this.store.dispatch(new GetDataCartAction());
-        console.log("User info login");
-        console.log(data);
+        // console.log("User info login");
+        // console.log(data);
         this.shared.userInfo(data);
 
         this.response = data;
 
-        console.log("Ошибок нету");
+        // console.log("Ошибок нету");
         this.shared.userInfo(this.response.result);
 
         this.dismiss();
       },
       err => {
         this.loading.hide();
-        console.log(err);
+        // console.log(err);
         if(err.status = 422){
           alert("Были введены неправильные е-мейл или пароль. Попробуйте, ещё раз!")
         }

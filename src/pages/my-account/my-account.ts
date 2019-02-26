@@ -132,8 +132,8 @@ export class MyAccountPage {
     // this.http.get(this.config.url + 'user/profile/', httpOptions).subscribe(
     this.http.get(this.config.url + 'user/profile/').subscribe(
       (res: any) => {
-        console.log("User Profile:");
-        console.log(res);
+        // console.log("User Profile:");
+        // console.log(res);
 
         this.ProfileData = res;
 
@@ -153,8 +153,8 @@ export class MyAccountPage {
 
   
   showHideSearchList(){
-    console.log("Search status");
-    console.log(this.SearchList);
+    // console.log("Search status");
+    // console.log(this.SearchList);
     if (this.SearchList == false) { this.SearchList = true; }
     else { this.SearchList = false;}
   }
@@ -162,15 +162,15 @@ export class MyAccountPage {
   getSearch(){
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
       // console.log(data.product_data.length + "   " + this.page);
-      console.log("Search answer:");
-      console.log(data);
+      // console.log("Search answer:");
+      // console.log(data);
 
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
     err => {
       var er_status = err.status;
-      console.log(err);
+      // console.log(err);
     });
   }
 
@@ -193,34 +193,34 @@ export class MyAccountPage {
     this.http.put(this.config.url + 'user/profile/', this.myAccountData).subscribe(
       (res: any) => {
         this.loading.hide();
-        console.log("User Response:");
-        console.log(res);
+        // console.log("User Response:");
+        // console.log(res);
         this.response = res;
 
         this.shared.customerData.name = this.response.result.name;
         this.shared.customerData.email = this.response.result.email;
         this.shared.customerData.lastName = this.response.result.lastName;
 
-        console.log("New Name");
-        console.log(this.shared.customerData.name);
+        // console.log("New Name");
+        // console.log(this.shared.customerData.name);
         // this.shared.customerData.surname = this.Userdata.surname;
 
       if(this.response.result.error == 0){
-          console.log("Ошибок нету"); 
+          // console.log("Ошибок нету");
           alert("Данные успешно сохранены!");
         }
   
         if(this.response.result.error == 1){
-          console.log("Ошибочки"); 
-          console.log(this.response.result.errorText);
+          // console.log("Ошибочки");
+          // console.log(this.response.result.errorText);
           alert(this.response.result.errorText);
         }
       });
     }
     else{
       this.pass_validation = false;
-      console.log("This pass validation:");
-      console.log(this.pass_validation);
+      // console.log("This pass validation:");
+      // console.log(this.pass_validation);
       alert("Пароли не совпадают!");
     }
   }

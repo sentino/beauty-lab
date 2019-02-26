@@ -244,7 +244,7 @@ export class OrderPage {
         this.products = (JSON.parse(JSON.stringify(this.shared.cartProducts)));
         this.couponArray = [];
         this.orderDetail.shipping_cost = this.shared.orderDetails.shipping_cost;
-        console.log('individual_use');
+        // console.log('individual_use');
       }
       var v: { [k: string]: any } = {};
       v.code = coupon.code;
@@ -318,15 +318,15 @@ export class OrderPage {
           //   }
           // }
         }, () => {
-          console.log('Error or render dialog closed without being successful');
+          // console.log('Error or render dialog closed without being successful');
           this.alert.show('Error or render dialog closed without being successful');
         });
       }, () => {
-        console.log('Error in configuration');
+        // console.log('Error in configuration');
         this.alert.show('Error in configuration');
       });
     }, () => {
-      console.log('Error in configuration');
+      // console.log('Error in configuration');
       this.alert.show('Error in initialization, maybe PayPal isnt supported or something else');
     });
   }
@@ -436,7 +436,9 @@ export class OrderPage {
         // console.log(nonce);
         this.addOrder(nonce);
       },
-      (err) => { console.log(err); }
+      (err) => {
+        // console.log(err);
+      }
     );
 
   };
@@ -478,7 +480,7 @@ export class OrderPage {
             // Handle error in Hosted Fields creation
             //alert("hostedFieldsErr" + hostedFieldsErr);
             document.getElementById('error-message').innerHTML = "hostedFieldsErr" + hostedFieldsErr;
-            console.log("hostedFieldsErr" + hostedFieldsErr);
+            // console.log("hostedFieldsErr" + hostedFieldsErr);
             return;
           }
 
@@ -514,14 +516,16 @@ export class OrderPage {
       (data) => { //console.log(nonce); 
         this.addOrder(nonce);
       },
-      (err) => { console.log(err); }
+      (err) => {
+        // console.log(err);
+      }
     );
   }
   scrollToBottom() {
 
     setTimeout(() => {
       this.content.scrollToBottom();
-      console.log("botton");
+      // console.log("botton");
     }, 300);
 
   }

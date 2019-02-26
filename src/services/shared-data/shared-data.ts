@@ -124,8 +124,8 @@ export class SharedDataProvider {
     //getting all allCategories
     this.http.get(config.url + 'catalog/sections/').subscribe((data: any) => {
     // this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).subscribe((data: any) => {
-      console.log("Data categories:");
-      console.log(data.result.beauty);
+    //   console.log("Data categories:");
+    //   console.log(data.result.beauty);
       for (let value of data.result.beauty) {
         if (value.parent_id == 0) this.categories.push(value);
         else this.subCategoriesBeauty.push(value);
@@ -136,11 +136,11 @@ export class SharedDataProvider {
         else this.subCategoriesHealth.push(value);
       }
 
-      console.log("Sub-categories Beauty:");
-      console.log(this.subCategoriesBeauty);
-
-      console.log("Sub-categories Health:");
-      console.log(this.subCategoriesHealth);
+      // console.log("Sub-categories Beauty:");
+      // console.log(this.subCategoriesBeauty);
+      //
+      // console.log("Sub-categories Health:");
+      // console.log(this.subCategoriesHealth);
     });
     //getting recent viewed items from local storage
     storage.get('customerData').then((val) => {
@@ -357,8 +357,8 @@ export class SharedDataProvider {
   }
 
   userInfo(data) {
-    console.log("Customer ID:");
-    console.log(data);
+    // console.log("Customer ID:");
+    // console.log(data);
     this.customerData = data;
     this.storage.set('customerData', this.customerData);
 
@@ -382,8 +382,8 @@ export class SharedDataProvider {
     localStorage.setItem('customerData', '');
     localStorage.setItem('x-content-session', '');
     this.store.dispatch(new GetDataCartAction());
-    console.log("Customer data");
-    console.log(this.customerData);
+    // console.log("Customer data");
+    // console.log(this.customerData);
 
   }
 
