@@ -6,9 +6,9 @@ import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-modal-one-click-order',
   template: `
-    <div class="l-modal" style="overflow-y: auto">
+    <div class="l-modal" style="overflow-y: auto; z-index: 10; left: 0;">
         <div class="l-modal" style="background: none;" (click)="close.emit()"></div>
-        <div class="c-modal" style="z-index: 2">
+        <div class="c-modal" style="z-index: 11;">
             <h2 class="c-modal__title" style="margin-top: 0;">
                 Оформить заказ в 1 клик
             </h2>

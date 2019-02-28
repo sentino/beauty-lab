@@ -60,6 +60,7 @@ import { BrandsContainer } from '../pages/brands/brands-container';
 import { MedicinesContainer } from '../pages/medicines/medicines.container';
 import { SubstancesContainer } from '../pages/substances/substances.container';
 import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articles-promotions-container';
+import { ConsultationContainer } from '../pages/consultation/consultation-container';
 
 
 @Component({
@@ -213,6 +214,7 @@ export class MyApp {
     else if (page == 'substances') this.nav.setRoot(SubstancesContainer);
     else if (page == 'promotions') this.nav.setRoot(ArticlesPromotionsContainer, {type: 'promotions'});
     else if (page == 'articles') this.nav.setRoot(ArticlesPromotionsContainer, {type: 'articles'});
+    else if (page == 'consultation') this.nav.setRoot(ConsultationContainer);
     else if (page == 'newest') this.nav.push(ProductsPage, { sortOrder: 'newest' });
     else if (page == 'topSeller') this.nav.push(ProductsPage, { sortOrder: 'top seller' });
     else if (page == 'deals') this.nav.push(ProductsPage, { sortOrder: 'special' });

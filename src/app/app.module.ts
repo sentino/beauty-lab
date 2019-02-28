@@ -155,6 +155,11 @@ import { ArticlesPromotionsComponent } from '../pages/articles-promotions/articl
 import { ArticlesPromotionsPageContainer } from '../pages/articles-promotions-page/articles-promotions-page-container';
 import { ArticlesPromotionsPageComponent } from '../pages/articles-promotions-page/articles-promotions-page.component';
 import { HrefDirective } from '../helpers/pipe/href.directive';
+import { ConsultationContainer } from '../pages/consultation/consultation-container';
+import { ConsultationComponent } from '../pages/consultation/consultation.component';
+import { ConsultationCart } from '../pages/consultation/components/consultation-cart';
+import { ConsultationQuestion } from '../pages/consultation/components/consultation-question';
+import { ConsultationModal } from '../helpers/consultation-modal/consultation-modal';
 
 
 
@@ -214,6 +219,14 @@ const ARTICLES_PROMOTIONS_MODULE = [
   ArticlesPromotionsComponent,
   ArticlesPromotionsPageContainer,
   ArticlesPromotionsPageComponent
+];
+
+const CONSULTATION_MODULE = [
+  ConsultationContainer,
+  ConsultationComponent,
+  ConsultationCart,
+  ConsultationQuestion,
+  ConsultationModal
 ];
 
 const PAGES = [
@@ -279,7 +292,8 @@ const PAGES = [
   ...MEDICINES_MODULE,
   ...SUBSTANCES_MODULE,
   ...MEDICINES_SUBSTANCES_MODULE,
-  ...ARTICLES_PROMOTIONS_MODULE
+  ...ARTICLES_PROMOTIONS_MODULE,
+  ...CONSULTATION_MODULE
 ];
 
 const PIPES = [

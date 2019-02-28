@@ -588,7 +588,9 @@ button {
 //.item.item-block.item-md.item-input.item-label-floating.ng-pristine.ng-valid.ng-touched.item-input-has-focus.input-has-focus {
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-pristine.ng-invalid.input-has-focus.item-input-has-focus .input.input-md.ng-untouched.ng-pristine.ng-invalid,
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-invalid.input-has-focus.item-input-has-focus.input-has-value.item-input-has-value.ng-dirty .input.input-md.ng-untouched.ng-dirty.ng-valid,
-.input.input-md.ng-touched.ng-dirty.ng-valid {
+.input.input-md.ng-touched.ng-dirty.ng-valid,
+.item.item-block.item-md.item-label-floating.item-input.ng-star-inserted.input-has-focus.item-input-has-focus,
+.item.item-block.item-md.item-label-floating.item-select.ng-star-inserted.input-has-value.item-input-has-value{
     border-bottom-color: #EF5CEF !important;
     -webkit-box-shadow: inset 0 -1px 0 0 #EF5CEF !important;
     box-shadow: inset 0 -1px 0 0 #EF5CEF !important;

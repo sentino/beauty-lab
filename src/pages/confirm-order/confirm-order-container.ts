@@ -3,8 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { PayPaylerService } from '../../services/pay-payler.service';
 import {
   AbstractControl,
-  FormArray,
-  FormBuilder, FormControl,
+  FormBuilder,
   FormGroup,
   ValidatorFn,
   Validators
@@ -12,13 +11,9 @@ import {
 import { Store } from '@ngrx/store';
 import {
   GetDataConfirmOrderAction, GetDataConfirmOrderSuccessAction,
-  selectCartTotalNewPrice,
   selectDataConfirmOrderNotify,
   selectDataConfirmOrderWarning
 } from '../../app/store';
-import { Observable, of } from 'rxjs';
-import * as Rx from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
 import { HomePage } from '../home/home';
 import { App } from 'ionic-angular';
 import { AlertProvider } from '../../services/alert/alert';

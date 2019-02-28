@@ -61,8 +61,13 @@ export class BrandsPageComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit(): void {
-    this.infinite.threshold = '8000px';
-    this.infinite.enable(true);
+    if (this.navigation.pageAll === 1 ||
+      this.navigation.pageAll === this.navigation.pageCurrent) {
+      this.infinite.enable(false);
+    } else {
+      this.infinite.threshold = '8000px';
+      this.infinite.enable(true);
+    }
   }
 
   onChangeBrand() {

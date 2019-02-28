@@ -159,15 +159,16 @@ export class ValidateCoupon {
       </main>
 
     </ion-content>
+    
+    
+    <ion-footer>
+      <footer></footer>
+    </ion-footer>
 
     <app-modal-one-click-order
       *ngIf="modal"
       (close)="openModal()"
     ></app-modal-one-click-order>
-    
-    <ion-footer>
-      <footer></footer>
-    </ion-footer>
   `
   // providers: [
   //   PayPaylerService
