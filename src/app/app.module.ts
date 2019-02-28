@@ -160,6 +160,8 @@ import { ConsultationComponent } from '../pages/consultation/consultation.compon
 import { ConsultationCart } from '../pages/consultation/components/consultation-cart';
 import { ConsultationQuestion } from '../pages/consultation/components/consultation-question';
 import { ConsultationModal } from '../helpers/consultation-modal/consultation-modal';
+import { SpecialistPageContainer } from '../pages/consultation/specialist-page/specialist-page-container';
+import { SpecialistPageComponent } from '../pages/consultation/specialist-page/specialist-page.component';
 
 
 
@@ -226,7 +228,9 @@ const CONSULTATION_MODULE = [
   ConsultationComponent,
   ConsultationCart,
   ConsultationQuestion,
-  ConsultationModal
+  ConsultationModal,
+  SpecialistPageContainer,
+  SpecialistPageComponent
 ];
 
 const PAGES = [

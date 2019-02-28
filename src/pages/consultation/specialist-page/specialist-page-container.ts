@@ -1,16 +1,16 @@
-import { Unsubscriber } from '../../helpers/unsubscriber';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { selectCartProductsLength } from '../../app/store';
+import { Unsubscriber } from '../../../helpers/unsubscriber';
+import { selectCartProductsLength } from '../../../app/store';
 import { Store } from '@ngrx/store';
-import { NavController } from 'ionic-angular';
-import { CartContainer } from '../cart/cart-container';
-import { SearchPage } from '../search/search';
-import { ConsultationService } from '../../services/consultation.service';
-import { debounceTime } from 'rxjs/operators';
-import { SpecialistPageContainer } from './specialist-page/specialist-page-container';
+import { NavController, NavParams } from 'ionic-angular';
+import { ConsultationService } from '../../../services/consultation.service';
+import { CartContainer } from '../../cart/cart-container';
+import { SearchPage } from '../../search/search';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 
 @Component({
-  selector: 'consultation-container',
+  selector: 'specialist-page',
   template: `
     <ion-header>
       <ion-navbar>
@@ -47,15 +47,8 @@ import { SpecialistPageContainer } from './specialist-page/specialist-page-conta
     </ion-header>
 
     <ion-content>
-      <consultation-component
-        *ngIf="specialists && specialists.length"
-        [specialists]="specialists"
-        [questions]="questions"
-        [questionsNavigation]="questionsNavigation"
-        (loadMoreQuestions)="loadMoreQuestions()"
-        (goToPageSpecialist)="goToPageSpecialist($event)"
-        (modal)="openModal($event)"
-      ></consultation-component>
+      <specialist-page-component
+      ></specialist-page-component>
     </ion-content>
 
     <ion-footer>
@@ -72,12 +65,9 @@ import { SpecialistPageContainer } from './specialist-page/specialist-page-conta
   providers: [ConsultationService]
 })
 
-export class ConsultationContainer extends Unsubscriber implements OnInit, OnDestroy {
+export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
-  specialists;
-  questions;
-  questionsNavigation;
   modal = false;
   specialistId;
   addQuestionFields;
@@ -85,39 +75,34 @@ export class ConsultationContainer extends Unsubscriber implements OnInit, OnDes
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
+    private navParams: NavParams,
+    private socialSharing: SocialSharing,
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    this.specialistId = this.navParams.get('id');
+
     this.wrapToUnsubscribe(this.consultationService.getSpecList(1)).subscribe(res => {
-      this.specialists = res.result.specialists;
-      this.questionsNavigation = res.result.questions.navigation;
-      this.questions = res.result.questions.items;
       this.addQuestionFields = res.result.addQuestionFields;
     })
   }
 
-  loadMoreQuestions() {
-    this.wrapToUnsubscribe(this.consultationService.getSpecList(this.questionsNavigation.pageCurrent + 1))
-      .pipe(
-        debounceTime(300)
-      )
-      .subscribe((res: any) => {
-        for (let i = 0; i < res.result.questions.items.length; i++) {
-          this.questions.push(res.result.questions.items[i]);
-        }
-        this.questionsNavigation = res.result.questions.navigation;
-      })
+  share() {
+    // this.socialSharing.share(
+      // this.name,
+      // this.name,
+      // this.image,
+      // this.url).then(() => {
+      // Success!
+    // }).catch(() => {
+      // Error!
+    // });
   }
 
-  goToPageSpecialist(id) {
-    this.navCtrl.push(SpecialistPageContainer, { id: id})
-  }
-
-  openModal(id) {
-    this.specialistId = id;
+  openModal() {
     this.modal = !this.modal;
   }
 
