@@ -4,6 +4,14 @@ specialist-page-component {
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  .c-position,
+  .c-experience,
+  .c-education,
+  .c-upgrading{
+    opacity: 0.52;
+  }
+
   .c-consultant {
     width: 100%;
     &__image {

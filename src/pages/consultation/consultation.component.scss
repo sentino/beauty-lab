@@ -111,7 +111,7 @@ consultation-component {
   }
 
   .l-consultation {
-    box-shadow: 0 3px 6px 0 lighten($color:$primaryTextColor, $amount: 84%);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     padding-top: 24px;
     display: flex;
     justify-content: center;

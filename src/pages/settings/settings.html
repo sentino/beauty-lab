@@ -64,24 +64,27 @@
       Веб сайт
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
-    <button ion-item (click)="showModal('privacyPolicy')">
+
+    <button ion-item (click)="openPage('agreement')">
       Пользовательское соглашение
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
-
     </button>
+
     <button ion-item (click)="showModal('refundPolicy')">
       Политика возрата
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
-
     </button>
+
     <button ion-item (click)="showModal('termServices')">
       Правила и услуги
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
+
     <button ion-item (click)="rateUs()">
       Оцените нас
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
+
     <button ion-item (click)="share()">
       Поделиться
       <ion-icon showWhen="android" name="share" item-end></ion-icon>

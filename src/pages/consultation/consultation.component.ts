@@ -4,7 +4,7 @@ import { InfiniteScroll } from 'ionic-angular';
 @Component({
   selector: 'consultation-component',
   template: `
-    <main style="padding-left: 6px;">
+    <main>
       <div class="c-proclaiming">
         <h2 class="c-proclaiming__text">
           На этой странице вы можете

@@ -16,6 +16,10 @@ export class ConsultationService {
     return this.http.get(this.config.url + `specialist/list/?page=${page}`)
   }
 
+  getSpecialist(id): Observable<any> {
+    return this.http.get(this.config.url + `specialist/view/${id}`)
+  }
+
   postQuestion(data): Observable<any> {
     return this.http.post(this.config.url + 'tools/question', data)
   }

@@ -61,6 +61,7 @@ import { MedicinesContainer } from '../pages/medicines/medicines.container';
 import { SubstancesContainer } from '../pages/substances/substances.container';
 import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articles-promotions-container';
 import { ConsultationContainer } from '../pages/consultation/consultation-container';
+import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 
 
 @Component({
@@ -215,6 +216,13 @@ export class MyApp {
     else if (page == 'promotions') this.nav.setRoot(ArticlesPromotionsContainer, {type: 'promotions'});
     else if (page == 'articles') this.nav.setRoot(ArticlesPromotionsContainer, {type: 'articles'});
     else if (page == 'consultation') this.nav.setRoot(ConsultationContainer);
+    else if (page == 'contacts') this.nav.setRoot(InfoPageComponent, {page: 'contacts'});
+    else if (page == 'about') this.nav.setRoot(InfoPageComponent, {page: 'about'});
+    else if (page == 'license') this.nav.setRoot(InfoPageComponent, {page: 'license'});
+    else if (page == 'guarantees') this.nav.setRoot(InfoPageComponent, {page: 'guarantees'});
+    else if (page == 'legal-entities') this.nav.setRoot(InfoPageComponent, {page: 'legal-entities'});
+    else if (page == 'privacy-policy') this.nav.setRoot(InfoPageComponent, {page: 'privacy-policy'});
+    else if (page == 'agreement') this.nav.setRoot(InfoPageComponent, {page: 'agreement'});
     else if (page == 'newest') this.nav.push(ProductsPage, { sortOrder: 'newest' });
     else if (page == 'topSeller') this.nav.push(ProductsPage, { sortOrder: 'top seller' });
     else if (page == 'deals') this.nav.push(ProductsPage, { sortOrder: 'special' });

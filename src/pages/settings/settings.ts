@@ -27,6 +27,7 @@ import { HomePage} from '../home/home';
 import { HttpClient } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { InfoPageComponent } from '../contact-page/info-page.component';
 
 
 
@@ -148,6 +149,7 @@ export class SettingsPage {
 
   openPage(page) {
     if (page == 'myAccount') this.navCtrl.push(MyAccountPage);
+    else if (page == 'agreement') this.navCtrl.setRoot(InfoPageComponent, {page: 'agreement'});
   }
 
   openSite() {

@@ -49,7 +49,7 @@
         <button menuClose ion-item (click)="openPage('categories3')">
           <ion-icon small item-left name="remove"></ion-icon>Мои бонусы</button>
         <button menuClose ion-item (click)="openPage('myWishList')">
-          <ion-icon small item-left name="heart"></ion-icon>Отложенное</button>
+          <ion-icon small item-left name="heart"></ion-icon>Избранное</button>
         <button menuClose ion-item (click)="logOut()">
           <ion-icon small item-left name="exit"></ion-icon>Выход</button>
       </div>
@@ -82,14 +82,6 @@
         <ion-icon item-left name="pricetag"></ion-icon>
       </button>
 
-      <button  menuClose ion-item  (click)="openPage('medicines')">Все лекарства
-        <ion-icon item-left name="pricetag"></ion-icon>
-      </button>
-
-      <button  menuClose ion-item  (click)="openPage('substances')">Все вещества
-        <ion-icon item-left name="pricetag"></ion-icon>
-      </button>
-
       <button  menuClose ion-item  (click)="openPage('promotions')">Акции
         <ion-icon item-left name="timer"></ion-icon>
       </button>
@@ -98,21 +90,45 @@
         <ion-icon item-left name="book"></ion-icon>
       </button>
 
-      <button  menuClose ion-item  (click)="openPage('settings')">Доставка и оплата
-        <ion-icon item-left name="card"></ion-icon>
+      <button menuClose ion-item  (click)="openPage('consultation')">Вопросы специалистам
+        <ion-icon item-left name="help"></ion-icon>
       </button>
 
-      <button menuClose ion-item  (click)="openPage('settings')">О компании
-        <ion-icon item-left name="information-circle"></ion-icon>
-      </button>
-
-      <button menuClose ion-item  (click)="openPage('settings')">Контакты
+      <button menuClose ion-item  (click)="openPage('contacts')">Контакты
         <ion-icon item-left name="call"></ion-icon>
       </button>
 
-      <button menuClose ion-item  (click)="openPage('consultation')">Вопросы специалистам
-        <ion-icon item-left name="help"></ion-icon>
-      </button> 
+      <button  menuClose ion-item  (click)="openPage('medicines')">Все лекарства
+        <ion-icon item-left name="pricetag"></ion-icon>
+      </button>
+
+      <button  menuClose ion-item  (click)="openPage('substances')">Все действующие вещества
+        <ion-icon item-left name="pricetag"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('about')">О компании
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('license')">Наша лицензия
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('guarantees')">Гарантии
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('privacy-policy')">Политика конфиденциальности
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('agreement')">Пользовательское соглашение
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
+
+      <button menuClose ion-item  (click)="openPage('legal-entities')">Юридическим лицам
+        <ion-icon item-left name="information-circle"></ion-icon>
+      </button>
 
       <button menuClose ion-item (click)="openPage('settings')">Настройки
         <ion-icon item-left name="settings"></ion-icon>

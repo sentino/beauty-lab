@@ -162,6 +162,7 @@ import { ConsultationQuestion } from '../pages/consultation/components/consultat
 import { ConsultationModal } from '../helpers/consultation-modal/consultation-modal';
 import { SpecialistPageContainer } from '../pages/consultation/specialist-page/specialist-page-container';
 import { SpecialistPageComponent } from '../pages/consultation/specialist-page/specialist-page.component';
+import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 
 
 
@@ -233,6 +234,10 @@ const CONSULTATION_MODULE = [
   SpecialistPageComponent
 ];
 
+const CONTENT_PAGES_MODULE = [
+  InfoPageComponent
+];
+
 const PAGES = [
   MyApp,
   HomePage,
@@ -297,7 +302,8 @@ const PAGES = [
   ...SUBSTANCES_MODULE,
   ...MEDICINES_SUBSTANCES_MODULE,
   ...ARTICLES_PROMOTIONS_MODULE,
-  ...CONSULTATION_MODULE
+  ...CONSULTATION_MODULE,
+  ...CONTENT_PAGES_MODULE
 ];
 
 const PIPES = [

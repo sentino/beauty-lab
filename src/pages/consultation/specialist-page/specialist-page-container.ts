@@ -48,6 +48,10 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
     <ion-content>
       <specialist-page-component
+        *ngIf="specialist"
+        [specialist]="specialist"
+        (openModal)="openModal()"
+        (share)="share()"
       ></specialist-page-component>
     </ion-content>
 
@@ -69,6 +73,7 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
   productsLength$ = this.store.select(selectCartProductsLength);
 
   modal = false;
+  specialist;
   specialistId;
   addQuestionFields;
 
@@ -85,21 +90,25 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
   public ngOnInit(): void {
     this.specialistId = this.navParams.get('id');
 
+    this.wrapToUnsubscribe(this.consultationService.getSpecialist(this.specialistId)).subscribe(res => {
+      this.specialist = res.result;
+    });
+
     this.wrapToUnsubscribe(this.consultationService.getSpecList(1)).subscribe(res => {
       this.addQuestionFields = res.result.addQuestionFields;
     })
   }
 
   share() {
-    // this.socialSharing.share(
-      // this.name,
-      // this.name,
-      // this.image,
-      // this.url).then(() => {
+    this.socialSharing.share(
+      this.specialist.name,
+      this.specialist.name,
+      this.specialist.image,
+      this.specialist.url).then(() => {
       // Success!
-    // }).catch(() => {
+    }).catch(() => {
       // Error!
-    // });
+    });
   }
 
   openModal() {
