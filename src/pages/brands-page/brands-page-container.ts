@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
-import { ActionSheetController, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, Content, NavController, NavParams } from 'ionic-angular';
 import { BrandsService } from '../../services/brands.service';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
@@ -46,17 +46,29 @@ import { debounceTime } from 'rxjs/operators';
       <!--</ion-toolbar>-->
     </ion-header>
 
+    <div class="c-filter" style="top: 56px;">
+      <div class="l-filter__row" style="padding-left: 25px;">
+        <div class="l-filter__buttons">
+          <button class="c-filter__button" *ngIf="brands && brands.length" (click)="openCategoryBy()">{{name}}</button>
+          <button class="c-filter__button" *ngIf="gamme && gamme.length" (click)="openGammeBy()">{{nameGamme}}</button>
+        </div>
+      </div>
+    </div>
+
     <ion-content>
       <brands-page-component
+        *ngIf="products && products.length"
         [name]="name"
-        [nameGamme]="nameGamme"
-        [gamme]="gamme"
         [products]="products"
         [navigation]="navigation"
-        (changeBrand)="openCategoryBy()"
-        (changeGamme)="openGammeBy()"
         (loadMoreProducts)="loadMoreProducts()"
       ></brands-page-component>
+
+      <ion-fab bottom right style="margin-bottom: 36px; margin-right: 16px;">
+        <button ion-fab (click)="scrollToTop()">
+          <ion-icon name="ios-arrow-up"></ion-icon>
+        </button>
+      </ion-fab>
     </ion-content>
 
     <ion-footer>
@@ -68,6 +80,8 @@ import { debounceTime } from 'rxjs/operators';
 
 export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
+
+  @ViewChild(Content) content: Content;
 
   id;
   brands = [];
@@ -186,6 +200,10 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
         this.navigation = res.result.navigation;
         // console.log(this.products);
     })
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(700);
   }
 
   openCart() {

@@ -5,16 +5,7 @@ import { InfiniteScroll } from 'ionic-angular';
 @Component({
   selector: 'brands-page-component',
   template: `
-    <div class="c-filter">
-      <div class="l-filter__row" style="padding-left: 25px;">
-        <div class="l-filter__buttons">
-          <button class="c-filter__button" (click)="onChangeBrand()">{{name}}</button>
-          <button class="c-filter__button"  *ngIf="gamme && gamme.length" (click)="onChangeGamme()">{{nameGamme}}</button>
-        </div>
-      </div>
-    </div>
-    
-    <main  style="margin-top: 25px; padding-left: 16px; padding-right: 16px;">
+    <main  style="margin-top: 67px; padding-left: 16px; padding-right: 16px;">
       <!--<div class="c-slider">-->
         <!--<img class="c-slider__item c-slider__item&#45;&#45;current" src="./images/slider.png">-->
         <!--<div class="l-slider__points">-->
@@ -42,13 +33,9 @@ import { InfiniteScroll } from 'ionic-angular';
 
 export class BrandsPageComponent implements OnInit, OnDestroy {
   @Input() name;
-  @Input() gamme;
-  @Input() nameGamme;
   @Input() products;
   @Input() navigation;
 
-  @Output() changeBrand: EventEmitter<any> = new EventEmitter<any>();
-  @Output() changeGamme: EventEmitter<any> = new EventEmitter<any>();
   @Output() loadMoreProducts: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
@@ -68,16 +55,6 @@ export class BrandsPageComponent implements OnInit, OnDestroy {
       this.infinite.threshold = '8000px';
       this.infinite.enable(true);
     }
-  }
-
-  onChangeBrand() {
-    this.changeBrand.emit();
-    this.infinite.enable(true);
-  }
-
-  onChangeGamme() {
-    this.changeGamme.emit();
-    this.infinite.enable(true);
   }
 
 
