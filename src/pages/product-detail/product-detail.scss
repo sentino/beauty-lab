@@ -668,36 +668,36 @@ page-product-detail {
     }
 
 
-  .c-good__favorite {
-    background: none;
-    box-shadow: none;
-    width: 25px;
-    height: 35px !important;
-    padding-bottom: 0 !important;
-    position: relative;
-  }
-
-  .c-good__favorite:after {
-    position: absolute;
-    top: calc(50% - 5px);
-    right: 0;
-    content: "\e87d";
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    color: #7a7a7a;
-    font-size: 20px;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-feature-settings: 'liga';
-    font-feature-settings: 'liga';
-  }
+  //.c-good__favorite {
+  //  background: none;
+  //  box-shadow: none;
+  //  width: 25px;
+  //  height: 35px !important;
+  //  padding-bottom: 0 !important;
+  //  position: relative;
+  //}
+  //
+  //.c-good__favorite:after {
+  //  position: absolute;
+  //  top: calc(50% - 5px);
+  //  right: 0;
+  //  content: "\e87d";
+  //  font-family: 'Material Icons';
+  //  font-weight: normal;
+  //  font-style: normal;
+  //  display: inline-block;
+  //  line-height: 1;
+  //  text-transform: none;
+  //  letter-spacing: normal;
+  //  word-wrap: normal;
+  //  white-space: nowrap;
+  //  direction: ltr;
+  //  color: #7a7a7a;
+  //  font-size: 20px;
+  //  -webkit-font-smoothing: antialiased;
+  //  text-rendering: optimizeLegibility;
+  //  -moz-osx-font-smoothing: grayscale;
+  //  -webkit-font-feature-settings: 'liga';
+  //  font-feature-settings: 'liga';
+  //}
 }

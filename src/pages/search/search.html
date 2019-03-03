@@ -41,7 +41,7 @@
           <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
       </ion-item>
       <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
-</form>
+  </form>
 </ion-header>
 
 <ion-content class="page-products" (ionScroll)="onScroll($event)">
@@ -51,17 +51,25 @@
     </div>
 
     <ion-grid *ngIf="productView=='grid'">
-      <ion-col *ngFor="let p of Products" col-6>
-        <product [data]="p" [type]="'normal'"></product>
-      </ion-col>
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: wrap;">
+        <app-product-cart *ngFor="let item of Products"
+                          [type]="'lg'"
+                          [cart]="item"
+                          style="margin: auto"
+        ></app-product-cart>
+      </div>
     </ion-grid>
   
   
   
     <ion-list class="list-view" *ngIf="productView=='list'">
-      <span *ngFor="let p of Products">
-        <product [data]="p" [type]="'list'"></product>
-      </span>
+      <div class="l-goods l-goods--horizontal" style="display: flex; flex-flow: wrap;">
+        <app-product-cart *ngFor="let item of Products"
+                          [type]="'horizontal'"
+                          [cart]="item"
+                          style="margin: auto"
+        ></app-product-cart>
+      </div>
     </ion-list>
   
   

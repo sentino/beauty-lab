@@ -90,6 +90,26 @@ app-product-cart {
     box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
     background-color: white;
 
+    @media screen and (max-width: 350px) {
+      margin-right: 5px;
+    }
+
+    &--promo {
+      width: 131px;
+      height: 271px;
+      margin-right: 16px;
+    }
+
+    &--horizontal {
+      width: 328px;
+      height: 130px;
+      flex-direction: row;
+
+      @media screen and (max-width: 350px) {
+        width: 100%;
+      }
+    }
+
     &--box {
       & div:nth-child(1) {
         left: 0 !important;

@@ -60,8 +60,18 @@
 
   <ion-list padding>
 
-    <button ion-item (click)="openSite()">
-      Веб сайт
+    <!--<button ion-item (click)="openSite()">-->
+      <!--Веб сайт-->
+      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
+    <!--</button>-->
+
+    <button ion-item (click)="openPage('about')">
+      О компании
+      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+    </button>
+
+    <button ion-item (click)="openPage('guarantees')">
+      Гарантии
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
 
@@ -70,20 +80,30 @@
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
 
-    <button ion-item (click)="showModal('refundPolicy')">
-      Политика возрата
+    <button ion-item (click)="openPage('privacy-policy')">
+      Политика конфиденциальности
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
 
-    <button ion-item (click)="showModal('termServices')">
-      Правила и услуги
+    <button ion-item (click)="openPage('license')">
+      Наша лицензия
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
 
-    <button ion-item (click)="rateUs()">
-      Оцените нас
-      <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
-    </button>
+    <!--<button ion-item (click)="showModal('refundPolicy')">-->
+      <!--Политика возрата-->
+      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
+    <!--</button>-->
+
+    <!--<button ion-item (click)="showModal('termServices')">-->
+      <!--Правила и услуги-->
+      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
+    <!--</button>-->
+
+    <!--<button ion-item (click)="rateUs()">-->
+      <!--Оцените нас-->
+      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
+    <!--</button>-->
 
     <button ion-item (click)="share()">
       Поделиться

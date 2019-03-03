@@ -200,37 +200,36 @@
 
       <hr>
 
-    <div class="properties-single" *ngIf="alsobuy_length != 0">
-        <p class="prop-name">С этим товаром  покупают</p>
-        <p class="prop-value">
-            <ion-slides slidesPerView=2.1 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
-                <ion-slide *ngFor="let p of products_alsobuy">
-                  <product [data]="p" [type]="'normal'"></product>
-                </ion-slide>
-            </ion-slides>
-        </p>
+    <div class="properties-single" *ngIf="alsobuy_length">
+      <p class="prop-name">С этим товаром  покупают</p>
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+        <app-product-cart style="margin-right: 16px;"
+                          *ngFor="let item of products_alsobuy"
+                          [type]="'lg'"
+                          [cart]="item"
+        ></app-product-cart>
+      </div>
     </div>
 
-    <div class="properties-single" *ngIf="leaders_length != 0">
-        <p class="prop-name">Лидеры продаж</p>
-        <p class="prop-value">
-            <ion-slides slidesPerView=2.1 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
-                <ion-slide *ngFor="let p of products_leaders">
-                  <product [data]="p" [type]="'normal'"></product>
-                </ion-slide>
-            </ion-slides>
-        </p>
+    <div class="properties-single" *ngIf="leaders_length">
+      <p class="prop-name">Лидеры продаж</p>
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+        <app-product-cart style="margin-right: 16px;"
+                          *ngFor="let item of products_leaders"
+                          [type]="'lg'"
+                          [cart]="item"
+        ></app-product-cart>
+      </div>
     </div>
 
-    <div class="properties-single" *ngIf="anlogs_length != 0">
-        <p class="prop-name">Аналоги</p>
-        <p class="prop-value">
-            <ion-slides slidesPerView=2.2 spaceBetween=10  class="animate-product footer-slider" dir="{{shared.dir}}">
-                <ion-slide *ngFor="let p of products_analogs">
-                  <product [data]="p" [type]="'normal'"></product>
-                </ion-slide>
-            </ion-slides>
-        </p>
+    <div class="properties-single" *ngIf="anlogs_length">
+      <p class="prop-name">Аналоги</p>
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+        <app-product-cart *ngFor="let item of products_analogs"
+                          [type]="'lg'"
+                          [cart]="item"
+        ></app-product-cart>
+      </div>
     </div>
     
   </ion-grid>

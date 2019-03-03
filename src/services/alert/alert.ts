@@ -7,7 +7,7 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class AlertProvider {
   okText = "ok";
-  alertText = "Alert";
+  alertText = "";
 
   constructor(
     public alertCtrl: AlertController,

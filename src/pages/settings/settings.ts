@@ -149,13 +149,17 @@ export class SettingsPage {
 
   openPage(page) {
     if (page == 'myAccount') this.navCtrl.push(MyAccountPage);
+    else if (page == 'about') this.navCtrl.setRoot(InfoPageComponent, {page: 'about'});
+    else if (page == 'guarantees') this.navCtrl.setRoot(InfoPageComponent, {page: 'guarantees'});
     else if (page == 'agreement') this.navCtrl.setRoot(InfoPageComponent, {page: 'agreement'});
+    else if (page == 'privacy-policy') this.navCtrl.setRoot(InfoPageComponent, {page: 'privacy-policy'});
+    else if (page == 'license') this.navCtrl.setRoot(InfoPageComponent, {page: 'license'});
   }
 
-  openSite() {
-    this.loading.autoHide(2000);
-    this.iab.create(this.config.siteUrl, "blank");
-  }
+  // openSite() {
+  //   this.loading.autoHide(2000);
+  //   this.iab.create(this.config.siteUrl, "blank");
+  // }
   //============================================================================================
   //turning on off local  notification
   // onOffPushNotification() {
@@ -204,25 +208,25 @@ export class SettingsPage {
     // this.events.publish('setting', this.setting);
     // this.updateSetting();
   }
-  showModal(value) {
-    this.loading.autoHide(1000);
-    if (value == 'privacyPolicy') {
-      let modal = this.modalCtrl.create(PrivacyPolicyPage);
-      modal.present();
-    }
-    else if (value == 'termServices') {
-      let modal = this.modalCtrl.create(TermServicesPage);
-      modal.present();
-    }
-    // else if (value == 'language') {
-    //   let modal = this.modalCtrl.create(LanguagePage);
-    //   modal.present();
-    // }
-    else {
-      let modal = this.modalCtrl.create(RefundPolicyPage);
-      modal.present();
-    }
-  }
+  // showModal(value) {
+  //   this.loading.autoHide(1000);
+  //   if (value == 'privacyPolicy') {
+  //     let modal = this.modalCtrl.create(PrivacyPolicyPage);
+  //     modal.present();
+  //   }
+  //   else if (value == 'termServices') {
+  //     let modal = this.modalCtrl.create(TermServicesPage);
+  //     modal.present();
+  //   }
+  //   // else if (value == 'language') {
+  //   //   let modal = this.modalCtrl.create(LanguagePage);
+  //   //   modal.present();
+  //   // }
+  //   else {
+  //     let modal = this.modalCtrl.create(RefundPolicyPage);
+  //     modal.present();
+  //   }
+  // }
   ionViewDidLoad() {
     this.setting.localNotification = false;
     let val = JSON.parse(localStorage.getItem('notificationEmail'));
@@ -245,16 +249,16 @@ export class SettingsPage {
   openSearch() {
     this.navCtrl.push(SearchPage);
   }
-  rateUs() {
-    this.loading.autoHide(2000);
-    if (this.plt.is('ios')) {
-      this.iab.create(this.config.packgeName.toString(), "_system");
-    } else if (this.plt.is('android')) {
-      this.appVersion.getPackageName().then((val) => {
-        this.iab.create("https://play.google.com/store/apps/details?id=" + val, "_system");
-      });
-    }
-  }
+  // rateUs() {
+  //   this.loading.autoHide(2000);
+  //   if (this.plt.is('ios')) {
+  //     this.iab.create(this.config.packgeName.toString(), "_system");
+  //   } else if (this.plt.is('android')) {
+  //     this.appVersion.getPackageName().then((val) => {
+  //       this.iab.create("https://play.google.com/store/apps/details?id=" + val, "_system");
+  //     });
+  //   }
+  // }
   share() {
     this.loading.autoHide(2000);
     if (this.plt.is('ios')) {

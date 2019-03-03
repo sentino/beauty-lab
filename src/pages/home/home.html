@@ -9,11 +9,12 @@
   </ion-slides>
   <div class="main-content">
     <p class="slider-header">Хиты продаж</p>
-    <ion-slides class="hits-slider" slidesPerView=2.1 spaceBetween=10>
-        <ion-slide *ngFor="let p of hits_products"  >
-          <product [data]="p" [type]="'normal'"></product>
-        </ion-slide>
-    </ion-slides>
+    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+      <app-product-cart *ngFor="let item of hits_products"
+                        [type]="'md'"
+                        [cart]="item"
+      ></app-product-cart>
+    </div>
 
     <p class="slider-header">Последнии статьи</p>
     <ion-slides slidesPerView=2.1 spaceBetween=10 class="articles_list">
