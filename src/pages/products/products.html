@@ -105,29 +105,37 @@
         <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
     </div>
 
-    
+
 
 
   <ion-grid *ngIf="productView=='grid'">
-    <ion-col *ngFor="let p of all_products " col-6>
-      <product [data]="p" [type]="'normal'"></product>
-    </ion-col>
+    <div class="l-goods l-goods--space" style="display: flex; flex-flow: wrap;">
+      <app-product-cart *ngFor="let item of all_products"
+                        [type]="'lg'"
+                        [cart]="item"
+                        style="margin: auto"
+      ></app-product-cart>
+    </div>
 
     <div class="empty_list" *ngIf="empty_products == true" >
-        <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+      <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
     </div>
   </ion-grid>
 
 
 
   <ion-list class="list-view list-type" *ngIf="productView=='list'">
-      <div class="empty_list" *ngIf="empty_products == true" >
-          <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
-      </div>
-    
-    <span *ngFor="let p of all_products">
-      <product [data]="p" [type]="'list'"></product>
-    </span>
+    <div class="empty_list" *ngIf="empty_products == true" >
+      <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
+    </div>
+
+    <div class="l-goods l-goods--horizontal" style="display: flex; flex-flow: wrap;">
+      <app-product-cart *ngFor="let item of all_products"
+                        [type]="'horizontal'"
+                        [cart]="item"
+                        style="margin: auto"
+      ></app-product-cart>
+    </div>
   </ion-list>
 
 
