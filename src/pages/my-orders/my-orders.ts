@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
@@ -19,10 +19,26 @@ import { Store } from '@ngrx/store';
 import { OrdersService } from '../../services/orders.service';
 import { Observable } from 'rxjs';
 import { ProductDetailPage } from '../product-detail/product-detail';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 @Component({
   selector: 'page-my-orders',
+  animations: [
+    trigger(
+      'animate', [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('500ms', style({ opacity: 1 }))
+        ]),
+        transition(':leave', [
+          style({ opacity: 1 }),
+          animate('700ms', style({ opacity: 0 }))
+        ])
+      ]
+    )
+  ],
   template: `
     <ion-header>
       <ion-navbar>
@@ -48,8 +64,16 @@ import { ProductDetailPage } from '../product-detail/product-detail';
     </ion-header>
 
     <div class="scroll-content">
-      <main style="margin-top: 56px;" *ngIf="orders$ | async">
-        <div class="l-order" *ngFor="let order of (orders$ | async)">
+      <ion-grid class="page-empty" *ngIf="!orders" [@animate]>
+        <ion-row align-items-center>
+          <ion-col col-12>
+            <h4 text-center>Ваша история покупок отобразится после первого оплаченного заказа</h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <main style="margin-top: 56px;" *ngIf="orders">
+        <div class="l-order" *ngFor="let order of orders">
           <div class="c-paragraph">
             <div class="c-paragraph__title">Номер заказа</div>
             <div class="c-paragraph__value">№{{order.number}}</div>
@@ -107,10 +131,10 @@ import { ProductDetailPage } from '../product-detail/product-detail';
     </ion-footer>
   `,
 })
-export class MyOrdersPage  implements OnInit{
+export class MyOrdersPage extends Unsubscriber implements OnInit, OnDestroy{
   productsLength$ = this.store.select(selectCartProductsLength);
 
-  orders$: Observable<any>;
+  orders;
   // orders = new Array;
   // httpRunning = true;
 
@@ -118,6 +142,7 @@ export class MyOrdersPage  implements OnInit{
     private store: Store<any>,
     public navCtrl: NavController,
     private ordersService: OrdersService,
+    private loading: LoadingProvider,
     // public navParams: NavParams,
     // public http: HttpClient,
     // public config: ConfigProvider,
@@ -126,11 +151,16 @@ export class MyOrdersPage  implements OnInit{
     private alert: AlertProvider,
     // public loading: LoadingProvider
   ) {
+    super();
   }
 
 
   public ngOnInit(): void {
-    this.orders$ = this.ordersService.getOrders().map(res => res.result.orders)
+    this.loading.showSpinner();
+    this.wrapToUnsubscribe(this.ordersService.getOrders()).subscribe(res => {
+      this.orders = res.result.orders;
+      this.loading.hideSpinner();
+    })
   }
 
   repeatOrder(id) {
@@ -185,5 +215,9 @@ export class MyOrdersPage  implements OnInit{
   }
   openSearch() {
     this.navCtrl.push(SearchPage);
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

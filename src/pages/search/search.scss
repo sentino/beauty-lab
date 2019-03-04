@@ -442,6 +442,10 @@ page-search {
         
         
         ion-footer{
+
+          &:before {
+            background: none !important;
+          }
             
             ion-buttons{
                 .bar-button-menutoggle{

@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -55,7 +55,7 @@ import { WishListService } from '../../services/wish-list.service';
     )
   ]
 })
-export class ProductDetailPage {
+export class ProductDetailPage implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   modal = false;
@@ -305,8 +305,8 @@ export class ProductDetailPage {
         // console.log("Propers List");
         // console.log(this.AllProperties);
 
-        this.product_properties
-
+        this.product_properties;
+        this.loading.hideSpinner();
       },
       err => {
         var er_status = err.status;
@@ -434,6 +434,7 @@ export class ProductDetailPage {
 
 
   ngOnInit() {
+    this.loading.showSpinner();
     this.getProductDetails();
   }
 

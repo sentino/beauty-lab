@@ -12,6 +12,7 @@ import { SearchPage } from '../../pages/search/search';
 import { HttpClient } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { CartContainer } from '../cart/cart-container';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -133,5 +134,9 @@ export class ForgotPasswordPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  openCart() {
+    this.navCtrl.push(CartContainer);
   }
 }

@@ -6,6 +6,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { ContentPagesService } from '../../services/content-pages.service';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -70,48 +71,57 @@ export class InfoPageComponent extends Unsubscriber implements OnInit, OnDestroy
     private store: Store<any>,
     private navCtrl: NavController,
     private navParams: NavParams,
-    private contentPagesService: ContentPagesService
+    private contentPagesService: ContentPagesService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     let page = this.navParams.get('page');
     
     if (page === 'contacts') {
       this.wrapToUnsubscribe(this.contentPagesService.getContacts()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'about') {
       this.wrapToUnsubscribe(this.contentPagesService.getAbout()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'license') {
       this.wrapToUnsubscribe(this.contentPagesService.getLicense()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'guarantees') {
       this.wrapToUnsubscribe(this.contentPagesService.getGuarantees()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'legal-entities') {
       this.wrapToUnsubscribe(this.contentPagesService.getLegalEntities()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'privacy-policy') {
       this.wrapToUnsubscribe(this.contentPagesService.getPrivacyPolicy()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     } else if (page === 'agreement') {
       this.wrapToUnsubscribe(this.contentPagesService.getAgreement()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
+        this.loading.hideSpinner();
       });
     }
   }

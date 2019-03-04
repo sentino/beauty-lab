@@ -18,6 +18,7 @@ import { HomePage } from '../home/home';
 import { App } from 'ionic-angular';
 import { AlertProvider } from '../../services/alert/alert';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 export function bonusesQuantity(controlOne: AbstractControl, controlTwo: AbstractControl): ValidatorFn {
@@ -150,7 +151,8 @@ export class ConfirmOrderContainer implements OnInit{
     private store: Store<any>,
     private appCtrl: App,
     public alert: AlertProvider,
-    private theInAppBrowser: InAppBrowser
+    private theInAppBrowser: InAppBrowser,
+    private loading: LoadingProvider,
   ) {
     this.form = this.fb.group({
       'listItemOne': this.fb.group({
@@ -179,6 +181,7 @@ export class ConfirmOrderContainer implements OnInit{
   }
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.store.dispatch(new GetDataConfirmOrderAction());
 
     this.payPayler.getData().subscribe((res: any) => {
@@ -226,6 +229,7 @@ export class ConfirmOrderContainer implements OnInit{
 
       this.result = res.result;
       // console.log('getData', this.result);
+      this.loading.hideSpinner();
     });
   }
   

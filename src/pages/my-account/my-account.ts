@@ -53,7 +53,7 @@ import { Store } from '@ngrx/store';
 export class MyAccountPage {
   productsLength$ = this.store.select(selectCartProductsLength);
 
-  pet: string = "puppies";
+  pet: string = "kittens";
 
   phoneNumber: any = "";
   public mask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];

@@ -7,6 +7,7 @@ import { ConsultationService } from '../../../services/consultation.service';
 import { CartContainer } from '../../cart/cart-container';
 import { SearchPage } from '../../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { LoadingProvider } from '../../../services/loading/loading';
 
 
 @Component({
@@ -83,15 +84,18 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
     private consultationService: ConsultationService,
     private navParams: NavParams,
     private socialSharing: SocialSharing,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.specialistId = this.navParams.get('id');
 
     this.wrapToUnsubscribe(this.consultationService.getSpecialist(this.specialistId)).subscribe(res => {
       this.specialist = res.result;
+      this.loading.hideSpinner();
     });
 
     this.wrapToUnsubscribe(this.consultationService.getSpecList(1)).subscribe(res => {

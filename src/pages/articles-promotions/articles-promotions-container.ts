@@ -7,6 +7,7 @@ import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -72,24 +73,28 @@ export class ArticlesPromotionsContainer extends Unsubscriber implements OnInit,
     private store: Store<any>,
     private navCtrl: NavController,
     private navParams: NavParams,
-    private articlesPromotionsService: ArticlesPromotionsService
+    private articlesPromotionsService: ArticlesPromotionsService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.type = this.navParams.get('type');
 
     if (this.type === 'articles') {
       this.title = 'Статьи';
       this.wrapToUnsubscribe(this.articlesPromotionsService.getArticles()).subscribe(res => {
         this.items = res.result;
+        this.loading.hideSpinner();
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акции';
       this.wrapToUnsubscribe(this.articlesPromotionsService.getPromotions()).subscribe(res => {
         this.items = res.result;
+        this.loading.hideSpinner();
       });
     }
   }

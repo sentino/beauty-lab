@@ -109,6 +109,7 @@ export class BeautyCatalogPage {
         //
         // console.log("Articles:");
         // console.log(this.last_articles);
+        this.loading.hideSpinner();
       });
   }
 
@@ -171,6 +172,7 @@ export class BeautyCatalogPage {
   }
 
   ngOnInit() {
+    this.loading.showSpinner();
     this.getMainInfo();
   }
 

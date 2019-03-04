@@ -78,7 +78,7 @@ export class HomePage {
     public navCtrl: NavController,
     // translate: TranslateService
   ) {
-      this.loading.hide();
+      // this.loading.hide();
       
       // console.log(this.shared.subCategoriesBeauty);
       // console.log(this.shared.subCategoriesHealth);
@@ -95,7 +95,7 @@ export class HomePage {
   }
 
   getMainInfo(){
-    this.loading.show();
+    // this.loading.show();
     // const headers = new Headers();
     // headers.append('Authorization-Token',this.shared.customerData.accessToken);
     //
@@ -111,7 +111,7 @@ export class HomePage {
 
     this.http.get(this.config.url + 'pages/index/').subscribe(
       (res: any) => {
-        this.loading.hide();
+        // this.loading.hide();
         // console.log("User Profile:");
         // console.log(res);
         this.mainInfo = res;
@@ -141,11 +141,13 @@ export class HomePage {
       //     console.log(this.response.result.errorText);
       //     alert(this.response.result.errorText);
       //   }
+        this.loading.hideSpinner();
       });
   }
 
 
   ngOnInit() {
+    this.loading.showSpinner();
     this.getMainInfo();
     this.store.dispatch(new GetDataCartAction());
   }

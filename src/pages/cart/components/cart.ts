@@ -25,7 +25,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
       <div class="c-good__discount" style="z-index: 1"
            *ngIf="product.discountPercent">{{product.discountPercent}}%
       </div>
-      <img [src]="product.image" alt="vichy-cream" class="c-good__image">
+      <img *ngIf="product.image" [src]="product.image" alt="pills" class="c-good__image">
+      <img *ngIf="!product.image" src="../../../assets/images/завантаження.jpg" alt="pills" class="c-good__image">
       <div class="l-good__info">
         <h2 class="c-good__title">
           {{(product.name.length > 80) ? (product.name | slice:0:80)+'...' : (product.name)}}

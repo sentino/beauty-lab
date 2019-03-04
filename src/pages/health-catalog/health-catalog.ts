@@ -130,6 +130,7 @@ export class HealthCatalogPage {
         
         // console.log("Articles:");
         // console.log(this.last_articles);
+        this.loading.hideSpinner();
       });
   }
 
@@ -169,6 +170,7 @@ export class HealthCatalogPage {
   }
 
   ngOnInit() {
+    this.loading.showSpinner();
     this.getMainInfo();
   }
   openCart() {

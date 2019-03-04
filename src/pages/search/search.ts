@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component , ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { Http } from '@angular/http';
@@ -48,7 +48,7 @@ import { selectCartProductsLength } from '../../app/store';
   ],
 })
 
-export class SearchPage {
+export class SearchPage implements OnInit {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   @ViewChild(Content) content: Content;
@@ -104,6 +104,7 @@ export class SearchPage {
     public loading: LoadingProvider,
     public shared: SharedDataProvider,
   ) {
+    this.loading.showSpinner();
     this.search_result = navParams.get('result');
     this.search_string = navParams.get('search');
 
@@ -139,7 +140,7 @@ export class SearchPage {
     // console.log("Next Page:");
     // console.log(next_page);
     this.current_page = next_page;
-    this.loading.show();
+    this.loading.showSpinner();
     this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.query_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
       // console.log(data.product_data.length + "   " + this.page);
       this.loading.hide();
@@ -156,6 +157,7 @@ export class SearchPage {
       for(var i = 0 ; i < parseInt(this.all_pages); i++){
         this.pages[i] = ({counter : i+1});
       }
+      this.loading.hideSpinner();
     },
     err => {
       var er_status = err.status;
@@ -313,6 +315,7 @@ export class SearchPage {
 
   ngOnInit() {
     this.helpMenuOpen = 'in';
+    this.loading.hideSpinner();
   }
   
 }

@@ -7,6 +7,7 @@ import { Content, NavController } from 'ionic-angular';
 import { selectCartProductsLength } from '../../app/store';
 import { BrandsPageContainer } from '../brands-page/brands-page-container';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -232,13 +233,15 @@ export class BrandsContainer extends Unsubscriber implements OnInit, OnDestroy {
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
-    private brandService: BrandsService
+    private brandService: BrandsService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.wrapToUnsubscribe(this.brandService.getBrands()).subscribe(res => {
       let result = res.result;
       for (const key of Object.keys(result)) {
@@ -249,6 +252,8 @@ export class BrandsContainer extends Unsubscriber implements OnInit, OnDestroy {
         this.result.push(item);
       }
       this.baseArr = this.result;
+
+      this.loading.hideSpinner();
     })
   }
 

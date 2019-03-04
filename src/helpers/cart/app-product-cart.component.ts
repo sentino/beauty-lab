@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { WishListService } from '../../services/wish-list.service';
 import { PostProductCartAction } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { ProductDetailPage } from '../../pages/product-detail/product-detail';
 import { NavController } from 'ionic-angular';
+import { Unsubscriber } from '../unsubscriber';
 
 
 @Component({
@@ -20,7 +21,8 @@ import { NavController } from 'ionic-angular';
         <div [ngClass]="cart.IN_BASKET === 'Y' ? 'c-good__picked c-good__picked' : 'c-good__picked c-good__picked--hidden'">
           <span class="c-good__checked-circle"></span>
         </div>
-        <img [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
+        <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
+        <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info">
           <h2 class="c-good__title">
             {{(cart.NAME.length > 65) ? (cart.NAME | slice:0:65)+'...' : (cart.NAME)}}
@@ -51,7 +53,8 @@ import { NavController } from 'ionic-angular';
         <div [ngClass]="cart.IN_BASKET === 'Y' ? 'c-good__picked c-good__picked' : 'c-good__picked c-good__picked--hidden'">
           <span class="c-good__checked-circle"></span>
         </div>
-        <img [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
+        <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
+        <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info">
           <h2 class="c-good__title c-good__title--promo">
             {{(cart.NAME.length > 50) ? (cart.NAME | slice:0:50)+'...' : (cart.NAME)}}
@@ -82,7 +85,8 @@ import { NavController } from 'ionic-angular';
         <div [ngClass]="cart.IN_BASKET === 'Y' ? 'c-good__picked c-good__picked' : 'c-good__picked c-good__picked--hidden'">
           <span class="c-good__checked-circle"></span>
         </div>
-        <img [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)" style="width: 127.08px;">
+        <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)" style="width: 127.08px;">
+        <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info l-good__info--horizontal" style="width: 100%;">
           <h2 class="c-good__title c-good__title--horizontal" style="width: 100%;">
             {{(cart.NAME.length > 65) ? (cart.NAME | slice:0:65)+'...' : (cart.NAME)}}
@@ -105,7 +109,7 @@ import { NavController } from 'ionic-angular';
   `
 })
 
-export class AppProductCartComponent {
+export class AppProductCartComponent extends Unsubscriber implements OnDestroy {
   @Input() type;
   @Input() cart;
 
@@ -113,15 +117,19 @@ export class AppProductCartComponent {
     private wishListService: WishListService,
     private store: Store<any>,
     private navCtrl: NavController
-  ) {}
+  ) {
+    super();
+  }
 
   clickWishList(id) {
     if (localStorage.getItem('customerData') && this.cart.IN_WISHLIST === 'N') {
-      this.wishListService.putItem(id);
-      this.cart.IN_WISHLIST = 'Y';
+      this.wrapToUnsubscribe(this.wishListService.putItem(id)).subscribe(res => {
+        this.cart.IN_WISHLIST = 'Y';
+      });
     } else {
-      this.wishListService.delItem(id);
-      this.cart.IN_WISHLIST = 'N';
+      this.wrapToUnsubscribe(this.wishListService.delItem(id)).subscribe(res => {
+        this.cart.IN_WISHLIST = 'N';
+      });
     }
   }
 
@@ -132,5 +140,9 @@ export class AppProductCartComponent {
 
   showProductDetail(id) {
     this.navCtrl.push(ProductDetailPage, { prod_id: id });
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

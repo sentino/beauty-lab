@@ -83,7 +83,7 @@ export class ValidateCoupon {
     </ion-header>
 
 
-    <ion-content class="page-cart">
+    <ion-content class="page-cart" style="background-color: rgb(255, 255, 255);">
 
       <ion-grid class="page-empty" *ngIf="!(productsLength$ | async)" [@animate]>
         <ion-row align-items-center>

@@ -7,6 +7,7 @@ import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { debounceTime } from 'rxjs/operators';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 
@@ -99,12 +100,14 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
     private brandService: BrandsService,
     private navParams: NavParams,
     private actionSheet: ActionSheetController,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.id = this.navParams.get('id');
 
     this.wrapToUnsubscribe(this.brandService.getBrands()).subscribe(res => {
@@ -121,12 +124,12 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
 
   initializeData(id) {
     this.wrapToUnsubscribe(this.brandService.getBrandById(id)).subscribe(res => {
-      // console.log(res);
-
       this.gamme = res.result.gamme;
       this.name = res.result.name;
       this.products = res.result.products;
       this.navigation = res.result.navigation;
+
+      this.loading.hideSpinner();
     })
   }
 
@@ -139,6 +142,7 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
       this.gamme = res.result.gamme;
       this.products = res.result.products;
       this.navigation = res.result.navigation;
+      this.loading.hideSpinner();
     })
   }
 
@@ -146,7 +150,15 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
     let buttonArray = [];
 
     for (let key of this.brands) {
-      buttonArray.push({ text: key.name, handler: () => { this.initializeData(key.id) } });
+      buttonArray.push(
+        {
+          text: key.name,
+          handler: () => {
+            this.loading.showSpinner();
+            this.initializeData(key.id);
+          }
+        }
+      );
     }
 
     buttonArray.push(
@@ -165,11 +177,20 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
     actionSheet.present();
   }
 
+
   openGammeBy() {
     let buttonArray = [];
 
     for (let key of this.gamme) {
-      buttonArray.push({ text: key.name, handler: () => { this.initializeDataForGamme(key.id, key.name) } });
+      buttonArray.push(
+        {
+          text: key.name,
+          handler: () => {
+            this.loading.showSpinner();
+            this.initializeDataForGamme(key.id, key.name);
+          }
+        }
+      );
     }
 
     buttonArray.push(

@@ -7,6 +7,7 @@ import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -82,12 +83,14 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
     private navParams: NavParams,
     private articlesPromotionsService: ArticlesPromotionsService,
     private socialSharing: SocialSharing,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.type = this.navParams.get('type');
     this.id = this.navParams.get('id');
 
@@ -100,6 +103,7 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
         this.products = res.result.products;
         this.image = res.result.IMAGE;
         this.url = res.result.URL;
+        this.loading.hideSpinner();
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акция';
@@ -110,6 +114,7 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
         this.products = res.result.products;
         this.image = res.result.IMAGE;
         this.url = res.result.URL;
+        this.loading.hideSpinner();
       });
     }
   }

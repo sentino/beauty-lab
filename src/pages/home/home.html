@@ -17,18 +17,24 @@
     </div>
 
     <p class="slider-header">Последнии статьи</p>
-    <ion-slides slidesPerView=2.1 spaceBetween=10 class="articles_list">
-        <ion-slide *ngFor="let p of last_articles" (click)="goToArticles(p.ID)">
-            <div class="card-thumb">
-                <img class="image" src="{{p.IMAGE}}"/>
-              </div>
-              <ion-card-content>
-                <ion-card-title>
-                    <div class="line-clamp">{{p.NAME}}</div>
-                </ion-card-title>
-              </ion-card-content>
-        </ion-slide>
-    </ion-slides>
+    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; align-items: baseline;">
+        <div *ngFor="let p of last_articles" (click)="goToArticles(p.ID)" style="width: 146.19px; margin-right: 10px;">
+            <div class="card-thumb" style="width: 146.19px;">
+                <img class="image" src="{{p.IMAGE}}"
+                     style="height: 100px;
+                      -webkit-box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+                      box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);"/>
+            </div>
+            <ion-card-content style="padding: 0;">
+              <ion-card-title>
+                  <div class="line-clamp"
+                       style="font-size: 12px;
+                              text-align: left;
+                              font-weight: 600;">{{(p.NAME.length > 55) ? (p.NAME | slice:0:55)+'...' : (p.NAME)}}</div>
+              </ion-card-title>
+            </ion-card-content>
+        </div>
+    </div>
   </div>
 
   <!-- <sliding-tabs></sliding-tabs> -->

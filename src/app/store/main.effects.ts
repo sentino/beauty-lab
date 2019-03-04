@@ -161,7 +161,7 @@ export class MainEffects {
     return this.cartService.postProduct(id, quantity)
       .pipe(
         map((res: any) => {
-          this.alert.show(res.result.successText);
+          // this.alert.show(res.result.successText);
           return new fromAction.PostProductCartSuccessAction(res);
         }),
         catchError(e => {

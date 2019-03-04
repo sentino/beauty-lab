@@ -23,12 +23,20 @@
 
 
 <div class="scroll-content">
-  <main style="margin-top: 56px; padding: 22px 0 65px 16px;" *ngIf="dataPoints$ | async">
+  <ion-grid class="page-empty" *ngIf="!dataPoints" [@animate]>
+    <ion-row align-items-center>
+      <ion-col col-12>
+        <h4 text-center>Оплатите свой первый заказ для получения бонусных баллов</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <main style="margin-top: 56px; padding: 0 0 65px 0;" *ngIf="dataPoints">
     <div class="c-bonus">
       <span class="c-bonus__title">Ваши бонусы</span>
-      <span class="c-bonus__quantity">{{dataPoints$ | async}}</span>
+      <span class="c-bonus__quantity">{{dataPoints}}</span>
     </div>
-    <div class="l-order l-order--bonus" *ngFor="let item of (dataTransacts$ | async)">
+    <div class="l-order l-order--bonus" *ngFor="let item of dataTransacts">
       <div class="c-paragraph">
         <div class="c-paragraph__title" style="opacity: .52;">Номер заказа</div>
         <div class="c-paragraph__value">№{{item.id}}</div>

@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { ConfigProvider } from '../../services/config/config';
@@ -15,6 +15,8 @@ import { Store } from '@ngrx/store';
 import { BonusesService } from '../../services/bonuses.service';
 import 'rxjs/add/operator/map';
 import { Observable, Subscription } from 'rxjs';
+import { LoadingProvider } from '../../services/loading/loading';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 
@@ -36,25 +38,33 @@ import { Observable, Subscription } from 'rxjs';
   ],
   templateUrl: 'categories3.html',
 })
-export class Categories3Page implements OnInit {
+export class Categories3Page extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
-  dataPoints$: Observable<any>;
-  dataTransacts$: Observable<any>;
+
+  dataPoints;
+  dataTransacts;
 
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
+    private loading: LoadingProvider,
     // public shared: SharedDataProvider,
     // public config: ConfigProvider
     private bonusesService: BonusesService
   ) {
-
+    super();
   }
 
 
   public ngOnInit(): void {
-    this.dataPoints$ = this.bonusesService.getBonuses().map(res => res.result.points);
-    this.dataTransacts$ = this.bonusesService.getBonuses().map(res => res.result.transacts);
+    this.loading.showSpinner();
+    this.wrapToUnsubscribe(this.bonusesService.getBonuses()).subscribe(res => {
+      this.dataPoints = res.result.points;
+      this.dataTransacts = res.result.transacts;
+      this.loading.hideSpinner();
+    });
+    // this.dataPoints$ = this.bonusesService.getBonuses().map(res => res.result.points);
+    // this.dataTransacts$ = this.bonusesService.getBonuses().map(res => res.result.transacts);
     // blah.subscribe(res => {
     //   console.log(res);
     // })
@@ -71,5 +81,8 @@ export class Categories3Page implements OnInit {
       this.navCtrl.push(SearchPage);
   }
 
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 }
 

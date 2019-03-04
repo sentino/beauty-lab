@@ -93,7 +93,7 @@
 
                         <div class="form-group">
                             <input id="customers_lastname" name="customers_lastname" [(ngModel)]="myAccountData.secondName" type="text" class="form-control">
-                            <label class="form-control-placeholder" for="customers_lastname" >Отчество*</label>
+                            <label class="form-control-placeholder" for="customers_lastname" >Отчество</label>
                         </div>
 
                         
@@ -103,8 +103,8 @@
                         </div>
 
                         <div class="form-group">
-                            <input id="customers_birhday" name="customers_birhday" [(ngModel)]="myAccountData.birthday" type="text" class="form-control" required>
-                            <label class="form-control-placeholder" for="customers_birhday" >Дата рождения*</label> 
+                            <input [brmasker]="{mask:'31.12.2100', len:10}" id="customers_birhday" name="customers_birhday" [(ngModel)]="myAccountData.birthday" type="text" class="form-control" required>
+                            <label class="form-control-placeholder" for="customers_birhday" >Дата рождения</label>
                         </div>
                       </div>
                 </div>
@@ -129,23 +129,23 @@
                   <div class="row">
                       <div class="form-group">
                           <input id="tel" name="tel" [brmasker]="{mask:'(999) 999 99 99', len:15}" [(ngModel)]="myAccountData.phone" type="text" class="form-control">
-                          <label class="form-control-placeholder" for="tel" >+7(000)-0000-000*</label>
+                          <label class="form-control-placeholder" for="tel" >+7(000)-0000-000</label>
                       </div>
 
                       <div class="form-group">
-                          <input id="index" name="index" [(ngModel)]="myAccountData.addressZip" type="text" class="form-control">
-                          <label class="form-control-placeholder" for="index" >Индекс*</label>
+                          <input id="index" name="index" [(ngModel)]="myAccountData.addressZip" type="number" class="form-control">
+                          <label class="form-control-placeholder" for="index" >Индекс</label>
                       </div>
 
                       <div class="form-group">
                           <input id="sity" name="sity" [(ngModel)]="myAccountData.addressCity" type="text" class="form-control">
-                          <label class="form-control-placeholder" for="sity" >Город или населенный пункт*</label>
+                          <label class="form-control-placeholder" for="sity" >Город или населенный пункт</label>
                       </div>
 
                       
                       <div class="form-group">
                           <input id="address" name="address" [(ngModel)]="myAccountData.addressStreet" type="text" class="form-control">
-                          <label class="form-control-placeholder" for="address" >Адрес*</label>                          
+                          <label class="form-control-placeholder" for="address" >Адрес</label>
                       </div>
                     </div>
               </div>                           

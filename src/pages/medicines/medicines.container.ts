@@ -7,6 +7,7 @@ import { selectCartProductsLength } from '../../app/store';
 import { MedicinesService } from '../../services/medicines.service';
 import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/medicines-substances-page.container';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -226,13 +227,15 @@ export class MedicinesContainer extends Unsubscriber implements OnInit, OnDestro
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
-    private medicinesService: MedicinesService
+    private medicinesService: MedicinesService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.wrapToUnsubscribe(this.medicinesService.getMedicines()).subscribe(res => {
       let result = res.result;
 
@@ -250,6 +253,7 @@ export class MedicinesContainer extends Unsubscriber implements OnInit, OnDestro
       }
 
       this.baseArr = this.result;
+      this.loading.hideSpinner();
     })
   }
 

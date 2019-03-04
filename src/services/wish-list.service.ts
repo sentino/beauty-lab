@@ -17,15 +17,11 @@ export class WishListService {
     return this.http.get(this.config.url + 'user/wishlist')
   }
 
-  putItem(id) {
-    this.http.put(this.config.url + 'user/wishlist', {'product': id}).subscribe((res: any) => {
-      this.alert.show(res.result.successText);
-    })
+  putItem(id): Observable<any> {
+    return this.http.put(this.config.url + 'user/wishlist', {'product': id})
   }
 
-  delItem(id) {
-    this.http.request('DELETE', this.config.url + 'user/wishlist', {body: {'product': id}}).subscribe((res: any) => {
-      this.alert.show(res.result.successText);
-    });
+  delItem(id): Observable<any> {
+    return this.http.request('DELETE', this.config.url + 'user/wishlist', {body: {'product': id}})
   }
 }

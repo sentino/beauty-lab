@@ -8,6 +8,7 @@ import { SearchPage } from '../search/search';
 import { ConsultationService } from '../../services/consultation.service';
 import { debounceTime } from 'rxjs/operators';
 import { SpecialistPageContainer } from './specialist-page/specialist-page-container';
+import { LoadingProvider } from '../../services/loading/loading';
 
 @Component({
   selector: 'consultation-container',
@@ -19,7 +20,7 @@ import { SpecialistPageContainer } from './specialist-page/specialist-page-conta
         </button>
 
         <ion-title>
-          Вопрос специалисту
+          Вопросы специалистам
         </ion-title>
 
         <ion-buttons end>
@@ -85,17 +86,20 @@ export class ConsultationContainer extends Unsubscriber implements OnInit, OnDes
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.wrapToUnsubscribe(this.consultationService.getSpecList(1)).subscribe(res => {
       this.specialists = res.result.specialists;
       this.questionsNavigation = res.result.questions.navigation;
       this.questions = res.result.questions.items;
       this.addQuestionFields = res.result.addQuestionFields;
+      this.loading.hideSpinner();
     })
   }
 

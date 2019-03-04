@@ -2,7 +2,7 @@
 // Project URI: http://ionicecommerce.com
 // Author: VectorCoder Team
 // Author URI: http://vectorcoder.com/
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../services/config/config';
@@ -17,6 +17,8 @@ import { Store } from '@ngrx/store';
 import { WishListService } from '../../services/wish-list.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 @Component({
   selector: 'page-wish-list',
@@ -60,8 +62,16 @@ import 'rxjs/add/operator/map';
 
 
     <div class="scroll-content">
-      <main style="margin-top: 56px; padding: 22px 16px 65px 16px; display: flex; flex-flow: wrap;" *ngIf="productsWishList$ | async">
-        <app-product-cart *ngFor="let item of (productsWishList$ | async)"
+      <ion-grid class="page-empty" *ngIf="!productsWishList" [@animate]>
+        <ion-row align-items-center>
+          <ion-col col-12>
+            <h4 text-center>Ваш список избранных товаров пуст</h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <main style="margin-top: 56px; padding: 22px 16px 65px 16px; display: flex; flex-flow: wrap;" *ngIf="productsWishList">
+        <app-product-cart *ngFor="let item of productsWishList"
                           [type]="'lg'"
                           [cart]="item"
                           style="margin: auto;"
@@ -87,9 +97,10 @@ import 'rxjs/add/operator/map';
     </ion-footer>
   `,
 })
-export class WishListPage implements OnInit {
+export class WishListPage extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
-  productsWishList$: Observable<any>;
+
+  productsWishList;
 
   // @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
 
@@ -98,17 +109,24 @@ export class WishListPage implements OnInit {
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
-    private wishListService: WishListService
+    private wishListService: WishListService,
+    private loading: LoadingProvider,
     // public navParams: NavParams,
     // public http: HttpClient,
     // public config: ConfigProvider,
     // public shared: SharedDataProvider,
     // translate: TranslateService
-  ) { }
+  ) {
+    super();
+  }
 
 
   public ngOnInit(): void {
-    this.productsWishList$ = this.wishListService.getList().map(res => res.result ? res.result.products : undefined);
+    this.loading.showSpinner();
+    this.wrapToUnsubscribe(this.wishListService.getList()).subscribe(res => {
+      this.productsWishList = res.result.products;
+      this.loading.hideSpinner();
+    });
   }
 
 
@@ -146,4 +164,7 @@ export class WishListPage implements OnInit {
   }
   // ionViewWillEnter() {
   // }
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 }

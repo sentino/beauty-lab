@@ -7,6 +7,7 @@ import { SearchPage } from '../search/search';
 import { SubstancesService } from '../../services/substances.service';
 import { MedicinesService } from '../../services/medicines.service';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { LoadingProvider } from '../../services/loading/loading';
 
 
 @Component({
@@ -65,7 +66,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
         <section class="c-section c-section--recommended c-section--no-space"
                  style="margin-left: -5px"
                  *ngIf="analogs && analogs.length">
-          <h2 style="padding-left: 5px; margin-top: 22px;" class="c-section__title">Рекомендуемые товары</h2>
+          <h2 style="padding-left: 5px; margin-top: 22px;" class="c-section__title">Аналоги</h2>
           <div class="l-goods l-goods--nowrap" style="flex-direction: row; padding-left: 5px;">
             <app-product-cart *ngFor="let item of analogs"
                               [type]="'md'"
@@ -99,12 +100,14 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
     private navCtrl: NavController,
     private navParams: NavParams,
     private medicinesService: MedicinesService,
-    private substancesService: SubstancesService
+    private substancesService: SubstancesService,
+    private loading: LoadingProvider,
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    this.loading.showSpinner();
     this.id = this.navParams.get('id');
     this.type = this.navParams.get('type');
 
@@ -118,6 +121,7 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
         this.desc = res.result.desc;
         this.products = res.result.products;
         this.analogs = res.result.analogs;
+        this.loading.hideSpinner();
       })
     } else if (type === 'substances') {
       this.wrapToUnsubscribe(this.substancesService.getSubstancesById(id)).subscribe(res => {
@@ -135,6 +139,7 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
 
         this.products = res.result.products;
         this.analogs = res.result.analogs;
+        this.loading.hideSpinner();
       })
     }
   }

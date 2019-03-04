@@ -37,4 +37,19 @@ export class LoadingProvider {
     // });
     // this.loading.present();
   }
+
+  showSpinner() {
+    this.loading = this.loadingCtrl.create({
+      duration: 10000
+    });
+    this.loading.present();
+  }
+
+  hideSpinner() {
+    setTimeout(() => {
+      try {
+        this.loading.dismiss();
+      } catch (error) { }
+    }, 300);
+  }
 }
