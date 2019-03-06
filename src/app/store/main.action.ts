@@ -44,6 +44,11 @@ export const GET_DATA_CONFIRM_ORDER_SUCCESS = type(`[${CATEGORY_CONFIRM_ORDER}] 
 export const GET_DATA_CONFIRM_ORDER_FAIL = type(`[${CATEGORY_CONFIRM_ORDER}] get data confirm order fail`);
 
 
+export const GET_COUPONS = type(`[${CATEGORY_CONFIRM_ORDER}] get coupons`);
+export const GET_COUPONS_SUCCESS = type(`[${CATEGORY_CONFIRM_ORDER}] get coupons success`);
+export const GET_COUPONS_FAIL = type(`[${CATEGORY_CONFIRM_ORDER}] get coupons fail`);
+
+
 
 export class InitDataCart implements Action {
   readonly type = INIT_DATA_CART;
@@ -137,6 +142,20 @@ export class GetDataConfirmOrderFailAction implements Action {
 }
 
 
+export class GetCouponsAction implements Action {
+  readonly type = GET_COUPONS;
+  constructor(public payload?: any) {}
+}
+export class GetCouponsSuccessAction implements Action {
+  readonly type = GET_COUPONS_SUCCESS;
+  constructor(public payload?: any) {}
+}
+export class GetCouponsFailAction implements Action {
+  readonly type = GET_COUPONS_FAIL;
+  constructor(public payload?: any) {}
+}
+
+
 
 
 export type All =
@@ -158,4 +177,7 @@ export type All =
   PostProductCartFailAction |
   GetDataConfirmOrderAction |
   GetDataConfirmOrderSuccessAction |
-  GetDataConfirmOrderFailAction;
+  GetDataConfirmOrderFailAction |
+  GetCouponsAction |
+  GetCouponsSuccessAction |
+  GetCouponsFailAction;

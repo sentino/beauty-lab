@@ -10,7 +10,6 @@ export class WishListService {
   constructor(
     private http: HttpClient,
     private config: ConfigProvider,
-    private alert: AlertProvider
   ) {}
 
   getList(): Observable<any> {

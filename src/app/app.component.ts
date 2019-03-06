@@ -1,51 +1,23 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
-
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-// import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-// import { TranslateService } from '@ngx-translate/core';
 import { MenuController } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
-// import { LanguagePage } from '../pages/language/language';
-import { IntroPage } from '../pages/intro/intro';
-import { ContactUsPage } from '../pages/contact-us/contact-us';
-import { AboutUsPage } from '../pages/about-us/about-us';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { LoginPage } from '../pages/login/login';
 import { ConfigProvider } from '../services/config/config';
 import { SharedDataProvider } from '../services/shared-data/shared-data';
-import { CategoriesPage } from '../pages/categories/categories';
 import { WishListPage } from '../pages/wish-list/wish-list';
 import { MyAccountPage } from '../pages/my-account/my-account';
 import { MyOrdersPage } from '../pages/my-orders/my-orders';
-import { MyShippingAddressesPage } from '../pages/my-shipping-addresses/my-shipping-addresses';
-import { NewsPage } from '../pages/news/news';
 import { ProductsPage } from '../pages/products/products';
 import { SettingsPage } from '../pages/settings/settings';
-// import { Network } from '@ionic-native/network';
 import { AlertProvider } from '../services/alert/alert';
 import { LoadingProvider } from '../services/loading/loading';
-import { Home2Page } from '../pages/home2/home2';
-import { Home3Page } from '../pages/home3/home3';
-import { Home4Page } from '../pages/home4/home4';
-import { Home5Page } from '../pages/home5/home5';
-import { Categories2Page } from '../pages/categories2/categories2';
-import { Categories4Page } from '../pages/categories4/categories4';
-import { Categories5Page } from '../pages/categories5/categories5';
-import { Categories3Page } from '../pages/categories3/categories3';
-import { Categories6Page } from '../pages/categories6/categories6';
 import { trigger, transition, animate, style } from '@angular/animations';
-// import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-// import { SocialSharing } from '@ionic-native/social-sharing';
-import { Http } from '@angular/http';
 import { CartContainer } from '../pages/cart/cart-container';
-// import { NavController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';
 import { HealthCatalogPage } from '../pages/health-catalog/health-catalog';
@@ -107,7 +79,6 @@ export class MyApp {
     public modalCtrl: ModalController,
     private statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    // translate: TranslateService,
     public storage: Storage,
     public appCtrl: App,
     public menuCtrl: MenuController,
@@ -136,32 +107,16 @@ export class MyApp {
     let connectedToInternet = true;
     network.onDisconnect().subscribe(() => {
       connectedToInternet = false;
-      // translate.get(["Please Connect to the Internet!", "Disconnected"]).subscribe((res) => {
-        this.alert.showWithTitle("Please Connect to the Internet!", "Disconnected");
-      // });
-      //  console.log('network was disconnected :-(');
-
+      this.alert.showWithTitle("Please Connect to the Internet!", "Disconnected");
     });
 
     network.onConnect().subscribe(() => {
       if (!connectedToInternet) {
         window.location.reload();
-        //this.loading.show();
-        //console.log('network connected!');
-        // translate.get(["Network connected Reloading Data", "Connected"]).subscribe((res) => {
-          this.alert.showWithTitle("Network connected Reloading Data" + '...', "Connected");
-        // });
-
+        this.alert.showWithTitle("Network connected Reloading Data" + '...', "Connected");
       }
-      //connectSubscription.unsubscribe();
     });
-    // this.platform.setDir(localStorage.direction, true);
-    // shared.dir = localStorage.direction;
-    // //setting default languge on start up 
-    // translate.setDefaultLang(this.config.langId);
-    //if(this.config.siteSetting()){
     this.initializeApp();
-    //}
   }
 
   initializeApp() {
@@ -171,12 +126,8 @@ export class MyApp {
       setTimeout(() => { this.splashScreen.hide(); }, 2000);
       this.statusBar.styleLightContent();
 
-      // console.log("Beauty App:");
-      // console.log(this.shared.subCategoriesBeauty);
       this.healthSubs = this.shared.subCategoriesBeauty;
-  
-      // console.log("Health App:");
-      // console.log(this.shared.subCategoriesHealth);
+
       this.beautySubs = this.shared.subCategoriesHealth;
 
     });
@@ -189,26 +140,10 @@ export class MyApp {
   openPage(page) {
     if (page == 'home') this.openHomePage();
     else if (page == 'home1') this.nav.setRoot(HomePage);
-    else if (page == 'home2') this.nav.setRoot(Home2Page);
-    else if (page == 'home3') this.nav.setRoot(Home3Page);
-    else if (page == 'home4') this.nav.setRoot(Home4Page);
-    else if (page == 'home5') this.nav.setRoot(Home5Page);
-    else if (page == 'categories') this.openCategoryPage();
-    else if (page == 'categories1') this.nav.setRoot(CategoriesPage);
-    else if (page == 'categories2') this.nav.setRoot(Categories2Page);
-    else if (page == 'categories3') this.nav.setRoot(Categories3Page);
-    else if (page == 'categories4') this.nav.setRoot(Categories4Page);
-    else if (page == 'categories5') this.nav.setRoot(Categories5Page);
-    else if (page == 'categories6') this.nav.setRoot(Categories6Page);
     else if (page == 'products') this.nav.setRoot(ProductsPage);
     else if (page == 'myWishList') this.nav.setRoot(WishListPage);
-    else if (page == 'myShippingAddresses') this.nav.setRoot(MyShippingAddressesPage);
     else if (page == 'myAccount') this.nav.setRoot(MyAccountPage);
     else if (page == 'myOrders') this.nav.setRoot(MyOrdersPage);
-    else if (page == 'contactUs') this.nav.setRoot(ContactUsPage);
-    else if (page == 'aboutUs') this.nav.setRoot(AboutUsPage);
-    else if (page == 'news') this.nav.setRoot(NewsPage);
-    else if (page == 'intro') this.nav.setRoot(IntroPage);
     else if (page == 'settings') this.nav.setRoot(SettingsPage);
     else if (page == 'brands') this.nav.setRoot(BrandsContainer);
     else if (page == 'medicines') this.nav.setRoot(MedicinesContainer);
@@ -243,30 +178,11 @@ export class MyApp {
     this.nav.setRoot(HealthCatalogPage);
   }
 
-  
-
   openHomePage() {
     if (this.config.homePage == 1) { this.nav.setRoot(HomePage); }
-    if (this.config.homePage == 2) { this.nav.setRoot(Home2Page); }
-    if (this.config.homePage == 3) { this.nav.setRoot(Home3Page); }
-    if (this.config.homePage == 4) { this.nav.setRoot(Home4Page); }
-    if (this.config.homePage == 5) { this.nav.setRoot(Home5Page); }
-  }
-  openCategoryPage() {
-    if (this.config.categoryPage == 1) { this.nav.setRoot(CategoriesPage); }
-    if (this.config.categoryPage == 2) { this.nav.setRoot(Categories2Page); }
-    if (this.config.categoryPage == 3) { this.nav.setRoot(Categories3Page); }
-    if (this.config.categoryPage == 4) { this.nav.setRoot(Categories4Page); }
-    if (this.config.categoryPage == 5) { this.nav.setRoot(Categories5Page); }
-    if (this.config.categoryPage == 6) { this.nav.setRoot(Categories6Page); }
   }
 
-  // openLanguagePage() {
-    // let modal = this.modalCtrl.create(LanguagePage);
-    // modal.present();
-  // }
-
-  dismiss(){
+  dismiss() {
     this.menuCtrl.close();
   }
 
@@ -274,20 +190,24 @@ export class MyApp {
     let modal = this.modalCtrl.create(LoginPage);
     modal.present();
   }
+
   openSignUpPage() {
     let modal = this.modalCtrl.create(SignUpPage);
     modal.present();
   }
+
   logOut() {
     this.shared.logOut();
     this.menuCtrl.close();
     this.appCtrl.getRootNav().setRoot(HomePage);
     this.store.dispatch(new InitDataCart());
   }
+
   showHideHomeList() {
     if (this.homeList == false) { this.homeList = true; this.homeListIcon = 'close'; }
     else { this.homeList = false; this.homeListIcon = 'add'; }
   }
+
   showHideCategoriesList() {
     if (this.categoriesList == false) { this.categoriesList = true; this.categoriesListIcon = 'close'; }
     else { this.categoriesList = false; this.categoriesListIcon = 'add'; }
@@ -307,12 +227,11 @@ export class MyApp {
     if (this.shopList == false) { this.shopList = true; this.shopListIcon = 'close'; }
     else { this.shopList = false; this.shopListIcon = 'add'; }
   }
-  ionViewWillEnter() {
 
-    // console.log("ionViewCanEnter");
+  ionViewWillEnter() {
   }
+
   rateUs() {
-    this.loading.autoHide(2000);
     if (this.plt.is('ios')) {
       this.iab.create(this.config.packgeName.toString(), "_system");
     } else if (this.plt.is('android')) {
@@ -323,7 +242,6 @@ export class MyApp {
   }
 
   share() {
-    this.loading.autoHide(2000);
     if (this.plt.is('ios')) {
       this.socialSharing.share(
         "Nice Application",

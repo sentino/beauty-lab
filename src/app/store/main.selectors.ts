@@ -17,7 +17,10 @@ export const selectCartProductsLength = createSelector(selectCartData, (cart) =>
 export const selectCartPresents = createSelector(selectCartData, (cart) => cart.gifts);
 export const selectCartTotalOldPrice = createSelector(selectCartData, (cart) => cart.summary.sumFullFormat);
 export const selectCartTotalNewPrice = createSelector(selectCartData, (cart) => cart.summary.sumFormat);
-// export const selectContainsDiscount = createSelector(selectCartData, (cart) => cart.summary.sum > cart.summary.sumFull);
+
+export const selectContainsDiscount = createSelector(selectCartData, (cart) => cart.discount.apply);
+export const selectContainsDiscountLength = createSelector(selectCartData, (cart) => cart.discount.apply.length);
+export const selectCouponFail = createSelector(selectCartData, (cart) => cart.discount.notFound);
 
 
 export const selectDataConfirmOrder = createSelector(selectsState, fromReducer.getDataConfirmOrder);

@@ -18,11 +18,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         <button class="c-primary-button c-primary-button--narrow" (click)="modal.emit(specialist.ID)">ЗАДАТЬ ВОПРОС</button>
       </div>
     </div>
-
-    <!--<consultation-modal-->
-      <!--*ngIf="modal"-->
-      <!--(close)="openModal()"-->
-    <!--&gt;</consultation-modal>-->
   `
 })
 
@@ -31,10 +26,4 @@ export class ConsultationCart {
 
   @Output() goToPageSpecialist: EventEmitter<any> = new EventEmitter<any>();
   @Output() modal: EventEmitter<any> = new EventEmitter<any>();
-
-  // modal = false;
-  //
-  // openModal() {
-  //   this.modal = !this.modal;
-  // }
 }

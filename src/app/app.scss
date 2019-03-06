@@ -1,21 +1,3 @@
-// http://ionicframework.com/docs/theming/
-//@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&subset=cyrillic,cyrillic-ext,latin-ext');
-
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
-//@import "../assets/styles/uikit_styles.scss";
-
 body{
   font-family: 'Roboto', sans-serif;
 }
@@ -286,9 +268,6 @@ ion-label{
                 font-size: 12px;
                 margin-top: 5px;
             }
-            button{
-                //color:color($colors, light);
-            }
         }
     }
     .list-menu{
@@ -331,9 +310,6 @@ ion-label{
         margin-bottom: 0;
         margin-left: 0;
         margin-right: 0;
-        .item {
-            //background-color:$white;
-        }
     }
 }
 
@@ -537,24 +513,6 @@ button {
 }
 
 
-//.list.list-md .item-input .item-inner {
-//  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-//  -webkit-box-shadow: none;
-//  box-shadow: none;
-//}
-
-//.list.list-md.ng-touched.ng-dirty.ng-valid .item-input .item-inner ion-input{
-//    border-bottom-color: #EF5CEF;
-//    -webkit-box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//    box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//}
-
-//.list.list-md.ng-touched.ng-dirty.ng-invalid .item-input .item-inner ion-input{
-//  border-bottom-color: #f53d3d;
-//  -webkit-box-shadow: inset 0 -1px 0 0 #f53d3d;
-//  box-shadow: inset 0 -1px 0 0 #f53d3d;
-//}
-
 .list.list-md .item-input .item-inner,
 .list.list-md.ng-touched.ng-dirty.ng-valid .item-input .item-inner,
 .list.list-md.ng-touched.ng-dirty.ng-invalid .item-input .item-inner,
@@ -570,8 +528,6 @@ button {
 }
 
 
-//.item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
-//.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
 .input.input-md,
 .input.input-md.ng-touched{
     border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
@@ -582,10 +538,6 @@ button {
 .item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
 .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
 .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
-//.list.list-md.ng-touched.ng-dirty.ng-valid .item-input,
-//.item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus).ng-dirty .item-inner,
-//.item.item-block.item-md.item-input.item-label-floating.ng-dirty.ng-touched.input-has-value.item-input-has-value.ng-valid.item-input-has-focus.input-has-focus,
-//.item.item-block.item-md.item-input.item-label-floating.ng-pristine.ng-valid.ng-touched.item-input-has-focus.input-has-focus {
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-pristine.ng-invalid.input-has-focus.item-input-has-focus .input.input-md.ng-untouched.ng-pristine.ng-invalid,
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-invalid.input-has-focus.item-input-has-focus.input-has-value.item-input-has-value.ng-dirty .input.input-md.ng-untouched.ng-dirty.ng-valid,
 .input.input-md.ng-touched.ng-dirty.ng-valid,
@@ -597,10 +549,6 @@ button {
     box-shadow: inset 0 -1px 0 0 #EF5CEF !important;
 }
 
-//.list.list-md.ng-touched.ng-dirty.ng-invalid .item-input,
-//.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus).ng-dirty .item-inner,
-//.item.item-block.item-md.item-input.item-label-floating.ng-dirty.ng-touched.input-has-value.item-input-has-value.ng-invalid.item-input-has-focus.input-has-focus,
-//.item.item-block.item-md.item-input.item-label-floating.ng-pristine.ng-invalid.ng-touched.item-input-has-focus.input-has-focus {
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-pristine.ng-invalid.input-has-focus.item-input-has-focus.input-has-value.item-input-has-value .input.input-md.ng-untouched.ng-invalid.ng-dirty,
 .item.item-block.item-md.item-input.item-label-floating.ng-untouched.ng-invalid.input-has-focus.item-input-has-focus.input-has-value.item-input-has-value.ng-dirty .input.input-md.ng-untouched.ng-invalid.ng-dirty,
 .input.input-md.ng-touched.ng-dirty.ng-invalid {
@@ -608,36 +556,6 @@ button {
     -webkit-box-shadow: inset 0 -1px 0 0 #f53d3d !important;
     box-shadow: inset 0 -1px 0 0 #f53d3d !important;
 }
-
-
-
-//.list.list-md.ng-touched.ng-dirty.ng-valid .item-input .item-inner,
-//.item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-//  border-bottom-color: #EF5CEF;
-//  -webkit-box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//  box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//}
-//
-//.list.list-md.ng-touched.ng-dirty.ng-invalid .item-input .item-inner,
-//.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-//  border-bottom-color: #f53d3d;
-//  -webkit-box-shadow: inset 0 -1px 0 0 #f53d3d;
-//  box-shadow: inset 0 -1px 0 0 #f53d3d;
-//}
-//
-//
-//.item-md.item-input.ng-valid.ng-touched.input-has-focus.item-input-has-focus .item-inner{
-//  border-bottom-color: #EF5CEF;
-//  -webkit-box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//  box-shadow: inset 0 -1px 0 0 #EF5CEF;
-//}
-//
-//.item-md.item-input.ng-invalid.ng-touched.input-has-focus.item-input-has-focus .item-inner {
-//  border-bottom-color: #f53d3d;
-//  -webkit-box-shadow: inset 0 -1px 0 0 #f53d3d;
-//  box-shadow: inset 0 -1px 0 0 #f53d3d;
-//}
-
 
 
 

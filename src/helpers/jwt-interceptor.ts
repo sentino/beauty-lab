@@ -26,12 +26,9 @@ export class JwtInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
-          // 'Access-Control-Allow-Credentials': 'true',
-          // 'Access-Control-Allow-Origin': '*',
           'Authorization-Token': this.customerData,
           'x-content-session': this.xContentSession ? this.xContentSession : ''
-        },
-        // withCredentials: true
+        }
       });
       return next.handle(request).map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -43,11 +40,8 @@ export class JwtInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
-          // 'Access-Control-Allow-Credentials': 'true',
-          // 'Access-Control-Allow-Origin': '*'
           'x-content-session': this.xContentSession ? this.xContentSession : ''
-        },
-        // withCredentials: true
+        }
       });
       return next.handle(request).map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {

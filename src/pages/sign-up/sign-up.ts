@@ -1,12 +1,7 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
 import { Component } from '@angular/core';
 import { ViewController, ModalController } from 'ionic-angular';
 import { LoadingProvider } from '../../services/loading/loading';
 import { ConfigProvider } from '../../services/config/config';
-import { Http } from '@angular/http';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { NavController } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
@@ -16,7 +11,6 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from 'ionic-angular';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { App } from 'ionic-angular';
-import { Slides } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { HttpClient } from '@angular/common/http';
 
@@ -64,7 +58,6 @@ export class SignUpPage {
     public loading: LoadingProvider,
     public shared: SharedDataProvider,
     public navCtrl: NavController,
-    private appVersion: AppVersion,
     public menuCtrl: MenuController,
     public appCtrl: App,
     public platform: Platform
@@ -94,10 +87,7 @@ export class SignUpPage {
       return;
     }
 
-    this.loading.show();
     this.http.post(this.config.url + 'auth/register/', this.registerForm.value).subscribe((data: any) => {
-      this.loading.hide();
-
       if (data.result.error == 0) {
         this.shared.userInfo(data.result);
         this.viewCtrl.dismiss();
@@ -110,7 +100,7 @@ export class SignUpPage {
       }
     },
       err => {
-        this.loading.hide();
+
         alert(JSON.parse(err._body).result.errorText);
       });
   }

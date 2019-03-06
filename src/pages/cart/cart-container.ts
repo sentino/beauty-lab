@@ -1,52 +1,33 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavController, Events, ModalController } from 'ionic-angular';
-import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { ConfigProvider } from '../../services/config/config';
-import { Http } from '@angular/http';
-import { delay, distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { Toast } from '@ionic-native/toast/ngx';
-import { ProductDetailPage } from '../product-detail/product-detail';
-import { LoadingProvider } from '../../services/loading/loading';
-import { Storage } from '@ionic/storage';
-import { LoginPage } from '../login/login';
-import { ShippingAddressPage } from '../shipping-address/shipping-address';
+import { NavController } from 'ionic-angular';
+import { delay, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { ProductsPage } from '../products/products';
-import { HttpClient } from '@angular/common/http';
 import { ConfirmOrderContainer } from '../confirm-order/confirm-order-container';
-import { PayPaylerService } from '../../services/pay-payler.service';
 import { CartService } from '../../services/cart.service';
 import 'rxjs/add/operator/map';
 import "rxjs/add/operator/delay";
 import "rxjs/add/operator/distinctUntilChanged";
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import {
   DeleteProductCartAction,
+  GetCouponsAction,
   selectCartPresents,
   selectCartProducts,
   selectCartProductsLength,
   selectCartTotalNewPrice,
-  selectCartTotalOldPrice, UpdateQuantityCartAction, // selectContainsDiscount
+  selectCartTotalOldPrice,
+  selectContainsDiscount, selectContainsDiscountLength,
+  selectCouponFail,
+  UpdateQuantityCartAction,
 } from '../../app/store';
-import { Observable, of, pipe, Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { AlertProvider } from '../../services/alert/alert';
 import { HomePage } from '../home/home';
+import { SearchService } from '../../services/search.service';
+import { SearchPage } from '../search/search';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
-
-export class ValidateCoupon {
-  static createValidator(cartService: CartService) {
-    return (control: AbstractControl) => {
-      return cartService.postCoupon(control.value).map((res: any) => {
-        return res.status === 200 ? null : {'error': true};
-      });
-    };
-  }
-}
 
 
 @Component({
@@ -67,12 +48,15 @@ export class ValidateCoupon {
   ],
   template: `
     <ion-header #myElement>
-      <ion-navbar>
+      <ion-navbar [style.boxShadow]="searchList ? 'none' : ''">
         <ion-title>
           Корзина
         </ion-title>
 
         <ion-buttons end>
+          <button ion-button icon-only (click)="searchList = !searchList">
+            <ion-icon name="search"></ion-icon>
+          </button>
           <button ion-button icon-only class="cart-button">
             <ion-icon name="cart">
               <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
@@ -80,6 +64,14 @@ export class ValidateCoupon {
           </button>
         </ion-buttons>
       </ion-navbar>
+
+      <form  class="search-form" (ngSubmit)="getSearch(search.value)" *ngIf="searchList" [@animate]>
+        <ion-item>
+          <ion-icon name="search"></ion-icon>
+          <ion-input #search name="search" placeholder="Поиск..." type="text"></ion-input>
+        </ion-item>
+        <ion-icon class="close-icon" name="close" (click)="searchList = !searchList"></ion-icon>
+      </form>
     </ion-header>
 
 
@@ -117,14 +109,28 @@ export class ValidateCoupon {
           ></app-presents>
         </div>
         
-        <ion-list>
+        <ion-list style="display: flex;
+                          flex-direction: row;
+                          align-items: flex-end;">
           <ion-item style=" border: none;
                             padding: 0;
-                            background-color: white;">
+                            background-color: white;
+                            margin-right: 10px;">
             <ion-label color="secondary" floating>Введите промокод</ion-label>
             <ion-input [formControl]="promoCode"></ion-input>
           </ion-item>
+          <button
+            [disabled]="!promoCode.value || promoCode.invalid"
+            class="c-primary-button c-primary-button--halfofpage" (click)="submitCoupon()">
+            Применить
+          </button>
         </ion-list>
+        <p style="color: green;" *ngIf="(discountLength$ | async)">
+          Купон
+          <span *ngFor="let item of (discount$ | async)">{{item}}</span>,
+          применен
+        </p>
+        <p style="color: red;" *ngIf="(couponFail$ | async)">Купон {{couponFail$ | async}} не действительный</p>
 
         <div class="c-total-sum">
           <h2 class="c-total-sum__title">Общая сумма:</h2>
@@ -145,16 +151,6 @@ export class ValidateCoupon {
         </div>
 
         <div class="c-disclaimer">
-          <!--<h2 class="c-disclaimer__title">Информация о юрлице продавца и лицензии</h2>-->
-          <!--<p class="c-disclaimer__text">-->
-            <!--РЫБНЫЙ ТЕКСТ <br /> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.-->
-            <!--Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus-->
-            <!--et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,-->
-            <!--ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis-->
-            <!--enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.-->
-            <!--In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum-->
-            <!--felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum-->
-          <!--</p>-->
         </div>
       </main>
 
@@ -170,75 +166,48 @@ export class ValidateCoupon {
       (close)="openModal()"
     ></app-modal-one-click-order>
   `
-  // providers: [
-  //   PayPaylerService
-  // ]
 })
-export class CartContainer implements OnInit, OnDestroy {
-  // products;
-  // discount;
-  // presents;
-  // oldPrice;
-  // newPrice;
-
+export class CartContainer extends Unsubscriber implements OnInit, OnDestroy {
   products$ = this.store.select(selectCartProducts);
   productsLength$ = this.store.select(selectCartProductsLength);
   presents$ = this.store.select(selectCartPresents);
   oldPrice$ = this.store.select(selectCartTotalOldPrice);
   newPrice$ = this.store.select(selectCartTotalNewPrice);
-  // discount$ = this.store.select(selectContainsDiscount);
+  discount$ = this.store.select(selectContainsDiscount);
+  discountLength$ = this.store.select(selectContainsDiscountLength);
+  couponFail$ = this.store.select(selectCouponFail);
 
   subscribeQuantity: Subscription;
 
   promoCode: FormControl;
   modal = false;
-  // total: any;
+
+  searchList = false;
 
   constructor(
     public navCtrl: NavController,
     private cartService: CartService,
     private store: Store<any>,
-    private alertProvider: AlertProvider
-    // public shared: SharedDataProvider,
-    // public config: ConfigProvider,
-    // public http: HttpClient,
-    // public loading: LoadingProvider,
-    // public toast: Toast,
-    // private storage: Storage,
-    // public events: Events,
-    // public modalCtrl: ModalController,
-    // private payPayler: PayPaylerService
+    private alertProvider: AlertProvider,
+    private searchService: SearchService,
   ) {
-    // this.payPayler.testPostItem();
+    super();
+
     this.promoCode = new FormControl('', [
       Validators.minLength(1),
       Validators.maxLength(50)
     ])
-    // ], ValidateCoupon.createValidator(this.cartService))
   }
 
 
   public ngOnInit(): void {
-    // this.cartService.getCart().subscribe((res: any) => {
-    //   console.log(res);
-    //   this.products = res.result.basket;
-    //   this.discount = res.result.discount;
-    //   this.presents = res.result.gifts;
-    //   this.oldPrice = res.result.summary.sumFullFormat;
-    //   this.newPrice = res.result.summary.sumFormat;
-    //   // debugger;
-    // })
-
-    // this.initializeData();
   }
 
-  // initializeData() {
-  //   this.products$ = this.cartService.getCart().map( res => res.result.basket);
-  //   this.productsLength$ = this.cartService.getCart().map( res => res.result.basket.length);
-  //   this.presents$ = this.cartService.getCart().map( res => res.result.gifts);
-  //   this.oldPrice$ = this.cartService.getCart().map( res => res.result.summary.sumFullFormat);
-  //   this.newPrice$ = this.cartService.getCart().map( res => res.result.summary.sumFormat);
-  // }
+  getSearch(value){
+    this.wrapToUnsubscribe(this.searchService.getSearch(value)).subscribe(res => {
+      this.navCtrl.push(SearchPage, { result: res, search: value });
+    });
+  }
 
   quantityProduct({id, quantity}) {
     this.subscribeQuantity = of({id, quantity})
@@ -252,109 +221,30 @@ export class CartContainer implements OnInit, OnDestroy {
 
   deleteProduct(id) {
     this.store.dispatch(new DeleteProductCartAction(id));
-    // this.cartService.delProduct(id)
-    // .subscribe((res: any) => {
-    //   if (res.result.error === 0) this.initializeData();
-    // });
+  }
+
+  submitCoupon() {
+    if (this.promoCode.value && this.promoCode.valid) {
+      this.wrapToUnsubscribe(this.cartService.postCoupon(this.promoCode.value)).subscribe((res: any) => {
+        this.store.dispatch(new GetCouponsAction());
+      })
+    }
   }
 
   submit() {
-    if (this.promoCode.value && this.promoCode.valid) {
-      this.cartService.postCoupon(this.promoCode.value).subscribe((res: any) => {
-        if (res.status === 200) {
-          this.navCtrl.push(ConfirmOrderContainer);
-        } else {
-          this.alertProvider.show('Купон не верный!')
-        }
-      })
-    } else {
-      this.navCtrl.push(ConfirmOrderContainer);
-    }
+    this.navCtrl.push(ConfirmOrderContainer);
   }
 
   openModal() {
     this.modal = !this.modal;
   }
 
-
-  // totalPrice() {
-  //   var price = 0;
-  //   for (let value of this.shared.cartProducts) {
-  //     var pp = value.final_price * value.customers_basket_quantity;
-  //     price = price + pp;
-  //   }
-  //   this.total = price;
-  // };
-  // getSingleProductDetail(id) {
-  //   this.loading.show();
-  //
-  //   var data: { [k: string]: any } = {};
-  //   if (this.shared.customerData != null)
-  //     data.customers_id = this.shared.customerData.customers_id;
-  //   else
-  //     data.customers_id = null;
-  //   data.products_id = id;
-  //   data.language_id = this.config.langId;
-  //   // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-  //   //   this.loading.hide();
-  //   //   if (data.success == 1) {
-  //   //     this.navCtrl.push(ProductDetailPage, { data: data.product_data[0] });
-  //   //   }
-  //   // });
-  // }
-  // removeCart(id) {
-  //   this.shared.removeCart(id);
-  //   this.totalPrice();
-  // }
-  // qunatityPlus = function (q) {
-  //   this.toast.show(`Product Quantity is Limited!`, 'short', 'center');
-  //   q.customers_basket_quantity++;
-  //   q.subtotal = q.final_price * q.customers_basket_quantity;
-  //   q.total = q.subtotal;
-  //   if (q.customers_basket_quantity > q.quantity) {
-  //     q.customers_basket_quantity--;
-  //     this.toast.show(`Product Quantity is Limited!`, 'short', 'center');
-  //   }
-  //   this.totalPrice();
-  //   this.shared.cartTotalItems();
-  //   this.storage.set('cartProducts', this.shared.cartProducts);
-  // }
-  // //function decreasing the quantity
-  // qunatityMinus = function (q) {
-  //   if (q.customers_basket_quantity == 1) {
-  //     return 0;
-  //   }
-  //   q.customers_basket_quantity--;
-  //   q.subtotal = q.final_price * q.customers_basket_quantity;
-  //   q.total = q.subtotal;
-  //   this.totalPrice();
-  //
-  //   this.shared.cartTotalItems();
-  //   this.storage.set('cartProducts', this.shared.cartProducts);
-  // }
-  // ionViewDidLoad() {
-  //   this.totalPrice()
-  // }
-  // proceedToCheckOut() {
-  //
-  //   if (this.shared.customerData.customers_id == null || this.shared.customerData.customers_id == undefined) {
-  //     let modal = this.modalCtrl.create(LoginPage);
-  //     modal.present();
-  //   }
-  //   else {
-  //     this.navCtrl.push(ShippingAddressPage);
-  //   }
-  // }
   openHomePage() {
     this.navCtrl.setRoot(HomePage);
   }
-  // ionViewDidLeave() {
-  //  // this.storage.set('cartProducts', this.shared.cartProducts);
-  // }
-  // ionViewWillEnter() {
-  // }
 
   public ngOnDestroy(): void {
     if (this.subscribeQuantity) this.subscribeQuantity.unsubscribe();
+    super.ngOnDestroy();
   }
 }

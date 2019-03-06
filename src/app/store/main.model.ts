@@ -3,7 +3,10 @@
 export class CartModel {
   basket = [];
   gifts = [];
-
+  discount = {
+    apply: [],
+    notFound: ''
+  };
   summary: {
     sum: number;
     sumFormat: string;
@@ -12,7 +15,7 @@ export class CartModel {
   };
 
   constructor(res) {
-    const { basket, gifts, summary } = res;
+    const { basket, gifts, discount, summary } = res;
 
 
     basket.map(el => {
@@ -31,6 +34,18 @@ export class CartModel {
       this.gifts.push({ id, image, name, productId, quantity })
     });
 
+
+    if (discount instanceof Object) {
+      if (discount.apply && discount.apply.length) {
+        discount.apply.map(el => {
+          this.discount.apply.push(el);
+        });
+      }
+
+      if (discount["not-found"] && discount["not-found"].length) {
+        this.discount.notFound = discount["not-found"][discount["not-found"].length - 1];
+      }
+    }
 
     this.summary = {
       sum: summary.sum,

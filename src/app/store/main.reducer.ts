@@ -3,6 +3,10 @@ import * as fromAction from './main.action';
 export interface ICart {
   basket: IBasket[],
   gifts: IGifts[],
+  discount: {
+    apply: any[],
+    notFound: string;
+  },
   summary: ISunnary
 }
 export interface IBasket {
@@ -75,6 +79,10 @@ export const initialCart = {
       quantity: null,
     }
   ],
+  discount: {
+    apply: [],
+    notFound: "",
+  },
   summary: {
     sum: null,
     sumFormat: "",
@@ -167,6 +175,21 @@ export function reducer(state = initialState, action: fromAction.All): State {
       }
     }
 
+    case fromAction.GET_COUPONS_SUCCESS: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          discount: {
+            apply: action.payload.apply,
+            notFound: action.payload.notFound
+          },
+          summary: {
+            ...action.payload.summary
+          }
+        }
+      }
+    }
 
     ///////////////////////////////////////////////
     case fromAction.GET_DATA_CONFIRM_ORDER_SUCCESS: {

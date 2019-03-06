@@ -1,15 +1,8 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
-import { Http } from '@angular/http';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { LoadingProvider } from '../../services/loading/loading';
-// import { TranslateService } from '@ngx-translate/core';
-// import { share } from 'rxjs/operator/share';
 import { trigger, transition, animate, style,state } from '@angular/animations';
 import { CartContainer } from '../cart/cart-container';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -56,13 +49,12 @@ export class ProductsPage {
 
   @ViewChild(Content) content: Content;
   @ViewChild(Slides) slider: Slides;
+  @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
 
 
   scrollTopButton = false;
-  helpMenuOpen: string;
 
-  @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
-  //@ViewChild(IonRange) priceRange: IonRange;
+  helpMenuOpen: string;
   products = new Array;
   selectedTab = '';
   categoryId = '';
@@ -147,20 +139,13 @@ export class ProductsPage {
     public config: ConfigProvider,
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
-    // public translate: TranslateService,
     public http: HttpClient,
     public actionSheet: ActionSheetController
   ) {
     this.activeButton = 1;
     this.search.search_string = null;
 
-    // console.log("Scroll status:");
-    // console.log(this.scrollTopButton);
-
     this.cat_id = this.navParams.get('id_cat');
-
-    // console.log("Category ID");
-    // console.log(this.cat_id);
 
     this.section_list = this.navParams.get('section_list');
 
@@ -169,8 +154,6 @@ export class ProductsPage {
     if (this.navParams.get('id') != undefined) this.selectedTab = this.categoryId = this.navParams.get('id');
     if (this.navParams.get('name') != undefined) this.categoryName = this.navParams.get('name');
     if (this.navParams.get('sortOrder') != undefined) this.sortOrder = this.navParams.get('sortOrder');
-    // this.getProducts(null);
-    // this.getFilters(this.categoryId);
   }
 
   test(filter, brand) {
@@ -198,20 +181,10 @@ export class ProductsPage {
     this.helpMenuOpen = 'in';
     this.getProducts();
     this.getSubacategories();
-
-    // console.log("Filter list:");
-    // console.log(this.filter_list);
   }
 
   //============================================================================================
   ngOnChanges() {}
-
-  addProduct(id, quantity) {
-    // console.log('!!!!!!!!!!!!!!!!', this.product_id);
-    // this.cartService.postProduct(this.product_id, 1).subscribe((res: any) => {
-    //   this.alert.showWithTitle('', res.result.successText);
-    // })
-  }
 
   submit() {
     this.Filter = false;
@@ -221,10 +194,6 @@ export class ProductsPage {
 
   openCategoryBy() {
     var buttonArray = [];
-    // this.translate.get(this.all_sections).subscribe((res) => {
-
-    // console.log("Sort massive");
-    // console.log(this.all_sections);
 
     for (let key of this.all_sections) {
       buttonArray.push({ text: key.TEXT, handler: () => { this.changeTab(key) } });
@@ -244,45 +213,26 @@ export class ProductsPage {
       buttons: buttonArray
     });
     actionSheet.present();
-    // });
   }
 
 
-  showHideSortsList(){
-    this.loading.show();
+  showHideSortsList() {
     if (this.Sort == false) {
-      this.loading.hide();
       this.Sort = true;
       this.sortListIcon = 'ios-arrow-up';
       this.background_show = 'sort';
       this.Filter = false;
       this.filterListIcon = 'ios-arrow-down';
-      // console.log("Fiter false status:");
-      // console.log(this.Filter);
-      // console.log("Sort true status:");
-      // console.log(this.Sort);
-      //
-      // console.log("Background SHOW After true:");
-      // console.log(this.background_show);
     }
     else {
-      this.loading.hide();
       this.Sort  = false;
       this.sortListIcon = 'ios-arrow-down';
       this.background_show = 'none';
-
-      // console.log("Sort false status:");
-      // console.log(this.Sort);
-      //
-      // console.log("Background SHOW After false:");
-      // console.log(this.background_show);
     }
   }
 
-  showHideFilterList(){
-    this.loading.show();
+  showHideFilterList() {
     if (this.Filter == false) {
-      this.loading.hide();
       this.Filter = true;
 
       this.filterListIcon = 'ios-arrow-up';
@@ -290,41 +240,17 @@ export class ProductsPage {
 
       this.Sort = false;
 
-      // console.log("Filter true status:");
-      // console.log(this.Filter);
-      // console.log("Sort true status:");
-      // console.log(this.Sort);
-
       this.sortListIcon = 'ios-arrow-down';
-      // console.log("Background SHOW After true:");
-      // console.log(this.background_show);
     }
     else {
-      this.loading.hide();
       this.Filter = false;
       this.filterListIcon = 'ios-arrow-down';
       this.background_show = 'none';
     }
-
-    // console.log("Fiter false status:");
-    // console.log(this.Filter);
-    // console.log("Background SHOW After false:");
-    // console.log(this.background_show);
   }
 
   filtered(newModel){
-    // console.log("Filtered Data --");
-    // console.log(this.filterList);
-    // console.log(newModel);
-    // debugger;
-
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id, {params: this.params()}).subscribe((data: any) => {
-        // console.log(data.product_data.length + "   " + this.page);\
-        // this.Filter = false;
-        // this.filterListIcon = 'ios-arrow-down';
-        // this.background_show = 'none';
-        // console.log("Search answer:");
-        // console.log(data);
         this.all_products = data.result.products;
         this.all_filters = data.result.filters;
         this.cat_id;
@@ -350,25 +276,19 @@ export class ProductsPage {
       },
       err => {
         var er_status = err.status;
-        // console.log(err);
       });
   }
 
-  showHideSearchList(){
+  showHideSearchList() {
     this.SearchList = !this.SearchList;
   }
 
-  navHandler(){
+  navHandler() {
     this.nav_status = !this.nav_status;
   }
 
   getProducts() {
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id ).subscribe((data: any) => {
-      this.loading.hide();
-      // console.log(data.product_data.length + "   " + this.page);
-
-      // console.log("Products GET");
-      // console.log(data);
       this.all_products = data.result.products;
       this.navigation = data.result.navigation;
       this.all_filters = data.result.filters;
@@ -376,27 +296,15 @@ export class ProductsPage {
 
       if(this.all_filters.length == 0){
         this.empty_filter = true;
-      }
-      else{
+      } else{
         this.empty_filter = false;
       }
-
-      // console.log("croite:");
-      // console.log(this.all_sections);
 
       if(this.all_sections.length == 0){
         this.all_sections = this.section_list;
       }
 
       this.current_section = data.result.section.name;
-
-      // console.log("Navigation All");
-      // console.log(this.navigation);
-
-      // console.log("Products All");
-      // console.log(this.all_products);
-
-      // console.log("Pages All");
 
       this.all_pages_count = this.navigation.pageAll;
 
@@ -407,37 +315,28 @@ export class ProductsPage {
     },
     err => {
       var er_status = err.status;
-      // console.log(err);
     });
 
   }
 
-  getSearch(){
+  getSearch() {
     this.helpMenuOpen = 'in';
-    this.loading.show();
+
     this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe((data: any) => {
-      // console.log(data.product_data.length + "   " + this.page);
-      this.loading.hide();
       this.SearchList = false;
-      // console.log("Search answer:");
       this.current_section = 'Результаты поиска';
-      // console.log(data);
       this.all_products = data.result.products;
       this.all_filters = data.result.filters;
 
       if(this.all_products.length == 0){
         this.empty_status = true;
-        // console.log("Empty result");
-      }
-      else{
+      } else{
         this.empty_status = false;
-        // console.log("Not Empty result");
       }
 
       if(this.all_filters == null){
         this.empty_filter = true;
-      }
-      else{
+      } else{
         this.empty_filter = false;
       }
 
@@ -446,44 +345,29 @@ export class ProductsPage {
       for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
         this.pages[i] = ({counter : i+1});
       }
-
-
     },
     err => {
       var er_status = err.status;
-      // console.log(err);
     });
   }
 
   getSubacategories() {
-    this.loading.show();
     this.http.get(this.config.url + 'catalog/sections/' + this.cat_id ).subscribe((data: any) => {
-      // console.log(data.product_data.length + "   " + this.page);
-      this.loading.hide();
-      // console.log("Subcategories GET");
-      // console.log(data);
       this.all_subcategories = data.result.products;
     },
     err => {
       var er_status = err.status;
-      // console.log(err);
     });
   }
 
   goToPage(next_page){
-    // console.log("Next Page:");
-    // console.log(next_page);
     this.current_page = next_page;
 
     if( this.search.search_string != null){
       this.current_page = next_page;
       this.helpMenuOpen = 'in';
-      this.loading.show();
+
       this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.search.search_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
-        // console.log(data.product_data.length + "   " + this.page);
-        this.loading.hide();
-        // console.log("Products GET");
-        // console.log(data);
         this.all_products = data;
         this.all_products = data.result.products;
         this.all_pages_count = data.result.navigation.pageAll;
@@ -496,28 +380,12 @@ export class ProductsPage {
       },
       err => {
         var er_status = err.status;
-        // console.log(err);
       });
-    }
-    else{
+    } else {
       this.helpMenuOpen = 'in';
-      this.loading.show();
-
       this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page, {params: this.params()}).subscribe((data: any) => {
-        this.loading.hide();
-        // console.log("Products GET");
-        // console.log(data);
         this.all_products = data.result.products;
         this.navigation = data.result.navigation;
-
-        // console.log("Navigation All");
-        // console.log(this.navigation);
-
-        // console.log("Products All");
-        // console.log(this.all_products);
-
-        // console.log("Pages All");
-        // console.log(this.navigation.pageAll);
 
         this.all_pages_count = data.result.navigation.pageAll;
 
@@ -529,32 +397,23 @@ export class ProductsPage {
       },
       err => {
         var er_status = err.status;
-        // console.log(err);
       });
     }
 
 
   }
 
-  showPages(){
-    // console.log("Maximum:");
-    // console.log(this.n_maximum);
+  showPages() {
     this.end_game = false;
     if(this.n_maximum < this.all_pages_count){
-      // console.log("Carason");
       this.n_maximum+=6;
-      // console.log(this.counter_blocks);
-      // console.log(this.n_maximum);
       for(this.counter_blocks = 0; this.counter_blocks < 6; this.counter_blocks++){
         this.pages[this.counter_blocks] = ({counter : this.counter_blocks+this.n_maximum});
       }
-      // console.log(this.pages);
     }
   }
 
-  prevPages(){
-    // console.log("Minimum value:");
-    // console.log(this.n_maximum);
+  prevPages() {
     if(this.n_maximum > 0){
       this.n_maximum-=6;
       for(this.counter_blocks = 0; this.counter_blocks < 6; this.counter_blocks++){
@@ -563,33 +422,23 @@ export class ProductsPage {
     }
   }
 
-  nextPages(){
+  nextPages() {
     this.pages = [];
-    // console.log("Start Maximum:");
-    // console.log(this.n_maximum);
     if(this.n_maximum < this.all_pages_count){
       for(this.counter_blocks = 0; this.counter_blocks < 6; this.counter_blocks++){
-
         if(this.counter_blocks+this.n_maximum >  this.all_pages_count){
-           // console.log("Fail");
            this.end_game = true;
            this.n_maximum-=6;
            break;
-        }
-        else{
+        } else{
           this.pages[this.counter_blocks] = ({counter : this.counter_blocks+this.n_maximum});
         }
       }
-      // console.log(this.pages);
       this.n_maximum+=6;
-  }
-  else{
+  } else {
     this.n_maximum-=6;
-    // console.log("End Game");
     for(this.counter_blocks = 0; this.counter_blocks < 6; this.counter_blocks++){
-
       if(this.counter_blocks+this.n_maximum >  this.all_pages_count){
-         // console.log("Fail");
          break;
       }
       else{
@@ -607,47 +456,16 @@ export class ProductsPage {
   changeTab(c) {
     this.activeButton = 1;
     this.applyFilter = false;
-    // this.infinite.enable(true);
     this.page = 0;
+
     if (c == '') {
       this.getProducts();
       this.selectedTab = c;
+    } else {
+      this.selectedTab = c.ID;
     }
-    else this.selectedTab = c.ID;
-    // this.getProducts(null);
-    this.loading.show();
 
     this.openCatalog(c.ID,this.all_sections);
-
-    // this.http.get(this.config.url + 'catalog/section/' + c.ID ).map(res => res.json()).subscribe(data => {
-    //   // console.log(data.product_data.length + "   " + this.page);
-    //   this.loading.hide();
-    //   console.log("Products GET");
-    //   console.log(data);
-    //   this.all_products = data.result.products;
-    //   this.navigation = data.result.navigation;
-    //   this.all_filters = data.result.filters;
-    //   this.current_section = data.result.section.name;
-    //   this.cat_id = data.result.section.id;
-    //   console.log("Navigation All");
-    //   console.log(this.navigation);
-
-    //   console.log("Products All");
-    //   console.log(this.all_products);
-
-    //   console.log("Pages All");
-    //   console.log(this.navigation.pageAll);
-
-    //   this.all_pages_count = this.navigation.pageAll;
-
-    //   for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
-    //     this.pages[i] = ({counter : i+1});
-    //   }
-    // },
-    // err => {
-    //   var er_status = err.status;
-    //   console.log(err);
-    // });
   }
 
   // filling filter array for keyword search
@@ -661,27 +479,13 @@ export class ProductsPage {
           this.selectedFilters.splice(index, 1);
         }
       });
-    } //console.log(this.selectedFilters);
+    }
   };
-
-  //getting countries from server
-  // getFilters = function (id) {
-  //   var data: { [k: string]: any } = {};
-  //   data.categories_id = id;
-  //   data.language_id = this.config.langId;
-  //   this.http.post(this.config.url + 'getFilters', data).map(res => res.json()).subscribe(data => {
-  //     //  console.log(data);
-  //     if (data.success == 1)
-  //       this.filters = data.filters;
-  //     this.maxAmount = this.price.upper = data.maxPrice;
-  //   });
-  // };
 
   applyFilters() {
     this.applyFilter = true;
     this.infinite.enable(true);
     this.page = 0;
-    // this.getProducts(null);
   }
 
   resetFilters() {
@@ -693,13 +497,7 @@ export class ProductsPage {
     this.applyFilter = false;
     this.infinite.enable(true);
     this.page = 0;
-    // this.getProducts(null);
-    // this.getFilters(this.selectedTab);
 
-  }
-
-  ionViewDidEnter() {
-    //this.product = this.navParams.get('data');
   }
 
   getSortProducts(value) {
@@ -735,60 +533,39 @@ export class ProductsPage {
 }
 
   getSortsProducts(sort_path) {
-    this.loading.show();
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).subscribe((data: any) => {
-      // console.log(data.product_data.length + "   " + this.page);
-      this.loading.hide();
       this.Sort = false;
-      // console.log("Sort GET");
-      // console.log(data);
       this.all_products = data.result.products;
       this.navigation = data.result.navigation;
 
-      // console.log("Navigation All");
-      // console.log(this.navigation);
-
-      // console.log("Products All");
-      // console.log(this.all_products);
-
-      // console.log("Pages All");
-      // console.log(this.navigation.pageAll);
-
       for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
         this.pages[i] = ({counter : i+1});
-        // console.log(i);
       }
-      // console.log(this.pages);
     },
     err => {
-      this.loading.hide();
       var er_status = err.status;
-      // console.log(err);
     });
   }
 
   openSortBy() {
     var buttonArray = [];
-    // this.translate.get(this.sortArray).subscribe((res) => {
+    for (let key in this.sortArray) {
+      buttonArray.push({ text: this.sortArray[key], handler: () => { this.getSortProducts(key) } });
+    }
+    buttonArray.push(
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
 
-      for (let key in this.sortArray) {
-        buttonArray.push({ text: this.sortArray[key], handler: () => { this.getSortProducts(key) } });
-      }
-      buttonArray.push(
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-
-          }
         }
-      );
+      }
+    );
 
-      var actionSheet = this.actionSheet.create({
-        buttons: buttonArray
-      });
-      actionSheet.present();
-    // });
+    var actionSheet = this.actionSheet.create({
+      buttons: buttonArray
+    });
+    actionSheet.present();
   }
 
   changeLayout() {
@@ -804,16 +581,11 @@ export class ProductsPage {
   }
 
   onScroll(e) {
-
     if (e.scrollTop >= 600) {
       this.scrollTopButton = true;
-      // console.log("Scroll status After true:");
-      // console.log(this.scrollTopButton);
     }
     if (e.scrollTop < 600) {
       this.scrollTopButton = false;
-      // console.log("Scroll status After false:");
-      // console.log(this.scrollTopButton);
     }
   }
 

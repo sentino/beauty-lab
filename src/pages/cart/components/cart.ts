@@ -1,25 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
-
 
 @Component({
   selector: 'app-cart',
-  animations: [
-    // trigger(
-    //   'animate', [
-    //     transition(':enter', [
-    //       style({ opacity: 0 }),
-    //       animate('500ms', style({ opacity: 1 }))
-    //     ]),
-    //     transition(':leave', [
-    //       style({ opacity: 1 }),
-    //       animate('700ms', style({ transform: 'scale(0)', opacity: 0 }))
-    //     ])
-    //   ]
-    // )
-  ],
   template: `
-    <!--<div class="c-good" *ngFor="let product of products" [@animate]>-->
     <div class="c-good" *ngFor="let product of products">
       <button class="c-good__close" style="z-index: 1;" [disabled]="product.loading" (click)="delete(product.id)"></button>
       <div class="c-good__discount" style="z-index: 1"
@@ -33,12 +16,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
         </h2>
         <div class="l-good__row">
           <div class="l-good__price" *ngIf="product.priceFull > product.price">
-            <span class="c-good__price c-good__price--del">{{product.priceFullFormat}}
-              <!--<span class="c-good__currency c-good__currency&#45;&#45;small">&#8381;</span>-->
-            </span>
-            <span class="c-good__price c-good__price--new">{{product.priceFormat}}
-              <!--<span class="c-good__currency c-good__currency&#45;&#45;large">&#8381;</span>-->
-            </span>
+            <span class="c-good__price c-good__price--del">{{product.priceFullFormat}}</span>
+            <span class="c-good__price c-good__price--new">{{product.priceFormat}}</span>
           </div>
 
           <div class="l-good__price" *ngIf="product.price === product.priceFull">
@@ -54,9 +33,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
             <button class="c-quantity__button c-quantity__button--add" (click)="quantityAdd(product.id)"></button>
           </div>
           <div class="l-good__price">
-            <span class="c-good__price c-good__price--total">{{product.sumFormat}}
-              <!--<span class="c-good__currency c-good__currency&#45;&#45;large">&#8381;</span>-->
-            </span>
+            <span class="c-good__price c-good__price--total">{{product.sumFormat}}</span>
           </div>
         </div>
       </div>

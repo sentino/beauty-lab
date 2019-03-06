@@ -344,11 +344,8 @@ page-search {
         }
     
         .pagination{
-            // position: fixed;
             display: flex;
             justify-content: space-evenly;
-            // padding-top: 10px;
-            // padding-bottom: 10px;
             background: gainsboro;
             padding-left: 20px;
             padding-right: 20px;
@@ -427,7 +424,6 @@ page-search {
                 .selected{
                     
                     border-bottom-color: $black;
-                    //background-color:color($colors, accent-color);
                 }
             }
         }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
@@ -6,15 +6,6 @@ import 'rxjs/add/operator/map';
   selector: 'app-section-list-item-two',
   template: `
     <section [formGroup]="form" [className]="displayNone ? 'switchDisplayNone' : ''">
-      <!--<ion-list-->
-        <!--radio-group-->
-        <!--[formArrayName]="'delivery'">-->
-        <!--<section *ngFor="let item of form.controls.delivery.controls; let i = index">-->
-          <!--<ion-item [formControlName]="i" ngDefaultControl>-->
-            <!--<ion-label>Курьерская доставка</ion-label>-->
-            <!--<ion-radio checked="true" value="0"></ion-radio>-->
-          <!--</ion-item>-->
-        <!--</section>-->
       <ion-list radio-group [formControl]="form.controls['delivery']">
         <ion-item *ngFor="let item of delivery">
           <ion-label>{{item.name}}</ion-label>
@@ -65,7 +56,6 @@ export class AppSectionListItemTwo {
   @Input() displayNone;
   @Input() delivery;
   @Input() priceDelivery;
-  // @Input() deliveryInfo;
 
   @Output() pointResultId: EventEmitter<any> = new EventEmitter();
   @Output() selectedDeliveryPrice: EventEmitter<any> = new EventEmitter();

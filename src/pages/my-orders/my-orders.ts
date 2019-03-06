@@ -1,26 +1,16 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
-import { ConfigProvider } from '../../services/config/config';
-// import { TranslateService } from '@ngx-translate/core';
-import { SharedDataProvider } from '../../services/shared-data/shared-data';
+import { NavController } from 'ionic-angular';
 import { LoadingProvider } from '../../services/loading/loading';
 import { AlertProvider } from '../../services/alert/alert';
-import { OrderDetailPage } from '../order-detail/order-detail';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
-import { HttpClient } from '@angular/common/http';
 import { GetDataCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { OrdersService } from '../../services/orders.service';
-import { Observable } from 'rxjs';
 import { ProductDetailPage } from '../product-detail/product-detail';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { SearchService } from '../../services/search.service';
 
 
 @Component({
@@ -41,7 +31,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
   ],
   template: `
     <ion-header>
-      <ion-navbar>
+      <ion-navbar [style.boxShadow]="searchList ? 'none' : ''">
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -51,7 +41,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
         </ion-title>
 
         <ion-buttons end>
-          <button ion-button icon-only (click)="openSearch()">
+          <button ion-button icon-only (click)="searchList = !searchList">
             <ion-icon name="search"></ion-icon>
           </button>
           <button ion-button icon-only class="cart-button" (click)="openCart()">
@@ -61,6 +51,15 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
           </button>
         </ion-buttons>
       </ion-navbar>
+
+
+      <form  class="search-form" (ngSubmit)="getSearch(search.value)" *ngIf="searchList" [@animate]>
+        <ion-item>
+          <ion-icon name="search"></ion-icon>
+          <ion-input #search name="search" placeholder="Поиск..." type="text"></ion-input>
+        </ion-item>
+        <ion-icon class="close-icon" name="close" (click)="searchList = !searchList"></ion-icon>
+      </form>
     </ion-header>
 
     <div class="scroll-content">
@@ -106,7 +105,6 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
           <div class="c-order-list">
             <h2 class="c-order-list__title">Состав заказа</h2>
             <div class="c-order-item" *ngFor="let item of order.basket">
-              <!--<span class="c-order-item__title">{{(item.name.length > 30)? (item.name | slice:0:30)+'...':(item.name)}}</span>-->
               <p class="c-order-item__title" 
                  style="word-wrap: break-word;
                         text-overflow: ellipsis;
@@ -135,21 +133,16 @@ export class MyOrdersPage extends Unsubscriber implements OnInit, OnDestroy{
   productsLength$ = this.store.select(selectCartProductsLength);
 
   orders;
-  // orders = new Array;
-  // httpRunning = true;
+
+  searchList = false;
 
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
     private ordersService: OrdersService,
     private loading: LoadingProvider,
-    // public navParams: NavParams,
-    // public http: HttpClient,
-    // public config: ConfigProvider,
-    // public shared: SharedDataProvider,
-    // translate: TranslateService,
     private alert: AlertProvider,
-    // public loading: LoadingProvider
+    private searchService: SearchService,
   ) {
     super();
   }
@@ -161,6 +154,12 @@ export class MyOrdersPage extends Unsubscriber implements OnInit, OnDestroy{
       this.orders = res.result.orders;
       this.loading.hideSpinner();
     })
+  }
+
+  getSearch(value){
+    this.wrapToUnsubscribe(this.searchService.getSearch(value)).subscribe(res => {
+      this.navCtrl.push(SearchPage, { result: res, search: value });
+    });
   }
 
   repeatOrder(id) {
@@ -175,40 +174,6 @@ export class MyOrdersPage extends Unsubscriber implements OnInit, OnDestroy{
   showProductDetail(id) {
     this.navCtrl.push(ProductDetailPage, { prod_id: id });
   }
-
-  // getOrders() {
-  //   this.httpRunning = true;
-  //   this.orders = [];
-  //   this.loading.show();
-  //   var data: { [k: string]: any } = {};
-  //   data.customers_id = this.shared.customerData.customers_id;
-  //   data.language_id = this.config.langId;
-  //   this.http.post(this.config.url + 'getOrders', data).map(res => res.json()).subscribe(data => {
-  //     this.loading.hide();
-  //     this.httpRunning = false;
-  //     //$rootScope.address=response.data.data;
-  //     if (data.success == 1) {
-  //       this.orders = [];
-  //       this.orders = data.data;
-  //     }
-  //     // $scope.$broadcast('scroll.refreshComplete');
-  //   },
-  //     function (response) {
-  //       this.loading.hide();
-  //       this.alert.show("Server Error while Loading Orders");
-  //       console.log(response);
-  //     });
-  // };
-
-  // showOrderDetail(order) {
-  //
-  //   this.navCtrl.push(OrderDetailPage, { 'data': order });
-  //
-  // }
-  // ionViewDidLoad() {
-  //   this.httpRunning = true;
-  //   // this.getOrders();
-  // }
 
   openCart() {
     this.navCtrl.push(CartContainer);

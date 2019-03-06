@@ -1,12 +1,5 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SharedDataProvider } from '../../services/shared-data/shared-data';
-import { ConfigProvider } from '../../services/config/config';
-import { SubCategories3Page } from '../sub-categories3/sub-categories3';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
@@ -14,9 +7,9 @@ import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { BonusesService } from '../../services/bonuses.service';
 import 'rxjs/add/operator/map';
-import { Observable, Subscription } from 'rxjs';
 import { LoadingProvider } from '../../services/loading/loading';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { SearchService } from '../../services/search.service';
 
 
 
@@ -44,13 +37,14 @@ export class Categories3Page extends Unsubscriber implements OnInit, OnDestroy {
   dataPoints;
   dataTransacts;
 
+  searchList = false;
+
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
     private loading: LoadingProvider,
-    // public shared: SharedDataProvider,
-    // public config: ConfigProvider
-    private bonusesService: BonusesService
+    private bonusesService: BonusesService,
+    private searchService: SearchService,
   ) {
     super();
   }
@@ -63,17 +57,14 @@ export class Categories3Page extends Unsubscriber implements OnInit, OnDestroy {
       this.dataTransacts = res.result.transacts;
       this.loading.hideSpinner();
     });
-    // this.dataPoints$ = this.bonusesService.getBonuses().map(res => res.result.points);
-    // this.dataTransacts$ = this.bonusesService.getBonuses().map(res => res.result.transacts);
-    // blah.subscribe(res => {
-    //   console.log(res);
-    // })
   }
 
+  getSearch(value){
+    this.wrapToUnsubscribe(this.searchService.getSearch(value)).subscribe(res => {
+      this.navCtrl.push(SearchPage, { result: res, search: value });
+    });
+  }
 
-  // openSubCategories(parent) {
-  //   this.navCtrl.push(SubCategories3Page, { 'parent': parent });
-  // }
   openCart() {
     this.navCtrl.push(CartContainer);
   }

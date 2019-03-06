@@ -12,7 +12,6 @@ import { FormGroup } from '@angular/forms';
             <span style="font-size: 8px;">{{i+1}}.</span>
             <div class="l-order__item">
               <span class="c-order__title">{{item.name}}</span>
-              <!--<span class="c-order__category">Крем</span>-->
             </div>
             <span class="c-order__quantity">{{item.quantity}} шт.</span>
             <span class="c-order__price" *ngIf="item.price !== 0">
@@ -34,7 +33,6 @@ import { FormGroup } from '@angular/forms';
             <span style="font-size: 8px;">{{i+1}}.</span>
             <div class="l-order__item">
               <span class="c-order__title">{{item.name}}</span>
-              <!--<span class="c-order__category">Крем</span>-->
             </div>
             <span class="c-order__quantity">{{item.quantity}} шт.</span>
             <span class="c-order__price" *ngIf="item.price === 0">Подарок!</span>
@@ -123,11 +121,8 @@ export class ConfirmOrderComponent implements OnInit {
   @Input() payments;
   @Input() innerPayment;
   @Input() fieldAddress;
-  // @Input() deliveryInfo;
   @Input('warning') _warning;
   @Input('notify') _notify;
-  // @Input() warning;
-  // @Input() notify;
 
   @Output() selectedLocation: EventEmitter<any> = new EventEmitter<any>();
   @Output() deliveryId: EventEmitter<any> = new EventEmitter<any>();
@@ -136,12 +131,6 @@ export class ConfirmOrderComponent implements OnInit {
 
   city;
   _selectedDeliveryPrice;
-  // set setCity(val) {
-  //   this._city = val;
-  // }
-  // get city() {
-  //   return this._city;
-  // }
 
   sectionLists = [
     {
@@ -170,10 +159,6 @@ export class ConfirmOrderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.form.valueChanges.subscribe(res => {
-    //   console.log(res);
-    // });
-
     this.form.controls['listItemThree'].get('bonuses').get('writeOffBonuses').valueChanges.subscribe(res => {
       this.form.controls['listItemThree'].get('bonuses').get('quantity').setValue('');
       this.form.controls['listItemThree'].get('bonuses').get('quantity').updateValueAndValidity();

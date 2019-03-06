@@ -99,7 +99,6 @@ export function bonusesQuantity(controlOne: AbstractControl, controlTwo: Abstrac
         (submit)="submit()"
       ></app-confirm-order-component>
       
-      <!--<section *ngIf="paymentBody" [innerHTML]="paymentBody | sanitizeHtml"></section>-->
     </ion-content>
 
     <ion-footer>
@@ -133,7 +132,6 @@ export class ConfirmOrderContainer implements OnInit{
   canOrder;
   fields;
   fieldAddress;
-  // deliveryInfo;
 
   form: FormGroup;
   formFieldsName;
@@ -208,11 +206,7 @@ export class ConfirmOrderContainer implements OnInit{
         this.priceDelivery = 0;
       }
 
-      // if (res.result.summary.deliveryPrice) {
-        this.weightFormat = res.result.summary.weightFormat;
-      // } else {
-      //   this.weightFormat = 0;
-      // }
+      this.weightFormat = res.result.summary.weightFormat;
 
       this.canOrder = res.result.can_order;
 
@@ -228,7 +222,7 @@ export class ConfirmOrderContainer implements OnInit{
       }
 
       this.result = res.result;
-      // console.log('getData', this.result);
+
       this.loading.hideSpinner();
     });
   }
@@ -267,10 +261,8 @@ export class ConfirmOrderContainer implements OnInit{
     this.payPayler.putData({location: event}).subscribe((res: any) => {
       this.store.dispatch(new GetDataConfirmOrderSuccessAction(res.result));
 
-      // console.log('location upd', res);
       this.form.controls['listItemTwo'].get('delivery').setValue('');
       this.form.controls['listItemTwo'].get('delivery').updateValueAndValidity();
-      // this.deliveryInfo = undefined;
 
       this.putLocation = event;
       this.delivery = res.result.delivery;
@@ -292,11 +284,7 @@ export class ConfirmOrderContainer implements OnInit{
         this.priceDelivery = 0;
       }
 
-      // if (res.result.summary.deliveryPrice) {
-        this.weightFormat = res.result.summary.weightFormat;
-      // } else {
-      //   this.weightFormat = 0;
-      // }
+      this.weightFormat = res.result.summary.weightFormat;
 
       this.canOrder = res.result.can_order;
     })
@@ -325,14 +313,9 @@ export class ConfirmOrderContainer implements OnInit{
     this.payPayler.putData(body).subscribe((res: any) => {
       this.store.dispatch(new GetDataConfirmOrderSuccessAction(res.result));
 
-      // console.log('delivery upd', res);
       this.payments = res.result.payments;
       this.innerPayment = res.result.innerPayment;
 
-      // this.oldPrice = res.result.summary.sumFull;
-      // this.newPrice = res.result.summary.sum;
-      // this.newPriceFormat = res.result.summary.sumFormat;
-      // this.oldPriceFormat = res.result.summary.sumFullFormat;
       this.newPriceFormat = res.result.summary.sumFullFormat;
       this.oldPrice = 1;
       this.newPrice = 1;
@@ -351,8 +334,6 @@ export class ConfirmOrderContainer implements OnInit{
       }
 
       this.canOrder = res.result.can_order;
-
-      // console.log(this.form);
     })
   }
 
@@ -404,10 +385,6 @@ export class ConfirmOrderContainer implements OnInit{
           'Заказ сформирован')
       })
     }
-
-
-    // Rx.Observable.concat(55290, getPostTwo$).subscribe(res => console.log(res));
-    // const posts$ = getPostOne$.mergeMap(orderId => getPostTwo$).subscribe(res => console.log(res))
   }
 
   formatDate(val) {
@@ -416,5 +393,4 @@ export class ConfirmOrderContainer implements OnInit{
     }
     return val;
   }
-
 }

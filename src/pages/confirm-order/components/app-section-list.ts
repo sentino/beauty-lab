@@ -62,7 +62,6 @@ export class AppSectionList {
   @Input() payments;
   @Input() innerPayment;
   @Input() fieldAddress;
-  // @Input() deliveryInfo;
 
   @Output() pointResultId: EventEmitter<any> = new EventEmitter();
   @Output() selectedDeliveryPrice: EventEmitter<any> = new EventEmitter();

@@ -8,13 +8,29 @@ import { CartContainer } from '../../cart/cart-container';
 import { SearchPage } from '../../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { LoadingProvider } from '../../../services/loading/loading';
+import { SearchService } from '../../../services/search.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'specialist-page',
+  animations: [
+    trigger(
+      'animate', [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('500ms', style({ opacity: 1 }))
+        ]),
+        transition(':leave', [
+          style({ opacity: 1 }),
+          animate('700ms', style({ opacity: 0 }))
+        ])
+      ]
+    )
+  ],
   template: `
     <ion-header>
-      <ion-navbar>
+      <ion-navbar [style.boxShadow]="searchList ? 'none' : ''">
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -24,9 +40,9 @@ import { LoadingProvider } from '../../../services/loading/loading';
         </ion-title>
 
         <ion-buttons end>
-          <!--<button ion-button icon-only (click)="openSearch()">-->
-          <!--<ion-icon name="search"></ion-icon>-->
-          <!--</button>-->
+          <button ion-button icon-only (click)="searchList = !searchList">
+            <ion-icon name="search"></ion-icon>
+          </button>
           <button ion-button icon-only class="cart-button" (click)="openCart()">
             <ion-icon name="cart">
               <ion-badge color="secondary">{{(productsLength$ | async) ? (productsLength$ | async) : 0}}</ion-badge>
@@ -36,15 +52,13 @@ import { LoadingProvider } from '../../../services/loading/loading';
       </ion-navbar>
 
 
-      <!--<ion-toolbar class="toolbar-secondary">-->
-      <!--<form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>-->
-      <!--<ion-item>-->
-      <!--<ion-icon name="search"></ion-icon>-->
-      <!--<ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>-->
-      <!--</ion-item>-->
-      <!--<ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>-->
-      <!--</form>-->
-      <!--</ion-toolbar>-->
+      <form  class="search-form" (ngSubmit)="getSearch(search.value)" *ngIf="searchList" [@animate]>
+        <ion-item>
+          <ion-icon name="search"></ion-icon>
+          <ion-input #search name="search" placeholder="Поиск..." type="text"></ion-input>
+        </ion-item>
+        <ion-icon class="close-icon" name="close" (click)="searchList = !searchList"></ion-icon>
+      </form>
     </ion-header>
 
     <ion-content>
@@ -78,6 +92,8 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
   specialistId;
   addQuestionFields;
 
+  searchList = false;
+
   constructor(
     private store: Store<any>,
     private navCtrl: NavController,
@@ -85,6 +101,7 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
     private navParams: NavParams,
     private socialSharing: SocialSharing,
     private loading: LoadingProvider,
+    private searchService: SearchService,
   ) {
     super();
   }
@@ -101,6 +118,12 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
     this.wrapToUnsubscribe(this.consultationService.getSpecList(1)).subscribe(res => {
       this.addQuestionFields = res.result.addQuestionFields;
     })
+  }
+
+  getSearch(value){
+    this.wrapToUnsubscribe(this.searchService.getSearch(value)).subscribe(res => {
+      this.navCtrl.push(SearchPage, { result: res, search: value });
+    });
   }
 
   share() {

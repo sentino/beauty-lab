@@ -6,16 +6,6 @@ import { InfiniteScroll } from 'ionic-angular';
   selector: 'brands-page-component',
   template: `
     <main  style="margin-top: 67px; padding-left: 16px; padding-right: 16px;">
-      <!--<div class="c-slider">-->
-        <!--<img class="c-slider__item c-slider__item&#45;&#45;current" src="./images/slider.png">-->
-        <!--<div class="l-slider__points">-->
-          <!--<div class="c-slider__point"></div>-->
-          <!--<div class="c-slider__point"></div>-->
-          <!--<div class="c-slider__point"></div>-->
-          <!--<div class="c-slider__point"></div>-->
-          <!--<div class="c-slider__point c-slider__point&#45;&#45;current"></div>-->
-        <!--</div>-->
-      <!--</div>-->
       <div class="l-goods l-goods--space" style="display: flex; flex-flow: wrap;">
         <app-product-cart style="margin: auto"
           *ngFor="let item of _products"
@@ -60,7 +50,6 @@ export class BrandsPageComponent implements OnInit, OnDestroy {
 
   doInfinite(infiniteScroll) {
     if (this.counter === 0 && this.navigation.pageAll > 1 && this.navigation.pageAll !== this.navigation.pageCurrent) {
-      // console.log('Begin async operation');
       this.loadMoreProducts.emit();
       this.counter = 1;
       setTimeout(() => {

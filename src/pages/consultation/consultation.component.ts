@@ -66,7 +66,6 @@ export class ConsultationComponent implements OnInit, OnDestroy {
     if (this.counter === 0 &&
       this.questionsNavigation.pageAll > 1 &&
       this.questionsNavigation.pageAll !== this.questionsNavigation.pageCurrent) {
-      // console.log('Begin async operation');
       this.loadMoreQuestions.emit();
       this.counter = 1;
       setTimeout(() => {

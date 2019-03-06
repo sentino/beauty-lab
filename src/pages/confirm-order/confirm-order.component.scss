@@ -1,6 +1,3 @@
-//@import "../../assets/styles/confirming.scss";
-
-
 app-confirm-order-component {
 
   .switchDisplayNone {
@@ -34,7 +31,6 @@ app-confirm-order-component {
       width: 100%;
       text-align: left;
       color: lighten($color: $primaryTextColor, $amount: 50%);
-      //color: rgb(33, 33, 33);
       font-size: 17px;
       font-weight: 500;
       border-bottom: 1px solid lighten($color: $primaryTextColor, $amount: 88%);
@@ -44,7 +40,6 @@ app-confirm-order-component {
         content: "\e5cd";
         transform: rotate(45deg);
         @include material-icons($font-size: 24px, $color: lighten($color: $primaryTextColor, $amount: 48%));
-        //color: rgb(33, 33, 33);
       }
 
       &--small {
@@ -59,7 +54,6 @@ app-confirm-order-component {
       }
 
       &--picked {
-        //color: lighten($color: $primaryTextColor, $amount: 13%);
         border-bottom: none;
         color: rgb(33, 33, 33);
 
@@ -131,13 +125,10 @@ app-confirm-order-component {
 
   .l-order {
     margin: 0;
-    //padding-inline-start: 10px;
     font-size: 10px;
     color: $primaryTextColor;
     padding: 0;
     min-height: 40px;
-    //max-height: 250px;
-    //overflow-y: auto;
     list-style-type: none;
 
     &__wrapper {
@@ -162,7 +153,6 @@ app-confirm-order-component {
 
   .c-order {
     padding-left: 10px;
-    //margin: 18px 0 0;
     padding-top: 8px;
     padding-bottom: 8px;
 
@@ -238,7 +228,6 @@ app-confirm-order-component {
     }
 
     &__price {
-      //max-width: 150px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -372,13 +361,5 @@ app-confirm-order-component {
   .item-md .radio-md {
     margin-right: 2px !important;
   }
-
-  //.item-block .item-inner .select-md {
-  //  position: absolute;
-  //  z-index: 1;
-  //  min-width: 100%;
-  //  background-color: #f1f1f1;
-  //  padding: 5px 5px 5px 0;
-  //}
 }
 

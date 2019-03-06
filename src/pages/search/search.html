@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar [style.boxShadow]="SearchList ? 'none' : ''">
     <ion-title>
       Результаты поиска
     </ion-title>
@@ -71,14 +71,7 @@
         ></app-product-cart>
       </div>
     </ion-list>
-  
-  
-    
-  
-  
-    <!-- <ion-infinite-scroll #infinite (ionInfinite)="getProducts($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll> -->
+
   
     <ion-fab bottom right>
       <button ion-fab (click)="scrollToTop()">

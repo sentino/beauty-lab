@@ -11,6 +11,7 @@ import { CartModel, UpdateCartModel } from './main.model';
 import { AlertProvider } from '../../services/alert/alert';
 import { GET_DATA_CONFIRM_ORDER } from './main.action';
 import { PayPaylerService } from '../../services/pay-payler.service';
+import { GET_COUPONS } from './main.action';
 
 
 @Injectable()
@@ -23,6 +24,16 @@ export class MainEffects {
       map((arg: fromAction.All) => arg.payload),
       mergeMap(payload => {
         return this.getCartData();
+      })
+    );
+
+  @Effect()
+  public getCoupons$ = this.action$
+    .ofType(fromAction.GET_COUPONS)
+    .pipe(
+      map((arg: fromAction.All) => arg.payload),
+      mergeMap(payload => {
+        return this.getCouponsData();
       })
     );
 
@@ -113,6 +124,39 @@ export class MainEffects {
         }),
         catchError(e => {
           return of(new fromAction.GetDataCartFailAction(e));
+        })
+      )
+  };
+
+  private getCouponsData() {
+    return this.cartService.getCart()
+      .pipe(
+        map(res => {
+          let discount = {
+            apply: [],
+            notFound: ''
+          };
+
+          if (res.result.discount instanceof Object) {
+            if (res.result.discount.apply && res.result.discount.apply.length) {
+              res.result.discount.apply.map(el => {
+                discount.apply.push(el);
+              });
+            }
+
+            if (res.result.discount["not-found"] && res.result.discount["not-found"].length) {
+              discount.notFound = res.result.discount["not-found"][res.result.discount["not-found"].length - 1];
+            }
+          }
+
+          return new fromAction.GetCouponsSuccessAction({
+            apply: discount.apply,
+            notFound: discount.notFound,
+            summary: res.result.summary
+          });
+        }),
+        catchError(e => {
+          return of(new fromAction.GetCouponsFailAction(e));
         })
       )
   };

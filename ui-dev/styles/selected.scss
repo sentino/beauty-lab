@@ -1,0 +1,12 @@
+@import 'partials';
+@import '1111/body';
+@import '1111/modal';
+@import 'footer';
+
+body {
+  main {
+    height: 72.1vh;
+    overflow-y: auto;
+    padding-bottom: 0;
+  }
+}

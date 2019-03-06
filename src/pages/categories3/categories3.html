@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar [style.boxShadow]="searchList ? 'none' : ''">
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -9,7 +9,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="openSearch()">
+      <button ion-button icon-only (click)="searchList = !searchList">
         <ion-icon name="search"></ion-icon>
       </button>
       <button ion-button icon-only class="cart-button" (click)="openCart()">
@@ -19,6 +19,15 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
+
+  <form  class="search-form" (ngSubmit)="getSearch(search.value)" *ngIf="searchList" [@animate]>
+    <ion-item>
+      <ion-icon name="search"></ion-icon>
+      <ion-input #search name="search" placeholder="Поиск..." type="text"></ion-input>
+    </ion-item>
+    <ion-icon class="close-icon" name="close" (click)="searchList = !searchList"></ion-icon>
+  </form>
 </ion-header>
 
 

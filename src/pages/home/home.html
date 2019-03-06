@@ -2,14 +2,18 @@
 
 <ion-content class="page-home" (ionScroll)="onScroll($event)">
   <!-- top banners -->
-  <ion-slides class="banners-slider" pager="true"  paginationType="bullets" autoplay="true" loop="false" dir="{{shared.dir}}">
+  <ion-slides style="height: auto;" class="banners-slider" pager="true"  paginationType="bullets" autoplay="true" loop="false" dir="{{shared.dir}}">
     <ion-slide *ngFor="let b of banners">
       <img src="{{b.IMAGE}}">
     </ion-slide>
   </ion-slides>
-  <div class="main-content">
+  <div class="main-content" style="padding-right: 0;">
     <p class="slider-header">Хиты продаж</p>
-    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; overflow-x: auto;
+                                                padding-top: 13px;
+                                                margin-top: -13px;
+                                                padding-left: 6px;
+                                                margin-left: -6px;">
       <app-product-cart *ngFor="let item of hits_products"
                         [type]="'md'"
                         [cart]="item"
@@ -17,7 +21,7 @@
     </div>
 
     <p class="slider-header">Последнии статьи</p>
-    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; align-items: baseline;">
+    <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; align-items: baseline; overflow-x: auto; padding-left: 6px; margin-left: -6px;">
         <div *ngFor="let p of last_articles" (click)="goToArticles(p.ID)" style="width: 146.19px; margin-right: 10px;">
             <div class="card-thumb" style="width: 146.19px;">
                 <img class="image" src="{{p.IMAGE}}"
@@ -37,7 +41,6 @@
     </div>
   </div>
 
-  <!-- <sliding-tabs></sliding-tabs> -->
   <ion-fab bottom right *ngIf="scrollTopButton">
     <button ion-fab (click)="scrollToTop()">
       <ion-icon name="arrow-round-up"></ion-icon>

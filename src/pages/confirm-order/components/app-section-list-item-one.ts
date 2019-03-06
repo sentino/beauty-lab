@@ -30,12 +30,6 @@ export class AppSectionListItemOne {
   @Input() city;
 
   get _city() {
-    // console.log(this.city);
-    // debugger;
     return this.city;
   }
-
-  // cityChange(e) {
-  //   console.log('!!!!!!!!!!!!!!!!!!!!!!!', e);
-  // }
 }

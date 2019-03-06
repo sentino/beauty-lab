@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar [style.boxShadow]="SearchList ? 'none' : ''">
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -67,11 +67,9 @@
         <span class="price-text">Цена</span>
           <span class="all-prices">
             <span class="card-price-normal-through discount_price" *ngIf="product_price > product_discount">{{product_price|curency}}</span>
-            <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price" >{{product_price|curency}}</span>
+            <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price">{{product_price|curency}}</span>
             <span class="card-price-normal" *ngIf="product_price != product_discount">{{product_discount|curency}}</span> 
           </span>
-          <!-- <span class="product-outstock" *ngIf="product.products_quantity==0">{{'Out of Stock'}}</span>
-          <span class="product-instock" *ngIf="product.products_quantity!=0">{{'In Stock'}}</span> -->
           <span class="product-outstock">{{product_avail}}</span>
         </span>
 
@@ -86,7 +84,6 @@
             <div class="etc-buttons">
                 <ion-icon name="share" (click)="share()"></ion-icon>
                 <div class="c-good__favorite" (click)="clickWishList()"></div>
-                <!--<ion-icon name="heart-outline"></ion-icon>-->
             </div>
       </div>
 
@@ -200,33 +197,43 @@
 
       <hr>
 
-    <div class="properties-single" *ngIf="alsobuy_length">
+    <div class="properties-single" *ngIf="alsobuy_length" style="width: calc(100% + 5%);">
       <p class="prop-name">С этим товаром  покупают</p>
-      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
-        <app-product-cart style="margin-right: 16px;"
-                          *ngFor="let item of products_alsobuy"
-                          [type]="'lg'"
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; overflow-x: auto;
+                                                padding-top: 13px;
+                                                margin-top: -13px;
+                                                padding-left: 6px;
+                                                margin-left: -6px;">
+        <app-product-cart *ngFor="let item of products_alsobuy"
+                          [type]="'md'"
                           [cart]="item"
         ></app-product-cart>
       </div>
     </div>
 
-    <div class="properties-single" *ngIf="leaders_length">
+    <div class="properties-single" *ngIf="leaders_length" style="width: calc(100% + 5%);">
       <p class="prop-name">Лидеры продаж</p>
-      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
-        <app-product-cart style="margin-right: 16px;"
-                          *ngFor="let item of products_leaders"
-                          [type]="'lg'"
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; overflow-x: auto;
+                                                padding-top: 13px;
+                                                margin-top: -13px;
+                                                padding-left: 6px;
+                                                margin-left: -6px;">
+        <app-product-cart *ngFor="let item of products_leaders"
+                          [type]="'md'"
                           [cart]="item"
         ></app-product-cart>
       </div>
     </div>
 
-    <div class="properties-single" *ngIf="anlogs_length">
+    <div class="properties-single" *ngIf="anlogs_length" style="width: calc(100% + 5%);">
       <p class="prop-name">Аналоги</p>
-      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row;">
+      <div class="l-goods l-goods--space" style="display: flex; flex-flow: row; overflow-x: auto;
+                                                padding-top: 13px;
+                                                margin-top: -13px;
+                                                padding-left: 6px;
+                                                margin-left: -6px;">
         <app-product-cart *ngFor="let item of products_analogs"
-                          [type]="'lg'"
+                          [type]="'md'"
                           [cart]="item"
         ></app-product-cart>
       </div>

@@ -1,56 +1,54 @@
-header {
-    .toolbar{
-        .bar-buttons{
-            .cart-button{
-                position: relative;
-                width: 42px;
-                top:1px;
-                right: 1px;
-                overflow: visible !important;
-                .icon{
-                    .badge{
-                        background: #48A7F0;
-                        position: absolute;
-                        top: 0px;
-                        right: 0px;
-                    }
+.toolbar{
+    .bar-buttons{
+        .cart-button{
+            position: relative;
+            width: 42px;
+            top:1px;
+            right: 1px;
+            overflow: visible !important;
+            .icon{
+                .badge{
+                    background: #48A7F0;
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
                 }
             }
         }
     }
+}
 
-    ion-header{
-        background: white;
+ion-header{
+    background: white;
+}
+
+.search-form{
+    ion-icon{
+        padding: 15px;
+    }
+}
+
+.search-form{
+    display: flex;
+    background: white;
+    margin: 0!important;
+    margin: 5px!important;
+    box-shadow: 0 2px 2px grey;
+    background-color: white;
+
+    .item-inner{
+        border: none!important;
+        box-shadow: none!important;
     }
 
-    .search-form{
-        ion-icon{
-            padding: 15px;
-        }
-    }
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24);
+    margin: 10px;
 
-    .search-form{
-        display: flex;
-        background: white;
-        margin: 0!important;
-        margin: 5px!important;
-        box-shadow: 0 2px 2px grey;
-        background-color: white;
+    .item-block{
+        background-color: transparent;
 
         .item-inner{
-            border: none!important;
-            box-shadow: none!important;
-        }
-
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24);
-        margin: 10px;
-
-        .item-block{
-            background-color: transparent;
-
-            .item-inner{
-                border-bottom: 0;
-            }
+            border-bottom: 0;
         }
     }
 }

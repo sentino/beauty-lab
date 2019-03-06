@@ -1,0 +1,57 @@
+@import "partials";
+@import "1111/body";
+@import "1111/modal";
+
+body {
+  main {
+    padding: 22px 16px 135px;
+    font-size: 12px;
+    line-height: 14px;
+    color: $primaryTextColor;
+  }
+}
+
+.c-info {
+  &__title {
+    font-size: inherit;
+    font-weight: 500;
+    margin: 14px 0;
+  }
+
+  &__text {
+    margin: 0 0 14px;
+    &--bold {
+      font-weight: 500;
+    }
+
+    &--large-space {
+      margin: 16px 0;
+    }
+  }
+
+  &__licence {
+    width: 101px;
+    height: 143px;
+
+    @media screen and (max-width: 350px) {
+      margin: 0 5px 10px;
+    }
+
+    &--modal {
+      width: 303px;
+      height: 439px;
+    }
+  }
+}
+
+.l-info__licence {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 22px 0 23px;
+
+  @media screen and (max-width: 350px) {
+    justify-content: space-around;
+  }
+}

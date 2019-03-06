@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar [style.boxShadow]="SearchList ? 'none' : ''">
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -60,11 +60,6 @@
 
   <ion-list padding>
 
-    <!--<button ion-item (click)="openSite()">-->
-      <!--Веб сайт-->
-      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
-    <!--</button>-->
-
     <button ion-item (click)="openPage('about')">
       О компании
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
@@ -90,31 +85,11 @@
       <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
     </button>
 
-    <!--<button ion-item (click)="showModal('refundPolicy')">-->
-      <!--Политика возрата-->
-      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
-    <!--</button>-->
-
-    <!--<button ion-item (click)="showModal('termServices')">-->
-      <!--Правила и услуги-->
-      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
-    <!--</button>-->
-
-    <!--<button ion-item (click)="rateUs()">-->
-      <!--Оцените нас-->
-      <!--<ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>-->
-    <!--</button>-->
-
     <button ion-item (click)="share()">
       Поделиться
       <ion-icon showWhen="android" name="share" item-end></ion-icon>
     </button>
 
-    <!--<ion-list *ngIf="shared.customerData.accessToken != null" class="logout-btn"  padding>-->
-      <!--<button ion-button block color="secondary" (click)="logOut()">-->
-        <!--Выйти-->
-      <!--</button>-->
-    <!--</ion-list>-->
   </ion-list>
 </ion-content>
 

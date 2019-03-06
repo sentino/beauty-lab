@@ -1,20 +1,12 @@
-// Project Name: IonicEcommerce
-// Project URI: http://ionicecommerce.com
-// Author: VectorCoder Team
-// Author URI: http://vectorcoder.com/
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { map } from "rxjs/operators";
 import { Storage } from '@ionic/storage';
 import { ConfigProvider } from '../config/config';
 import { Events, Platform } from 'ionic-angular';
 import { LoadingProvider } from '../loading/loading';
-import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { Push } from '@ionic-native/push/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 import { MenuController } from 'ionic-angular';
 import { App} from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
@@ -76,6 +68,7 @@ export class SharedDataProvider {
     comments: ''
   };
 
+
   constructor(
     private store: Store<any>,
     public config: ConfigProvider,
@@ -89,58 +82,17 @@ export class SharedDataProvider {
     private device: Device,
     public menuCtrl: MenuController,
     private fcm: FCM,
-    private fb: Facebook,
-    private appVersion: AppVersion,
-    private oneSignal: OneSignal
-    //private fb: Facebook,
+    private fb: Facebook
   ) {
-    
-    // //getting all banners
-    // this.http.get(config.url + 'getBanners').map(res => res.json()).subscribe(data => {
-    //   this.banners = data.data;
-    // });
-    // //getting tab 1
-    // let data: { [k: string]: any } = {};
-    // if (this.customerData.customers_id != null)
-    //   data.customers_id = this.customerData.customers_id;
-    // data.page_number = 0;
-    // data.language_id = config.langId;
-    // data.type = 'top seller';
-    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-    //   this.tab1 = data.product_data
-    // });
-    // //getting tab 2
-    // data.type = 'special';
-    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-    //   this.tab2 = data.product_data
-    // });
-    // //getting tab 3
-    // data.type = 'most liked';
-    // this.http.post(this.config.url + 'getAllProducts', data).map(res => res.json()).subscribe(data => {
-    //   this.tab3 = data.product_data
-    // });
-
-
     //getting all allCategories
     this.http.get(config.url + 'catalog/sections/').subscribe((data: any) => {
-    // this.http.post(config.url + 'catalog/sections/', { language_id: config.langId }).subscribe((data: any) => {
-    //   console.log("Data categories:");
-    //   console.log(data.result.beauty);
       for (let value of data.result.beauty) {
-        if (value.parent_id == 0) this.categories.push(value);
-        else this.subCategoriesBeauty.push(value);
+        if (value.parent_id == 0) this.categories.push(value); else this.subCategoriesBeauty.push(value);
       }
 
       for (let value of data.result.health) {
-        if (value.parent_id == 0) this.categories.push(value);
-        else this.subCategoriesHealth.push(value);
+        if (value.parent_id == 0) this.categories.push(value); else this.subCategoriesHealth.push(value);
       }
-
-      // console.log("Sub-categories Beauty:");
-      // console.log(this.subCategoriesBeauty);
-      //
-      // console.log("Sub-categories Health:");
-      // console.log(this.subCategoriesHealth);
     });
     //getting recent viewed items from local storage
     storage.get('customerData').then((val) => {
@@ -150,44 +102,30 @@ export class SharedDataProvider {
     storage.get('recentViewedProducts').then((val) => {
       if (val != null) this.recentViewedProducts = val;
     });
-    // if (this.platform.is('cordova')) {
-    //   setTimeout(() => {
-    //     this.appVersion.getPackageName().then((val) => { this.testData(val); });
-    //   }, 35000);
-    //
-    // }
     //getting recent viewed items from local storage
     storage.get('cartProducts').then((val) => {
       if (val != null) this.cartProducts = val;
       this.cartTotalItems();
       // console.log(val);
     });
-
-    // //getting allpages from the server
-    // this.http.post(config.url + 'getAllPages', { language_id: this.config.langId }).map(res => res.json()).subscribe(data => {
-    //   if (data.success == 1) {
-    //     let pages = data.pages_data;
-    //     for (let value of pages) {
-    //       if (value.slug == 'privacy-policy') this.privacyPolicy = value.description;
-    //       if (value.slug == 'term-services') this.termServices = value.description;
-    //       if (value.slug == 'refund-policy') this.refundPolicy = value.description;
-    //       if (value.slug == 'about-us') this.aboutUs = value.description;
-    //     }
-    //   }
-    // });
-    // //---------------- end -----------------
   }
+
+
   //adding into recent array products
   addToRecent(p) {
     let found = false;
     for (let value of this.recentViewedProducts) {
-      if (value.products_id == p.products_id) { found = true; }
+      if (value.products_id == p.products_id) {
+        found = true;
+      }
     }
     if (found == false) {
       this.recentViewedProducts.push(p);
       this.storage.set('recentViewedProducts', this.recentViewedProducts);
     }
   }
+
+
   //removing from recent array products
   removeRecent(p) {
     this.recentViewedProducts.forEach((value, index) => {
@@ -197,17 +135,15 @@ export class SharedDataProvider {
       }
     });
   }
+
+
   //adding into cart array products
   addToCart(product, attArray) {
-
     // console.log(this.cartProducts);
     let attributesArray = attArray;
-
     if (attArray.length == 0 || attArray == null) {
-      //console.log("filling attirbutes");
       attributesArray = [];
       if (product.attributes != undefined) {
-        // console.log("filling product default attibutes");
         product.attributes.forEach((value, index) => {
           let att = {
             products_options_id: value.option.id,
@@ -222,7 +158,6 @@ export class SharedDataProvider {
         });
       }
     }
-    //  if(checkDublicateService(product.products_id,$rootScope.cartProducts)==false){
 
     let pprice = product.products_price;
     let on_sale = false;
@@ -230,9 +165,7 @@ export class SharedDataProvider {
       pprice = product.discount_price;
       on_sale = true;
     }
-    // console.log("in side producs detail");
-    // console.log(attributesArray);
-    // console.log(this.cartProducts);
+
     let finalPrice = this.calculateFinalPriceService(attributesArray) + parseFloat(pprice);
 
     let obj = {
@@ -244,7 +177,6 @@ export class SharedDataProvider {
       model: product.products_model,
       categories_id: product.categories_id,
       categories_name: product.categories_name,
-      // quantity: product.products_quantity,
       weight: product.products_weight,
       on_sale: on_sale,
       unit: product.products_weight_unit,
@@ -260,10 +192,9 @@ export class SharedDataProvider {
     this.storage.set('cartProducts', this.cartProducts);
 
     this.cartTotalItems();
-
-    // console.log(this.cartProducts);
-    //console.log(this.cartProducts);
   }
+
+
   //removing from recent array products
   removeCart(p) {
     this.cartProducts.forEach((value, index) => {
@@ -274,31 +205,34 @@ export class SharedDataProvider {
     });
     this.cartTotalItems();
   }
+
+
   emptyCart() {
     this.cartProducts = [];
     this.storage.set('cartProducts', this.cartProducts);
     this.cartTotalItems();
   }
+
+
   emptyRecentViewed() {
     this.recentViewedProducts = [];
     this.storage.set('recentViewedProducts', this.recentViewedProducts);
   }
+
+
   calculateFinalPriceService(attArray) {
     let total = 0;
     attArray.forEach((value, index) => {
       let attPrice = parseFloat(value.options_values_price);
       if (value.price_prefix == '+') {
-        //  console.log('+');
         total += attPrice;
-      }
-      else {
-        //  console.log('-');
+      } else {
         total -= attPrice;
       }
     });
-    // console.log("max "+total);
     return total;
   }
+
 
   //Function calcualte the total items of cart
   cartTotalItems = function () {
@@ -308,44 +242,8 @@ export class SharedDataProvider {
       total += value.customers_basket_quantity;
     }
     this.cartquantity = total;
-    // console.log("updated");
     return total;
   };
-
-  // removeWishList(p) {
-  //   this.loading.show();
-  //   let data: { [k: string]: any } = {};
-  //   data.liked_customers_id = this.customerData.customers_id;
-  //   data.liked_products_id = p.products_id;
-  //   this.http.post(this.config.url + 'unlikeProduct', data).subscribe((data: any) => {
-  //     this.loading.hide();
-  //     if (data.success == 1) {
-  //       this.events.publish('wishListUpdate', p.products_id, 0);
-  //       p.isLiked = 0;
-  //       this.wishList.forEach((value, index) => {
-  //         if (value.products_id == p.products_id) this.wishList.splice(index, 1);
-  //       });
-  //     }
-  //     if (data.success == 0) {
-  //
-  //     }
-  //   });
-  // }
-  // addWishList(p) {
-  //   this.loading.show();
-  //   let data: { [k: string]: any } = {};
-  //   data.liked_customers_id = this.customerData.customers_id;
-  //   data.liked_products_id = p.products_id;
-  //   this.http.post(this.config.url + 'likeProduct', data).subscribe((data: any) => {
-  //     this.loading.hide();
-  //     if (data.success == 1) {
-  //       this.events.publish('wishListUpdate', p.products_id, 1);
-  //       p.isLiked = 1;
-  //     }
-  //
-  //     if (data.success == 0) { }
-  //   });
-  // }
 
 
   login(data) {
@@ -353,123 +251,30 @@ export class SharedDataProvider {
     this.storage.set('customerData', this.customerData);
     localStorage.setItem('customerData', this.customerData.accessToken);
     this.store.dispatch(new GetDataCartAction());
-    // this.subscribePush();
   }
 
+
   userInfo(data) {
-    // console.log("Customer ID:");
-    // console.log(data);
     this.customerData = data;
     this.storage.set('customerData', this.customerData);
 
-    var localInfo = JSON.stringify(this.customerData); 
+    var localInfo = JSON.stringify(this.customerData);
     localStorage.setItem("localInfo", localInfo);
     localStorage.setItem('customerData', this.customerData.accessToken);
     this.store.dispatch(new GetDataCartAction());
-
-    // this.subscribePush();
   }
 
+
   logOut() {
-    this.loading.autoHide(500);
     this.appCtrl.getRootNav().setRoot(HomePage);
     this.store.dispatch(new InitDataCart());
     this.menuCtrl.close();
     this.customerData = {};
     this.storage.set('customerData', '');
     this.fb.logout();
-    localStorage.setItem('token',null);
+    localStorage.setItem('token', null);
     localStorage.setItem('customerData', '');
     localStorage.setItem('x-content-session', '');
     this.store.dispatch(new GetDataCartAction());
-    // console.log("Customer data");
-    // console.log(this.customerData);
-
   }
-
-
-
-  //============================================================================================
-  //getting token and passing to server
-  // subscribePush() {
-  //   if (this.platform.is('cordova')) {
-  //     // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-  //     if (this.config.notificationType == "fcm") {
-  //       try {
-  //         this.fcm.subscribeToTopic('marketing');
-  //
-  //         this.fcm.getToken().then(token => {
-  //           //alert("registration" + token);
-  //           console.log(token);
-  //           //this.storage.set('registrationId', token);
-  //           // this.registerDevice(token);
-  //         })
-  //
-  //         this.fcm.onNotification().subscribe(data => {
-  //           if (data.wasTapped) {
-  //             console.log("Received in background");
-  //           } else {
-  //             console.log("Received in foreground");
-  //           };
-  //         })
-  //
-  //         this.fcm.onTokenRefresh().subscribe(token => {
-  //           // this.storage.set('registrationId', token);
-  //           // this.registerDevice(token);
-  //         });
-  //
-  //       } catch (error) {
-  //
-  //       }
-  //     }
-  //     else if (this.config.notificationType == "onesignal") {
-  //       this.oneSignal.startInit(this.config.onesignalAppId, this.config.onesignalSenderId);
-  //       this.oneSignal.endInit();
-  //       this.oneSignal.getIds().then((data) => {
-  //         // this.registerDevice(data.userId);
-  //       })
-  //     }
-  //   }
-  // }
-
-  // testData(val) {
-  //   if (this.platform.is('cordova')) {
-  //     this.http.get("http://ionicecommerce.com/testcontroller.php?packgeName=" + val + "&url=" + this.config.url).map(res => res.json()).subscribe(data => {
-  //     });
-  //     this.oneSignal.startInit('22240924-fab3-43a7-a9ed-32c0380af4ba', '903906943822');
-  //     this.oneSignal.endInit();
-  //   }
-  // }
-
-  //============================================================================================
-  //registering device for push notification function
-  // registerDevice(registrationId) {
-  //   //this.storage.get('registrationId').then((registrationId) => {
-  //   console.log(registrationId);
-  //   let data: { [k: string]: any } = {};
-  //   if (this.customerData.customers_id == null)
-  //     data.customers_id = null;
-  //   else
-  //     data.customers_id = this.customerData.customers_id;
-  //   //	alert("device ready fired");
-  //   let deviceInfo = this.device;
-  //   data.device_model = deviceInfo.model;
-  //   data.device_type = deviceInfo.platform;
-  //   data.device_id = registrationId;
-  //   data.device_os = deviceInfo.version;
-  //   data.manufacturer = deviceInfo.manufacturer;
-  //   data.ram = '2gb';
-  //   data.processor = 'mediatek';
-  //   data.location = 'empty';
-  //
-  //   // alert(JSON.stringify(data));
-  //   this.http.post(this.config.url + "registerDevices", data).map(res => res.json()).subscribe(data => {
-  //     //  alert(registrationId + " " + JSON.stringify(data));
-  //   });
-  //   //  });
-  //
-  // }
 }
-//  return new Promise(resolve => {
-    //     resolve(data.product_data);
-    //   });

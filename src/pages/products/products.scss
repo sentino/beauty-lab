@@ -250,11 +250,6 @@ page-products {
         }
 
 
-
-
-
-
-
         .filter{
             border: none;
             background: transparent;
@@ -435,9 +430,7 @@ page-products {
                 border-bottom-color:transparent;
             }
             .selected{
-                
                 border-bottom-color: $black;
-                //background-color:color($colors, accent-color);
             }
         }
     }
