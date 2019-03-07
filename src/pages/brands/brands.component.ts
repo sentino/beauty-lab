@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'brands-component',
   template: `
     <section [ngSwitch]="classList">
-      <main style="margin-top: 67px; padding-left: 25px; padding-right: 16px;" *ngSwitchCase="false">
+      <main style="margin-top: 27px; padding-left: 25px; padding-right: 16px;" *ngSwitchCase="false">
         <h6 text-center *ngIf="!result.length">По вашему запросу ничего не найдено</h6>
         <div class="l-filted-list" *ngIf="result.length">
 

@@ -17,7 +17,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
       
       <ion-item>
         <ion-label color="secondary" floating>Мобильный телефон</ion-label>
-        <ion-input [formControl]="form.controls['phone']"></ion-input>
+        <ion-input [formControl]="form.controls['phone']" brmasker [inputValue]="form.get('phone')" [defaultValue]="returnReplace" [brmasker]="{phone:true}"></ion-input>
       </ion-item>
       
       <ion-item *ngIf="_fieldAddress">
@@ -48,6 +48,7 @@ export class AppSectionListItemFour {
   @Input() form;
   @Input() displayNone;
   @Input() fieldAddress;
+  @Input() returnReplace;
 
   @ViewChild('myTextArea') myTextArea: ElementRef;
 

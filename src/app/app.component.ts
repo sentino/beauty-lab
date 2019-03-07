@@ -198,9 +198,9 @@ export class MyApp {
 
   logOut() {
     this.shared.logOut();
-    this.menuCtrl.close();
-    this.appCtrl.getRootNav().setRoot(HomePage);
-    this.store.dispatch(new InitDataCart());
+    // this.menuCtrl.close();
+    // this.appCtrl.getRootNav().setRoot(HomePage);
+    // this.store.dispatch(new InitDataCart());
   }
 
   showHideHomeList() {

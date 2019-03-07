@@ -587,3 +587,18 @@ app-confirm-order-component app-section-list-item-three .list-md:last-child > .i
 .alert-md .alert-radio-label {
   white-space: normal!important;
 }
+
+
+.search-form .item-inner,
+.search-form .item-md.item-input.input-has-focus .item-inner,
+.search-form .input.input-md.ng-touched.ng-dirty.ng-valid,
+.search-form .item-md.item-input.ng-valid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.search-form .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.search-form .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+  border: none !important;
+  box-shadow: none !important;
+
+  ion-input {
+    border: none !important;
+  }
+}

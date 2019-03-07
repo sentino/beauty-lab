@@ -20,15 +20,14 @@
         </button>
       </ion-buttons>
     </ion-navbar>
-    <ion-toolbar class="this-toolbar">
-        <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
-              <ion-item>
-                  <ion-icon name="search"></ion-icon>
-                  <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
-              </ion-item>
-              <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
-        </form>
-    </ion-toolbar>
+
+    <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+          <ion-item style="padding-left: 10px !important;">
+              <ion-icon name="search"></ion-icon>
+              <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+          </ion-item>
+          <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+    </form>
   </ion-header>
 
 <ion-content class="page-product-detail">

@@ -13,6 +13,7 @@ import { HomePage } from '../../pages/home/home';
 import { HttpClient } from '@angular/common/http';
 import { GetDataCartAction, InitDataCart } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { LoginPage } from '../../pages/login/login';
 
 @Injectable()
 export class SharedDataProvider {
@@ -266,7 +267,7 @@ export class SharedDataProvider {
 
 
   logOut() {
-    this.appCtrl.getRootNav().setRoot(HomePage);
+    // this.appCtrl.getRootNav().push(LoginPage);
     this.store.dispatch(new InitDataCart());
     this.menuCtrl.close();
     this.customerData = {};
@@ -275,6 +276,9 @@ export class SharedDataProvider {
     localStorage.setItem('token', null);
     localStorage.setItem('customerData', '');
     localStorage.setItem('x-content-session', '');
-    this.store.dispatch(new GetDataCartAction());
+    // this.appCtrl.getRootNav().setRoot(LoginPage);
+    let nav = this.appCtrl.getActiveNavs();
+    nav[0].setRoot(HomePage);
+    // this.store.dispatch(new GetDataCartAction());
   }
 }

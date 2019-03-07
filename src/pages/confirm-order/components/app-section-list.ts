@@ -42,6 +42,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           *ngSwitchCase="4"
           [form]="form.controls['listItemFour']"
           [fieldAddress]="fieldAddress"
+          [returnReplace]="returnReplace"
           [displayNone]="form.controls['listItemThree'].invalid"
         ></app-section-list-item-four>
       </section>
@@ -62,6 +63,7 @@ export class AppSectionList {
   @Input() payments;
   @Input() innerPayment;
   @Input() fieldAddress;
+  @Input() returnReplace;
 
   @Output() pointResultId: EventEmitter<any> = new EventEmitter();
   @Output() selectedDeliveryPrice: EventEmitter<any> = new EventEmitter();

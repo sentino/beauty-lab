@@ -93,6 +93,7 @@ export function bonusesQuantity(controlOne: AbstractControl, controlTwo: Abstrac
         [fieldAddress]="fieldAddress"
         [warning]="warning$ | async"
         [notify]="notify$ | async"
+        [returnReplace]="returnReplace"
         (selectedLocation)="putSelectedLocation($event)"
         (deliveryId)="putDeliveryData($event)"
         (pointResultId)="putDeliveryData(form.controls['listItemTwo'].get('delivery').value, $event)"
@@ -143,6 +144,13 @@ export class ConfirmOrderContainer implements OnInit{
   private putDelivery = '';
   private putStore = '';
 
+  get returnReplace() {
+    if (this.formFieldsPhone) {
+      return this.formFieldsPhone.slice(1).replace(/\D/gi, '');
+    }
+    return ''
+  }
+
   constructor (
     private payPayler: PayPaylerService,
     private fb: FormBuilder,
@@ -171,7 +179,7 @@ export class ConfirmOrderContainer implements OnInit{
         'name': ['', [Validators.required, Validators.maxLength(150)]],
         'email': ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})')]],
         // 'phone': ['', [Validators.required, Validators.pattern(/^((\+7|7|8)+([0-9]){10})$/gm)]],
-        'phone': ['', [Validators.required]],
+        'phone': ['', [Validators.required, Validators.minLength(18)]],
         'address': [''],
         'comment': ['', [Validators.maxLength(600)]]
       })
@@ -234,7 +242,7 @@ export class ConfirmOrderContainer implements OnInit{
 
       this.form.controls['listItemFour'].get('name').setValue(this.formFieldsName);
       this.form.controls['listItemFour'].get('email').setValue(this.formFieldsEmail);
-      this.form.controls['listItemFour'].get('phone').setValue(this.formFieldsPhone);
+      // this.form.controls['listItemFour'].get('phone').setValue(this.formFieldsPhone);
 
       this.form.controls['listItemFour'].get('name').updateValueAndValidity();
       this.form.controls['listItemFour'].get('email').updateValueAndValidity();

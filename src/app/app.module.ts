@@ -52,7 +52,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { BrMaskerModule } from 'brmasker-ionic-3';
+import { BrMaskerModule } from '../../br-masker-ionic-3/src';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { BeautyCatalogPage } from '../pages/beauty-catalog/beauty-catalog';

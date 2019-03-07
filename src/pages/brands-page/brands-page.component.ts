@@ -5,7 +5,7 @@ import { InfiniteScroll } from 'ionic-angular';
 @Component({
   selector: 'brands-page-component',
   template: `
-    <main  style="margin-top: 67px; padding-left: 16px; padding-right: 16px;">
+    <main  style="margin-top: 27px; padding-left: 16px; padding-right: 16px;">
       <div class="l-goods l-goods--space" style="display: flex; flex-flow: wrap;">
         <app-product-cart style="margin: auto"
           *ngFor="let item of _products"

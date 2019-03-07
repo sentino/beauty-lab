@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar [style.boxShadow]="SearchList ? 'none' : ''">
+  <ion-navbar style="box-shadow: none">
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -27,20 +27,21 @@
         </ion-item>
         <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
   </form>
-</ion-header>
-<ion-content class="page-my-account" padding>
-<ion-segment class="segment-body" [(ngModel)]="pet">
-  <ion-segment-button value="kittens">
-        Клиент
-  </ion-segment-button>
-  <ion-segment-button value="ducklings">
-      Доставка
-  </ion-segment-button>
-  <ion-segment-button value="puppies">
-    Пароль
-  </ion-segment-button>
-</ion-segment>
 
+  <ion-segment class="segment-body" [(ngModel)]="pet">
+    <ion-segment-button value="kittens">
+      Клиент
+    </ion-segment-button>
+    <ion-segment-button value="ducklings">
+      Доставка
+    </ion-segment-button>
+    <ion-segment-button value="puppies">
+      Пароль
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="page-my-account" padding>
 <div [ngSwitch]="pet">
   <ion-list *ngSwitchCase="'puppies'">
     
@@ -127,8 +128,8 @@
           <ion-list>
               <div class="container my-5">
                   <div class="row">
-                      <div class="form-group">
-                          <input id="tel" name="tel" [brmasker]="{mask:'(999) 999 99 99', len:15}" [(ngModel)]="myAccountData.phone" type="text" class="form-control">
+                      <div class="form-group" [formGroup]="form">
+                          <input id="tel" name="tel" [formControl]="form.controls['phone']" brmasker [inputValue]="form.get('phone')" [defaultValue]="returnReplace" [brmasker]="{phone:true}" type="text" class="form-control">
                           <label class="form-control-placeholder" for="tel" >+7(000)-0000-000</label>
                       </div>
 

@@ -59,16 +59,16 @@ import { animate, style, transition, trigger } from '@angular/animations';
         </ion-item>
         <ion-icon class="close-icon" name="close" (click)="searchList = !searchList"></ion-icon>
       </form>
-    </ion-header>
 
-    <div class="c-filter" style="top: 56px;">
-      <div class="l-filter__row" style="padding-left: 25px;">
-        <div class="l-filter__buttons">
-          <button class="c-filter__button" *ngIf="brands && brands.length" (click)="openCategoryBy()">{{name}}</button>
-          <button class="c-filter__button" *ngIf="gamme && gamme.length" (click)="openGammeBy()">{{nameGamme}}</button>
+      <div class="c-filter">
+        <div class="l-filter__row" style="padding-left: 25px;">
+          <div class="l-filter__buttons">
+            <button class="c-filter__button" *ngIf="brands && brands.length" (click)="openCategoryBy()">{{name}}</button>
+            <button class="c-filter__button" *ngIf="gamme && gamme.length" (click)="openGammeBy()">{{nameGamme}}</button>
+          </div>
         </div>
       </div>
-    </div>
+    </ion-header>
 
     <ion-content>
       <brands-page-component

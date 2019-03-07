@@ -24,7 +24,7 @@ import { Unsubscriber } from '../unsubscriber';
         <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info">
-          <h2 class="c-good__title">
+          <h2 class="c-good__title" (click)="showProductDetail(cart.ID)">
             {{(cart.NAME.length > 65) ? (cart.NAME | slice:0:65)+'...' : (cart.NAME)}}
           </h2>
           <div class="l-good__row l-good__row--little-margin">
@@ -56,7 +56,7 @@ import { Unsubscriber } from '../unsubscriber';
         <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info">
-          <h2 class="c-good__title c-good__title--promo">
+          <h2 class="c-good__title c-good__title--promo" (click)="showProductDetail(cart.ID)">
             {{(cart.NAME.length > 50) ? (cart.NAME | slice:0:50)+'...' : (cart.NAME)}}
           </h2>
           <div class="l-good__row l-good__row--promo">
@@ -88,7 +88,7 @@ import { Unsubscriber } from '../unsubscriber';
         <img *ngIf="cart.IMAGE" [src]="cart.IMAGE" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)" style="width: 127.08px;">
         <img *ngIf="!cart.IMAGE" src="../../assets/images/завантаження.jpg" alt="pills" class="c-good__image" (click)="showProductDetail(cart.ID)">
         <div class="l-good__info l-good__info--horizontal" style="width: 100%;">
-          <h2 class="c-good__title c-good__title--horizontal" style="width: 100%;">
+          <h2 class="c-good__title c-good__title--horizontal" style="width: 100%;" (click)="showProductDetail(cart.ID)">
             {{(cart.NAME.length > 65) ? (cart.NAME | slice:0:65)+'...' : (cart.NAME)}}
           </h2>
           <div class="l-good__row l-good__row--horizontal">

@@ -53,6 +53,7 @@ export class MyAccountPage {
   public zip = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 
   userForm: FormGroup;
+  form: FormGroup;
 
   myAccountData = {
     email: '',                    // type string / required - email
@@ -103,13 +104,28 @@ export class MyAccountPage {
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),                 // type string / required - пароль
       passwordConfirmed: new FormControl(null, [Validators.required]),
     }, validatorFnControlsMatch('password', 'passwordConfirmed'));
+
+    this.form = new FormGroup({
+      phone: new FormControl('', [Validators.minLength(18)]),
+    })
   }
+
+  get returnReplace() {
+    if (this.ProfileData) {
+      return this.ProfileData.result.phone.slice(1).replace(/\D/gi, '');
+    }
+    return ''
+  }
+
+  // test(event) {
+  //   console.log(event);
+  //   this.form.controls['phone'].patchValue(event);
+  // }
 
   getProfile() {
     this.http.get(this.config.url + 'user/profile/').subscribe(
       (res: any) => {
         this.ProfileData = res;
-
         this.myAccountData.email = this.ProfileData.result.email;
         this.myAccountData.password = this.userForm.controls['password'].value;
         this.myAccountData.passwordConfirmed = this.userForm.controls['passwordConfirmed'].value;
@@ -117,7 +133,10 @@ export class MyAccountPage {
         this.myAccountData.lastName = this.ProfileData.result.lastName;
         this.myAccountData.secondName = this.ProfileData.result.secondName;
         this.myAccountData.birthday = this.ProfileData.result.birthday;
-        this.myAccountData.phone = this.ProfileData.result.phone;
+
+        this.form.controls['phone'].setValue(this.ProfileData.result.phone);
+        this.form.controls['phone'].updateValueAndValidity({onlySelf:true, emitEvent:false});
+
         this.myAccountData.addressZip = this.ProfileData.result.addressZip;
         this.myAccountData.addressCity = this.ProfileData.result.addressCity;
         this.myAccountData.addressStreet = this.ProfileData.result.addressStreet;
@@ -141,8 +160,9 @@ export class MyAccountPage {
   }
 
   updateProfile() {
-    if(this.myAccountData.password === this.myAccountData.passwordConfirmed){
+    this.myAccountData.phone = this.form.controls['phone'].value;
 
+    if(this.myAccountData.password === this.myAccountData.passwordConfirmed){
 
     this.http.put(this.config.url + 'user/profile/', this.myAccountData).subscribe(
       (res: any) => {

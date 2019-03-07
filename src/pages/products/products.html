@@ -29,7 +29,7 @@
           <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
     </form>
 
-    <div class="sort-filter">
+    <div class="sort-filter" style="height: 41px;">
       <p (click)="background_show = 'cat'" [ngClass]="{ 'bg-active': background_show == 'cat'}" class="filter category" (click)="openCategoryBy()">
           <span class="filter">Категории: </span> 
           <ion-icon class="arrow" name="ios-arrow-down"></ion-icon>

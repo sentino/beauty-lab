@@ -5,7 +5,7 @@
         <ion-icon name="arrow-round-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Регистрация</ion-title>
+    <ion-title style="margin-top: 2px;">Регистрация</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -67,18 +67,18 @@
             <p class="little-text">* поля обязательные для заполнения</p>
           </div>
 
-          <div ion-item class="item-header">
+          <div ion-item class="item-header" style="margin: 0;" (click)="showHideLoginList()">
             <ion-segment-button class="reg-header">
               Информация для доставки
             </ion-segment-button>
-            <ion-icon item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
+            <ion-icon item-right [name]="categoriesLoginIcon"></ion-icon>
           </div>
 
           <div [ngClass]="{'shower':ProfileList==true,'hider':ProfileList==false}" [@animate]>
 
             <ion-item>
               <ion-label color="secondary" floating>Мобильный телефон</ion-label>
-              <ion-input formControlName="phone" type="text" [brmasker]="{mask:'(999) 999 99 99', len:15}"></ion-input>
+              <ion-input formControlName="phone" type="text" brmasker [inputValue]="registerForm.get('phone')" [brmasker]="{phone:true}"></ion-input>
             </ion-item>
 
             <ion-item>

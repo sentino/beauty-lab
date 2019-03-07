@@ -32,7 +32,8 @@ import { CartService } from '../../services/cart.service';
                             padding: 0;
                             background-color: white;">
               <ion-label color="secondary" floating>Мобильный телефон</ion-label>
-              <ion-input [formControl]="this.form.controls['phone']"></ion-input>
+              <ion-input [brmasker]="{phone:true}" 
+                         [formControl]="this.form.controls['phone']"></ion-input>
             </ion-item>
           </ion-list>
 
@@ -66,7 +67,7 @@ export class ModalOneClickOrder implements OnInit {
       ]),
       'phone': new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^((\+7|7|8)+([0-9]){10})$/gm)
+        Validators.minLength(18)
       ])
     })
   }

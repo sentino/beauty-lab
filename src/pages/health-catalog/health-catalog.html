@@ -1,6 +1,8 @@
-<ion-header>
+<ion-header style="background: white;
+    -webkit-box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);">
 
-    <ion-navbar [style.boxShadow]="SearchList ? 'none' : ''">
+    <ion-navbar style="box-shadow: none">
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -28,7 +30,7 @@
         <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
   </form>
 
-    <p class="filter category" (click)="openCategoryBy()">
+    <p class="filter category" (click)="openCategoryBy()" style="margin-top: 15px;">
         <span class="filter">Выбрать категорию:</span> <ion-icon class="arrow" name="ios-arrow-down"></ion-icon>
     </p>
   </ion-header>

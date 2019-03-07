@@ -21,6 +21,7 @@ import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from '@ngrx/store';
 import { GetDataCartAction } from '../../app/store';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -138,7 +139,6 @@ export class LoginPage {
 
 
   login() {
-
     this.postAuth(this.form.value);
   }
 

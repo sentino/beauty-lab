@@ -71,7 +71,7 @@ export class SignUpPage {
       lastName: new FormControl(null, [Validators.required]),                 // type string / required - фамилия
       secondName: new FormControl(null),               // type string / option - отчество
       birthday: new FormControl(null),                 // type string / option - день рождения
-      phone: new FormControl(null, [Validators.pattern(/^((\+7|7|8)+([0-9]){10})$/gm)]),                    // type string / option - телефон
+      phone: new FormControl(null, [Validators.minLength(18)]),                    // type string / option - телефон
       addressZip: new FormControl(null),               // type string / option - индекс
       addressCity: new FormControl(null),              // type string / option - город
       addressStreet: new FormControl(null),             // type string / option - улица, адрес

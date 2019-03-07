@@ -81,6 +81,7 @@ import { FormGroup } from '@angular/forms';
           [innerPayment]="innerPayment"
           [city]="city"
           [fieldAddress]="fieldAddress"
+          [returnReplace]="returnReplace"
           (pointResultId)="_pointResultId($event)"
           (selectedDeliveryPrice)="selectedDeliveryPrice($event)"
         ></app-section-list>
@@ -123,6 +124,7 @@ export class ConfirmOrderComponent implements OnInit {
   @Input() fieldAddress;
   @Input('warning') _warning;
   @Input('notify') _notify;
+  @Input() returnReplace;
 
   @Output() selectedLocation: EventEmitter<any> = new EventEmitter<any>();
   @Output() deliveryId: EventEmitter<any> = new EventEmitter<any>();
