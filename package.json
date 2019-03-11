@@ -30,6 +30,7 @@
     "@angular/platform-browser": "6.1.10",
     "@angular/platform-browser-dynamic": "6.1.10",
     "@ionic-native/facebook": "^5.0.0",
+    "@ionic-native/google-analytics": "^5.2.0",
     "@ionic-native/in-app-browser": "^5.1.0",
     "@ionic-native/themeable-browser": "^5.0.0",
     "@material/floating-label": "^0.43.0",
@@ -49,6 +50,7 @@
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^4.1.0",
+    "cordova-plugin-google-analytics": "1.8.6",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-network-information": "^1.3.4",
@@ -162,7 +164,10 @@
       "cordova-plugin-ulogin": {},
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-themeablebrowser": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-google-analytics": {
+        "GMS_VERSION": "11.0.1"
+      }
     },
     "platforms": [
       "browser",

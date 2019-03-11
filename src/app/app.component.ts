@@ -35,6 +35,7 @@ import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articl
 import { ConsultationContainer } from '../pages/consultation/consultation-container';
 import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 import { Categories3Page } from '../pages/categories3/categories3';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 
 @Component({
@@ -94,9 +95,18 @@ export class MyApp {
     private appVersion: AppVersion,
     public iab: InAppBrowser,
     private socialSharing: SocialSharing,
-    private store: Store<any>
-
+    private store: Store<any>,
+    private ga: GoogleAnalytics
   ) {
+    this.ga.startTrackerWithId('UA-136019689-1')
+      .then(() => {
+        console.log('Google analytics is ready now');
+        this.ga.trackView('test');
+        // Tracker is ready
+        // You can now track pages or set additional information such as AppVersion or UserId
+      })
+      .catch(e => console.log('Error starting GoogleAnalytics', e));
+
     //open intro page on start
     storage.get('introPage').then((val) => {
       if (val == undefined) {

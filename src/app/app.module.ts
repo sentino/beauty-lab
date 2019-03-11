@@ -106,6 +106,7 @@ import { SpecialistPageComponent } from '../pages/consultation/specialist-page/s
 import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 import { SearchService } from '../services/search.service';
 import { MatSelectModule } from '@angular/material';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 const SHARED_MODULE = [
   AppProductCartComponent,
@@ -237,6 +238,7 @@ const PIPES = [
   ],
   entryComponents: [...PAGES],
   providers: [
+    GoogleAnalytics,
     SearchService,
     InAppBrowser,
     PayPaylerService,
