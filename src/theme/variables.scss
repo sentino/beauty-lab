@@ -1,3 +1,4 @@
+@import "../assets/styles/prebuilt-themes/deeppurple-amber";
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
@@ -40,22 +41,22 @@ $content-padding: 10px;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary-dark:   #DE00E1,
-  primary:        rgba(239, 92, 239, 1),
-  primary-light:  #DE00E1,
+primary-dark:   #DE00E1,
+primary:        rgba(239, 92, 239, 1),
+primary-light:  #DE00E1,
 
-  secondary-dark: #46D8E5,
-  secondary:      rgba(72, 167, 240, 1),
-  secondary-light:#46D8E5,
+secondary-dark: #46D8E5,
+secondary:      rgba(72, 167, 240, 1),
+secondary-light:#46D8E5,
 
-  accent-color:   #dddddd,
+accent-color:   #dddddd,
 
-  google:         #dd4b39,
-  facebook:       #3b5998,
+google:         #dd4b39,
+facebook:       #3b5998,
 
-  danger:         #f53d3d,
-  light:          #f4f4f4,
-  dark:           #222
+danger:         #f53d3d,
+light:          #f4f4f4,
+dark:           #222
 );
 
 $background-color:darken(color($colors, light), 1%);
@@ -148,3 +149,4 @@ $item-wp-padding-bottom: 10px;
 @import "../assets/styles/modal";
 @import "../assets/styles/good-card--favourite";
 @import "../assets/styles/body";
+

@@ -38,3 +38,12 @@ brands-component {
     justify-content: space-around;
   }
 }
+
+brands-page-component {
+  main {
+    @media screen and (max-width: 350px) {
+      padding-left: 4px !important;
+      padding-right: 4px !important;
+    }
+  }
+}

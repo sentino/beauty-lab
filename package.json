@@ -18,13 +18,15 @@
     "ionic:serve": "ionic-app-scripts serve --prod --aot --lab"
   },
   "dependencies": {
-    "@angular/animations": "6.1.10",
+    "@angular/animations": "^6.1.10",
+    "@angular/cdk": "^7.3.3",
     "@angular/common": "6.1.10",
     "@angular/compiler": "6.1.10",
     "@angular/compiler-cli": "6.1.10",
     "@angular/core": "6.1.10",
     "@angular/forms": "6.1.10",
     "@angular/http": "6.1.10",
+    "@angular/material": "^7.3.3",
     "@angular/platform-browser": "6.1.10",
     "@angular/platform-browser-dynamic": "6.1.10",
     "@ionic-native/facebook": "^5.0.0",

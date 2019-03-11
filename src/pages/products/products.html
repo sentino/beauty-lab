@@ -66,17 +66,20 @@
             <p>Список доступных фильтров пуст, попробуйте пожалуйста еще раз!</p>
         </div>
 
-        <div class="filter" *ngFor="let filter of all_filters">
-            <h3 class="filter_title">{{filter.name}}:</h3>
-            <ion-item class="filter_select">
-                <ion-label>{{filter.name}}:</ion-label>
-                <ion-select name="redic" [(ngModel)]="filterList[filter.code]" (ngModelChange)="filtered($event)">
-                    <ion-option value="blah">Все</ion-option>
-                    <ion-option value="{{brand.id}}"
-                                *ngFor="let brand of filter.values"
-                                [selected]="test(filter, brand)">{{brand.name}}</ion-option>
-                </ion-select>
-            </ion-item>
+        <div class="filter" *ngFor="let filter of all_filters;">
+          <mat-form-field>
+            <mat-select
+              placeholder="{{filter.name}}"
+              [(ngModel)]="filterList[filter.code]"
+              (ngModelChange)="filtered($event)"
+              [id]="filter.name"
+              [ngModelOptions]="{standalone: true}">
+              <mat-option value="blah">Все</mat-option>
+              <mat-option *ngFor="let brand of filter.values" [value]="brand.id">
+                {{brand.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <ion-footer>

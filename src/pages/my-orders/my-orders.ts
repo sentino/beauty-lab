@@ -63,7 +63,7 @@ import { SearchService } from '../../services/search.service';
     </ion-header>
 
     <div class="scroll-content">
-      <ion-grid class="page-empty" *ngIf="!orders" [@animate]>
+      <ion-grid class="page-empty" *ngIf="!orders || !orders.length" [@animate]>
         <ion-row align-items-center>
           <ion-col col-12>
             <h4 text-center>Ваша история покупок отобразится после первого оплаченного заказа</h4>

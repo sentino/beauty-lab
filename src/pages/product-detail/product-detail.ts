@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -9,11 +9,10 @@ import { Events } from 'ionic-angular';
 import { SearchPage } from '../search/search';
 import { CartContainer } from '../cart/cart-container';
 import { HttpClient } from '@angular/common/http';
-import { CartService } from '../../services/cart.service';
-import { AlertProvider } from '../../services/alert/alert';
 import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { WishListService } from '../../services/wish-list.service';
+import { Unsubscriber } from '../../helpers/unsubscriber';
 
 
 
@@ -47,8 +46,10 @@ import { WishListService } from '../../services/wish-list.service';
     )
   ]
 })
-export class ProductDetailPage implements OnInit {
+export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
+
+  @ViewChild('myTextArea') myTextArea: ElementRef;
 
   modal = false;
 
@@ -132,7 +133,13 @@ export class ProductDetailPage implements OnInit {
     public loading: LoadingProvider,
     private socialSharing: SocialSharing
   ) {
+    super();
     this.product_id = navParams.get('prod_id');
+  }
+
+  ngOnInit() {
+    this.loading.showSpinner();
+    this.getProductDetails();
   }
 
   addProduct() {
@@ -236,6 +243,7 @@ export class ProductDetailPage implements OnInit {
     });
   }
 
+
   share() {
     this.socialSharing.share(
       this.product_name,
@@ -248,31 +256,34 @@ export class ProductDetailPage implements OnInit {
       });
   }
 
-
   clickWishList() {
-    if (localStorage.getItem('customerData')) {
-      this.addWishList();
+    if (localStorage.getItem('customerData') && this.single_product.IN_WISHLIST === 'N') {
+      this.wrapToUnsubscribe(this.wishListService.putItem(this.product_id)).subscribe(res => {
+        this.single_product.IN_WISHLIST = 'Y';
+      });
+    } else {
+      this.wrapToUnsubscribe(this.wishListService.delItem(this.product_id)).subscribe(res => {
+        this.single_product.IN_WISHLIST = 'N';
+      });
     }
-  }
-
-  addWishList() {
-    this.wishListService.putItem(this.product_id);
-  }
-
-  removeWishList() {
-    this.wishListService.delItem(this.product_id)
   }
 
   openCart() {
     this.navCtrl.push(CartContainer);
   }
 
-  ngOnInit() {
-    this.loading.showSpinner();
-    this.getProductDetails();
-  }
-
   openModal() {
     this.modal = !this.modal;
+  }
+
+  resize() {
+    let element = this.myTextArea['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
+    let scrollHeight = element.scrollHeight;
+    element.style.height = scrollHeight + 'px';
+    this.myTextArea['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 }

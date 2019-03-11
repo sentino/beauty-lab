@@ -35,15 +35,22 @@
   <div class="product_image">
       <img class="image" src="{{product_image}}">
 
-      <div class="labels-block">
-          <img class="badge-label hit-label" *ngIf="props_list_hit == 'Y'"  src="./assets/labels/badge_hit.png"/>
-          <img class="badge-label min-label" *ngIf="props_list_min == 'Y'" src="./assets/labels/badge_min.png"/>
-          <img class="badge-label new-label" *ngIf="props_list_new  == 'Y'" src="./assets/labels/badge_new.png"/>
-          <span class="discount-label">
-              <img class="badge-label disc-label" *ngIf="props_list_discount != null" src="./assets/labels/badge_discount.png"/>
-              <span class="discount_number" *ngIf="props_list_discount != null">Скидка<br>{{props_list_discount}}%</span>
-          </span>
-      </div>
+      <!--<div class="labels-block">-->
+          <!--<img class="badge-label hit-label" *ngIf="props_list_hit == 'Y'"  src="./assets/labels/badge_hit.png"/>-->
+          <!--<img class="badge-label min-label" *ngIf="props_list_min == 'Y'" src="./assets/labels/badge_min.png"/>-->
+          <!--<img class="badge-label new-label" *ngIf="props_list_new  == 'Y'" src="./assets/labels/badge_new.png"/>-->
+          <!--<span class="discount-label">-->
+              <!--<img class="badge-label disc-label" *ngIf="props_list_discount != null" src="./assets/labels/badge_discount.png"/>-->
+              <!--<span class="discount_number" *ngIf="props_list_discount != null">Скидка<br>{{props_list_discount}}%</span>-->
+          <!--</span>-->
+      <!--</div>-->
+
+    <div class="c-good--box" style="z-index: 9; position: absolute; top: 24px;">
+      <div class="c-good__label c-good__label--hit" *ngIf="props_list_hit && props_list_hit === 'Y'">Супер ХИТ</div>
+      <div class="c-good__label c-good__label--new" *ngIf="props_list_new && props_list_new === 'Y'">NEW</div>
+      <div class="c-good__label c-good__label--min-price" *ngIf="props_list_min && props_list_min === 'Y'">MIN ЦЕНА</div>
+    </div>
+    <div class="c-good__label c-good__label--discount" style="z-index: 9;" *ngIf="props_list_discount">Скидка {{props_list_discount}}%</div>
   </div>
 
 
@@ -64,26 +71,30 @@
       
       <span class="price-row">
         <span class="price-text">Цена</span>
-          <span class="all-prices">
-            <span class="card-price-normal-through discount_price" *ngIf="product_price > product_discount">{{product_price|curency}}</span>
-            <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price">{{product_price|curency}}</span>
-            <span class="card-price-normal" *ngIf="product_price != product_discount">{{product_discount|curency}}</span> 
-          </span>
-          <span class="product-outstock">{{product_avail}}</span>
+        <span class="all-prices">
+          <span class="card-price-normal-through discount_price" *ngIf="product_price > product_discount">{{product_price|curency}}</span>
+          <span class="card-price-normal price-single" *ngIf="product_price == product_discount no-discount-price">{{product_price|curency}}</span>
+          <span style="color: #EF5CEF" class="card-price-normal" *ngIf="product_price != product_discount">{{product_discount|curency}}</span>
         </span>
+        <span class="product-outstock">{{product_avail}}</span>
+      </span>
 
 
       <div class="flex-block rating-like-part">
-            <div class="rating-part" >
-                <span *ngIf="no_rating !=true" class="rating_number" >{{product_rating}}</span>
-                <rating *ngIf="no_rating !=true" name="rating" readOnly="true" [(ngModel)]="product_rating" ></rating>
-                <span *ngIf="no_rating !=true" class="reviews_count"><b> {{reviews_count}} отзыва</b></span>
-            </div>
-      
-            <div class="etc-buttons">
-                <ion-icon name="share" (click)="share()"></ion-icon>
-                <div class="c-good__favorite" (click)="clickWishList()"></div>
-            </div>
+        <div class="rating-part" >
+            <span *ngIf="no_rating !=true" class="rating_number" >{{product_rating}}</span>
+            <rating name="rating" readOnly="true" [(ngModel)]="product_rating" ></rating>
+            <span *ngIf="no_rating !=true" class="reviews_count"><b> {{reviews_count}} отзыва</b></span>
+        </div>
+
+        <div class="etc-buttons">
+          <ion-icon name="share" (click)="share()"></ion-icon>
+          <span
+            [ngClass]="single_product && single_product.IN_WISHLIST === 'Y' ? 'c-good__favorite c-good__favorite--selected' : 'c-good__favorite'"
+            (click)="clickWishList()"
+            style="margin-left: 21px"
+          ></span>
+        </div>
       </div>
 
       <div class="flex-block buy_btns-part">
@@ -126,6 +137,9 @@
 
               <ion-list *ngSwitchCase="'puppies'">
                   <div class="reviews_list">
+                    <div class="single-review" *ngIf="!reviews_count">
+                      <h6 text-center>У этого товара еще нет отзывов</h6>
+                    </div>
                     <div class="single-review" *ngFor="let c of product_reviews">
                         <p class="reviews_name">{{c.NAME}} </p>
                         <p class="reviews_data">{{c.DATE}}</p>
@@ -140,10 +154,12 @@
 
 
                 <div class="properties-single" *ngIf="can_add == 'Y'">
-                    <p class="prop-name">Оставить отзыв</p>
+                    <p class="prop-name" style="margin-bottom: 0;">Оставить отзыв</p>
                     <form action="" #loginForm="ngForm" class="form review_form" (ngSubmit)="newReview()">
+                      <ion-list>
                         <ion-item>
-                            <ion-input [(ngModel)]="RevData.NAME" name="name" type="text" placeholder="Имя*"></ion-input>
+                          <ion-label color="secondary" floating>Имя*</ion-label>
+                          <ion-input [(ngModel)]="RevData.NAME" name="name" type="text"></ion-input>
                         </ion-item>
 
                         <ion-item>
@@ -168,8 +184,20 @@
                         </ion-item>
 
                         <ion-item>
-                            <ion-textarea placeholder="Отзыв*" name="review" [(ngModel)]="RevData.COMMENT" type="text" value=""></ion-textarea>
-                          </ion-item>
+                          <ion-label color="secondary" floating>Отзыв*</ion-label>
+                          <ion-textarea
+                            name="review"
+                            [(ngModel)]="RevData.COMMENT"
+                            rows="1"
+                            style=" border: 0;
+                                    border-radius: 0;
+                                    background: transparent;"
+                            #myTextArea
+                            id="myTextArea"
+                            (keyup)="resize()"
+                          ></ion-textarea>
+                        </ion-item>
+                      </ion-list>
 
                           <div class="rating-block">
                             <span>Цена/качество:</span>  <rating name="rating" [(ngModel)]="RevData.RATING1" ></rating>

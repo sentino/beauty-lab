@@ -107,6 +107,7 @@ cart-container {
   }
 
   .c-good {
+    margin: auto;
     margin-bottom: 22px;
     width: 328px;
     height: 109px;
@@ -116,6 +117,10 @@ cart-container {
     display: flex;
     justify-content: flex-start;
     position: relative;
+
+    @media screen and (max-width: 350px) {
+      width: 100%;
+    }
 
     &--gift {
       margin-bottom: 12px;
@@ -183,6 +188,7 @@ cart-container {
       font-size: 10px;
       font-weight: 500;
       color: $primaryTextColor;
+      height: 48px;
     }
 
     &__price {

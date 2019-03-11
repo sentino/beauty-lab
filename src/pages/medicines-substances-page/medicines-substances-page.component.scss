@@ -1,4 +1,11 @@
 medicines-substances-page-container {
+  main {
+    @media screen and (max-width: 350px) {
+      padding-left: 4px !important;
+      padding-right: 4px !important;
+    }
+  }
+
   .c-section {
     margin: 0 0 16px;
 
@@ -204,7 +211,7 @@ medicines-substances-page-container {
     box-shadow: 0 6px 6px 0 lighten($color: $primaryTextColor, $amount: 84%);
 
     @media screen and (max-width: 350px) {
-      margin-right: 5px;
+      width: 150px;
     }
 
     &--promo {

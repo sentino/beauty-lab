@@ -105,6 +105,7 @@ import { SpecialistPageContainer } from '../pages/consultation/specialist-page/s
 import { SpecialistPageComponent } from '../pages/consultation/specialist-page/specialist-page.component';
 import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 import { SearchService } from '../services/search.service';
+import { MatSelectModule } from '@angular/material';
 
 const SHARED_MODULE = [
   AppProductCartComponent,
@@ -213,6 +214,7 @@ const PIPES = [
     IonicModule.forRoot(MyApp,{
       backButtonText: '',
       iconMode: 'md',
+      mode:'md'
     }),
     StoreModule.forRoot({main: reducer}),
     EffectsModule.forRoot([MainEffects]),
@@ -226,6 +228,7 @@ const PIPES = [
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
     LazyLoadImageModule,
+    MatSelectModule
   ],
   declarations: [
     HrefDirective,

@@ -34,6 +34,7 @@ import { SubstancesContainer } from '../pages/substances/substances.container';
 import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articles-promotions-container';
 import { ConsultationContainer } from '../pages/consultation/consultation-container';
 import { InfoPageComponent } from '../pages/contact-page/info-page.component';
+import { Categories3Page } from '../pages/categories3/categories3';
 
 
 @Component({
@@ -141,6 +142,7 @@ export class MyApp {
     if (page == 'home') this.openHomePage();
     else if (page == 'home1') this.nav.setRoot(HomePage);
     else if (page == 'products') this.nav.setRoot(ProductsPage);
+    else if (page == 'categories3') this.nav.setRoot(Categories3Page);
     else if (page == 'myWishList') this.nav.setRoot(WishListPage);
     else if (page == 'myAccount') this.nav.setRoot(MyAccountPage);
     else if (page == 'myOrders') this.nav.setRoot(MyOrdersPage);

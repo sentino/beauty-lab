@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -140,7 +140,8 @@ export class ProductsPage {
     public shared: SharedDataProvider,
     public loading: LoadingProvider,
     public http: HttpClient,
-    public actionSheet: ActionSheetController
+    public actionSheet: ActionSheetController,
+    private _elementRef: ElementRef
   ) {
     this.activeButton = 1;
     this.search.search_string = null;
@@ -154,26 +155,6 @@ export class ProductsPage {
     if (this.navParams.get('id') != undefined) this.selectedTab = this.categoryId = this.navParams.get('id');
     if (this.navParams.get('name') != undefined) this.categoryName = this.navParams.get('name');
     if (this.navParams.get('sortOrder') != undefined) this.sortOrder = this.navParams.get('sortOrder');
-  }
-
-  test(filter, brand) {
-    if (this.filterList) {
-      if (filter.code == "brand") {
-        return brand.id == this.filterList.brand;
-      } else if (filter.code == "gamme") {
-        return brand.id == this.filterList.gamme;
-      } else if (filter.code == "deystvie") {
-        return brand.id == this.filterList.deystvie;
-      } else if (filter.code == "mezh_nep_nazvanie") {
-        return brand.id == this.filterList.mezh_nep_nazvanie;
-      } else if (filter.code == "tip_volos") {
-        return brand.id == this.filterList.tip_volos;
-      } else if (filter.code == "tip_kozhi") {
-        return brand.id == this.filterList.tip_kozhi;
-      } else if (filter.code == "form_vypusk") {
-        return brand.id == this.filterList.form_vypusk;
-      }
-    }
   }
 
   //============================================================================================
@@ -241,6 +222,8 @@ export class ProductsPage {
       this.Sort = false;
 
       this.sortListIcon = 'ios-arrow-down';
+
+      this.setSelectText();
     }
     else {
       this.Filter = false;
@@ -250,7 +233,7 @@ export class ProductsPage {
   }
 
   filtered(newModel){
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id, {params: this.params()}).subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '/?count=50', {params: this.params()}).subscribe((data: any) => {
         this.all_products = data.result.products;
         this.all_filters = data.result.filters;
         this.cat_id;
@@ -273,10 +256,51 @@ export class ProductsPage {
         else{
           this.empty_filter = false;
         }
+
+        this.setSelectText();
       },
       err => {
         var er_status = err.status;
       });
+  }
+
+
+  setSelectText() {
+    setTimeout(() => {
+      let select: any[] = this._elementRef.nativeElement.querySelectorAll('ion-select');
+
+      for (let i = 0; i < select.length; i++) {
+
+          if (select[i].id === 'Бренд' && this.filterList.brand.trim().length && this.filterList.brand !== 'blah') {
+            select[i].innerText = this.searchName('brand', this.filterList.brand);
+          } else if (select[i].id === 'Гамма' && this.filterList.gamme.trim().length && this.filterList.gamme !== 'blah') {
+            select[i].innerText = this.searchName('gamme', this.filterList.gamme);
+          } else if (select[i].id === 'Действие' && this.filterList.deystvie.trim().length && this.filterList.deystvie !== 'blah') {
+            select[i].innerText = this.searchName('deystvie', this.filterList.deystvie);
+          } else if (select[i].id === 'Международное непатентованное название' && this.filterList.mezh_nep_nazvanie.trim().length && this.filterList.mezh_nep_nazvanie !== 'blah') {
+            select[i].innerText = this.searchName('mezh_nep_nazvanie', this.filterList.mezh_nep_nazvanie);
+          } else if (select[i].id === 'Тип кожи' && this.filterList.tip_kozhi.trim().length && this.filterList.tip_kozhi !== 'blah') {
+            select[i].innerText = this.searchName('tip_kozhi', this.filterList.tip_kozhi);
+          } else if (select[i].id === 'Форма выпуска' && this.filterList.form_vypusk.trim().length && this.filterList.form_vypusk !== 'blah') {
+            select[i].innerText = this.searchName('form_vypusk', this.filterList.form_vypusk);
+          } else if (select[i].id === 'Тип волос' && this.filterList.tip_volos.trim().length && this.filterList.tip_volos !== 'blah') {
+            select[i].innerText = this.searchName('tip_volos', this.filterList.tip_volos);
+          }
+      }
+
+    }, 0);
+  }
+
+  searchName(code, id) {
+    for (let i = 0; i < this.all_filters.length; i++) {
+      if (this.all_filters[i].code === code) {
+        for (let x = 0; x < this.all_filters[i].values.length; x++) {
+          if (this.all_filters[i].values[x].id === id) {
+            return this.all_filters[i].values[x].name
+          }
+        }
+      }
+    }
   }
 
   showHideSearchList() {
@@ -288,7 +312,17 @@ export class ProductsPage {
   }
 
   getProducts() {
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id ).subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '/?count=50' ).subscribe((data: any) => {
+      this.filterList = {
+        "brand": '',
+        "gamme":'',
+        "deystvie":'',
+        "mezh_nep_nazvanie":'',
+        "tip_kozhi":'',
+        "form_vypusk":'',
+        "tip_volos":''
+      };
+
       this.all_products = data.result.products;
       this.navigation = data.result.navigation;
       this.all_filters = data.result.filters;
@@ -312,6 +346,7 @@ export class ProductsPage {
         this.pages[i] = ({counter : i+1});
       }
 
+      this.setSelectText();
     },
     err => {
       var er_status = err.status;
@@ -345,6 +380,8 @@ export class ProductsPage {
       for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
         this.pages[i] = ({counter : i+1});
       }
+
+      this.setSelectText();
     },
     err => {
       var er_status = err.status;
@@ -383,7 +420,7 @@ export class ProductsPage {
       });
     } else {
       this.helpMenuOpen = 'in';
-      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page, {params: this.params()}).subscribe((data: any) => {
+      this.http.get(this.config.url + 'catalog/section/' + this.cat_id +'/?page='+ next_page + '&count=50', {params: this.params()}).subscribe((data: any) => {
         this.all_products = data.result.products;
         this.navigation = data.result.navigation;
 
@@ -533,7 +570,7 @@ export class ProductsPage {
 }
 
   getSortsProducts(sort_path) {
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path).subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path + '&count=50').subscribe((data: any) => {
       this.Sort = false;
       this.all_products = data.result.products;
       this.navigation = data.result.navigation;

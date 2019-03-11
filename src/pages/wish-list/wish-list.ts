@@ -105,7 +105,7 @@ export class WishListPage extends Unsubscriber implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.loading.showSpinner();
     this.wrapToUnsubscribe(this.wishListService.getList()).subscribe(res => {
-      this.productsWishList = res.result.products;
+      if (res.result) this.productsWishList = res.result.products;
       this.loading.hideSpinner();
     });
   }

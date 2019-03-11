@@ -61,7 +61,7 @@ import { Unsubscriber } from '../unsubscriber';
           </h2>
           <div class="l-good__row l-good__row--promo">
             <span class="c-good__price c-good__price--del" style="height: 12.8px">{{ cart.PRICE !== cart.PRICE_DISCOUNT ? cart.PRICE_FORMAT : ''}}</span>
-            <span class="c-good__country" style="height: 12.8px">{{cart.COUNTRY}}</span>
+            <span class="c-good__country" style="height: 12.8px">{{(cart.COUNTRY.length > 9) ? (cart.COUNTRY | slice:0:8)+'...' : (cart.COUNTRY)}}</span>
           </div>
           <div class="l-good__row l-good__row--promo &--little-margin">
             <span class="c-good__price c-good__price--new">{{cart.PRICE_DISCOUNT_FORMAT}}</span>
