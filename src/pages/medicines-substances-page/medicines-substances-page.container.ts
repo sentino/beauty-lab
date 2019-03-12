@@ -10,6 +10,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -119,6 +120,7 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
     private substancesService: SubstancesService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
   }
@@ -139,6 +141,7 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
 
   initializeData(id, type) {
     if (type === 'medicines') {
+      this.ga.trackPage('medicinePage');
       this.wrapToUnsubscribe(this.medicinesService.getMedicinesById(id)).subscribe( res => {
         this.name = res.result.name;
         this.desc = res.result.desc;
@@ -147,6 +150,7 @@ export class MedicinesSubstancesPageContainer extends Unsubscriber implements On
         this.loading.hideSpinner();
       })
     } else if (type === 'substances') {
+      this.ga.trackPage('substancePage');
       this.wrapToUnsubscribe(this.substancesService.getSubstancesById(id)).subscribe(res => {
         this.name = res.result.name;
 

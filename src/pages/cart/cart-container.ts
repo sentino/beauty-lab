@@ -27,6 +27,7 @@ import { HomePage } from '../home/home';
 import { SearchService } from '../../services/search.service';
 import { SearchPage } from '../search/search';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -190,8 +191,11 @@ export class CartContainer extends Unsubscriber implements OnInit, OnDestroy {
     private store: Store<any>,
     private alertProvider: AlertProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService
   ) {
     super();
+
+    this.ga.trackPage('cart');
 
     this.promoCode = new FormControl('', [
       Validators.minLength(1),

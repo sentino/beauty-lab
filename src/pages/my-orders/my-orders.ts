@@ -11,6 +11,7 @@ import { ProductDetailPage } from '../product-detail/product-detail';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { SearchService } from '../../services/search.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -143,8 +144,11 @@ export class MyOrdersPage extends Unsubscriber implements OnInit, OnDestroy{
     private loading: LoadingProvider,
     private alert: AlertProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService
   ) {
     super();
+
+    this.ga.trackPage('ordersHistory');
   }
 
 

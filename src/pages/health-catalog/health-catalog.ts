@@ -12,6 +12,7 @@ import { CartContainer } from '../cart/cart-container';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'page-health-catalog',
@@ -67,7 +68,10 @@ export class HealthCatalogPage {
     public navParams: NavParams,
     public loading: LoadingProvider,
     public http: HttpClient,
-    ) { }
+    private ga: AnalyticsService
+    ) {
+    this.ga.trackPage('healthCatalogPage');
+  }
 
 
   showHideSearchList() {

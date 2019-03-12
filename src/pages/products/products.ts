@@ -8,6 +8,7 @@ import { CartContainer } from '../cart/cart-container';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -141,7 +142,8 @@ export class ProductsPage {
     public loading: LoadingProvider,
     public http: HttpClient,
     public actionSheet: ActionSheetController,
-    private _elementRef: ElementRef
+    private _elementRef: ElementRef,
+    private ga: AnalyticsService
   ) {
     this.activeButton = 1;
     this.search.search_string = null;
@@ -339,6 +341,7 @@ export class ProductsPage {
       }
 
       this.current_section = data.result.section.name;
+      this.ga.trackPage(data.result.section.name);
 
       this.all_pages_count = this.navigation.pageAll;
 

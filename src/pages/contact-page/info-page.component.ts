@@ -9,6 +9,7 @@ import { ContentPagesService } from '../../services/content-pages.service';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -90,6 +91,7 @@ export class InfoPageComponent extends Unsubscriber implements OnInit, OnDestroy
     private contentPagesService: ContentPagesService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
   }
@@ -99,42 +101,49 @@ export class InfoPageComponent extends Unsubscriber implements OnInit, OnDestroy
     let page = this.navParams.get('page');
     
     if (page === 'contacts') {
+      this.ga.trackPage('contacts');
       this.wrapToUnsubscribe(this.contentPagesService.getContacts()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'about') {
+      this.ga.trackPage('aboutUs');
       this.wrapToUnsubscribe(this.contentPagesService.getAbout()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'license') {
+      this.ga.trackPage('licence');
       this.wrapToUnsubscribe(this.contentPagesService.getLicense()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'guarantees') {
+      this.ga.trackPage('waranty');
       this.wrapToUnsubscribe(this.contentPagesService.getGuarantees()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'legal-entities') {
+      this.ga.trackPage('corporateClients');
       this.wrapToUnsubscribe(this.contentPagesService.getLegalEntities()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'privacy-policy') {
+      this.ga.trackPage('privacyPolicy');
       this.wrapToUnsubscribe(this.contentPagesService.getPrivacyPolicy()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;
         this.loading.hideSpinner();
       });
     } else if (page === 'agreement') {
+      this.ga.trackPage('termsOfUse');
       this.wrapToUnsubscribe(this.contentPagesService.getAgreement()).subscribe(res => {
         this.title = res.result.title;
         this.content = res.result.content;

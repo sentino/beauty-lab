@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validatorFnControlsMatch } from '../../helpers/customValidator';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'page-sign-up',
@@ -60,8 +61,10 @@ export class SignUpPage {
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     public appCtrl: App,
-    public platform: Platform
+    public platform: Platform,
+    private ga: AnalyticsService
   ) {
+    this.ga.trackPage('registration');
 
     this.registerForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})')]),                    // type string / required - email

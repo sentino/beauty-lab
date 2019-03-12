@@ -19,6 +19,7 @@ import { App } from 'ionic-angular';
 import { AlertProvider } from '../../services/alert/alert';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LoadingProvider } from '../../services/loading/loading';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 export function bonusesQuantity(controlOne: AbstractControl, controlTwo: AbstractControl): ValidatorFn {
@@ -159,7 +160,10 @@ export class ConfirmOrderContainer implements OnInit{
     public alert: AlertProvider,
     private theInAppBrowser: InAppBrowser,
     private loading: LoadingProvider,
+    private ga: AnalyticsService
   ) {
+    this.ga.trackPage('order');
+
     this.form = this.fb.group({
       'listItemOne': this.fb.group({
         'region': ['', [Validators.required]],
@@ -372,6 +376,7 @@ export class ConfirmOrderContainer implements OnInit{
 
     if (peyment.cash === 'A') {
       this.payPayler.postData(body).subscribe((res: any) => {
+        this.ga.trackPage('paymentPage');
         //TODO: если юзер не зареган, будет ошибка
         const browser = this.theInAppBrowser.create(res.result.payLink, '_blank');
         this.appCtrl.getRootNav().setRoot(HomePage);

@@ -26,7 +26,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { GetDataCartAction, InitDataCart } from './store';
+import { GetDataCartAction } from './store';
 import { Store } from '@ngrx/store';
 import { BrandsContainer } from '../pages/brands/brands-container';
 import { MedicinesContainer } from '../pages/medicines/medicines.container';
@@ -35,7 +35,7 @@ import { ArticlesPromotionsContainer } from '../pages/articles-promotions/articl
 import { ConsultationContainer } from '../pages/consultation/consultation-container';
 import { InfoPageComponent } from '../pages/contact-page/info-page.component';
 import { Categories3Page } from '../pages/categories3/categories3';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { AnalyticsService } from '../services/analytics.service';
 
 
 @Component({
@@ -96,16 +96,9 @@ export class MyApp {
     public iab: InAppBrowser,
     private socialSharing: SocialSharing,
     private store: Store<any>,
-    private ga: GoogleAnalytics
+    private ga: AnalyticsService
   ) {
-    this.ga.startTrackerWithId('UA-136019689-1')
-      .then(() => {
-        console.log('Google analytics is ready now');
-        this.ga.trackView('test');
-        // Tracker is ready
-        // You can now track pages or set additional information such as AppVersion or UserId
-      })
-      .catch(e => console.log('Error starting GoogleAnalytics', e));
+    this.ga.trackPage('HomePage');
 
     //open intro page on start
     storage.get('introPage').then((val) => {

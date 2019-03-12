@@ -12,6 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validatorFnControlsMatch } from '../../helpers/customValidator';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -98,7 +99,10 @@ export class MyAccountPage {
     public platform: Platform,
     public navCtrl: NavController,
     public alert: AlertProvider,
-    public loading: LoadingProvider) {
+    public loading: LoadingProvider,
+    private ga: AnalyticsService
+    ) {
+    this.ga.trackPage('profile');
 
     this.userForm = new FormGroup({
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),                 // type string / required - пароль

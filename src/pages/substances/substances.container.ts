@@ -9,6 +9,7 @@ import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/m
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -244,8 +245,11 @@ export class SubstancesContainer extends Unsubscriber implements OnInit, OnDestr
     private navCtrl: NavController,
     private substancesService: SubstancesService,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('substances');
   }
 
 

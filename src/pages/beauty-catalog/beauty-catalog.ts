@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { ArticlesPromotionsPageContainer } from '../articles-promotions-page/articles-promotions-page-container';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'page-beauty-catalog',
@@ -67,10 +68,18 @@ export class BeautyCatalogPage {
     public navParams: NavParams,
     public loading: LoadingProvider,
     public http: HttpClient,
-    ) {}
+    private ga: AnalyticsService
+    ) {
+    this.ga.trackPage('beautyCatalogPage');
+  }
+
+  ngOnInit() {
+    this.loading.showSpinner();
+    this.getMainInfo();
+  }
+
 
   getMainInfo() {
-
     this.http.get(this.config.url + 'catalog/beauty/').subscribe(
       res => {
 
@@ -85,7 +94,6 @@ export class BeautyCatalogPage {
       });
   }
 
-  
   showHideSearchList() {
     if (this.SearchList == false) { this.SearchList = true; }
     else { this.SearchList = false;}
@@ -128,11 +136,6 @@ export class BeautyCatalogPage {
 
   goToArticles(id) {
     this.navCtrl.setRoot(ArticlesPromotionsPageContainer, { id: id, type: 'articles' })
-  }
-
-  ngOnInit() {
-    this.loading.showSpinner();
-    this.getMainInfo();
   }
 
   openCart() {

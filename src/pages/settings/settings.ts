@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { InfoPageComponent } from '../contact-page/info-page.component';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -72,9 +73,10 @@ export class SettingsPage {
     public iab: InAppBrowser,
     private socialSharing: SocialSharing,
     public plt: Platform,
-    private appVersion: AppVersion
+    private appVersion: AppVersion,
+    private ga: AnalyticsService,
   ) {
-
+    this.ga.trackPage('settings');
   }
 
 

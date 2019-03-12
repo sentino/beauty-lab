@@ -11,6 +11,7 @@ import { SpecialistPageContainer } from './specialist-page/specialist-page-conta
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'consultation-container',
@@ -105,8 +106,11 @@ export class ConsultationContainer extends Unsubscriber implements OnInit, OnDes
     private consultationService: ConsultationService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('questionsForSpecialists');
   }
 
   public ngOnInit(): void {

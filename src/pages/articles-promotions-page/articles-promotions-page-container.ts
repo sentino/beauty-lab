@@ -10,6 +10,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -101,6 +102,7 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
     private socialSharing: SocialSharing,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
   }
@@ -113,6 +115,7 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
 
     if (this.type === 'articles') {
       this.title = 'Статья';
+      this.ga.trackPage('articlesPage-' + this.id);
       this.wrapToUnsubscribe(this.articlesPromotionsService.getArticlesById(this.id)).subscribe(res => {
         this.name = res.result.NAME;
         this.desc = res.result.DESC;
@@ -123,6 +126,7 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акция';
+      this.ga.trackPage('promoPage-' + this.id);
       this.wrapToUnsubscribe(this.articlesPromotionsService.getPromotionsById(this.id)).subscribe(res => {
         this.name = res.result.NAME;
         this.desc = res.result.DESC;

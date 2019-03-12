@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { CartContainer } from '../cart/cart-container';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -60,8 +61,13 @@ export class ForgotPasswordPage {
     public loading: LoadingProvider,
     public http: HttpClient,
     public config: ConfigProvider,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private ga: AnalyticsService
+  ) {
+    this.ga.trackPage('forgotPassword');
   }
+
+
   forgetPassword() {
 
     this.errorMessage = '';

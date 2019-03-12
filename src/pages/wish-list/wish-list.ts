@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'page-wish-list',
@@ -97,8 +98,11 @@ export class WishListPage extends Unsubscriber implements OnInit, OnDestroy {
     private wishListService: WishListService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('wishlist');
   }
 
 

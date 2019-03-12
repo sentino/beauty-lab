@@ -10,6 +10,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -92,6 +93,7 @@ export class ArticlesPromotionsContainer extends Unsubscriber implements OnInit,
     private articlesPromotionsService: ArticlesPromotionsService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
   }
@@ -103,12 +105,14 @@ export class ArticlesPromotionsContainer extends Unsubscriber implements OnInit,
 
     if (this.type === 'articles') {
       this.title = 'Статьи';
+      this.ga.trackPage('articles');
       this.wrapToUnsubscribe(this.articlesPromotionsService.getArticles()).subscribe(res => {
         this.items = res.result;
         this.loading.hideSpinner();
       });
     } else if (this.type === 'promotions') {
       this.title = 'Акции';
+      this.ga.trackPage('promo');
       this.wrapToUnsubscribe(this.articlesPromotionsService.getPromotions()).subscribe(res => {
         this.items = res.result;
         this.loading.hideSpinner();

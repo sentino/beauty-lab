@@ -13,6 +13,7 @@ import { PostProductCartAction, selectCartProductsLength } from '../../app/store
 import { Store } from '@ngrx/store';
 import { WishListService } from '../../services/wish-list.service';
 import { Unsubscriber } from '../../helpers/unsubscriber';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -131,10 +132,13 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
     public modalCtrl: ModalController,
     public events: Events,
     public loading: LoadingProvider,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private ga: AnalyticsService
   ) {
     super();
     this.product_id = navParams.get('prod_id');
+
+    this.ga.trackPage('productDetails-' + this.product_id);
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -54,8 +55,11 @@ export class ModalOneClickOrder implements OnInit {
 
   form: FormGroup;
 
-  constructor(private cartService: CartService) {
-
+  constructor(
+    private cartService: CartService,
+    private ga: AnalyticsService,
+  ) {
+    this.ga.trackPage('1tapPurchase');
   }
 
   public ngOnInit(): void {

@@ -21,7 +21,7 @@ import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from '@ngrx/store';
 import { GetDataCartAction } from '../../app/store';
-import { HomePage } from '../home/home';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -78,7 +78,10 @@ export class LoginPage {
     public alert: AlertProvider,
     private iab: InAppBrowser,
     private googlePlus: GooglePlus,
+    private ga: AnalyticsService
   ) {
+    this.ga.trackPage('authorization');
+
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.pattern("[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),

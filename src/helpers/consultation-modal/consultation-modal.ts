@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 import { ConsultationService } from '../../services/consultation.service';
 import { Unsubscriber } from '../unsubscriber';
 import { AlertProvider } from '../../services/alert/alert';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -73,9 +74,12 @@ export class ConsultationModal extends Unsubscriber implements OnInit, OnDestroy
   constructor(
     private fb: FormBuilder,
     private alert: AlertProvider,
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('askQuestion');
   }
 
 

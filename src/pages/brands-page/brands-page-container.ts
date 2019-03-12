@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -117,8 +118,11 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
     private actionSheet: ActionSheetController,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('brandPage');
   }
 
 

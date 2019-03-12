@@ -10,6 +10,7 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
 import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 @Component({
@@ -246,8 +247,11 @@ export class MedicinesContainer extends Unsubscriber implements OnInit, OnDestro
     private medicinesService: MedicinesService,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
+
+    this.ga.trackPage('medicine');
   }
 
 

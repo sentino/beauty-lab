@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { LoadingProvider } from '../../services/loading/loading';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { SearchService } from '../../services/search.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 
 
@@ -45,8 +46,11 @@ export class Categories3Page extends Unsubscriber implements OnInit, OnDestroy {
     private loading: LoadingProvider,
     private bonusesService: BonusesService,
     private searchService: SearchService,
+    private ga: AnalyticsService
   ) {
     super();
+
+    this.ga.trackPage('bonusHistory');
   }
 
 

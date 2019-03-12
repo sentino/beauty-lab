@@ -10,6 +10,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { LoadingProvider } from '../../../services/loading/loading';
 import { SearchService } from '../../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AnalyticsService } from '../../../services/analytics.service';
 
 
 @Component({
@@ -102,6 +103,7 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
     private socialSharing: SocialSharing,
     private loading: LoadingProvider,
     private searchService: SearchService,
+    private ga: AnalyticsService,
   ) {
     super();
   }
@@ -109,6 +111,8 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
   public ngOnInit(): void {
     this.loading.showSpinner();
     this.specialistId = this.navParams.get('id');
+
+    this.ga.trackPage('specialistPage-' + this.specialistId);
 
     this.wrapToUnsubscribe(this.consultationService.getSpecialist(this.specialistId)).subscribe(res => {
       this.specialist = res.result;
