@@ -143,7 +143,7 @@ export class ProductsPage {
     public http: HttpClient,
     public actionSheet: ActionSheetController,
     private _elementRef: ElementRef,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
   ) {
     this.activeButton = 1;
     this.search.search_string = null;
@@ -161,6 +161,7 @@ export class ProductsPage {
 
   //============================================================================================
   ngOnInit() {
+    this.loading.showSpinner();
     this.helpMenuOpen = 'in';
     this.getProducts();
     this.getSubacategories();
@@ -350,6 +351,7 @@ export class ProductsPage {
       }
 
       this.setSelectText();
+      this.loading.hideSpinner();
     },
     err => {
       var er_status = err.status;
