@@ -174,29 +174,27 @@ export class SettingsPage {
   share() {
     if (this.plt.is('ios')) {
       this.socialSharing.share(
-        this.config.packgeName.toString(),
-        this.config.appName,
-        this.config.packgeName.toString(),
-        this.config.packgeName.toString()
-      ).then(() => {
-      }).catch(() => {
-
-      });
+        'Beauty Lab - Лаборатория красоты и здоровья',
+        'Beauty Lab',
+        '',
+        ''
+      )
+        .then(() => {})
+        .catch(() => {});
     } else if (this.plt.is('android')) {
-
       this.appVersion.getPackageName().then((val) => {
         this.socialSharing.share(
-          this.config.appName,
-          this.config.appName,
-          "",
-          "https://play.google.com/store/apps/details?id=" + val
-        ).then(() => {
-
-        }).catch(() => {
-        });
+          'Beauty Lab - Лаборатория красоты и здоровья',
+          'Beauty Lab',
+          '',
+          'https://play.google.com/store/apps/details?id=' + val
+        )
+          .then(() => {})
+          .catch(() => {});
       });
     }
   }
+
   showAd() {
     this.events.publish('showAd');
   }

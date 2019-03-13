@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Unsubscriber } from '../../../helpers/unsubscriber';
 import { selectCartProductsLength } from '../../../app/store';
 import { Store } from '@ngrx/store';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { ConsultationService } from '../../../services/consultation.service';
 import { CartContainer } from '../../cart/cart-container';
 import { SearchPage } from '../../search/search';
@@ -11,6 +11,7 @@ import { LoadingProvider } from '../../../services/loading/loading';
 import { SearchService } from '../../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AnalyticsService } from '../../../services/analytics.service';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 @Component({
@@ -104,6 +105,8 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
     private loading: LoadingProvider,
     private searchService: SearchService,
     private ga: AnalyticsService,
+    private plt: Platform,
+    private appVersion: AppVersion,
   ) {
     super();
   }
@@ -131,15 +134,27 @@ export class SpecialistPageContainer extends Unsubscriber implements OnInit, OnD
   }
 
   share() {
-    this.socialSharing.share(
-      this.specialist.name,
-      this.specialist.name,
-      this.specialist.image,
-      this.specialist.url).then(() => {
-      // Success!
-    }).catch(() => {
-      // Error!
-    });
+    if (this.plt.is('ios')) {
+      this.socialSharing.share(
+        'Задай вопрос профильным специалистам фармацевтам и косметологам',
+        'Beauty Lab',
+        '',
+        ''
+      )
+        .then(() => {})
+        .catch(() => {});
+    } else if (this.plt.is('android')) {
+      this.appVersion.getPackageName().then((val) => {
+        this.socialSharing.share(
+          'Задай вопрос профильным специалистам фармацевтам и косметологам',
+          'Beauty Lab',
+          '',
+          "https://play.google.com/store/apps/details?id=" + val
+        )
+          .then(() => {})
+          .catch(() => {});
+      });
+    }
   }
 
   openModal() {

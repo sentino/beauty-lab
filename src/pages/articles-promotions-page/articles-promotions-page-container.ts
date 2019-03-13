@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticlesPromotionsService } from '../../services/articles-promotions.service';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { CartContainer } from '../cart/cart-container';
 import { SearchPage } from '../search/search';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -11,6 +11,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { SearchService } from '../../services/search.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AnalyticsService } from '../../services/analytics.service';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 @Component({
@@ -103,6 +104,8 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
     private loading: LoadingProvider,
     private searchService: SearchService,
     private ga: AnalyticsService,
+    private plt: Platform,
+    private appVersion: AppVersion,
   ) {
     super();
   }
@@ -145,15 +148,27 @@ export class ArticlesPromotionsPageContainer extends Unsubscriber implements OnI
   }
 
   share() {
-    this.socialSharing.share(
-      this.name,
-      this.name,
-      this.image,
-      this.url).then(() => {
-      // Success!
-    }).catch(() => {
-      // Error!
-    });
+    if (this.plt.is('ios')) {
+      this.socialSharing.share(
+        this.name,
+        'Beauty Lab',
+        this.image,
+        ''
+      )
+        .then(() => {})
+        .catch(() => {});
+    } else if (this.plt.is('android')) {
+      this.appVersion.getPackageName().then((val) => {
+        this.socialSharing.share(
+          this.name,
+          'Beauty Lab',
+          this.image,
+          'https://play.google.com/store/apps/details?id=' + val
+        )
+          .then(() => {})
+          .catch(() => {});
+      });
+    }
   }
 
   openCart() {

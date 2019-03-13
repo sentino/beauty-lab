@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
 import { trigger, transition, animate, style,state } from '@angular/animations';
@@ -14,6 +14,8 @@ import { Store } from '@ngrx/store';
 import { WishListService } from '../../services/wish-list.service';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { AnalyticsService } from '../../services/analytics.service';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { AlertProvider } from '../../services/alert/alert';
 
 
 
@@ -133,7 +135,10 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
     public events: Events,
     public loading: LoadingProvider,
     private socialSharing: SocialSharing,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    private plt: Platform,
+    private appVersion: AppVersion,
+    private alert: AlertProvider,
   ) {
     super();
     this.product_id = navParams.get('prod_id');
@@ -148,6 +153,7 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
 
   addProduct() {
     this.store.dispatch(new PostProductCartAction({id: this.product_id, quantity: 1}));
+    this.alert.show('товар добавлен в корзину');
   }
 
   getProductDetails() {
@@ -247,17 +253,28 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
     });
   }
 
-
   share() {
-    this.socialSharing.share(
-      this.product_name,
-      this.product_name,
-      this.product_image,
-      this.product_url).then(() => {
-        // Success!
-      }).catch(() => {
-        // Error!
+    if (this.plt.is('ios')) {
+      this.socialSharing.share(
+        this.product_name,
+        'Beauty Lab',
+        this.product_image,
+        ''
+      )
+        .then(() => {})
+        .catch(() => {});
+    } else if (this.plt.is('android')) {
+      this.appVersion.getPackageName().then((val) => {
+        this.socialSharing.share(
+          this.product_name,
+          'Beauty Lab',
+          this.product_image,
+          'https://play.google.com/store/apps/details?id=' + val
+        )
+          .then(() => {})
+          .catch(() => {});
       });
+    }
   }
 
   clickWishList() {
