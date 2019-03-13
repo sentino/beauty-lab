@@ -609,3 +609,8 @@ app-confirm-order-component app-section-list-item-three .list-md:last-child > .i
     border: none !important;
   }
 }
+
+.swiper-slide img {
+  object-fit: contain;
+  max-height: 400px;
+}
