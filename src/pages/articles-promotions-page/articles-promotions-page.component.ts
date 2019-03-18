@@ -14,7 +14,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           <h2 class="c-share__title">Поделиться в соц-сетях:</h2>
           <button class="c-share__button" (click)="share.emit()"></button>
         </div>
-        <div class="c-message" style="padding-top: 10px" *ngIf="desc" [innerHTML]="desc | sanitizeHtml" [href]></div>
+        <div class="c-message box-href" style="padding-top: 10px" *ngIf="desc" [innerHTML]="desc | sanitizeHtml" [href]></div>
       </section>
       
       <section class="c-section c-section--recommended c-section--no-space"

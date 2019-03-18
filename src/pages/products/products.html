@@ -102,7 +102,8 @@
 </ion-header>
 
 
-<ion-content class="page-products" (ionScroll)="onScroll($event)">
+<!--<ion-content class="page-products" (ionScroll)="onScroll($event)">-->
+<ion-content class="page-products">
 
     <div class="empty_list" *ngIf="empty_status == true" >
         <p>По данном запросу нечего не найдено, попробуйте пожалуйста еще раз!</p>
@@ -142,25 +143,29 @@
   </ion-list>
 
 
-  <ion-fab bottom right>
+  <ion-fab bottom right style="margin-bottom: 36px; margin-right: 16px;">
     <button ion-fab (click)="scrollToTop()">
       <ion-icon name="ios-arrow-up"></ion-icon>
     </button>
   </ion-fab>
+
+  <ion-infinite-scroll #infinite (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 
 <ion-footer>
-  <div class="flexer">
-      <div [@slideInOut]="helpMenuOpen" class="pagi" >
-          <button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>
+  <!--<div class="flexer">-->
+      <!--<div [@slideInOut]="helpMenuOpen" class="pagi" >-->
+          <!--<button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>-->
 
-      </div>
-      <div *ngIf="all_pages_count>1" class="plaska" (click)="navHandler()">
-      <button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages_count}}</button> 
-      <ion-icon  name="ios-arrow-forward"></ion-icon> 
-      </div>
-  </div>
+      <!--</div>-->
+      <!--<div *ngIf="all_pages_count>1" class="plaska" (click)="navHandler()">-->
+      <!--<button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages_count}}</button> -->
+      <!--<ion-icon  name="ios-arrow-forward"></ion-icon> -->
+      <!--</div>-->
+  <!--</div>-->
   <footer></footer>
 </ion-footer>
 

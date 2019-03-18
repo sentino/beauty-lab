@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, Content, ActionSheetController, Slides } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { SharedDataProvider } from '../../services/shared-data/shared-data';
@@ -9,6 +9,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { AnalyticsService } from '../../services/analytics.service';
+import { Unsubscriber } from '../../helpers/unsubscriber';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -44,13 +46,15 @@ import { AnalyticsService } from '../../services/analytics.service';
 
 
 
-export class ProductsPage {
+export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
 
   @ViewChild(Content) content: Content;
   @ViewChild(Slides) slider: Slides;
   @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
+
+  counter = 0;
 
 
   scrollTopButton = false;
@@ -145,6 +149,8 @@ export class ProductsPage {
     private _elementRef: ElementRef,
     private ga: AnalyticsService,
   ) {
+    super();
+
     this.activeButton = 1;
     this.search.search_string = null;
 
@@ -169,6 +175,34 @@ export class ProductsPage {
 
   //============================================================================================
   ngOnChanges() {}
+
+  doInfinite(infiniteScroll) {
+    if (this.counter === 0 && this.navigation.pageAll > 1 && this.navigation.pageAll !== this.navigation.pageCurrent) {
+      this.loadMoreProducts();
+      this.counter = 1;
+      setTimeout(() => {
+        this.counter = 0;
+        infiniteScroll.complete();
+      }, 2000)
+    }
+
+    if (this.navigation.pageAll === 1 || this.navigation.pageAll === this.navigation.pageCurrent) {
+      this.infinite.enable(false);
+    }
+  }
+
+  loadMoreProducts() {
+    this.wrapToUnsubscribe(this.http.get(this.config.url + `catalog/section/${this.cat_id}/?page=${this.navigation.pageCurrent + 1}&count=50`, {params: this.params()}))
+      .pipe(
+        debounceTime(2000)
+      )
+      .subscribe((res: any) => {
+        for (let i = 0; i < res.result.products.length; i++) {
+          this.all_products.push(res.result.products[i]);
+        }
+        this.navigation = res.result.navigation;
+      });
+  }
 
   submit() {
     this.Filter = false;
@@ -241,6 +275,7 @@ export class ProductsPage {
         this.all_filters = data.result.filters;
         this.cat_id;
         this.all_pages_count = parseInt(data.result.navigation.pageAll);
+        this.navigation = data.result.navigation;
         this.pages = [];
         for(var i = 0 ; i < parseInt(this.all_pages_count); i++){
           this.pages[i] = ({counter : i+1});
@@ -330,6 +365,14 @@ export class ProductsPage {
       this.navigation = data.result.navigation;
       this.all_filters = data.result.filters;
       this.all_sections = data.result.sections;
+
+      if (this.navigation.pageAll === 1 ||
+        this.navigation.pageAll === this.navigation.pageCurrent) {
+        this.infinite.enable(false);
+      } else {
+        this.infinite.threshold = '8000px';
+        this.infinite.enable(true);
+      }
 
       if(this.all_filters.length == 0){
         this.empty_filter = true;
@@ -663,6 +706,16 @@ export class ProductsPage {
     }
 
     return params;
+  }
+
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+
+    if (this.infinite) {
+      this.infinite.complete();
+      this.infinite.enable(false);
+    }
   }
 
 }

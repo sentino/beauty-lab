@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   template: `
     
     <section 
-      class="c-section" 
+      class="c-section box-href" 
       *ngIf="type === 'medicines' && desc"
       [innerHTML]="desc | sanitizeHtml" [href]
     ></section>

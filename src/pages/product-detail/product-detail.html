@@ -66,7 +66,16 @@
 
       <span class="">
           <span class="brand"><u>{{product_brand}}</u></span>
-          <span class="gamme" *ngIf="no_gamme !=true">Гамма:  <u>{{product_gamme}}</u></span>
+          <span [ngClass]="product_brand ? 'gamme' : ''" *ngIf="no_gamme !=true">Гамма:  <u>{{product_gamme}}</u></span>
+      </span>
+     <span *ngIf="MEZH_NEP_NAZVANIE" style="margin-bottom: 14px;">
+          <span>Действующее вещество: <u>{{MEZH_NEP_NAZVANIE}}</u></span>
+      </span>
+     <span *ngIf="TORG_NAME_NEW" style="margin-bottom: 14px;">
+          <span>Все формы: <u>{{TORG_NAME_NEW}}</u></span>
+      </span>
+     <span *ngIf="M_PROIZVODITEL" style="margin-bottom: 14px;">
+          <span>Производитель: <u>{{M_PROIZVODITEL}}</u></span>
       </span>
       
       <span class="price-row">
@@ -124,7 +133,9 @@
               <ion-list *ngSwitchCase="'kittens'"> 
                   <div class="properties-single" *ngFor="let c of props_all_textlist">
                       <p class="prop-name" [innerHTML]="c.name"></p>
-                      <p class="prop-value" [innerHTML]="c.value"></p>
+                      <p class="prop-value" *ngIf="c.code !== 'M_RECEPT'" [innerHTML]="c.value"></p>
+                      <p class="prop-value" *ngIf="c.code === 'M_RECEPT' && c.value === 0">Отпускается без рецепта</p>
+                      <p class="prop-value" *ngIf="c.code === 'M_RECEPT' && c.value === 1">Отпускается по рецепту</p>
                   </div>
               </ion-list>
             

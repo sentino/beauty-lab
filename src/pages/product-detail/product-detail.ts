@@ -91,6 +91,9 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   product_country;
   product_brand;
   product_gamme;
+  MEZH_NEP_NAZVANIE;
+  TORG_NAME_NEW;
+  M_PROIZVODITEL;
   reviews_count;
   product_rating_one;
   product_rating_two;
@@ -187,6 +190,17 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
       this.product_country = this.single_product.COUNTRY;
       this.product_brand = this.single_product.PROPERTIES.BRAND;
       this.product_gamme = this.single_product.PROPERTIES.GAMME;
+      this.product_gamme = this.single_product.PROPERTIES.GAMME;
+
+      if (this.single_product.PROPERTIES.MEZH_NEP_NAZVANIE) {
+        this.MEZH_NEP_NAZVANIE = this.single_product.PROPERTIES.MEZH_NEP_NAZVANIE;
+      }
+      if (this.single_product.PROPERTIES.TORG_NAME_NEW) {
+        this.TORG_NAME_NEW = this.single_product.PROPERTIES.TORG_NAME_NEW;
+      }
+      if (this.single_product.PROPERTIES.M_PROIZVODITE) {
+        this.M_PROIZVODITEL = this.single_product.PROPERTIES.M_PROIZVODITEL;
+      }
 
       if(this.product_gamme == null){
         this.no_gamme = true;

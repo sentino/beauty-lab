@@ -64,6 +64,7 @@ import { AnalyticsService } from '../../services/analytics.service';
     <ion-content>
       <main
         style="margin-top: 22px; padding-left: 16px; padding-right: 16px;"
+        class="box-href"
         *ngIf="content"
         [innerHTML]="content | sanitizeHtml" [href]
       ></main>
