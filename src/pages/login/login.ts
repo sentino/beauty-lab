@@ -223,7 +223,7 @@ export class LoginPage {
       err => {
 
         if(err.status = 422){
-          this.alert.show("Неверный лоигн или пароль. Попробуйте еще раз!");
+          this.alert.show("Неверный логин или пароль. Попробуйте еще раз!");
         }
       });
   }
