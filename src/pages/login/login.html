@@ -1,9 +1,9 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar class="custom-ion-navbar">
     <ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()">
+      <button ion-button icon-only (click)="dismiss()" style="width: 50px;">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,8 +13,8 @@
 
 <ion-content class="page-login" padding>
     <ion-row class="grid-t logo-part">
-      <ion-col>
-        <img class="image" src="assets/beauty-lab_logo.png"/>
+      <ion-col style="padding: 0;">
+        <img style="margin-top: 28px; margin-bottom: 0;" class="image" src="assets/beauty-lab_logo.png"/>
       </ion-col>
     </ion-row>
   <form class="form" novalidate [formGroup]="form" (ngSubmit)="login()">

@@ -178,17 +178,17 @@ export class MyAccountPage {
         this.shared.customerData.lastName = this.response.result.lastName;
 
       if(this.response.result.error == 0){
-          alert("Данные успешно сохранены!");
-        }
+        this.alert.show("Данные успешно сохранены!");
+      }
   
         if(this.response.result.error == 1){
-          alert(this.response.result.errorText);
+          this.alert.show(this.response.result.errorText);
         }
       });
     }
     else{
       this.pass_validation = false;
-      alert("Пароли не совпадают!");
+      this.alert.show("Пароли не совпадают!");
     }
   }
 

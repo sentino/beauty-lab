@@ -235,4 +235,24 @@ page-login {
   .blah2 {
     border-bottom: none !important;
   }
+
+  .custom-ion-navbar {
+    ion-buttons {
+      position: absolute;
+      z-index: 5;
+    }
+
+    .toolbar-content {
+      width: 100%;
+
+      ion-title {
+        justify-content: center;
+
+        div {
+          padding: 0 !important;
+          width: auto;
+        }
+      }
+    }
+  }
 }

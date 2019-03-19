@@ -11,13 +11,14 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import {
   DeleteProductCartAction,
-  GetCouponsAction,
+  GetCouponsAction, GetDataCartAction,
   selectCartPresents,
   selectCartProducts,
   selectCartProductsLength,
   selectCartTotalNewPrice,
   selectCartTotalOldPrice,
-  selectContainsDiscount, selectContainsDiscountLength,
+  selectContainsDiscount,
+  selectContainsDiscountLength,
   selectCouponFail,
   UpdateQuantityCartAction,
 } from '../../app/store';
@@ -28,6 +29,7 @@ import { SearchService } from '../../services/search.service';
 import { SearchPage } from '../search/search';
 import { Unsubscriber } from '../../helpers/unsubscriber';
 import { AnalyticsService } from '../../services/analytics.service';
+import { WishListService } from '../../services/wish-list.service';
 
 
 
@@ -102,6 +104,7 @@ import { AnalyticsService } from '../../services/analytics.service';
             [products]="products$ | async"
             (deleteProduct)="deleteProduct($event)"
             (quantityProduct)="quantityProduct($event)"
+            (clickWishList)="clickWishList($event)"
           ></app-cart>
           
           <app-presents
@@ -191,7 +194,8 @@ export class CartContainer extends Unsubscriber implements OnInit, OnDestroy {
     private store: Store<any>,
     private alertProvider: AlertProvider,
     private searchService: SearchService,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    private wishListService: WishListService,
   ) {
     super();
 
@@ -232,6 +236,18 @@ export class CartContainer extends Unsubscriber implements OnInit, OnDestroy {
       this.wrapToUnsubscribe(this.cartService.postCoupon(this.promoCode.value)).subscribe((res: any) => {
         this.store.dispatch(new GetCouponsAction());
       })
+    }
+  }
+
+  clickWishList({id, wishlist}) {
+    if (localStorage.getItem('customerData') && wishlist === 'N') {
+      this.wrapToUnsubscribe(this.wishListService.putItem(id)).subscribe(res => {
+        this.store.dispatch(new GetDataCartAction());
+      });
+    } else {
+      this.wrapToUnsubscribe(this.wishListService.delItem(id)).subscribe(res => {
+        this.store.dispatch(new GetDataCartAction());
+      });
     }
   }
 

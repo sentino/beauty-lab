@@ -120,7 +120,7 @@ export class LoginPage {
 
       });
   }, (error) => {
-      alert(error);
+      this.alert.show(error);
   });
   }
 
@@ -185,12 +185,11 @@ export class LoginPage {
       }
 
       if(this.response.result.error == 1){
-        alert(this.response.result.errorText);
+        this.alert.show(this.response.result.errorText);
       }
     },
     err => {
-      alert("Ошибка");
-      alert(err);
+      this.alert.show(err);
     });
   };
 
@@ -224,7 +223,7 @@ export class LoginPage {
       err => {
 
         if(err.status = 422){
-          alert("Были введены неправильные е-мейл или пароль. Попробуйте, ещё раз!")
+          this.alert.show("Были введены неправильные е-мейл или пароль. Попробуйте, ещё раз!");
         }
       });
   }

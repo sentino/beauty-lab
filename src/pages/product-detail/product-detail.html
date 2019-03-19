@@ -66,16 +66,16 @@
 
       <span class="">
           <span class="brand"><u>{{product_brand}}</u></span>
-          <span [ngClass]="product_brand ? 'gamme' : ''" *ngIf="no_gamme !=true">Гамма:  <u>{{product_gamme}}</u></span>
+          <span [ngClass]="product_brand ? 'gamme' : ''" *ngIf="no_gamme !=true">Гамма: <u style="text-decoration: none;">{{product_gamme}}</u></span>
       </span>
      <span *ngIf="MEZH_NEP_NAZVANIE" style="margin-bottom: 14px;">
-          <span>Действующее вещество: <u>{{MEZH_NEP_NAZVANIE}}</u></span>
+          <span>Действующее вещество: <u (click)="goToPageId('substances', MEZH_NEP_NAZVANIE_ID)">{{MEZH_NEP_NAZVANIE}}</u></span>
       </span>
      <span *ngIf="TORG_NAME_NEW" style="margin-bottom: 14px;">
-          <span>Все формы: <u>{{TORG_NAME_NEW}}</u></span>
+          <span>Все формы: <u (click)="goToPageId('medicines', TORG_NAME_NEW_ID)">{{TORG_NAME_NEW}}</u></span>
       </span>
      <span *ngIf="M_PROIZVODITEL" style="margin-bottom: 14px;">
-          <span>Производитель: <u>{{M_PROIZVODITEL}}</u></span>
+          <span>Производитель: <u (click)="goToPageId('brands', M_PROIZVODITEL_ID)" style="text-decoration: none;">{{M_PROIZVODITEL}}</u></span>
       </span>
       
       <span class="price-row">
@@ -166,30 +166,30 @@
 
                 <div class="properties-single" *ngIf="can_add == 'Y'">
                     <p class="prop-name" style="margin-bottom: 0;">Оставить отзыв</p>
-                    <form action="" #loginForm="ngForm" class="form review_form" (ngSubmit)="newReview()">
+                    <form action="" [formGroup]="RevData" class="form review_form" (ngSubmit)="newReview()">
                       <ion-list>
                         <ion-item>
                           <ion-label color="secondary" floating>Имя*</ion-label>
-                          <ion-input [(ngModel)]="RevData.NAME" name="name" type="text"></ion-input>
+                          <ion-input [formControl]="RevData.controls['name']" type="text"></ion-input>
                         </ion-item>
 
-                        <ion-item>
+                        <ion-item *ngIf="reviews_info[2].VALUES">
                             <ion-label>Тип кожи</ion-label>
-                            <ion-select [(ngModel)]="RevData.tip_skin" name="type_skin">
+                            <ion-select [formControl]="RevData.controls['tipSkin']">
                                 <ion-option *ngFor="let c of reviews_info[2].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
                             </ion-select>
                         </ion-item>
 
-                        <ion-item>
+                        <ion-item *ngIf="reviews_info[1].VALUES">
                             <ion-label>Укажите ваш возраст</ion-label>
-                            <ion-select [(ngModel)]="RevData.AGE" name="age">
+                            <ion-select [formControl]="RevData.controls['age']">
                               <ion-option *ngFor="let c of reviews_info[1].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
                             </ion-select>
                         </ion-item>
 
-                        <ion-item>
+                        <ion-item *ngIf="reviews_info[3].VALUES">
                             <ion-label>Укажите тип волос</ion-label>
-                            <ion-select [(ngModel)]="RevData.tip_volos" name="type_volos">
+                            <ion-select [formControl]="RevData.controls['tipVolos']">
                                 <ion-option *ngFor="let c of reviews_info[3].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
                             </ion-select>
                         </ion-item>
@@ -197,8 +197,7 @@
                         <ion-item>
                           <ion-label color="secondary" floating>Отзыв*</ion-label>
                           <ion-textarea
-                            name="review"
-                            [(ngModel)]="RevData.COMMENT"
+                            [formControl]="RevData.controls['comment']"
                             rows="1"
                             style=" border: 0;
                                     border-radius: 0;
@@ -211,20 +210,20 @@
                       </ion-list>
 
                           <div class="rating-block">
-                            <span>Цена/качество:</span>  <rating name="rating" [(ngModel)]="RevData.RATING1" ></rating>
+                            <span>Цена/качество:</span>  <rating [formControl]="RevData.controls['rating1']"></rating>
                           </div>
 
                           <div class="rating-block">
-                            <span>Эффективность:</span> <rating name="rating" [(ngModel)]="RevData.RATING2" ></rating>
+                            <span>Эффективность:</span> <rating [formControl]="RevData.controls['rating2']"></rating>
                           </div>
                           
                           <div class="rating-block">
-                            <span>Дизайн упаковки:</span> <rating name="rating" [(ngModel)]="RevData.RATING3" ></rating>
+                            <span>Дизайн упаковки:</span> <rating [formControl]="RevData.controls['rating3']"></rating>
                           </div>
 
                           <ion-row>
                             <ion-col>
-                              <button  ion-button block class="regsubmit" color="secondary" type="submit" [disabled]="!loginForm.form.valid">Оставить отзыв</button>
+                              <button  ion-button block class="regsubmit" color="secondary" type="submit" [disabled]="RevData.invalid">Оставить отзыв</button>
                             </ion-col>
                           </ion-row>  
                     </form>

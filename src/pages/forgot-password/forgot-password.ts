@@ -9,6 +9,7 @@ import { selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { CartContainer } from '../cart/cart-container';
 import { AnalyticsService } from '../../services/analytics.service';
+import { AlertProvider } from '../../services/alert/alert';
 
 
 @Component({
@@ -62,7 +63,8 @@ export class ForgotPasswordPage {
     public http: HttpClient,
     public config: ConfigProvider,
     public navParams: NavParams,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    public alert: AlertProvider,
   ) {
     this.ga.trackPage('forgotPassword');
   }
@@ -83,14 +85,14 @@ export class ForgotPasswordPage {
 
       if(this.response.result.error == 1){
         this.forgot_complete = false;
-        alert(this.response.result.errorText);
+        this.alert.show(this.response.result.errorText);
       }
     },
     err => {
       this.forgot_complete = false;
 
       if(err.status == 422){
-        alert("Пользователь не найден!Попробуйте ещё раз.")
+        this.alert.show("Пользователь не найден!Попробуйте ещё раз.");
       }
     }
   );

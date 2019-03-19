@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validatorFnControlsMatch } from '../../helpers/customValidator';
 import { AnalyticsService } from '../../services/analytics.service';
+import { AlertProvider } from '../../services/alert/alert';
 
 @Component({
   selector: 'page-sign-up',
@@ -62,7 +63,8 @@ export class SignUpPage {
     public menuCtrl: MenuController,
     public appCtrl: App,
     public platform: Platform,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    public alert: AlertProvider,
   ) {
     this.ga.trackPage('registration');
 
@@ -99,12 +101,11 @@ export class SignUpPage {
       }
 
       if (data.result.error == 1) {
-        alert(data.result.errorText);
+        this.alert.show(data.result.errorText);
       }
     },
       err => {
-
-        alert(JSON.parse(err._body).result.errorText);
+        this.alert.show(err.error.result.errorText);
       });
   }
 

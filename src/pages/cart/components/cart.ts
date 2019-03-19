@@ -23,7 +23,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           <div class="l-good__price" *ngIf="product.price === product.priceFull">
             <span class="c-good__price c-good__price--new">{{product.priceFullFormat}}</span>
           </div>
-          <button class="c-good__favorite"></button>
+          <button
+            [ngClass]="product.in_wishlist === 'Y' ? 'c-good__favorite c-good__favorite--selected' : 'c-good__favorite'"
+            (click)="clickWishList.emit({id: product.id, wishlist: product.in_wishlist})"
+          ></button>
         </div>
         <div class="l-good__row l-good__row--large-margin">
           <div class="c-quantity">
@@ -58,6 +61,7 @@ export class AppCart {
 
   @Output() deleteProduct: EventEmitter<any> = new EventEmitter();
   @Output() quantityProduct: EventEmitter<any> = new EventEmitter();
+  @Output() clickWishList: EventEmitter<any> = new EventEmitter();
 
   quantity: number;
 

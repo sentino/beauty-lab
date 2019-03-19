@@ -8,7 +8,7 @@ import { LoadingProvider } from '../../services/loading/loading';
 import { Events } from 'ionic-angular';
 import { SearchPage } from '../search/search';
 import { CartContainer } from '../cart/cart-container';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { PostProductCartAction, selectCartProductsLength } from '../../app/store';
 import { Store } from '@ngrx/store';
 import { WishListService } from '../../services/wish-list.service';
@@ -16,6 +16,9 @@ import { Unsubscriber } from '../../helpers/unsubscriber';
 import { AnalyticsService } from '../../services/analytics.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AlertProvider } from '../../services/alert/alert';
+import { MedicinesSubstancesPageContainer } from '../medicines-substances-page/medicines-substances-page.container';
+import { BrandsPageContainer } from '../brands-page/brands-page-container';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -92,8 +95,11 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   product_brand;
   product_gamme;
   MEZH_NEP_NAZVANIE;
+  MEZH_NEP_NAZVANIE_ID;
   TORG_NAME_NEW;
+  TORG_NAME_NEW_ID;
   M_PROIZVODITEL;
+  M_PROIZVODITEL_ID;
   reviews_count;
   product_rating_one;
   product_rating_two;
@@ -113,18 +119,8 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   };
 
   can_add;
-  
-  RevData = {
-    "product": "",                  // type integer / required - ID товара, к которому добавляется отзыв
-    "NAME": "",
-    "AGE": "",
-    "COMMENT": "",
-    "RATING1": "",
-    "RATING2": "",
-    "RATING3": "",
-    "tip_volos":"",
-    "tip_skin":"",
-}
+
+  RevData: FormGroup;
 
   constructor(
     private store: Store<any>,
@@ -147,6 +143,17 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
     this.product_id = navParams.get('prod_id');
 
     this.ga.trackPage('productDetails-' + this.product_id);
+
+    this.RevData = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      age: new FormControl(null, [Validators.required]),
+      comment: new FormControl(null, [Validators.required]),
+      rating1: new FormControl(null, [Validators.required]),
+      rating2: new FormControl(null, [Validators.required]),
+      rating3: new FormControl(null, [Validators.required]),
+      tipVolos: new FormControl(null, [Validators.required]),
+      tipSkin: new FormControl(null, [Validators.required]),
+    });
   }
 
   ngOnInit() {
@@ -194,12 +201,15 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
 
       if (this.single_product.PROPERTIES.MEZH_NEP_NAZVANIE) {
         this.MEZH_NEP_NAZVANIE = this.single_product.PROPERTIES.MEZH_NEP_NAZVANIE;
+        this.MEZH_NEP_NAZVANIE_ID = this.single_product.PROPERTIES.MEZH_NEP_NAZVANIE_ID;
       }
       if (this.single_product.PROPERTIES.TORG_NAME_NEW) {
         this.TORG_NAME_NEW = this.single_product.PROPERTIES.TORG_NAME_NEW;
+        this.TORG_NAME_NEW_ID = this.single_product.PROPERTIES.TORG_NAME_NEW_ID;
       }
       if (this.single_product.PROPERTIES.M_PROIZVODITE) {
         this.M_PROIZVODITEL = this.single_product.PROPERTIES.M_PROIZVODITEL;
+        this.M_PROIZVODITEL_ID = this.single_product.PROPERTIES.M_PROIZVODITEL_ID;
       }
 
       if(this.product_gamme == null){
@@ -244,25 +254,25 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   }
 
   newReview() {
-    var RevData = new FormData();
+    var RevData = new HttpParams();
 
-    RevData.append('product',this.product_id);
-    RevData.append('AGE', this.RevData.AGE);
-    RevData.append('COMMENT', this.RevData.COMMENT);
-    RevData.append('NAME', this.RevData.NAME);
-    RevData.append('RATING1', this.RevData.RATING1);
-    RevData.append('RATING2', this.RevData.RATING2);
-    RevData.append('RATING3', this.RevData.RATING3);
-    RevData.append('HAIR', this.RevData.tip_volos);
-    RevData.append('SKIN', this.RevData.tip_skin);
-
-    this.http.post(this.config.url + 'tools/review/', RevData).subscribe(data => {
+    RevData = RevData.append('product',this.product_id);
+    RevData = RevData.append('AGE', this.RevData.controls['age'].value);
+    RevData = RevData.append('COMMENT', this.RevData.controls['comment'].value);
+    RevData = RevData.append('NAME', this.RevData.controls['name'].value);
+    RevData = RevData.append('RATING1', this.RevData.controls['rating1'].value);
+    RevData = RevData.append('RATING2', this.RevData.controls['rating2'].value);
+    RevData = RevData.append('RATING3', this.RevData.controls['rating3'].value);
+    RevData = RevData.append('HAIR', this.RevData.controls['tipVolos'].value);
+    RevData = RevData.append('SKIN', this.RevData.controls['tipSkin'].value);
+    
+    this.http.post(this.config.url + 'tools/review/', null, {params: RevData}).subscribe(data => {
       this.review_response = data;
-      alert(this.review_response.result.successText);
+      this.alert.show(this.review_response.result.successText);
     },
     err => {
       if(err.status == 422){
-        alert("Были введены неправильные е-мейл или пароль.Попробуйте, ещё раз!")
+        this.alert.show(err.error.result.errorText);
       }
     });
   }
@@ -300,6 +310,16 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
       this.wrapToUnsubscribe(this.wishListService.delItem(this.product_id)).subscribe(res => {
         this.single_product.IN_WISHLIST = 'N';
       });
+    }
+  }
+
+  goToPageId(page, id) {
+    if (page === 'medicines') {
+      this.navCtrl.push(MedicinesSubstancesPageContainer, { id: id, type: 'medicines' });
+    } else if (page === 'substances') {
+      this.navCtrl.push(MedicinesSubstancesPageContainer, { id: id, type: 'substances' });
+    } else if (page === 'brands') {
+      this.navCtrl.push(BrandsPageContainer, { id: id })
     }
   }
 
