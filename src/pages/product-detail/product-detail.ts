@@ -93,13 +93,13 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   props_all_textlist;
   product_country;
   product_brand;
+  BRAND_ID;
   product_gamme;
   MEZH_NEP_NAZVANIE;
   MEZH_NEP_NAZVANIE_ID;
   TORG_NAME_NEW;
   TORG_NAME_NEW_ID;
   M_PROIZVODITEL;
-  M_PROIZVODITEL_ID;
   reviews_count;
   product_rating_one;
   product_rating_two;
@@ -196,6 +196,7 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
       this.product_articul = this.single_product.PROPERTIES.ARTICUL;
       this.product_country = this.single_product.COUNTRY;
       this.product_brand = this.single_product.PROPERTIES.BRAND;
+      this.BRAND_ID = this.single_product.PROPERTIES.BRAND_ID;
       this.product_gamme = this.single_product.PROPERTIES.GAMME;
       this.product_gamme = this.single_product.PROPERTIES.GAMME;
 
@@ -207,9 +208,8 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
         this.TORG_NAME_NEW = this.single_product.PROPERTIES.TORG_NAME_NEW;
         this.TORG_NAME_NEW_ID = this.single_product.PROPERTIES.TORG_NAME_NEW_ID;
       }
-      if (this.single_product.PROPERTIES.M_PROIZVODITE) {
+      if (this.single_product.PROPERTIES.M_PROIZVODITEL) {
         this.M_PROIZVODITEL = this.single_product.PROPERTIES.M_PROIZVODITEL;
-        this.M_PROIZVODITEL_ID = this.single_product.PROPERTIES.M_PROIZVODITEL_ID;
       }
 
       if(this.product_gamme == null){
@@ -265,7 +265,7 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
     RevData = RevData.append('RATING3', this.RevData.controls['rating3'].value);
     RevData = RevData.append('HAIR', this.RevData.controls['tipVolos'].value);
     RevData = RevData.append('SKIN', this.RevData.controls['tipSkin'].value);
-    
+
     this.http.post(this.config.url + 'tools/review/', null, {params: RevData}).subscribe(data => {
       this.review_response = data;
       this.alert.show(this.review_response.result.successText);

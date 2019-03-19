@@ -64,7 +64,7 @@ export class MyAccountPage {
     lastName: '',                 // type string / required - фамилия
     secondName: '',               // type string / option - отчество
     birthday: '',                 // type string / option - день рождения
-    phone: '',                    // type string / option - телефон
+    phone: null,                    // type string / option - телефон
     addressZip: '',               // type string / option - индекс
     addressCity: '',              // type string / option - город
     addressStreet: '',             // type string / option - улица, адрес
@@ -164,7 +164,9 @@ export class MyAccountPage {
   }
 
   updateProfile() {
-    this.myAccountData.phone = this.form.controls['phone'].value;
+    if (this.form.controls['phone'].value !== "") {
+      this.myAccountData.phone = this.form.controls['phone'].value;
+    }
 
     if(this.myAccountData.password === this.myAccountData.passwordConfirmed){
 

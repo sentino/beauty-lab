@@ -64,18 +64,18 @@
         <p class="maker">{{product_country}}</p>
       </div>
 
-      <span class="">
-          <span class="brand"><u>{{product_brand}}</u></span>
+      <span style="margin-bottom: 14px;">
+          <span class="brand"><u (click)="goToPageId('brands', BRAND_ID)">{{product_brand}}</u></span>
           <span [ngClass]="product_brand ? 'gamme' : ''" *ngIf="no_gamme !=true">Гамма: <u style="text-decoration: none;">{{product_gamme}}</u></span>
       </span>
-     <span *ngIf="MEZH_NEP_NAZVANIE" style="margin-bottom: 14px;">
+     <span *ngIf="MEZH_NEP_NAZVANIE">
           <span>Действующее вещество: <u (click)="goToPageId('substances', MEZH_NEP_NAZVANIE_ID)">{{MEZH_NEP_NAZVANIE}}</u></span>
       </span>
-     <span *ngIf="TORG_NAME_NEW" style="margin-bottom: 14px;">
+     <span *ngIf="TORG_NAME_NEW">
           <span>Все формы: <u (click)="goToPageId('medicines', TORG_NAME_NEW_ID)">{{TORG_NAME_NEW}}</u></span>
       </span>
-     <span *ngIf="M_PROIZVODITEL" style="margin-bottom: 14px;">
-          <span>Производитель: <u (click)="goToPageId('brands', M_PROIZVODITEL_ID)" style="text-decoration: none;">{{M_PROIZVODITEL}}</u></span>
+     <span *ngIf="M_PROIZVODITEL">
+          <span>Производитель: <u style="text-decoration: none;">{{M_PROIZVODITEL}}</u></span>
       </span>
       
       <span class="price-row">
