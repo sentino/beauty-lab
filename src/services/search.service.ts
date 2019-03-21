@@ -13,6 +13,6 @@ export class SearchService {
   ) {}
 
   getSearch(value): Observable<any> {
-    return this.http.get(this.config.url + 'catalog/search/?q=' + value);
+    return this.http.get(this.config.url + 'catalog/search/?q=' + value + '&count=50');
   }
 }

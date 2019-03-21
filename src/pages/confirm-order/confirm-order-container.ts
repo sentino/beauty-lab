@@ -258,11 +258,13 @@ export class ConfirmOrderContainer implements OnInit{
       if (this.fields[i].code === "order_prop_5") {
         this.fieldAddress = true;
         this.form.controls['listItemFour'].get('address').setValidators([Validators.required, Validators.maxLength(150)]);
+        this.form.controls['listItemFour'].get('address').setValue(this.fields[i].value);
         this.form.controls['listItemFour'].get('address').updateValueAndValidity();
-        break;
+        return;
       } else {
         this.fieldAddress = false;
         this.form.controls['listItemFour'].get('address').setValidators([]);
+        this.form.controls['listItemFour'].get('address').setValue('');
         this.form.controls['listItemFour'].get('address').updateValueAndValidity();
       }
     }

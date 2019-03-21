@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content } from 'ionic-angular';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content, InfiniteScroll } from 'ionic-angular';
 import { ConfigProvider } from '../../services/config/config';
 import { AlertProvider } from '../../services/alert/alert';
 import { LoadingProvider } from '../../services/loading/loading';
@@ -10,6 +10,8 @@ import { CartContainer } from '../cart/cart-container';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { selectCartProductsLength } from '../../app/store';
+import { Unsubscriber } from '../../helpers/unsubscriber';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -43,10 +45,14 @@ import { selectCartProductsLength } from '../../app/store';
   ],
 })
 
-export class SearchPage implements OnInit {
+export class SearchPage extends Unsubscriber implements OnInit, OnDestroy {
   productsLength$ = this.store.select(selectCartProductsLength);
 
   @ViewChild(Content) content: Content;
+  @ViewChild(InfiniteScroll) infinite: InfiniteScroll;
+
+  counter = 0;
+
   searchResult = [];
   showCategories = true;
   search_result;
@@ -89,6 +95,8 @@ export class SearchPage implements OnInit {
   query_string;
   empty_status = false;
 
+  sort = '&sort=POPULATE';
+
   constructor(
     private store: Store<any>,
     public navCtrl: NavController,
@@ -99,6 +107,8 @@ export class SearchPage implements OnInit {
     public loading: LoadingProvider,
     public shared: SharedDataProvider,
   ) {
+    super();
+
     this.loading.showSpinner();
     this.search_result = navParams.get('result');
     this.search_string = navParams.get('search');
@@ -115,16 +125,45 @@ export class SearchPage implements OnInit {
     }
 
     this.all_pages =  this.search_result.result.navigation.pageAll;
+    this.navigation =  this.search_result.result.navigation;
 
     for(var i = 0 ; i < parseInt(this.all_pages); i++){
       this.pages[i] = ({counter : i+1});
     }
   }
+
+  doInfinite(infiniteScroll) {
+    if (this.counter === 0 && this.navigation.pageAll > 1 && this.navigation.pageAll !== this.navigation.pageCurrent) {
+      this.loadMoreProducts(this.sort);
+      this.counter = 1;
+      setTimeout(() => {
+        this.counter = 0;
+        infiniteScroll.complete();
+      }, 2000)
+    }
+
+    if (this.navigation.pageAll === 1 || this.navigation.pageAll === this.navigation.pageCurrent) {
+      this.infinite.enable(false);
+    }
+  }
+
+  loadMoreProducts(sort) {
+    this.wrapToUnsubscribe(this.http.get(this.config.url + `catalog/search/?q=${this.query_string}${sort}&page=${this.navigation.pageCurrent + 1}&count=50`))
+      .pipe(
+        debounceTime(2000)
+      )
+      .subscribe((res: any) => {
+        for (let i = 0; i < res.result.products.length; i++) {
+          this.Products.push(res.result.products[i]);
+        }
+        this.navigation = res.result.navigation;
+      });
+  }
   
   goToPage(next_page) {
     this.current_page = next_page;
     this.loading.showSpinner();
-    this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.query_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.query_string + '&page='+ next_page + '&count=50').subscribe((data: any) => {
       this.all_products = data;
       this.Products = this.all_products.result.products;
       this.helpMenuOpen = 'in';
@@ -151,7 +190,7 @@ export class SearchPage implements OnInit {
   }
 
   getSearch() {
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string + '&count=50').subscribe(data => {
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },
@@ -208,7 +247,7 @@ export class SearchPage implements OnInit {
   }
 
   getSortsProducts(sort_path) {
-    this.http.get(this.config.url + 'catalog/search/?q='+ this.search_string + sort_path).subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/search/?q='+ this.search_string + sort_path + '&count=50').subscribe((data: any) => {
       this.Sort = false;
       this.all_products = data;
       this.Products = data.result.products;
@@ -218,7 +257,13 @@ export class SearchPage implements OnInit {
       for(var i = 0 ; i < parseInt(this.all_pages); i++){
         this.pages[i] = ({counter : i+1});
       }
-    },
+
+      this.navigation = this.all_products.result.navigation;
+      this.sort = sort_path;
+      this.infinite.threshold = '8000px';
+      this.infinite.enable(true);
+      this.scrollToTop();
+      },
     err => {
       var er_status = err.status;
     });
@@ -240,5 +285,22 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     this.helpMenuOpen = 'in';
     this.loading.hideSpinner();
+
+    if (this.navigation.pageAll === 1 ||
+      this.navigation.pageAll === this.navigation.pageCurrent) {
+      this.infinite.enable(false);
+    } else {
+      this.infinite.threshold = '8000px';
+      this.infinite.enable(true);
+    }
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+
+    if (this.infinite) {
+      this.infinite.complete();
+      this.infinite.enable(false);
+    }
   }
 }

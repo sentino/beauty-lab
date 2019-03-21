@@ -121,6 +121,8 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
   empty_status;
   empty_products;
 
+  sort = '&sort=POPULATE';
+
   toggleHelpMenu(): void {
     this.helpMenuOpen = this.helpMenuOpen === 'out' ? 'in' : 'out';
   }
@@ -192,7 +194,7 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
   }
 
   loadMoreProducts() {
-    this.wrapToUnsubscribe(this.http.get(this.config.url + `catalog/section/${this.cat_id}/?page=${this.navigation.pageCurrent + 1}&count=50`, {params: this.params()}))
+    this.wrapToUnsubscribe(this.http.get(this.config.url + `catalog/section/${this.cat_id}${this.sort}/?page=${this.navigation.pageCurrent + 1}&count=50`, {params: this.params()}))
       .pipe(
         debounceTime(2000)
       )
@@ -405,7 +407,7 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
   getSearch() {
     this.helpMenuOpen = 'in';
 
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string + '&count=50').subscribe((data: any) => {
       this.SearchList = false;
       this.current_section = 'Результаты поиска';
       this.all_products = data.result.products;
@@ -452,7 +454,7 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
       this.current_page = next_page;
       this.helpMenuOpen = 'in';
 
-      this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.search.search_string + '&page='+ next_page + '&count=20').subscribe((data: any) => {
+      this.http.get(this.config.url + 'catalog/search/' +'/?q=' + this.search.search_string + '&page='+ next_page + '&count=50').subscribe((data: any) => {
         this.all_products = data;
         this.all_products = data.result.products;
         this.all_pages_count = data.result.navigation.pageAll;
@@ -626,6 +628,11 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
       for(var i = 0 ; i < parseInt(this.navigation.pageAll); i++){
         this.pages[i] = ({counter : i+1});
       }
+
+      this.sort = sort_path;
+      this.infinite.threshold = '8000px';
+      this.infinite.enable(true);
+      this.scrollToTop();
     },
     err => {
       var er_status = err.status;

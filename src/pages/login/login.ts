@@ -104,6 +104,7 @@ export class LoginPage {
 
 
   Vklog() {
+    this.loading.showSpinner();
     this.oauth.logInVia(this.vkProvider).then((success:any) => {
       const vkData = {
         "email": success.email,
@@ -126,6 +127,7 @@ export class LoginPage {
 
 
   facebookLogin() {
+    this.loading.showSpinner();
     this.fb.getLoginStatus().then((res: any) => {
       if (res.status == "connected") {
         this.createAccount(res.authResponse.accessToken, "fb");
@@ -133,11 +135,18 @@ export class LoginPage {
       else {
         this.fb.login(["public_profile", "user_friends", "email"])
           .then((res: FacebookLoginResponse) => {
+            this.loading.showSpinner();
             this.createAccount(res.authResponse.accessToken, "fb");
           })
-          .catch(e => this.alert.show("Error logging into Facebook" + JSON.stringify(e)));
+          .catch(e => {
+            this.loading.hideSpinner();
+            this.alert.show("Error logging into Facebook" + JSON.stringify(e))
+          });
       }
-    }).catch(e => this.alert.show("Error Check Login Status Facebook" + JSON.stringify(e)));
+    }).catch(e => {
+      this.loading.hideSpinner();
+      this.alert.show("Error Check Login Status Facebook" + JSON.stringify(e))
+    });
   }
 
 
@@ -178,17 +187,18 @@ export class LoginPage {
       this.shared.userInfo(data);
 
       this.response = data;
-
       if(this.response.result.error == 0){
         this.shared.userInfo(this.response.result);
         this.dismiss();
       }
 
       if(this.response.result.error == 1){
+        this.loading.hideSpinner();
         this.alert.show(this.response.result.errorText);
       }
     },
     err => {
+      this.loading.hideSpinner();
       this.alert.show(err);
     });
   };
@@ -206,6 +216,7 @@ export class LoginPage {
   dismiss() {
     this.viewCtrl.dismiss();
     this.menuCtrl.close();
+    this.loading.hideSpinner();
   }
 
   postAuth(formData) {

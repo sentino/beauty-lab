@@ -244,7 +244,7 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
   }
 
   getSearch() {
-    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string).subscribe(data => {
+    this.http.get(this.config.url + 'catalog/search/?q=' + this.search.search_string + '&count=50').subscribe(data => {
       this.Search_result = data;
         this.navCtrl.push(SearchPage, { result: this.Search_result,search: this.search.search_string });
     },

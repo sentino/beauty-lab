@@ -37,7 +37,7 @@
           </button>
 
       <button class="beuatyBtn" *ngIf="shared.customerData.accessToken != null">
-        <ion-icon class="menu-icon" item-left name="person"></ion-icon>
+        <ion-icon class="menu-icon" item-left name="person" style="margin-top: 10px; margin-bottom: 10px;"></ion-icon>
         <button menuClose (click)="openPage('myAccount')">Профиль</button>
         <ion-icon class="btn-plus" item-right [name]="categoriesLoginIcon" (click)="showHideLoginList()"></ion-icon>
       </button>
@@ -55,7 +55,7 @@
       </div>
 
       <button class="beuatyBtn">
-        <ion-icon class="menu-icon" item-left name="bowtie"></ion-icon>
+        <ion-icon class="menu-icon" item-left name="bowtie" style="margin-top: 10px; margin-bottom: 10px;"></ion-icon>
         <button menuClose (click)="openBeautyCatalog('BeautyCatalogPage')">Товары для красоты</button>
         <ion-icon class="btn-plus" item-right [name]="categoriesListIcon" (click)="showHideCategoriesList()"></ion-icon>
       </button>
@@ -65,7 +65,7 @@
       </div> 
 
       <button class="beuatyBtn" >
-        <ion-icon class="menu-icon"  item-left name="medkit"></ion-icon>
+        <ion-icon class="menu-icon"  item-left name="medkit" style="margin-top: 10px; margin-bottom: 10px;"></ion-icon>
         <button menuClose (click)="openHealthCatalog('HealthCatalogPage')">Товары для здоровья</button>
         <ion-icon class="btn-plus" item-right [name]="categoriesTwoListIcon" (click)="showHideCategoriesTwoList()"></ion-icon>
       </button>

@@ -14,6 +14,15 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
+  <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
+    <ion-item>
+      <ion-icon name="search"></ion-icon>
+      <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
+    </ion-item>
+    <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
+  </form>
+
   <ion-toolbar class="toolbar-secondary">
     <div class="flex-box" style="padding-right: 7px;">
         <p (click)="background_show = 'sort'" [ngClass]="{ 'bg-active': background_show == 'sort'}" class="sorts" (click)="showHideSortsList()">
@@ -34,14 +43,6 @@
         </div>
       </form>
   </ion-toolbar>
-
-  <form  class="search-form" (ngSubmit)="getSearch()" *ngIf="SearchList" [@animate]>
-      <ion-item>
-          <ion-icon name="search"></ion-icon>
-          <ion-input [(ngModel)]="search.search_string" name="search" placeholder="Поиск..." type="text"></ion-input>
-      </ion-item>
-      <ion-icon class="close-icon" name="close" (click)="showHideSearchList()"></ion-icon>
-  </form>
 </ion-header>
 
 <ion-content class="page-products" (ionScroll)="onScroll($event)">
@@ -73,22 +74,26 @@
     </ion-list>
 
   
-    <ion-fab bottom right>
+    <ion-fab bottom right style="margin-bottom: 36px; margin-right: 16px;">
       <button ion-fab (click)="scrollToTop()">
           <ion-icon name="ios-arrow-up"></ion-icon>
       </button>
     </ion-fab>
+
+  <ion-infinite-scroll #infinite (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer>
-    <div class="flexer">
-        <div [@slideInOut]="helpMenuOpen" class="pagi" >
-            <button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>
-        </div>
-        <div *ngIf="all_pages>1" class="plaska" (click)="navHandler()">
-        <button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages}}</button> 
-        <ion-icon  name="ios-arrow-forward"></ion-icon> 
-        </div>
-    </div>
+    <!--<div class="flexer">-->
+        <!--<div [@slideInOut]="helpMenuOpen" class="pagi" >-->
+            <!--<button *ngFor="let p of pages"  (click)="goToPage(p.counter)" (click)="activeButton = p.counter" [ngClass]="{ 'active-btn': activeButton == p.counter }"  >{{p.counter}}</button>-->
+        <!--</div>-->
+        <!--<div *ngIf="all_pages>1" class="plaska" (click)="navHandler()">-->
+        <!--<button (click)="toggleHelpMenu()">{{current_page}} / {{all_pages}}</button> -->
+        <!--<ion-icon  name="ios-arrow-forward"></ion-icon> -->
+        <!--</div>-->
+    <!--</div>-->
     <footer></footer>
   </ion-footer>

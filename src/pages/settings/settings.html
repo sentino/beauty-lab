@@ -34,7 +34,7 @@
 <ion-content class="page-settings">
 
   <ion-list class="list-avatar" padding>
-    <ion-item class="user-information" *ngIf="shared.customerData.accessToken !=undefined" text-center>
+    <ion-item class="user-information" *ngIf="shared.customerData.accessToken !=undefined" text-center (click)="openPage('myAccount')">
       <h2>{{shared.customerData.name + " " + shared.customerData.lastName}}</h2>
       <p>{{shared.customerData.email}}</p>
     </ion-item>

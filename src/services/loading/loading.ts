@@ -12,7 +12,7 @@ export class LoadingProvider {
 
   showSpinner() {
     this.loading = this.loadingCtrl.create({
-      duration: 10000
+      duration: 20000
     });
     this.loading.present();
   }

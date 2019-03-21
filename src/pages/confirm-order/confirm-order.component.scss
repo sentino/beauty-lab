@@ -37,6 +37,10 @@ app-confirm-order-component {
       position: relative;
 
       &::after {
+        @media screen and (max-width: 350px) {
+          position: absolute;
+          right: 16px;
+        }
         content: "\e5cd";
         transform: rotate(45deg);
         @include material-icons($font-size: 24px, $color: lighten($color: $primaryTextColor, $amount: 48%));
@@ -360,6 +364,13 @@ app-confirm-order-component {
 
   .item-md .radio-md {
     margin-right: 2px !important;
+  }
+
+  .c-info__button--picked::after {
+    @media screen and (max-width: 350px) {
+      position: absolute;
+      right: 16px;
+    }
   }
 }
 

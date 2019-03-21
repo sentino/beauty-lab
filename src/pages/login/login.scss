@@ -237,6 +237,8 @@ page-login {
   }
 
   .custom-ion-navbar {
+    align-items: center;
+    
     ion-buttons {
       position: absolute;
       z-index: 5;

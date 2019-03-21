@@ -119,6 +119,9 @@ articles-promotions-page-component {
     &--no-space {
       overflow-x: hidden;
       margin-right: -16px;
+      @media screen and (max-width: 350px) {
+        overflow-x: visible;
+      }
     }
 
     &__title {
@@ -127,6 +130,13 @@ articles-promotions-page-component {
       color: $primaryTextColor;
       padding: 0;
       margin: 5px 0;
+    }
+  }
+
+  .l-goods--nowrap {
+    @media screen and (max-width: 350px) {
+      margin-left: -12px;
+      width: calc(100% + 24px);
     }
   }
 }
