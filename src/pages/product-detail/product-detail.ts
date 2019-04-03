@@ -146,13 +146,13 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
 
     this.RevData = new FormGroup({
       name: new FormControl(null, [Validators.required]),
-      age: new FormControl(null, [Validators.required]),
+      age: new FormControl(null),
       comment: new FormControl(null, [Validators.required]),
       rating1: new FormControl(null, [Validators.required]),
       rating2: new FormControl(null, [Validators.required]),
       rating3: new FormControl(null, [Validators.required]),
-      tipVolos: new FormControl(null, [Validators.required]),
-      tipSkin: new FormControl(null, [Validators.required]),
+      tipVolos: new FormControl(null),
+      tipSkin: new FormControl(null),
     });
   }
 
@@ -219,6 +219,19 @@ export class ProductDetailPage extends Unsubscriber implements OnInit, OnDestroy
       this.reviews_count = this.product_reviews.length;
 
       this.reviews_info = this.single_product.REVIEWS.ADD_NEW_FIELDS;
+      
+      if (this.single_product.REVIEWS.ADD_NEW_FIELDS[1].CODE === 'AGE') {
+        this.RevData.controls['age'].setValidators([Validators.required]);
+        this.RevData.controls['age'].updateValueAndValidity();
+      }
+      if (this.single_product.REVIEWS.ADD_NEW_FIELDS[2].CODE === 'SKIN') {
+        this.RevData.controls['tipSkin'].setValidators([Validators.required]);
+        this.RevData.controls['tipSkin'].updateValueAndValidity();
+      }
+      if (this.single_product.REVIEWS.ADD_NEW_FIELDS[3].CODE === 'HAIR') {
+        this.RevData.controls['tipVolos'].setValidators([Validators.required]);
+        this.RevData.controls['tipVolos'].updateValueAndValidity();
+      }
 
       this.can_add = this.single_product.REVIEWS.CAN_ADD;
 

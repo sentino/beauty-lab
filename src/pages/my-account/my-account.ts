@@ -110,7 +110,7 @@ export class MyAccountPage {
     }, validatorFnControlsMatch('password', 'passwordConfirmed'));
 
     this.form = new FormGroup({
-      phone: new FormControl('', [Validators.minLength(18)]),
+      phone: new FormControl('+7', [Validators.minLength(18)]),
     })
   }
 
@@ -164,7 +164,7 @@ export class MyAccountPage {
   }
 
   updateProfile() {
-    if (this.form.controls['phone'].value !== "") {
+    if (this.form.controls['phone'].value !== "" || this.form.controls['phone'].value !== "+7") {
       this.myAccountData.phone = this.form.controls['phone'].value;
     }
 

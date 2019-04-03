@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
 @Component({
@@ -20,7 +20,8 @@ import { Component, Input } from '@angular/core';
         </ion-item>
 
         <ion-item>
-          <ion-input [formControlName]="'quantity'" [disabled]="!writeOffBonuses" 
+          <ion-input [formControlName]="'quantity'" [disabled]="!writeOffBonuses"
+                     (blur)="blurQuantity.emit(form.get('bonuses').get('quantity').value)"
                      type="number" 
                      placeholder="{{innerPayment.sum}}"></ion-input>
         </ion-item>
@@ -35,6 +36,8 @@ export class AppSectionListItemThree {
   @Input() displayNone;
   @Input() payments;
   @Input() innerPayment;
+
+  @Output() blurQuantity: EventEmitter<any> = new EventEmitter<any>();
 
   get writeOffBonuses() {
     return this.form.get('bonuses').get('writeOffBonuses').value;

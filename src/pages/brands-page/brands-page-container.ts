@@ -187,7 +187,7 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
 
     buttonArray.push(
       {
-        text: 'Зыкрыть',
+        text: 'Закрыть',
         role: 'cancel',
         handler: () => {
         }
@@ -218,7 +218,7 @@ export class BrandsPageContainer extends Unsubscriber implements OnInit, OnDestr
 
     buttonArray.push(
       {
-        text: 'Зыкрыть',
+        text: 'Закрыть',
         role: 'cancel',
         handler: () => {
         }

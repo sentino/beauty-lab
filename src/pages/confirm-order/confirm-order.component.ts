@@ -84,6 +84,7 @@ import { FormGroup } from '@angular/forms';
           [returnReplace]="returnReplace"
           (pointResultId)="_pointResultId($event)"
           (selectedDeliveryPrice)="selectedDeliveryPrice($event)"
+          (blurQuantity)="_blurQuantity($event)"
         ></app-section-list>
       </section>
       
@@ -130,6 +131,7 @@ export class ConfirmOrderComponent implements OnInit {
   @Output() deliveryId: EventEmitter<any> = new EventEmitter<any>();
   @Output() pointResultId: EventEmitter<any> = new EventEmitter<any>();
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() blurQuantity: EventEmitter<any> = new EventEmitter<any>();
 
   city;
   _selectedDeliveryPrice;
@@ -192,6 +194,10 @@ export class ConfirmOrderComponent implements OnInit {
 
   selectedDeliveryPrice(event) {
     this._selectedDeliveryPrice = event;
+  }
+
+  _blurQuantity(event) {
+    this.blurQuantity.emit(event);
   }
 
   submitForm() {

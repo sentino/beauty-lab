@@ -273,6 +273,8 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
 
   filtered(newModel){
     this.http.get(this.config.url + 'catalog/section/' + this.cat_id + '/?count=50', {params: this.params()}).subscribe((data: any) => {
+        this.activeButton = '';
+
         this.all_products = data.result.products;
         this.all_filters = data.result.filters;
         this.cat_id;
@@ -620,7 +622,7 @@ export class ProductsPage extends Unsubscriber implements OnInit, OnDestroy {
 }
 
   getSortsProducts(sort_path) {
-    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path + '&count=50').subscribe((data: any) => {
+    this.http.get(this.config.url + 'catalog/section/' + this.cat_id + sort_path + '&count=50', {params: this.params()}).subscribe((data: any) => {
       this.Sort = false;
       this.all_products = data.result.products;
       this.navigation = data.result.navigation;

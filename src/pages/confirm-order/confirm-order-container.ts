@@ -98,6 +98,7 @@ export function bonusesQuantity(controlOne: AbstractControl, controlTwo: Abstrac
         (selectedLocation)="putSelectedLocation($event)"
         (deliveryId)="putDeliveryData($event)"
         (pointResultId)="putDeliveryData(form.controls['listItemTwo'].get('delivery').value, $event)"
+        (blurQuantity)="blurQuantity($event)"
         (submit)="submit()"
       ></app-confirm-order-component>
       
@@ -183,7 +184,7 @@ export class ConfirmOrderContainer implements OnInit{
         'name': ['', [Validators.required, Validators.maxLength(150)]],
         'email': ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})')]],
         // 'phone': ['', [Validators.required, Validators.pattern(/^((\+7|7|8)+([0-9]){10})$/gm)]],
-        'phone': ['', [Validators.required, Validators.minLength(18)]],
+        'phone': ['+7', [Validators.required, Validators.minLength(18)]],
         'address': [''],
         'comment': ['', [Validators.maxLength(600)]]
       })
@@ -236,6 +237,12 @@ export class ConfirmOrderContainer implements OnInit{
       this.result = res.result;
 
       this.loading.hideSpinner();
+    });
+
+    this.form.controls['listItemThree'].get('bonuses').get('writeOffBonuses').valueChanges.subscribe(value => {
+      if (!value) {
+        this.form.controls['listItemThree'].get('bonuses').get('quantity').setValue(0);
+      }
     });
   }
   
@@ -351,6 +358,16 @@ export class ConfirmOrderContainer implements OnInit{
     })
   }
 
+  blurQuantity(event) {
+    this.payPayler.putData({bonusPay: event}).subscribe((res: any) => {
+      this.store.dispatch(new GetDataConfirmOrderSuccessAction(res.result));
+
+      this.oldPrice = res.result.summary.sumFull;
+      this.newPrice = res.result.summary.sum;
+      this.oldPriceFormat = res.result.summary.sumFullFormat;
+      this.newPriceFormat = res.result.summary.sumFormat;
+    })
+  }
 
   submit() {
     let body: any = {
@@ -391,8 +408,6 @@ export class ConfirmOrderContainer implements OnInit{
             hour = this.formatDate(new Date().getHours()),
             minutes = this.formatDate(new Date().getMinutes()),
             seconds = this.formatDate(new Date().getSeconds());
-        // console.log(res);
-        // debugger;
         this.appCtrl.getRootNav().setRoot(HomePage);
         this.alert.showWithTitle(
           `Ваш заказ №${res.result.orderId}

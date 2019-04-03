@@ -69,7 +69,7 @@ export class ModalOneClickOrder implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),
-      'phone': new FormControl(null, [
+      'phone': new FormControl('+7', [
         Validators.required,
         Validators.minLength(18)
       ])

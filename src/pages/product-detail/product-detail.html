@@ -173,21 +173,21 @@
                           <ion-input [formControl]="RevData.controls['name']" type="text"></ion-input>
                         </ion-item>
 
-                        <ion-item *ngIf="reviews_info[2].VALUES">
+                        <ion-item *ngIf="reviews_info[2].VALUES && reviews_info[2].CODE === 'SKIN'">
                             <ion-label>Тип кожи</ion-label>
                             <ion-select [formControl]="RevData.controls['tipSkin']">
                                 <ion-option *ngFor="let c of reviews_info[2].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
                             </ion-select>
                         </ion-item>
 
-                        <ion-item *ngIf="reviews_info[1].VALUES">
+                        <ion-item *ngIf="reviews_info[1].VALUES && reviews_info[1].CODE === 'AGE'">
                             <ion-label>Укажите ваш возраст</ion-label>
                             <ion-select [formControl]="RevData.controls['age']">
                               <ion-option *ngFor="let c of reviews_info[1].VALUES" value="{{c.name}}">{{c.name}}</ion-option>
                             </ion-select>
                         </ion-item>
 
-                        <ion-item *ngIf="reviews_info[3].VALUES">
+                        <ion-item *ngIf="reviews_info[3].VALUES && reviews_info[3].CODE === 'HAIR'">
                             <ion-label>Укажите тип волос</ion-label>
                             <ion-select [formControl]="RevData.controls['tipVolos']">
                                 <ion-option *ngFor="let c of reviews_info[3].VALUES" value="{{c.name}}">{{c.name}}</ion-option>

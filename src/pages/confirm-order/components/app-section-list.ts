@@ -36,6 +36,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
           [displayNone]="form.controls['listItemTwo'].invalid"
           [payments]="payments"
           [innerPayment]="innerPayment"
+          (blurQuantity)="_blurQuantity($event)"
         ></app-section-list-item-three>
 
         <app-section-list-item-four
@@ -67,6 +68,7 @@ export class AppSectionList {
 
   @Output() pointResultId: EventEmitter<any> = new EventEmitter();
   @Output() selectedDeliveryPrice: EventEmitter<any> = new EventEmitter();
+  @Output() blurQuantity: EventEmitter<any> = new EventEmitter<any>();
 
   picked = false;
   validColor = false;
@@ -114,6 +116,10 @@ export class AppSectionList {
 
   _selectedDeliveryPrice(e) {
     this.selectedDeliveryPrice.emit(e);
+  }
+
+  _blurQuantity(e) {
+    this.blurQuantity.emit(e);
   }
 
 }
